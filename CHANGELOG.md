@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.7.0 - 2026-06-21
+
+- Added the first Da Liu Ren / Xiao Liu Ren content layer with `data/liuren_terms.json` and `data/liuren_structures.json`.
+- Added a "六壬资料" workbench view and backend search kinds for `liuren_terms` and `liuren_structures`.
+- Added Liuren public sources and open-source project references while keeping Da Liu Ren and Xiao Liu Ren separated.
+- Expanded validation, smoke tests, function tests, and predeploy checks for the new Liuren layer.
+
 ## v0.6.0 - 2026-06-21
 
 - Added the first Qi Men Dun Jia content layer with `data/qimen_terms.json` and `data/qimen_structures.json`.

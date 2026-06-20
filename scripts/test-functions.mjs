@@ -21,6 +21,10 @@ const ziweiStructures = searchKnowledgeBase(data, { query: "命宫", kind: "ziwe
 const qimenTerms = searchKnowledgeBase(data, { query: "奇门遁甲", kind: "qimen_terms", limit: 10 });
 const qimenGates = searchKnowledgeBase(data, { query: "八门", kind: "qimen_terms", limit: 10 });
 const qimenStructures = searchKnowledgeBase(data, { query: "坎一宫", kind: "qimen_structures", limit: 10 });
+const liurenTerms = searchKnowledgeBase(data, { query: "大六壬", kind: "liuren_terms", limit: 10 });
+const liurenThreeTransmissions = searchKnowledgeBase(data, { query: "三传", kind: "liuren_terms", limit: 20 });
+const liurenStructures = searchKnowledgeBase(data, { query: "初传", kind: "liuren_structures", limit: 10 });
+const xiaoLiurenStructures = searchKnowledgeBase(data, { query: "大安", kind: "liuren_structures", limit: 10 });
 const accuracy = searchKnowledgeBase(data, { query: "评分", kind: "accuracy_cases", limit: 10 });
 const retroAccuracy = searchKnowledgeBase(data, { query: "retrospective-calibration", kind: "accuracy_cases", limit: 10 });
 const all = searchKnowledgeBase(data, { query: "回头克", limit: 20 });
@@ -40,6 +44,15 @@ check(
     && data.qimen_structures.stars.length === 9
     && data.qimen_structures.deities.length === 8,
 );
+check("function_data_has_liuren_terms", data.liuren_terms.length >= 36);
+check(
+  "function_data_has_liuren_structures",
+  data.liuren_structures.subsystems.length === 2
+    && data.liuren_structures.four_lessons.length === 4
+    && data.liuren_structures.three_transmissions.length === 3
+    && data.liuren_structures.heavenly_generals.length === 12
+    && data.liuren_structures.xiao_liuren_palaces.length === 6,
+);
 check("function_data_has_accuracy_cases", data.accuracy_cases.length >= 4);
 check("function_data_has_external_projects", data.external_projects.length >= 6);
 check("search_case_index_lost_object", lost.results.some((item) => item.id === "zengshan-case-slot-010-lost-object-home"));
@@ -56,6 +69,10 @@ check("search_ziwei_structures_ming", ziweiStructures.results.some((item) => ite
 check("search_qimen_terms_qimen", qimenTerms.results.some((item) => item.kind === "qimen_terms" && item.id === "qimen-dunjia"));
 check("search_qimen_terms_gates", qimenGates.results.some((item) => item.id === "eight-gates"));
 check("search_qimen_structures_kan", qimenStructures.results.some((item) => item.id === "palace-kan-1"));
+check("search_liuren_terms_da", liurenTerms.results.some((item) => item.kind === "liuren_terms" && item.id === "da-liuren"));
+check("search_liuren_terms_three_transmissions", liurenThreeTransmissions.results.some((item) => item.id === "three-transmissions"));
+check("search_liuren_structures_initial", liurenStructures.results.some((item) => item.id === "transmission-initial"));
+check("search_liuren_structures_daan", xiaoLiurenStructures.results.some((item) => item.id === "xiao-palace-daan"));
 check("search_accuracy_cases_scoring", accuracy.results.some((item) => item.id === "accuracy-demo-2026-nba-finals-game-7"));
 check("search_accuracy_cases_retro", retroAccuracy.results.some((item) => item.id === "accuracy-retro-2024-super-bowl-lviii"));
 check("search_all_back_control", all.results.some((item) => item.title.includes("回头克") || JSON.stringify(item.item).includes("回头克")));
@@ -72,6 +89,10 @@ check("handler_search_ziwei_terms_ok", ziweiResponse.status === 200 && ziweiPayl
 const qimenResponse = await searchHandler(new Request("https://example.test/api/search?q=%E5%85%AB%E9%97%A8&kind=qimen_terms"));
 const qimenPayload = await qimenResponse.json();
 check("handler_search_qimen_terms_ok", qimenResponse.status === 200 && qimenPayload.results.some((item) => item.id === "eight-gates"));
+
+const liurenResponse = await searchHandler(new Request("https://example.test/api/search?q=%E5%9B%9B%E8%AF%BE&kind=liuren_terms"));
+const liurenPayload = await liurenResponse.json();
+check("handler_search_liuren_terms_ok", liurenResponse.status === 200 && liurenPayload.results.some((item) => item.id === "four-lessons"));
 
 const schemaResponse = await caseSchemaHandler(new Request("https://example.test/api/case-schema"));
 const schemaPayload = await schemaResponse.json();

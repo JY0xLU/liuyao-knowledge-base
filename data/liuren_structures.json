@@ -1,0 +1,73 @@
+{
+  "schema_version": "liuren-structure-seed-2026-06-21",
+  "system": "liuren",
+  "boundary": "本文件只记录大六壬/小六壬第一版课式结构字段，用于学习检索、案例复盘和后续起课算法设计；不提供自动起课，也不提供确定性吉凶判断。",
+  "subsystems": [
+    {
+      "id": "subsystem-da-liuren",
+      "name": "大六壬",
+      "focus": "以月将、占时、天地盘、四课、三传、十二天将和课体组织课式。",
+      "source_refs": ["wikipedia-da-liuren-zh", "github-kentang2017-kinliuren", "github-look-fate-liuren-ts-lib"]
+    },
+    {
+      "id": "subsystem-xiao-liuren",
+      "name": "小六壬",
+      "focus": "以大安、留连、速喜、赤口、小吉、空亡六宫组织快速课法。",
+      "source_refs": ["wikipedia-rokuyo-zh", "github-maifusha-xiaoliuren"]
+    }
+  ],
+  "da_liuren_chart_fields": [
+    {"id": "field-liuren-question", "name": "问题", "group": "案例字段", "core_focus": "记录占问主题、题型和提问背景。", "source_refs": ["wikipedia-da-liuren-zh"]},
+    {"id": "field-liuren-time", "name": "占时", "group": "输入字段", "core_focus": "记录起课时间、时辰和换算来源。", "source_refs": ["wikipedia-da-liuren-zh", "github-look-fate-liuren-ts-lib"]},
+    {"id": "field-liuren-month-general", "name": "月将", "group": "输入字段", "core_focus": "记录月将取法和来源。", "source_refs": ["wikipedia-da-liuren-zh", "github-kentang2017-kinliuren"]},
+    {"id": "field-liuren-day-ganzhi", "name": "日干支", "group": "输入字段", "core_focus": "记录日干、日支及公历换算来源。", "source_refs": ["wikipedia-da-liuren-zh", "github-kentang2017-kinliuren"]},
+    {"id": "field-liuren-heaven-earth-plates", "name": "天地盘", "group": "盘层字段", "core_focus": "记录天盘、地盘和十二支排布。", "source_refs": ["wikipedia-da-liuren-zh", "github-wlhyl-dalurenpython"]},
+    {"id": "field-liuren-four-lessons", "name": "四课", "group": "课式字段", "core_focus": "记录一课、二课、三课、四课。", "source_refs": ["wikipedia-da-liuren-zh", "github-kentang2017-kinliuren"]},
+    {"id": "field-liuren-three-transmissions", "name": "三传", "group": "课式字段", "core_focus": "记录初传、中传、末传。", "source_refs": ["wikipedia-da-liuren-zh", "github-kentang2017-kinliuren"]},
+    {"id": "field-liuren-heavenly-generals", "name": "十二天将", "group": "天将字段", "core_focus": "记录十二天将名称、顺逆和落位来源。", "source_refs": ["wikipedia-da-liuren-zh", "github-look-fate-liuren-ts-lib"]},
+    {"id": "field-liuren-lesson-type", "name": "课体", "group": "分类字段", "core_focus": "记录课体或课格分类，后续关联来源化规则。", "source_refs": ["wikipedia-da-liuren-zh", "github-kentang2017-kinliuren"]}
+  ],
+  "four_lessons": [
+    {"id": "lesson-one", "name": "一课", "group": "四课", "core_focus": "四课中的第一课位；结构层只记录位置。", "source_refs": ["wikipedia-da-liuren-zh"]},
+    {"id": "lesson-two", "name": "二课", "group": "四课", "core_focus": "四课中的第二课位；结构层只记录位置。", "source_refs": ["wikipedia-da-liuren-zh"]},
+    {"id": "lesson-three", "name": "三课", "group": "四课", "core_focus": "四课中的第三课位；结构层只记录位置。", "source_refs": ["wikipedia-da-liuren-zh"]},
+    {"id": "lesson-four", "name": "四课", "group": "四课", "core_focus": "四课中的第四课位；结构层只记录位置。", "source_refs": ["wikipedia-da-liuren-zh"]}
+  ],
+  "three_transmissions": [
+    {"id": "transmission-initial", "name": "初传", "group": "三传", "core_focus": "三传第一段，作为传递链起点字段。", "source_refs": ["wikipedia-da-liuren-zh", "github-kentang2017-kinliuren"]},
+    {"id": "transmission-middle", "name": "中传", "group": "三传", "core_focus": "三传第二段，作为中间传递字段。", "source_refs": ["wikipedia-da-liuren-zh", "github-kentang2017-kinliuren"]},
+    {"id": "transmission-final", "name": "末传", "group": "三传", "core_focus": "三传第三段，作为传递链末端字段。", "source_refs": ["wikipedia-da-liuren-zh", "github-kentang2017-kinliuren"]}
+  ],
+  "heavenly_generals": [
+    {"id": "general-guiren", "name": "贵人", "group": "十二天将", "core_focus": "十二天将之一，结构层记录名称和落位。", "source_refs": ["wikipedia-da-liuren-zh", "github-look-fate-liuren-ts-lib"]},
+    {"id": "general-tengshe", "name": "螣蛇", "group": "十二天将", "core_focus": "十二天将之一，结构层记录名称和落位。", "source_refs": ["wikipedia-da-liuren-zh"]},
+    {"id": "general-zhuque", "name": "朱雀", "group": "十二天将", "core_focus": "十二天将之一，结构层记录名称和落位。", "source_refs": ["wikipedia-da-liuren-zh"]},
+    {"id": "general-liuhe", "name": "六合", "group": "十二天将", "core_focus": "十二天将之一，结构层记录名称和落位。", "source_refs": ["wikipedia-da-liuren-zh"]},
+    {"id": "general-gouchen", "name": "勾陈", "group": "十二天将", "core_focus": "十二天将之一，结构层记录名称和落位。", "source_refs": ["wikipedia-da-liuren-zh"]},
+    {"id": "general-qinglong", "name": "青龙", "group": "十二天将", "core_focus": "十二天将之一，结构层记录名称和落位。", "source_refs": ["wikipedia-da-liuren-zh"]},
+    {"id": "general-tiankong", "name": "天空", "group": "十二天将", "core_focus": "十二天将之一，结构层记录名称和落位。", "source_refs": ["wikipedia-da-liuren-zh"]},
+    {"id": "general-baihu", "name": "白虎", "group": "十二天将", "core_focus": "十二天将之一，结构层记录名称和落位。", "source_refs": ["wikipedia-da-liuren-zh"]},
+    {"id": "general-taichang", "name": "太常", "group": "十二天将", "core_focus": "十二天将之一，结构层记录名称和落位。", "source_refs": ["wikipedia-da-liuren-zh"]},
+    {"id": "general-xuanwu", "name": "玄武", "group": "十二天将", "core_focus": "十二天将之一，结构层记录名称和落位。", "source_refs": ["wikipedia-da-liuren-zh"]},
+    {"id": "general-taiyin", "name": "太阴", "group": "十二天将", "core_focus": "十二天将之一，结构层记录名称和落位。", "source_refs": ["wikipedia-da-liuren-zh"]},
+    {"id": "general-tianhou", "name": "天后", "group": "十二天将", "core_focus": "十二天将之一，结构层记录名称和落位。", "source_refs": ["wikipedia-da-liuren-zh"]}
+  ],
+  "xiao_liuren_palaces": [
+    {"id": "xiao-palace-daan", "name": "大安", "order": 1, "group": "小六壬六宫", "core_focus": "小六壬六宫之一，结构层记录名称和顺序。", "source_refs": ["wikipedia-rokuyo-zh", "github-maifusha-xiaoliuren"]},
+    {"id": "xiao-palace-liulian", "name": "留连", "order": 2, "group": "小六壬六宫", "core_focus": "小六壬六宫之一，结构层记录名称和顺序。", "source_refs": ["wikipedia-rokuyo-zh", "github-maifusha-xiaoliuren"]},
+    {"id": "xiao-palace-suxi", "name": "速喜", "order": 3, "group": "小六壬六宫", "core_focus": "小六壬六宫之一，结构层记录名称和顺序。", "source_refs": ["wikipedia-rokuyo-zh", "github-maifusha-xiaoliuren"]},
+    {"id": "xiao-palace-chikou", "name": "赤口", "order": 4, "group": "小六壬六宫", "core_focus": "小六壬六宫之一，结构层记录名称和顺序。", "source_refs": ["wikipedia-rokuyo-zh", "github-maifusha-xiaoliuren"]},
+    {"id": "xiao-palace-xiaoji", "name": "小吉", "order": 5, "group": "小六壬六宫", "core_focus": "小六壬六宫之一，结构层记录名称和顺序。", "source_refs": ["wikipedia-rokuyo-zh", "github-maifusha-xiaoliuren"]},
+    {"id": "xiao-palace-kongwang", "name": "空亡", "order": 6, "group": "小六壬六宫", "core_focus": "小六壬六宫之一，结构层记录名称和顺序；不同于六爻旬空。", "source_refs": ["wikipedia-rokuyo-zh", "github-maifusha-xiaoliuren"]}
+  ],
+  "case_fields": [
+    {"id": "field-liuren-subsystem", "name": "子体系", "group": "案例字段", "core_focus": "记录案例属于大六壬还是小六壬。", "source_refs": ["wikipedia-da-liuren-zh", "wikipedia-rokuyo-zh"]},
+    {"id": "field-liuren-topic", "name": "题型", "group": "案例字段", "core_focus": "记录问事类型，避免跨题型套用规则。", "source_refs": ["wikipedia-da-liuren-zh"]},
+    {"id": "field-liuren-inputs", "name": "输入来源", "group": "案例字段", "core_focus": "记录时间、历法、取数、人工修正等输入来源。", "source_refs": ["wikipedia-da-liuren-zh", "wikipedia-rokuyo-zh"]},
+    {"id": "field-liuren-chart-json", "name": "课式 JSON", "group": "案例字段", "core_focus": "记录可复查的结构化课式输出。", "source_refs": ["github-look-fate-liuren-ts-lib", "github-maifusha-xiaoliuren"]},
+    {"id": "field-liuren-source-rule", "name": "规则来源", "group": "案例字段", "core_focus": "记录引用的规则和来源等级。", "source_refs": ["github-kentang2017-kinliuren"]},
+    {"id": "field-liuren-outcome", "name": "结果", "group": "案例字段", "core_focus": "记录事后可验证结果，区分回测和事前样本。", "source_refs": ["wikipedia-da-liuren-zh"]},
+    {"id": "field-liuren-score", "name": "评分", "group": "案例字段", "core_focus": "记录命中、偏差、不可判和解释力评分。", "source_refs": ["wikipedia-da-liuren-zh"]},
+    {"id": "field-liuren-boundary", "name": "边界说明", "group": "案例字段", "core_focus": "记录流派、题型、来源不足和不可用于现实决策的限制。", "source_refs": ["wikipedia-da-liuren-zh", "wikipedia-rokuyo-zh"]}
+  ]
+}

@@ -286,5 +286,92 @@
       "尚未源码审计，不能直接采信具体规则"
     ],
     "adoption": "作为多体系工程参考；每个体系仍独立做来源、结构和测试。"
+  },
+  {
+    "id": "github-kentang2017-kinliuren",
+    "name": "kinliuren",
+    "owner": "kentang2017",
+    "url": "https://github.com/kentang2017/kinliuren",
+    "platform": "GitHub",
+    "language": "Python",
+    "stars": 98,
+    "forks": 39,
+    "license": "MIT",
+    "updated_at": "2026-06-12T13:52:46Z",
+    "project_type": "python-library",
+    "scope": "Python 大六壬包，描述覆盖 Da Liu Ren divination；适合作为四课三传字段和测试颗粒度参考。",
+    "evidence": [
+      "GitHub repository metadata collected via repo view",
+      "repo view shows MIT license, Python primary language and 98 stars",
+      "description notes it is a Daliuren package and does not include full date-time Ganzhi evolution"
+    ],
+    "useful_patterns": [
+      "把大六壬排盘拆成可调用 Python 包",
+      "适合作为四课三传字段命名和最小 API 参考",
+      "MIT license lowers后续接口对照成本"
+    ],
+    "risks": [
+      "项目描述提示不包含年月日時干支演化，不能直接当完整起课引擎",
+      "未源码级审计前不能复用算法或断语"
+    ],
+    "adoption": "作为大六壬结构层和后续算法测试候选；本轮只记录 metadata 和字段边界。"
+  },
+  {
+    "id": "github-look-fate-liuren-ts-lib",
+    "name": "liuren-ts-lib",
+    "owner": "look-fate",
+    "url": "https://github.com/look-fate/liuren-ts-lib",
+    "platform": "GitHub",
+    "language": "TypeScript",
+    "stars": 9,
+    "forks": 3,
+    "license": "Apache-2.0",
+    "updated_at": "2026-06-05T13:23:33Z",
+    "project_type": "typescript-library",
+    "scope": "基于 tyme 的六壬神课 TypeScript lib，适合参考 Web/API 环境的课式字段和算法接口。",
+    "evidence": [
+      "GitHub repository metadata collected via repo view",
+      "repo view shows Apache-2.0 license and TypeScript primary language",
+      "description says it is a 六壬神课 TypeScript lib based on tyme"
+    ],
+    "useful_patterns": [
+      "和当前轻量 Web/Netlify 栈更接近",
+      "可作为后续 Node-side 起课接口候选",
+      "基于历法库的实现提示后续需重点测试时间换算"
+    ],
+    "risks": [
+      "stars 少，准确性不能从热度推断",
+      "接入前必须建立月将、占时、四课、三传测试样本"
+    ],
+    "adoption": "作为大六壬 TypeScript 算法候选；本轮不接入源码。"
+  },
+  {
+    "id": "github-maifusha-xiaoliuren",
+    "name": "xiaoliuren",
+    "owner": "maifusha",
+    "url": "https://github.com/maifusha/xiaoliuren",
+    "platform": "GitHub",
+    "language": "Go",
+    "stars": 4,
+    "forks": 2,
+    "license": "MIT",
+    "updated_at": "2025-03-16T08:58:50Z",
+    "project_type": "go-web-service",
+    "scope": "Go/Gin 道门小六壬实现，适合参考小六壬六宫输入输出和轻量接口边界。",
+    "evidence": [
+      "GitHub repository metadata collected via repo view",
+      "repo view shows MIT license and Go primary language",
+      "description states 道门小六壬 - 吉凶掐算"
+    ],
+    "useful_patterns": [
+      "小六壬可作为独立轻量服务实现",
+      "六宫字段适合与大六壬课式字段分开",
+      "MIT license lowers后续接口参考成本"
+    ],
+    "risks": [
+      "项目热度小且描述含断语定位，本库不能直接采信结论",
+      "未源码审计前只作结构和接口参考"
+    ],
+    "adoption": "作为小六壬结构和接口候选；本轮只记录六宫资料层。"
   }
 ]

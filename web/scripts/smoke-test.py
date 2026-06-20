@@ -39,12 +39,15 @@ def main() -> int:
         "has_multi_system_doc": any(doc["title"] == "多术数体系路线图" for doc in data["docs"]),
         "has_ziwei_foundation_doc": any(doc["title"] == "紫微斗数第一版资料层" for doc in data["docs"]),
         "has_qimen_foundation_doc": any(doc["title"] == "奇门遁甲第一版资料层" for doc in data["docs"]),
+        "has_liuren_foundation_doc": any(doc["title"] == "大六壬 / 小六壬第一版资料层" for doc in data["docs"]),
         "has_systems": len(data.get("systems", [])) >= 4,
         "systems_contains_ziwei": any(contains(item, "紫微斗数") for item in data.get("systems", [])),
         "systems_contains_qimen": any(contains(item, "奇门遁甲") for item in data.get("systems", [])),
+        "systems_contains_liuren": any(contains(item, "大六壬") for item in data.get("systems", [])),
         "app_has_systems_view": 'systems: ["体系总览"' in app,
         "app_has_ziwei_view": 'ziwei: ["紫微资料"' in app and 'data-view="ziwei"' in html,
         "app_has_qimen_view": 'qimen: ["奇门资料"' in app and 'data-view="qimen"' in html,
+        "app_has_liuren_view": 'liuren: ["六壬资料"' in app and 'data-view="liuren"' in html,
         "has_ziwei_terms": len(data.get("ziwei_terms", [])) >= 30,
         "ziwei_contains_core_terms": all(
             any(item.get("term") == term for item in data.get("ziwei_terms", []))
@@ -61,6 +64,16 @@ def main() -> int:
         and len(data.get("qimen_structures", {}).get("gates", [])) == 8
         and len(data.get("qimen_structures", {}).get("stars", [])) == 9
         and len(data.get("qimen_structures", {}).get("deities", [])) == 8,
+        "has_liuren_terms": len(data.get("liuren_terms", [])) >= 36,
+        "liuren_contains_core_terms": all(
+            any(item.get("term") == term for item in data.get("liuren_terms", []))
+            for term in ["六壬", "大六壬", "小六壬", "四课", "三传", "十二天将", "小六壬六宫"]
+        ),
+        "has_liuren_structures": len(data.get("liuren_structures", {}).get("subsystems", [])) == 2
+        and len(data.get("liuren_structures", {}).get("four_lessons", [])) == 4
+        and len(data.get("liuren_structures", {}).get("three_transmissions", [])) == 3
+        and len(data.get("liuren_structures", {}).get("heavenly_generals", [])) == 12
+        and len(data.get("liuren_structures", {}).get("xiao_liuren_palaces", [])) == 6,
         "has_rules": len(data["rules"]) >= 20,
         "has_classic_notes": len(data.get("classic_notes", [])) >= 36,
         "has_case_index": len(data.get("case_index", [])) >= 24,

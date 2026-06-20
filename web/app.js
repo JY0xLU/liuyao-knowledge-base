@@ -36,6 +36,7 @@ const viewTitles = {
   terms: ["术语表", "六爻术语速查"],
   ziwei: ["紫微资料", "术语 · 宫位 · 星曜 · 四化"],
   qimen: ["奇门资料", "九宫 · 八门 · 九星 · 八神"],
+  liuren: ["六壬资料", "大六壬 · 小六壬 · 四课三传"],
   classics: ["古籍索引", "经典阅读路线"],
   notes: ["读书笔记", "十八论与问答笔记"],
   caseIndex: ["案例索引", "增删卜易案例槽位"],
@@ -193,6 +194,12 @@ function localSearchResults(query) {
       body: `${item.definition} ${item.boundary_notes || ""}`,
       item,
     })),
+    ...(state.data.liuren_terms || []).map((item) => ({
+      type: "六壬术语",
+      title: item.term,
+      body: `${item.definition} ${item.boundary_notes || ""}`,
+      item,
+    })),
     ...Object.entries(state.data.ziwei_structures || {})
       .filter(([, value]) => Array.isArray(value))
       .flatMap(([group, items]) =>
@@ -208,6 +215,16 @@ function localSearchResults(query) {
       .flatMap(([group, items]) =>
         items.map((item) => ({
           type: "奇门结构",
+          title: item.name,
+          body: item.focus || item.core_focus || item.description || item.group || "",
+          item: { group, ...item },
+        })),
+      ),
+    ...Object.entries(state.data.liuren_structures || {})
+      .filter(([, value]) => Array.isArray(value))
+      .flatMap(([group, items]) =>
+        items.map((item) => ({
+          type: "六壬结构",
           title: item.name,
           body: item.focus || item.core_focus || item.description || item.group || "",
           item: { group, ...item },
@@ -306,6 +323,7 @@ function renderStats() {
     ["术语", (data.terms || []).length],
     ["紫微术语", (data.ziwei_terms || []).length],
     ["奇门术语", (data.qimen_terms || []).length],
+    ["六壬术语", (data.liuren_terms || []).length],
     ["规则", (data.rules || []).length],
     ["来源", (data.sources || []).length],
     ["古籍", (data.classics || []).length],
@@ -587,6 +605,78 @@ function renderQimen() {
         ${renderStructureColumn("九星", stars)}
         ${renderStructureColumn("八神", deities)}
         ${renderStructureColumn("字段", fields)}
+      </div>
+    </div>
+  `;
+}
+
+function renderLiuren() {
+  const query = state.query.trim();
+  const terms = (state.data.liuren_terms || []).filter((term) => matchText(term, query));
+  const structures = state.data.liuren_structures || {};
+  const subsystems = (structures.subsystems || []).filter((item) => matchText(item, query));
+  const daFields = (structures.da_liuren_chart_fields || []).filter((item) => matchText(item, query));
+  const fourLessons = (structures.four_lessons || []).filter((item) => matchText(item, query));
+  const transmissions = (structures.three_transmissions || []).filter((item) => matchText(item, query));
+  const generals = (structures.heavenly_generals || []).filter((item) => matchText(item, query));
+  const xiaoPalaces = (structures.xiao_liuren_palaces || []).filter((item) => matchText(item, query));
+  const caseFields = (structures.case_fields || []).filter((item) => matchText(item, query));
+
+  els.content.innerHTML = `
+    <div class="hero-grid">
+      <article class="hero-card">
+        <h3>大六壬 / 小六壬第一版资料层</h3>
+        <p>本层把大六壬和小六壬分开记录：大六壬先收月将、占时、四课、三传、十二天将和课体字段；小六壬先收六宫结构。</p>
+        <div class="tag-row">
+          <span class="tag">术语 ${terms.length}</span>
+          <span class="tag">子体系 ${structures.subsystems?.length || 0}</span>
+          <span class="tag">四课 ${structures.four_lessons?.length || 0}</span>
+          <span class="tag">三传 ${structures.three_transmissions?.length || 0}</span>
+          <span class="tag">天将 ${structures.heavenly_generals?.length || 0}</span>
+          <span class="tag">六宫 ${structures.xiao_liuren_palaces?.length || 0}</span>
+        </div>
+      </article>
+      <article class="card">
+        <h3>边界</h3>
+        <p>${escapeHtml(structures.boundary || "大六壬和小六壬分开来源、字段、案例和评分，不合并成同一断法。")}</p>
+        <div class="tag-row">
+          <span class="tag">active-v0.7-seed</span>
+          <span class="tag">结构先行</span>
+        </div>
+      </article>
+    </div>
+    <div class="section-band">
+      <h3>术语</h3>
+      <div class="result-grid">
+        ${terms
+          .map(
+            (term) => `
+              <article class="card">
+                <div class="meta-row">
+                  <span class="tag">${escapeHtml(term.category)}</span>
+                  <span class="tag">${escapeHtml(term.group || "六壬")}</span>
+                  ${(term.aliases || []).slice(0, 3).map((alias) => `<span class="tag">${escapeHtml(alias)}</span>`).join("")}
+                </div>
+                <h3>${escapeHtml(term.term)}</h3>
+                <p>${escapeHtml(term.definition)}</p>
+                ${term.boundary_notes ? `<p><strong>边界：</strong>${escapeHtml(term.boundary_notes)}</p>` : ""}
+                <div class="tag-row">${(term.source_refs || []).map((ref) => `<span class="tag">${escapeHtml(ref)}</span>`).join("")}</div>
+              </article>
+            `,
+          )
+          .join("")}
+      </div>
+    </div>
+    <div class="section-band">
+      <h3>课式结构</h3>
+      <div class="structure-grid">
+        ${renderStructureColumn("子体系", subsystems)}
+        ${renderStructureColumn("大六壬字段", daFields)}
+        ${renderStructureColumn("四课", fourLessons)}
+        ${renderStructureColumn("三传", transmissions)}
+        ${renderStructureColumn("十二天将", generals)}
+        ${renderStructureColumn("小六壬六宫", xiaoPalaces)}
+        ${renderStructureColumn("案例字段", caseFields)}
       </div>
     </div>
   `;
@@ -1067,6 +1157,7 @@ function render() {
   if (state.view === "terms") renderTerms();
   if (state.view === "ziwei") renderZiwei();
   if (state.view === "qimen") renderQimen();
+  if (state.view === "liuren") renderLiuren();
   if (state.view === "classics") renderClassics();
   if (state.view === "notes") renderNotes();
   if (state.view === "caseIndex") renderCaseIndex();

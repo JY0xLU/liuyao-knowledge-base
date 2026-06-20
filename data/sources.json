@@ -246,5 +246,69 @@
     "class": "C",
     "type": "video-search",
     "notes": "Agent Reach B站搜索返回奇门遁甲入门和长课目录线索；因终端标题编码限制，本轮只作为学习生态观察，不写入规则。"
+  },
+  {
+    "id": "wikipedia-da-liuren-zh",
+    "title": "大六壬 - 维基百科",
+    "url": "https://zh.wikipedia.org/wiki/%E5%A4%A7%E5%85%AD%E5%A3%AC",
+    "class": "B",
+    "type": "encyclopedia",
+    "notes": "用于大六壬、四课、三传、天地盘、十二天将和课式结构的百科级导览；只作结构入口，不作断语来源。"
+  },
+  {
+    "id": "wikipedia-rokuyo-zh",
+    "title": "六曜 - 维基百科",
+    "url": "https://zh.wikipedia.org/wiki/%E5%85%AD%E6%9B%9C",
+    "class": "B",
+    "type": "encyclopedia",
+    "notes": "用于小六壬六宫的大安、留连、速喜、赤口、小吉、空亡等名称入口；不同地区六曜用法需保留边界。"
+  },
+  {
+    "id": "github-kentang2017-kinliuren",
+    "title": "kentang2017/kinliuren - Python 大六壬包",
+    "url": "https://github.com/kentang2017/kinliuren",
+    "class": "B",
+    "type": "open-source-code",
+    "notes": "MIT 开源 Python 大六壬包；用于参考四课三传、课式字段和测试颗粒度，接入算法前需独立校验。"
+  },
+  {
+    "id": "github-wlhyl-dalurenpython",
+    "title": "wlhyl/dalurenpython - 大六壬排盘 Python 版",
+    "url": "https://github.com/wlhyl/dalurenpython",
+    "class": "C",
+    "type": "open-source-code",
+    "notes": "公开大六壬排盘项目，未确认 license；只作为字段和生态参考，不复制源码或规则。"
+  },
+  {
+    "id": "github-look-fate-liuren-ts-lib",
+    "title": "look-fate/liuren-ts-lib - 六壬神课 TypeScript lib",
+    "url": "https://github.com/look-fate/liuren-ts-lib",
+    "class": "B",
+    "type": "open-source-code",
+    "notes": "Apache-2.0 开源 TypeScript 六壬神课库，基于 tyme；用于后续算法接口、输入输出字段和测试设计参考。"
+  },
+  {
+    "id": "github-maifusha-xiaoliuren",
+    "title": "maifusha/xiaoliuren - 道门小六壬 Go 实现",
+    "url": "https://github.com/maifusha/xiaoliuren",
+    "class": "B",
+    "type": "open-source-code",
+    "notes": "MIT 开源 Go 小六壬实现；用于参考小六壬六宫输入输出和轻量接口，不直接采信 AI/断语结论。"
+  },
+  {
+    "id": "bilibili-daliuren-search-20260621",
+    "title": "B站大六壬入门课程搜索结果",
+    "url": "https://search.bilibili.com/all?keyword=%E5%A4%A7%E5%85%AD%E5%A3%AC%20%E5%85%A5%E9%97%A8%20%E5%9B%9B%E8%AF%BE%E4%B8%89%E4%BC%A0",
+    "class": "C",
+    "type": "video-search",
+    "notes": "Agent Reach B站搜索返回大六壬入门、四课三传和长课目录线索；因终端标题编码限制，本轮只作为学习生态观察。"
+  },
+  {
+    "id": "bilibili-xiaoliuren-search-20260621",
+    "title": "B站小六壬入门课程搜索结果",
+    "url": "https://search.bilibili.com/all?keyword=%E5%B0%8F%E5%85%AD%E5%A3%AC%20%E5%85%A5%E9%97%A8%20%E5%A4%A7%E5%AE%89%20%E7%95%99%E8%BF%9E%20%E9%80%9F%E5%96%9C",
+    "class": "C",
+    "type": "video-search",
+    "notes": "Agent Reach B站搜索返回小六壬入门和六宫速查线索；只作为课程生态观察，不写入规则。"
   }
 ]

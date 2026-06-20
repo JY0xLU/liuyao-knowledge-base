@@ -72,6 +72,14 @@ export function searchPools(data) {
       summary: item.definition,
       item,
     })),
+    ...(data.liuren_terms || []).map((item) => ({
+      kind: "liuren_terms",
+      kind_label: "六壬术语",
+      id: item.id || item.term,
+      title: item.term,
+      summary: item.definition,
+      item,
+    })),
     ...Object.entries(data.ziwei_structures || {})
       .filter(([, value]) => Array.isArray(value))
       .flatMap(([group, items]) =>
@@ -90,6 +98,18 @@ export function searchPools(data) {
         items.map((item) => ({
           kind: "qimen_structures",
           kind_label: "奇门结构",
+          id: item.id || `${group}-${item.name}`,
+          title: item.name,
+          summary: item.focus || item.core_focus || item.description || item.group || "",
+          item: { group, ...item },
+        })),
+      ),
+    ...Object.entries(data.liuren_structures || {})
+      .filter(([, value]) => Array.isArray(value))
+      .flatMap(([group, items]) =>
+        items.map((item) => ({
+          kind: "liuren_structures",
+          kind_label: "六壬结构",
           id: item.id || `${group}-${item.name}`,
           title: item.name,
           summary: item.focus || item.core_focus || item.description || item.group || "",

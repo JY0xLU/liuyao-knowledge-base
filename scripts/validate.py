@@ -56,6 +56,13 @@ def iter_qimen_structure_items(structures):
                 yield key, item
 
 
+def iter_liuren_structure_items(structures):
+    for key, value in structures.items():
+        if isinstance(value, list):
+            for item in value:
+                yield key, item
+
+
 def check_ziwei_terms(terms, source_ids: set[str]) -> list[str]:
     errors: list[str] = []
     errors += require_unique(terms, "id", "ziwei_terms")
@@ -99,6 +106,29 @@ def check_qimen_terms(terms, source_ids: set[str]) -> list[str]:
     if missing:
         errors.append(f"qimen_terms missing required terms: {', '.join(sorted(missing))}")
     errors += check_refs(terms, source_ids, "qimen_term")
+    return errors
+
+
+def check_liuren_terms(terms, source_ids: set[str]) -> list[str]:
+    errors: list[str] = []
+    errors += require_unique(terms, "id", "liuren_terms")
+    seen_terms: set[str] = set()
+    for item in terms:
+        term = item.get("term")
+        if not term:
+            errors.append(f"liuren_term missing term: {item}")
+            continue
+        if term in seen_terms:
+            errors.append(f"liuren_term duplicate term: {term}")
+        seen_terms.add(term)
+        for key in ["category", "definition", "group", "boundary_notes"]:
+            if not item.get(key):
+                errors.append(f"liuren_term {term} missing {key}")
+    required = {"六壬", "大六壬", "小六壬", "月将", "占时", "四课", "三传", "十二天将", "小六壬六宫"}
+    missing = required - seen_terms
+    if missing:
+        errors.append(f"liuren_terms missing required terms: {', '.join(sorted(missing))}")
+    errors += check_refs(terms, source_ids, "liuren_term")
     return errors
 
 
@@ -174,6 +204,46 @@ def check_qimen_structures(structures, source_ids: set[str]) -> list[str]:
         for ref in item.get("source_refs", []):
             if ref not in source_ids:
                 errors.append(f"qimen_structure {item_id} references missing source {ref}")
+    return errors
+
+
+def check_liuren_structures(structures, source_ids: set[str]) -> list[str]:
+    errors: list[str] = []
+    if structures.get("system") != "liuren":
+        errors.append("liuren_structures system must be liuren")
+    if not structures.get("boundary"):
+        errors.append("liuren_structures missing boundary")
+
+    required_counts = {
+        "subsystems": 2,
+        "da_liuren_chart_fields": 8,
+        "four_lessons": 4,
+        "three_transmissions": 3,
+        "heavenly_generals": 12,
+        "xiao_liuren_palaces": 6,
+        "case_fields": 6,
+    }
+    for key, minimum in required_counts.items():
+        value = structures.get(key)
+        if not isinstance(value, list) or len(value) < minimum:
+            errors.append(f"liuren_structures {key} must have at least {minimum} items")
+
+    ids: set[str] = set()
+    for group, item in iter_liuren_structure_items(structures):
+        item_id = item.get("id")
+        if not item_id:
+            errors.append(f"liuren_structure {group} item missing id: {item}")
+            continue
+        if item_id in ids:
+            errors.append(f"liuren_structure duplicate id: {item_id}")
+        ids.add(item_id)
+        if not item.get("name"):
+            errors.append(f"liuren_structure {item_id} missing name")
+        if not (item.get("focus") or item.get("core_focus") or item.get("description")):
+            errors.append(f"liuren_structure {item_id} missing focus/core_focus/description")
+        for ref in item.get("source_refs", []):
+            if ref not in source_ids:
+                errors.append(f"liuren_structure {item_id} references missing source {ref}")
     return errors
 
 
@@ -338,6 +408,8 @@ def main() -> int:
     ziwei_structures = load_json("ziwei_structures.json")
     qimen_terms = load_json("qimen_terms.json")
     qimen_structures = load_json("qimen_structures.json")
+    liuren_terms = load_json("liuren_terms.json")
+    liuren_structures = load_json("liuren_structures.json")
     rules = load_json("rules.json")
     classics = load_json("classics_index.json")
     classic_notes = load_json("classic_notes.json")
@@ -360,6 +432,8 @@ def main() -> int:
     errors += check_ziwei_structures(ziwei_structures, source_ids)
     errors += check_qimen_terms(qimen_terms, source_ids)
     errors += check_qimen_structures(qimen_structures, source_ids)
+    errors += check_liuren_terms(liuren_terms, source_ids)
+    errors += check_liuren_structures(liuren_structures, source_ids)
     errors += check_refs(rules, source_ids, "rule")
     errors += check_refs(classics, source_ids, "classic")
     errors += check_rule_ids(case_schema, rule_ids)
@@ -388,6 +462,7 @@ def main() -> int:
         "docs/15-multi-system-roadmap.md",
         "docs/16-ziwei-foundation.md",
         "docs/17-qimen-foundation.md",
+        "docs/18-liuren-foundation.md",
         "docs/sources.md",
         "docs/website-plan.md",
     ]
@@ -406,6 +481,7 @@ def main() -> int:
         f"{len(sources)} sources, {len(systems)} systems, {len(terms)} terms, "
         f"{len(ziwei_terms)} ziwei terms, "
         f"{len(qimen_terms)} qimen terms, "
+        f"{len(liuren_terms)} liuren terms, "
         f"{len(rules)} rules, {len(classics)} classics, "
         f"{len(classic_notes)} classic notes, {len(case_index)} case slots, "
         f"{len(accuracy_cases)} accuracy cases, "

@@ -1,6 +1,6 @@
 # 术数知识库工作台
 
-这是一个本地优先的传统术数学习、检索、排盘和验证评分工作台。当前版本以「六爻」作为第一条完整样板线，已经打通资料分层、规则卡、装卦辅助、案例槽位、准确度校准、GitHub CI 和 Netlify 上线；紫微斗数和奇门遁甲已建立第一版术语和盘式结构资料层；大小六壬已预留独立体系入口，后续按同一套轻量架构扩展。
+这是一个本地优先的传统术数学习、检索、排盘和验证评分工作台。当前版本以「六爻」作为第一条完整样板线，已经打通资料分层、规则卡、装卦辅助、案例槽位、准确度校准、GitHub CI 和 Netlify 上线；紫微斗数、奇门遁甲和大六壬/小六壬已建立第一版术语和结构资料层，后续按同一套轻量架构继续扩展。
 
 > 定位：传统术数与文化研究资料库。这里的内容不能作为医疗、法律、金融、考试、婚恋等现实决策的唯一依据。
 
@@ -18,6 +18,7 @@ python .\scripts\query.py notes 旬空
 python .\scripts\query.py cases 失物
 python .\scripts\query.py ziwei_terms 命宫 --json
 python .\scripts\query.py qimen_terms 八门 --json
+python .\scripts\query.py liuren_terms 三传 --json
 ```
 
 常用入口：
@@ -41,6 +42,7 @@ python .\scripts\query.py qimen_terms 八门 --json
 - [GitHub 项目化与版本迭代](docs/14-github-versioning.md)
 - [紫微斗数第一版资料层](docs/16-ziwei-foundation.md)
 - [奇门遁甲第一版资料层](docs/17-qimen-foundation.md)
+- [大六壬 / 小六壬第一版资料层](docs/18-liuren-foundation.md)
 - [版本记录](CHANGELOG.md)
 - [来源索引](docs/sources.md)
 - [术语表 JSON](data/terms.json)
@@ -48,6 +50,8 @@ python .\scripts\query.py qimen_terms 八门 --json
 - [紫微结构 JSON](data/ziwei_structures.json)
 - [奇门术语 JSON](data/qimen_terms.json)
 - [奇门结构 JSON](data/qimen_structures.json)
+- [六壬术语 JSON](data/liuren_terms.json)
+- [六壬结构 JSON](data/liuren_structures.json)
 - [来源 JSON](data/sources.json)
 - [体系 JSON](data/systems.json)
 - [规则卡 JSON](data/rules.json)
@@ -65,6 +69,7 @@ python .\scripts\query.py qimen_terms 八门 --json
 - 奇门遁甲、大小六壬、紫微斗数、六爻的体系索引与扩展路线
 - 紫微斗数第一版资料层：36 个术语、十二宫、十四主星、四化和命盘字段结构
 - 奇门遁甲第一版资料层：25 个术语、九宫、八门、九星、八神和值符值使字段结构
+- 大六壬/小六壬第一版资料层：六壬术语、四课三传、十二天将、小六壬六宫和案例字段结构
 - 起卦、动爻、变卦、本卦、互参逻辑
 - 纳甲、六亲、六神、世应、伏神等装卦层
 - 用神、原神、忌神、仇神、进退神、旬空、月破、日破等判断层
@@ -85,7 +90,7 @@ python .\scripts\query.py qimen_terms 八门 --json
 - 大量卦例拆解
 - 紫微斗数自动排盘、流派规则、命例 Schema 和案例校验
 - 奇门遁甲自动起局、盘式流派规则、案例 Schema 和案例校验
-- 大六壬/小六壬分层课式资料层
+- 大六壬/小六壬自动起课、课体规则、案例 Schema 和案例校验
 - 公历自动换算月建/日辰、飞神伏神生克、旺衰和应期的完整自动判断
 - 后端在线案例库
 - GitHub release 与长期版本迭代；远程仓库已创建、推送并配置 CI，release 尚未创建
@@ -163,6 +168,8 @@ npx netlify deploy --prod
 - `data/ziwei_structures.json` 作为紫微盘式结构 API
 - `data/qimen_terms.json` 作为奇门术语检索 API
 - `data/qimen_structures.json` 作为奇门盘式结构 API
+- `data/liuren_terms.json` 作为六壬术语检索 API
+- `data/liuren_structures.json` 作为六壬课式结构 API
 - `data/sources.json` 作为参考资料库
 - `data/rules.json` 作为规则卡 API
 - `data/classics_index.json` 作为古籍阅读路线 API
@@ -208,4 +215,5 @@ python .\scripts\query.py notes 回头克 --group 十八问答
 python .\scripts\query.py cases 失物
 python .\scripts\query.py ziwei_terms 命宫 --json
 python .\scripts\query.py qimen_terms 八门 --json
+python .\scripts\query.py liuren_terms 三传 --json
 ```

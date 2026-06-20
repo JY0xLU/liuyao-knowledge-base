@@ -112,6 +112,7 @@ def main() -> int:
     check("app_has_systems_view", 'systems: ["体系总览"' in app and 'data-view="systems"' in html, failures)
     check("app_has_ziwei_view", 'ziwei: ["紫微资料"' in app and 'data-view="ziwei"' in html, failures)
     check("app_has_qimen_view", 'qimen: ["奇门资料"' in app and 'data-view="qimen"' in html, failures)
+    check("app_has_liuren_view", 'liuren: ["六壬资料"' in app and 'data-view="liuren"' in html, failures)
     check("app_has_caster_view", 'caster: ["装卦辅助", "手工起卦排盘"]' in app, failures)
     check("engine_exports_builder", "buildLiuyaoChart" in engine and "validateLiuyaoInput" in engine, failures)
     check("css_has_mobile_breakpoint", "@media (max-width: 820px)" in css, failures)
@@ -130,6 +131,8 @@ def main() -> int:
     check("function_search_core_has_ziwei_structures", "ziwei_structures" in function_search_core, failures)
     check("function_search_core_has_qimen_terms", "qimen_terms" in function_search_core, failures)
     check("function_search_core_has_qimen_structures", "qimen_structures" in function_search_core, failures)
+    check("function_search_core_has_liuren_terms", "liuren_terms" in function_search_core, failures)
+    check("function_search_core_has_liuren_structures", "liuren_structures" in function_search_core, failures)
     check("docs_count", len(data.get("docs", [])) >= 13, failures)
     check(
         "research_log_in_site_data",
@@ -166,6 +169,11 @@ def main() -> int:
         any(doc.get("title") == "奇门遁甲第一版资料层" for doc in data.get("docs", [])),
         failures,
     )
+    check(
+        "liuren_foundation_doc_in_site_data",
+        any(doc.get("title") == "大六壬 / 小六壬第一版资料层" for doc in data.get("docs", [])),
+        failures,
+    )
     check("systems_count", len(data.get("systems", [])) >= 4, failures)
     check(
         "systems_cover_requested_scope",
@@ -200,6 +208,23 @@ def main() -> int:
         and len(data.get("qimen_structures", {}).get("gates", [])) == 8
         and len(data.get("qimen_structures", {}).get("stars", [])) == 9
         and len(data.get("qimen_structures", {}).get("deities", [])) == 8,
+        failures,
+    )
+    check("liuren_terms_count", len(data.get("liuren_terms", [])) >= 36, failures)
+    check(
+        "liuren_terms_have_core_terms",
+        {"六壬", "大六壬", "小六壬", "四课", "三传", "十二天将", "小六壬六宫"}.issubset(
+            {item.get("term") for item in data.get("liuren_terms", [])}
+        ),
+        failures,
+    )
+    check(
+        "liuren_structures_have_core_counts",
+        len(data.get("liuren_structures", {}).get("subsystems", [])) == 2
+        and len(data.get("liuren_structures", {}).get("four_lessons", [])) == 4
+        and len(data.get("liuren_structures", {}).get("three_transmissions", [])) == 3
+        and len(data.get("liuren_structures", {}).get("heavenly_generals", [])) == 12
+        and len(data.get("liuren_structures", {}).get("xiao_liuren_palaces", [])) == 6,
         failures,
     )
     check("classic_notes_count", len(data.get("classic_notes", [])) >= 36, failures)
@@ -256,7 +281,7 @@ def main() -> int:
         "npm run check" in readme and "npx netlify deploy --prod" in readme,
         failures,
     )
-    check("changelog_has_current_version", "## v0.6.0 - 2026-06-21" in changelog, failures)
+    check("changelog_has_current_version", "## v0.7.0 - 2026-06-21" in changelog, failures)
 
     if failures:
         print("\nPredeploy check failed:")
