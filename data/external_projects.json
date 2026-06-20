@@ -199,5 +199,92 @@
       "其具体流派体系不能直接变成本库唯一规则"
     ],
     "adoption": "先作为紫微资料层的字段和工程参考；接入算法前必须做测试用例和流派边界复核。"
+  },
+  {
+    "id": "github-qfdk-qimen",
+    "name": "qimen",
+    "owner": "qfdk",
+    "url": "https://github.com/qfdk/qimen",
+    "platform": "GitHub",
+    "language": "JavaScript",
+    "stars": 184,
+    "forks": 62,
+    "license": "MIT",
+    "updated_at": "2026-06-19T09:23:29Z",
+    "project_type": "javascript-web-chart",
+    "scope": "奇门遁甲在线排盘项目，仓库描述标明转盘奇门，适合参考九宫盘面、门星神字段和前端展示颗粒度。",
+    "evidence": [
+      "GitHub repository metadata collected via repo view",
+      "repo view shows MIT license, JavaScript primary language and 184 stars",
+      "description explicitly states 奇门遁甲在线排盘(转盘)"
+    ],
+    "useful_patterns": [
+      "把奇门输出组织成九宫盘面",
+      "前端直接呈现盘局而不是先做营销页",
+      "适合作为转盘奇门字段和 UI 颗粒度参考"
+    ],
+    "risks": [
+      "只确认到 metadata 级信息，尚未逐文件审计源码",
+      "仓库标明转盘，不能把其字段口径扩展成所有奇门体系通用规则"
+    ],
+    "adoption": "先作为奇门资料层的字段和前端展示参考；接入算法前必须抽样源码、建立节气/局数/值符值使测试。"
+  },
+  {
+    "id": "github-arc119226-qimen-dunjia",
+    "name": "qimen_dunjia",
+    "owner": "arc119226",
+    "url": "https://github.com/arc119226/qimen_dunjia",
+    "platform": "GitHub",
+    "language": "JavaScript",
+    "stars": 3,
+    "forks": 1,
+    "license": "MIT",
+    "updated_at": "2026-06-19T11:16:36Z",
+    "project_type": "javascript-chart-module",
+    "scope": "奇门遁甲起盘模块，可作为后续算法接口、字段命名和值符值使输出的抽样参考。",
+    "evidence": [
+      "GitHub repository metadata collected via repo view",
+      "repo view shows MIT license and JavaScript primary language",
+      "description explicitly states 奇門遁甲起盤模組"
+    ],
+    "useful_patterns": [
+      "以模块形态提供奇门起盘能力",
+      "适合后续比较起局输入输出字段",
+      "可与 qfdk/qimen 做字段差异对照"
+    ],
+    "risks": [
+      "stars 很少，不能直接作为准确性依据",
+      "未完成源码级审计前不能复用算法或断法"
+    ],
+    "adoption": "作为奇门起局算法调研候选；本轮只写 metadata 和结构层，不接入代码。"
+  },
+  {
+    "id": "github-banderzhm-zhouyilab",
+    "name": "ZhouYiLab",
+    "owner": "banderzhm",
+    "url": "https://github.com/banderzhm/ZhouYiLab",
+    "platform": "GitHub",
+    "language": "C++",
+    "stars": 94,
+    "forks": 37,
+    "license": "MIT",
+    "updated_at": "2026-06-20T06:13:45Z",
+    "project_type": "multi-system-computation-engine",
+    "scope": "玄学计算引擎，描述包含大六壬、六爻、紫微斗数、八字和奇门遁甲，适合作为多体系工程边界参考。",
+    "evidence": [
+      "GitHub repository metadata collected via repo view",
+      "repo view shows MIT license and C++ primary language",
+      "description names 大六壬、六爻、紫微斗数、八字、奇门遁甲"
+    ],
+    "useful_patterns": [
+      "多体系计算引擎需要清楚隔离不同体系",
+      "适合作为后续大六壬和奇门算法项目的对照样本",
+      "MIT license lowers后续接口参考成本"
+    ],
+    "risks": [
+      "综合引擎范围很大，不能替代本库逐体系来源校验",
+      "尚未源码审计，不能直接采信具体规则"
+    ],
+    "adoption": "作为多体系工程参考；每个体系仍独立做来源、结构和测试。"
   }
 ]

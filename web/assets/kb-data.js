@@ -60,8 +60,8 @@ window.LIUYAO_KB_DATA = {
       "id": "08-research-and-deployment-log",
       "title": "研究与部署日志",
       "path": "docs/08-research-and-deployment-log.md",
-      "summary": "研究与部署日志 本日志记录资料调研、网站化、验证和部署状态。它不是学习正文，只说明当前版本做到了哪里、证据来自哪里、下一步还缺什么。 1. 当前版本结论 当前版本以「六爻」作为第一条完整样板线，同时把奇门遁甲、大小六壬、紫微斗数拆成独立体系入口。紫微斗数已经从“预留入口”推进到第一版资料层，包含术语、十二宫、十四主星、四化和命盘字段结构；奇门与六壬仍处在体系",
-      "markdown": "# 研究与部署日志\n\n本日志记录资料调研、网站化、验证和部署状态。它不是学习正文，只说明当前版本做到了哪里、证据来自哪里、下一步还缺什么。\n\n## 1. 当前版本结论\n\n当前版本以「六爻」作为第一条完整样板线，同时把奇门遁甲、大小六壬、紫微斗数拆成独立体系入口。紫微斗数已经从“预留入口”推进到第一版资料层，包含术语、十二宫、十四主星、四化和命盘字段结构；奇门与六壬仍处在体系路线图阶段。这样可以先把资料分层、规则追踪、案例复盘、网站化和部署链路跑通，再逐个扩展其他体系，避免把不同规则混成一套无法校验的断法。\n\n已经完成的基础形态：\n\n- 本地知识库：Markdown 教材、来源索引、古籍阅读路线、规则卡、术语表、古籍读书笔记、案例槽位、案例 Schema。\n- 多体系骨架：已加入 `data/systems.json` 和 [多术数体系路线图](15-multi-system-roadmap.md)，把奇门遁甲、大小六壬、紫微斗数、六爻拆成独立资料层，避免规则混写。\n- 紫微资料层：已加入 `data/ziwei_terms.json`、`data/ziwei_structures.json` 和 [紫微斗数第一版资料层](16-ziwei-foundation.md)，当前只记录结构字段，不写断语规则。\n- 搜索工具：`scripts/search.py` 支持全文检索，`scripts/query.py` 支持按术语、规则、来源、古籍、读书笔记、案例槽位做结构化查询。\n- 静态网站：`web/index.html` 可读取内置数据包，展示学习路径、全库搜索、规则卡、术语表、古籍索引、读书笔记、案例索引、外部项目、来源库和案例录入。\n- 装卦辅助：`web/liuyao-engine.js` 已支持手工输入六爻，生成本卦、变卦、动爻、卦宫、纳甲干支、地支五行、六神、六亲、自动世应、伏神提示、旬空和月建/日辰基础状态。\n- 准确度验证：已加入 `data/accuracy_cases.json`、验证评分页面和评分 rubric；当前含 1 条方法演示和 3 条回测校准样本，回测样本不计入真实命中率。\n- GitHub 项目化：已创建并推送 public 仓库 `JY0xLU/liuyao-knowledge-base`，已加入 `.github/workflows/check.yml`，远程 Actions 已通过一次检查。\n- 后端接口：Netlify Functions 提供 `/api/search` 和 `/api/case-schema`，前端可优先用后端检索并在本地环境回退到内置数据包。\n- 部署配置：`netlify.toml`、`package.json`、`.gitignore`、`scripts/predeploy_check.py` 已加入。\n\n仍未完成的完整目标：\n\n- 还没有把经典逐章整理到逐条原文释义和真实卦例复盘级别。\n- 还没有把紫微斗数、奇门遁甲、大六壬/小六壬展开到六爻同等深度；紫微当前是第一版资料层，奇门和六壬仍只是体系索引和扩展路线。\n- 还没有建立大规模反馈卦例库；当前只有《增删卜易》案例抽取槽位。\n- 还没有从公历自动换算月建、日辰、旬空，也还没有完整飞神伏神生克、旺衰和应期模型。\n- 还没有在线保存案例的后端。\n- 线上站点当前是只读知识库和检索 API，尚未接入用户案例持久化。\n\n## 2. 资料采集与工具状态\n\n2026-06-21 的资料采集以公开网页、古籍页面、B站课程目录、GitHub 公开源码和公开赛果页面为主。需要登录态或专用后端的平台暂不作为规则来源，只作为后续采集候选。\n\n当前规则只从可复查来源进入 A/B/C 分层；视频、论坛、社媒和个人经验材料最多作为 C 类线索，不能直接升级为规则。\n\n## 3. 已纳入来源边界\n\n本版来源按 A/B/C 分层：\n\n- A 类：CText、维基文库、Wikimedia Commons 等经典或公共文本。\n- B 类：现代教程、百科、流程文章。\n- C 类：视频课程、讨论帖、个人经验材料。\n\n采信方式：\n\n1. A 类用于定义术语、规则主干和古籍阅读路线。\n2. B 类用于补齐现代流程、学习顺序和术语解释。\n3. C 类用于观察课程结构和案例线索，不直接升级为规则。\n\n当前 `data/sources.json` 已收录 25 条来源，其中 A 类来源包含六爻经典文本和维基文库《紫微斗數全書》；新增的体育结果来源只用于赛果事实锁定，不用于提升六爻规则等级。紫微来源只用于结构和检索入口，不直接升级为断语规则。\n\n2026-06-21 新增的装卦引擎校验来源：\n\n- `bopo/najia` README 和源码：确认卦码自下而上、纳甲表、六神、六亲、伏神字段，以及 README 中关于地天泰世应和归魂卦 bug 的修复说明。\n- `bopo/najia` 测试：确认离为火 `101101` 的纳甲结果为 `己卯、己丑、己亥、己酉、己未、己巳`。\n- Cosmic Tao 六爻教程：确认三钱法、八宫、六亲、世应、六神、伏神等现代流程说明。\n- FateMaster 世应表：确认八纯、一至五世、游魂、归魂的世应位置。\n\n2026-06-21 新增的回测校准赛果来源：\n\n- Kansas City Chiefs 官方赛报：Super Bowl LVIII，Chiefs 25-22 49ers，加时。\n- UEFA 官方赛报：EURO 2024 决赛，Spain 2-1 England，Oyarzabal 后段进球。\n- Olympics.com 官方赛报：Paris 2024 男篮决赛，USA 98-87 France，Stephen Curry 末段关键投篮。\n\n2026-06-21 新增的紫微资料层来源：\n\n- 维基文库《紫微斗數全書》：作为 A 类公共古籍文本候选，用于星曜、宫位和结构字段索引；引用前仍需逐段校对。\n- 中文维基百科“紫微斗数”和英文 Wikipedia “Zi Wei Dou Shu”：作为 B 类百科导览，用于概念入口和跨语言命名。\n- `Renhuai123/ziwei-doushu`：MIT 开源 TypeScript 排盘项目，用于字段、四化系统和测试颗粒度参考。\n- `taskyoooo/ziwei-doushu-skill`：作为 C 类产品形态线索，不作为规则来源。\n\n## 4. 网站化验证结果\n\n本地静态工作台已完成以下验证：\n\n| 验证项 | 结果 |\n|---|---|\n| 数据校验 | `scripts/validate.py` 通过：19 sources、4 systems、16 terms、31 rules、4 classics、36 classic notes、24 case slots、4 accuracy cases、6 external projects |\n| 数据构建 | `web/scripts/build-data.py` 通过：18 docs、4 systems、16 terms、31 rules、36 notes、24 case slots、4 accuracy cases、6 external projects |\n| 静态冒烟 | `web/scripts/smoke-test.py` 通过，覆盖多体系入口、读书笔记、案例索引、验证评分和外部项目 |\n| 函数测试 | `scripts/test-functions.mjs` 通过，覆盖 `/api/search` 核心搜索语义、体系搜索、验证评分搜索、外部项目搜索和案例 Schema 数据 |\n| 装卦测试 | `scripts/test-liuyao-engine.mjs` 通过，覆盖本卦、变卦、动爻、卦码、纳甲、卦宫、六神、六亲、自动世应、游魂、归魂、伏神、旬空和月建/日辰基础状态 |\n| 部署前检查 | `scripts/predeploy_check.py` 通过，覆盖公开资产路径、体系入口、规则引用、读书笔记和案例槽位 |\n| 搜索脚本 | `scripts/search.py 旬空` 可返回文档、术语、规则、来源 |\n| 结构化查询 | `scripts/query.py rules 旬空`、`scripts/query.py notes 旬空`、`scripts/query.py cases 失物` 均可返回结构化结果 |\n| 浏览器桌面 QA | `http://127.0.0.1:8765/web/` 可加载，搜索「旬空」返回 15 张结果卡 |\n| 读书笔记 QA | 读书笔记页可显示 36 张十八论/十八问答笔记卡 |\n| 案例索引 QA | 案例索引页可显示 24 张《增删卜易》案例槽位卡 |\n| 外部项目 QA | 外部项目页可显示 6 个 GitHub/平台参考项目 |\n| 紫微资料 QA | 新增紫微资料页和后端搜索 kind，覆盖 `ziwei_terms` 与 `ziwei_structures` |\n| 案例录入 QA | 案例页可填写问题字段，能显示 `case_schema.json` 标识 |\n| 移动端 QA | 390px 断点生效，`.app-shell` 变为单列布局 |\n| 控制台 | 浏览器 QA 中未记录 error/warn |\n\n`file://` 直接打开已在文件层由 `web/assets/kb-data.js` 支持；Browser 插件阻止访问 `file://` 页面，因此没有绕过安全策略做浏览器复查。\n\n## 5. Netlify 状态\n\nNetlify 上线结果：\n\n- Team: `jy0xlu`\n- Project: `liuyao-knowledge-base`\n- Site ID: `e4b6e282-daac-49d6-b251-15acf3c896c8`\n- Site URL: https://liuyao-knowledge-base.netlify.app\n- Latest deploy: 以 Netlify 项目页为准，避免部署 ID 自引用后变成旧值。\n- Deploy state: `ready`\n\n线上 HTTP 验证：\n\n| 验证项 | 结果 |\n|---|---|\n| 首页 | `https://liuyao-knowledge-base.netlify.app/` 返回 200，HTML 含 `kb-data.js` |\n| 体系搜索 API | `/api/search?q=紫微斗数&kind=systems` 返回 200，结果包含 `ziwei` |\n| 外部项目 API | `/api/search?q=najia&kind=external_projects` 返回 200，首条为 `github-bopo-najia` |\n| 案例索引 API | `/api/search?q=失物&kind=case_index` 返回 200，首条为 `zengshan-case-slot-010-lost-object-home` |\n| 案例 Schema API | `/api/case-schema` 返回 200，Schema title 为 `LiuyaoCase` |\n\n部署工具链记录：\n\n- Netlify 部署时运行 `npm run build:netlify` 重建 `web/assets/kb-data.json`、`web/assets/kb-data.js` 和 `netlify/functions/_shared/kb-data.mjs`，避免源数据变更后发布旧资产。\n- 发布前使用干净部署副本，只包含源码、文档、数据、前端和函数目录，不携带本地缓存或临时工具目录。\n\n## 6. 外部项目参考状态\n\n2026-06-20 使用 GitHub 公开 API 和 Agent Reach 搜索：\n\n- 已结构化记录 6 个参考项目：`RealKai42/liu-yao-divining`、`Brhiza/mingyu`、`bopo/najia`、`xiongdun8/liuyao`、`kentang2017/ichingshifa`、`abbeymondshein/i-ching-cli`。\n- 已写入 `data/external_projects.json` 和 [外部项目与源码参考](11-external-project-benchmark.md)。\n- 可借鉴重点：结构化输出、多入口 API/MCP/skill、装卦函数拆分、六神/六亲/世应/旬空测试颗粒度、AI 解读与规则数据分层。\n- 风险：部分项目未确认 license；部分项目定位为娱乐或泛命理平台；GitHub API 本轮出现 rate limit，未做深度源码抓取。\n\n## 7. 下一轮扩展优先级\n\n### 第一优先：紫微资料层深化\n\n1. 校对《紫微斗數全書》里十二宫、十四主星和四化相关段落。\n2. 建立 `data/ziwei_case_schema.json`，先支持手工命例录入。\n3. 对 `Renhuai123/ziwei-doushu` 做源码和测试抽样，确认命盘字段、四化输入输出和流派边界。\n4. 收集公开命例或事件复盘，回测样本只用于字段校准，不计入真实准确率。\n\n### 第二优先：经典细化\n\n1. 《卜筮正宗》十八论逐条读书笔记。\n2. 每条读书笔记拆成：原章节、核心问题、规则、适用条件、例外、对应规则卡。\n3. 把「十八问答」改造成案例问题集。\n\n### 第三优先：反馈案例库\n\n1. 从《增删卜易》抽取至少 100 条卦例。\n2. 每条卦例按 `data/case_schema.json` 记录。\n3. 按财、婚、病、官、考试、失物、出行等专题聚类。\n4. 把规则是否应验记录成可统计字段。\n\n### 第四优先：装卦辅助\n\n1. 从公历时间自动换算月建、日辰、旬空。\n2. 继续补飞神伏神的生克关系、旺衰、空破、墓绝、合冲和应期字段。\n3. 接入案例表单，自动保存排盘字段。\n\n### 第五优先：上线增强\n\n1. 加入在线案例持久化后端。\n2. 建立真实前瞻事件验证集，至少 20 条可评分样本。\n3. 创建 release 标签和 release notes。\n4. 使用线上 URL 定期复跑桌面和移动端 QA。\n5. 把每轮公网验证结果写回 README 和本日志。\n"
+      "summary": "研究与部署日志 本日志记录资料调研、网站化、验证和部署状态。它不是学习正文，只说明当前版本做到了哪里、证据来自哪里、下一步还缺什么。 1. 当前版本结论 当前版本以「六爻」作为第一条完整样板线，同时把奇门遁甲、大小六壬、紫微斗数拆成独立体系入口。紫微斗数已经进入第一版资料层，包含术语、十二宫、十四主星、四化和命盘字段结构；奇门遁甲也已进入第一版资料层，包含术",
+      "markdown": "# 研究与部署日志\n\n本日志记录资料调研、网站化、验证和部署状态。它不是学习正文，只说明当前版本做到了哪里、证据来自哪里、下一步还缺什么。\n\n## 1. 当前版本结论\n\n当前版本以「六爻」作为第一条完整样板线，同时把奇门遁甲、大小六壬、紫微斗数拆成独立体系入口。紫微斗数已经进入第一版资料层，包含术语、十二宫、十四主星、四化和命盘字段结构；奇门遁甲也已进入第一版资料层，包含术语、九宫、八门、九星、八神和值符值使字段结构；六壬仍处在体系路线图阶段。这样可以先把资料分层、规则追踪、案例复盘、网站化和部署链路跑通，再逐个扩展其他体系，避免把不同规则混成一套无法校验的断法。\n\n已经完成的基础形态：\n\n- 本地知识库：Markdown 教材、来源索引、古籍阅读路线、规则卡、术语表、古籍读书笔记、案例槽位、案例 Schema。\n- 多体系骨架：已加入 `data/systems.json` 和 [多术数体系路线图](15-multi-system-roadmap.md)，把奇门遁甲、大小六壬、紫微斗数、六爻拆成独立资料层，避免规则混写。\n- 紫微资料层：已加入 `data/ziwei_terms.json`、`data/ziwei_structures.json` 和 [紫微斗数第一版资料层](16-ziwei-foundation.md)，当前只记录结构字段，不写断语规则。\n- 搜索工具：`scripts/search.py` 支持全文检索，`scripts/query.py` 支持按术语、规则、来源、古籍、读书笔记、案例槽位做结构化查询。\n- 静态网站：`web/index.html` 可读取内置数据包，展示学习路径、全库搜索、规则卡、术语表、古籍索引、读书笔记、案例索引、外部项目、来源库和案例录入。\n- 装卦辅助：`web/liuyao-engine.js` 已支持手工输入六爻，生成本卦、变卦、动爻、卦宫、纳甲干支、地支五行、六神、六亲、自动世应、伏神提示、旬空和月建/日辰基础状态。\n- 准确度验证：已加入 `data/accuracy_cases.json`、验证评分页面和评分 rubric；当前含 1 条方法演示和 3 条回测校准样本，回测样本不计入真实命中率。\n- GitHub 项目化：已创建并推送 public 仓库 `JY0xLU/liuyao-knowledge-base`，已加入 `.github/workflows/check.yml`，远程 Actions 已通过一次检查。\n- 后端接口：Netlify Functions 提供 `/api/search` 和 `/api/case-schema`，前端可优先用后端检索并在本地环境回退到内置数据包。\n- 部署配置：`netlify.toml`、`package.json`、`.gitignore`、`scripts/predeploy_check.py` 已加入。\n\n仍未完成的完整目标：\n\n- 还没有把经典逐章整理到逐条原文释义和真实卦例复盘级别。\n- 还没有把紫微斗数、奇门遁甲、大六壬/小六壬展开到六爻同等深度；紫微和奇门当前是第一版资料层，六壬仍只是体系索引和扩展路线。\n- 还没有建立大规模反馈卦例库；当前只有《增删卜易》案例抽取槽位。\n- 还没有从公历自动换算月建、日辰、旬空，也还没有完整飞神伏神生克、旺衰和应期模型。\n- 还没有在线保存案例的后端。\n- 线上站点当前是只读知识库和检索 API，尚未接入用户案例持久化。\n\n## 2. 资料采集与工具状态\n\n2026-06-21 的资料采集以公开网页、古籍页面、B站课程目录、GitHub 公开源码和公开赛果页面为主。需要登录态或专用后端的平台暂不作为规则来源，只作为后续采集候选。\n\n当前规则只从可复查来源进入 A/B/C 分层；视频、论坛、社媒和个人经验材料最多作为 C 类线索，不能直接升级为规则。\n\n## 3. 已纳入来源边界\n\n本版来源按 A/B/C 分层：\n\n- A 类：CText、维基文库、Wikimedia Commons 等经典或公共文本。\n- B 类：现代教程、百科、流程文章。\n- C 类：视频课程、讨论帖、个人经验材料。\n\n采信方式：\n\n1. A 类用于定义术语、规则主干和古籍阅读路线。\n2. B 类用于补齐现代流程、学习顺序和术语解释。\n3. C 类用于观察课程结构和案例线索，不直接升级为规则。\n\n当前 `data/sources.json` 已收录 25 条来源，其中 A 类来源包含六爻经典文本和维基文库《紫微斗數全書》；新增的体育结果来源只用于赛果事实锁定，不用于提升六爻规则等级。紫微来源只用于结构和检索入口，不直接升级为断语规则。\n\n2026-06-21 新增的装卦引擎校验来源：\n\n- `bopo/najia` README 和源码：确认卦码自下而上、纳甲表、六神、六亲、伏神字段，以及 README 中关于地天泰世应和归魂卦 bug 的修复说明。\n- `bopo/najia` 测试：确认离为火 `101101` 的纳甲结果为 `己卯、己丑、己亥、己酉、己未、己巳`。\n- Cosmic Tao 六爻教程：确认三钱法、八宫、六亲、世应、六神、伏神等现代流程说明。\n- FateMaster 世应表：确认八纯、一至五世、游魂、归魂的世应位置。\n\n2026-06-21 新增的回测校准赛果来源：\n\n- Kansas City Chiefs 官方赛报：Super Bowl LVIII，Chiefs 25-22 49ers，加时。\n- UEFA 官方赛报：EURO 2024 决赛，Spain 2-1 England，Oyarzabal 后段进球。\n- Olympics.com 官方赛报：Paris 2024 男篮决赛，USA 98-87 France，Stephen Curry 末段关键投篮。\n\n2026-06-21 新增的紫微资料层来源：\n\n- 维基文库《紫微斗數全書》：作为 A 类公共古籍文本候选，用于星曜、宫位和结构字段索引；引用前仍需逐段校对。\n- 中文维基百科“紫微斗数”和英文 Wikipedia “Zi Wei Dou Shu”：作为 B 类百科导览，用于概念入口和跨语言命名。\n- `Renhuai123/ziwei-doushu`：MIT 开源 TypeScript 排盘项目，用于字段、四化系统和测试颗粒度参考。\n- `taskyoooo/ziwei-doushu-skill`：作为 C 类产品形态线索，不作为规则来源。\n\n## 4. 网站化验证结果\n\n本地静态工作台已完成以下验证：\n\n| 验证项 | 结果 |\n|---|---|\n| 数据校验 | `scripts/validate.py` 通过：19 sources、4 systems、16 terms、31 rules、4 classics、36 classic notes、24 case slots、4 accuracy cases、6 external projects |\n| 数据构建 | `web/scripts/build-data.py` 通过：18 docs、4 systems、16 terms、31 rules、36 notes、24 case slots、4 accuracy cases、6 external projects |\n| 静态冒烟 | `web/scripts/smoke-test.py` 通过，覆盖多体系入口、读书笔记、案例索引、验证评分和外部项目 |\n| 函数测试 | `scripts/test-functions.mjs` 通过，覆盖 `/api/search` 核心搜索语义、体系搜索、验证评分搜索、外部项目搜索和案例 Schema 数据 |\n| 装卦测试 | `scripts/test-liuyao-engine.mjs` 通过，覆盖本卦、变卦、动爻、卦码、纳甲、卦宫、六神、六亲、自动世应、游魂、归魂、伏神、旬空和月建/日辰基础状态 |\n| 部署前检查 | `scripts/predeploy_check.py` 通过，覆盖公开资产路径、体系入口、规则引用、读书笔记和案例槽位 |\n| 搜索脚本 | `scripts/search.py 旬空` 可返回文档、术语、规则、来源 |\n| 结构化查询 | `scripts/query.py rules 旬空`、`scripts/query.py notes 旬空`、`scripts/query.py cases 失物` 均可返回结构化结果 |\n| 浏览器桌面 QA | `http://127.0.0.1:8765/web/` 可加载，搜索「旬空」返回 15 张结果卡 |\n| 读书笔记 QA | 读书笔记页可显示 36 张十八论/十八问答笔记卡 |\n| 案例索引 QA | 案例索引页可显示 24 张《增删卜易》案例槽位卡 |\n| 外部项目 QA | 外部项目页可显示 6 个 GitHub/平台参考项目 |\n| 紫微资料 QA | 新增紫微资料页和后端搜索 kind，覆盖 `ziwei_terms` 与 `ziwei_structures` |\n| 案例录入 QA | 案例页可填写问题字段，能显示 `case_schema.json` 标识 |\n| 移动端 QA | 390px 断点生效，`.app-shell` 变为单列布局 |\n| 控制台 | 浏览器 QA 中未记录 error/warn |\n\n`file://` 直接打开已在文件层由 `web/assets/kb-data.js` 支持；Browser 插件阻止访问 `file://` 页面，因此没有绕过安全策略做浏览器复查。\n\n## 5. Netlify 状态\n\nNetlify 上线结果：\n\n- Team: `jy0xlu`\n- Project: `liuyao-knowledge-base`\n- Site ID: `e4b6e282-daac-49d6-b251-15acf3c896c8`\n- Site URL: https://liuyao-knowledge-base.netlify.app\n- Latest deploy: 以 Netlify 项目页为准，避免部署 ID 自引用后变成旧值。\n- Deploy state: `ready`\n\n线上 HTTP 验证：\n\n| 验证项 | 结果 |\n|---|---|\n| 首页 | `https://liuyao-knowledge-base.netlify.app/` 返回 200，HTML 含 `kb-data.js` |\n| 体系搜索 API | `/api/search?q=紫微斗数&kind=systems` 返回 200，结果包含 `ziwei` |\n| 外部项目 API | `/api/search?q=najia&kind=external_projects` 返回 200，首条为 `github-bopo-najia` |\n| 案例索引 API | `/api/search?q=失物&kind=case_index` 返回 200，首条为 `zengshan-case-slot-010-lost-object-home` |\n| 案例 Schema API | `/api/case-schema` 返回 200，Schema title 为 `LiuyaoCase` |\n\n部署工具链记录：\n\n- Netlify 部署时运行 `npm run build:netlify` 重建 `web/assets/kb-data.json`、`web/assets/kb-data.js` 和 `netlify/functions/_shared/kb-data.mjs`，避免源数据变更后发布旧资产。\n- 发布前使用干净部署副本，只包含源码、文档、数据、前端和函数目录，不携带本地缓存或临时工具目录。\n\n## 6. 外部项目参考状态\n\n2026-06-20 使用 GitHub 公开 API 和 Agent Reach 搜索：\n\n- 已结构化记录 6 个参考项目：`RealKai42/liu-yao-divining`、`Brhiza/mingyu`、`bopo/najia`、`xiongdun8/liuyao`、`kentang2017/ichingshifa`、`abbeymondshein/i-ching-cli`。\n- 已写入 `data/external_projects.json` 和 [外部项目与源码参考](11-external-project-benchmark.md)。\n- 可借鉴重点：结构化输出、多入口 API/MCP/skill、装卦函数拆分、六神/六亲/世应/旬空测试颗粒度、AI 解读与规则数据分层。\n- 风险：部分项目未确认 license；部分项目定位为娱乐或泛命理平台；GitHub API 本轮出现 rate limit，未做深度源码抓取。\n\n## 7. 下一轮扩展优先级\n\n### 第一优先：紫微资料层深化\n\n1. 校对《紫微斗數全書》里十二宫、十四主星和四化相关段落。\n2. 建立 `data/ziwei_case_schema.json`，先支持手工命例录入。\n3. 对 `Renhuai123/ziwei-doushu` 做源码和测试抽样，确认命盘字段、四化输入输出和流派边界。\n4. 收集公开命例或事件复盘，回测样本只用于字段校准，不计入真实准确率。\n\n### 第二优先：经典细化\n\n1. 《卜筮正宗》十八论逐条读书笔记。\n2. 每条读书笔记拆成：原章节、核心问题、规则、适用条件、例外、对应规则卡。\n3. 把「十八问答」改造成案例问题集。\n\n### 第三优先：反馈案例库\n\n1. 从《增删卜易》抽取至少 100 条卦例。\n2. 每条卦例按 `data/case_schema.json` 记录。\n3. 按财、婚、病、官、考试、失物、出行等专题聚类。\n4. 把规则是否应验记录成可统计字段。\n\n### 第四优先：装卦辅助\n\n1. 从公历时间自动换算月建、日辰、旬空。\n2. 继续补飞神伏神的生克关系、旺衰、空破、墓绝、合冲和应期字段。\n3. 接入案例表单，自动保存排盘字段。\n\n### 第五优先：上线增强\n\n1. 加入在线案例持久化后端。\n2. 建立真实前瞻事件验证集，至少 20 条可评分样本。\n3. 创建 release 标签和 release notes。\n4. 使用线上 URL 定期复跑桌面和移动端 QA。\n5. 把每轮公网验证结果写回 README 和本日志。\n\n## 2026-06-21 奇门遁甲第一版资料层\n\n- 新增 `data/qimen_terms.json`：25 个奇门术语，覆盖奇门盘、九宫、八门、九星、八神、值符值使、阴阳遁、局数、转盘/飞盘和时家/日家边界。\n- 新增 `data/qimen_structures.json`：九宫、八门、九星、八神和盘式字段结构。\n- 新增 [奇门遁甲第一版资料层](17-qimen-foundation.md)，明确本轮只做结构资料，不实现自动起局，不写确定性断语。\n- 接入前端“奇门资料”视图、后端 `qimen_terms` / `qimen_structures` 搜索池、CLI 查询和部署前检查。\n- 调研边界：Jina Reader 读取 Wikipedia 镜像返回匿名 401；本轮使用可直接访问的百科 URL 与 GitHub 元数据，B站搜索只作为 C 类学习生态线索。\n"
     },
     {
       "id": "09-bushi-zhengzong-notes",
@@ -110,7 +110,7 @@ window.LIUYAO_KB_DATA = {
       "title": "多术数体系路线图",
       "path": "docs/15-multi-system-roadmap.md",
       "summary": "多术数体系路线图 本项目从六爻先落地，是为了先把资料分层、规则追踪、案例复盘、网站化和部署链路打通。扩展到奇门遁甲、大小六壬、紫微斗数时，不应把所有规则塞进一个大模型里，而应保留“体系隔离、共享工具”的结构。 1. 架构原则 - 共享层：搜索、来源索引、案例记录、准确度评分、GitHub/Netlify 发布链路。 - 体系层：六爻、紫微、奇门、六壬分别保留",
-      "markdown": "# 多术数体系路线图\n\n本项目从六爻先落地，是为了先把资料分层、规则追踪、案例复盘、网站化和部署链路打通。扩展到奇门遁甲、大小六壬、紫微斗数时，不应把所有规则塞进一个大模型里，而应保留“体系隔离、共享工具”的结构。\n\n## 1. 架构原则\n\n- 共享层：搜索、来源索引、案例记录、准确度评分、GitHub/Netlify 发布链路。\n- 体系层：六爻、紫微、奇门、六壬分别保留自己的术语、盘式、规则、案例 Schema。\n- 证据层：每条规则必须有来源等级、适用体系、适用条件和例外。\n- 产品层：前端保持一个轻量静态工作台，后端只提供搜索和 Schema 这类薄 API；没有必要在第一阶段上数据库和重框架。\n\n## 2. 当前状态\n\n| 体系 | 状态 | 已完成 | 下一步 |\n|---|---|---|---|\n| 六爻 | active-v0.4 | 学习路径、规则卡、案例槽位、装卦辅助、验证评分、线上站点、多体系样板线 | 公历换算、旺衰应期、真实前瞻样本 |\n| 紫微斗数 | active-v0.5-seed | 第一版术语、十二宫、十四主星、四化、命盘字段结构、独立资料页 | 校对原文、设计命例 Schema、排盘算法测试 |\n| 奇门遁甲 | planned | 已预留体系索引 | 九宫/门星神词典、盘式 Schema、起局算法调研 |\n| 大六壬/小六壬 | planned | 已预留体系索引 | 四课三传 Schema、小六壬六宫速查、子体系分层 |\n\n## 3. 为什么不做臃肿框架\n\n这些体系都需要大量资料校勘和案例反馈。过早引入全栈数据库、用户系统、复杂权限或多模型服务，会让项目先变成工程负担，而不是知识库。当前最稳妥的路线是：\n\n1. 用 JSON 和 Markdown 固化资料结构。\n2. 用静态前端和 Netlify Functions 提供检索体验。\n3. 用脚本校验来源、规则引用和生成资产同步。\n4. 等真实案例和用户录入量足够后，再决定是否接入数据库。\n\n## 4. 下一轮扩展顺序\n\n1. 紫微斗数：已先做星曜、宫位、四化、大限流年词典和结构表；下一步补命例 Schema 与排盘算法测试。\n2. 奇门遁甲：先做盘式字段和体系边界，避免转盘/飞盘、时家/日家混用。\n3. 大六壬/小六壬：先分层，避免把大六壬课式和小六壬速断混成同一规则库。\n4. 六爻继续深化：作为已上线样板，用真实案例、评分和排盘回归来校准整套产品方法。\n\n## 5. 验证口径\n\n四个体系都使用同一套诚实口径：\n\n- 事前锁定的预测才进入命中率。\n- 历史回测只能做字段校准和解释力分析。\n- 视频、论坛、社媒、个人经验最多是 C 类线索，不能直接升级为规则。\n- 不同流派规则要并列记录，不能合并成“唯一正确断法”。\n"
+      "markdown": "# 多术数体系路线图\n\n本项目从六爻先落地，是为了先把资料分层、规则追踪、案例复盘、网站化和部署链路打通。扩展到奇门遁甲、大小六壬、紫微斗数时，不应把所有规则塞进一个大模型里，而应保留“体系隔离、共享工具”的结构。\n\n## 1. 架构原则\n\n- 共享层：搜索、来源索引、案例记录、准确度评分、GitHub/Netlify 发布链路。\n- 体系层：六爻、紫微、奇门、六壬分别保留自己的术语、盘式、规则、案例 Schema。\n- 证据层：每条规则必须有来源等级、适用体系、适用条件和例外。\n- 产品层：前端保持一个轻量静态工作台，后端只提供搜索和 Schema 这类薄 API；没有必要在第一阶段上数据库和重框架。\n\n## 2. 当前状态\n\n| 体系 | 状态 | 已完成 | 下一步 |\n|---|---|---|---|\n| 六爻 | active-v0.4 | 学习路径、规则卡、案例槽位、装卦辅助、验证评分、线上站点、多体系样板线 | 公历换算、旺衰应期、真实前瞻样本 |\n| 紫微斗数 | active-v0.5-seed | 第一版术语、十二宫、十四主星、四化、命盘字段结构、独立资料页 | 校对原文、设计命例 Schema、排盘算法测试 |\n| 奇门遁甲 | active-v0.6-seed | 第一版术语、九宫、八门、九星、八神、值符值使、阴阳遁、局数、盘式字段结构、独立资料页 | 源码抽样、案例 Schema、节气/局数/值符值使测试 |\n| 大六壬/小六壬 | planned | 已预留体系索引 | 四课三传 Schema、小六壬六宫速查、子体系分层 |\n\n## 3. 为什么不做臃肿框架\n\n这些体系都需要大量资料校勘和案例反馈。过早引入全栈数据库、用户系统、复杂权限或多模型服务，会让项目先变成工程负担，而不是知识库。当前最稳妥的路线是：\n\n1. 用 JSON 和 Markdown 固化资料结构。\n2. 用静态前端和 Netlify Functions 提供检索体验。\n3. 用脚本校验来源、规则引用和生成资产同步。\n4. 等真实案例和用户录入量足够后，再决定是否接入数据库。\n\n## 4. 下一轮扩展顺序\n\n1. 紫微斗数：已先做星曜、宫位、四化、大限流年词典和结构表；下一步补命例 Schema 与排盘算法测试。\n2. 奇门遁甲：已先做九宫、八门、九星、八神和值符值使结构；下一步补案例 Schema、源码抽样和起局算法测试。\n3. 大六壬/小六壬：先分层，避免把大六壬课式和小六壬速断混成同一规则库。\n4. 六爻继续深化：作为已上线样板，用真实案例、评分和排盘回归来校准整套产品方法。\n\n## 5. 验证口径\n\n四个体系都使用同一套诚实口径：\n\n- 事前锁定的预测才进入命中率。\n- 历史回测只能做字段校准和解释力分析。\n- 视频、论坛、社媒、个人经验最多是 C 类线索，不能直接升级为规则。\n- 不同流派规则要并列记录，不能合并成“唯一正确断法”。\n"
     },
     {
       "id": "16-ziwei-foundation",
@@ -120,18 +120,25 @@ window.LIUYAO_KB_DATA = {
       "markdown": "# 紫微斗数第一版资料层\n\n本页记录紫微斗数第一版落地范围：术语、盘式字段、十二宫、十四主星、四化和来源索引。它是知识库的结构层，不是排盘算法，也不是断语规则库。\n\n使用边界很明确：本层用于文化研究、学习检索和案例复盘；不声称提供确定性命运判断，也不能作为医疗、法律、金融、婚恋、职业或考试决策依据。不同流派规则后续并列记录，不合并成“唯一正确断法”。\n\n## 1. 已建立的数据\n\n| 文件 | 内容 | 当前用途 |\n|---|---|---|\n| `data/ziwei_terms.json` | 紫微斗数术语、别名、分类、定义、来源和边界说明 | 全库搜索、紫微资料页、后续案例字段 |\n| `data/ziwei_structures.json` | 十二宫、十四主星、四化、命盘字段结构 | 排盘 Schema 设计、前端结构展示 |\n| `data/sources.json` | 维基文库、百科、公开 GitHub 项目等来源 | A/B/C 采信分层 |\n| `data/systems.json` | 紫微体系状态和下一步 | 多体系路线图和体系总览 |\n\n本轮只写结构字段，不把紫微断语混入 `data/rules.json`。后续如果增加规则，必须单独标明流派、来源、适用条件、例外和案例证据。\n\n## 2. 第一批术语范围\n\n第一批术语分成六组：\n\n- 体系：紫微斗数、流派差异。\n- 盘式字段：命盘、本命盘、出生资料、大限盘、流年盘、流月盘。\n- 十二宫：命宫、身宫、十二宫，以及十二个宫位结构。\n- 星曜：十四主星、紫微、天机、太阳、武曲、天同、廉贞、天府、太阴、贪狼、巨门、天相、天梁、七杀、破军。\n- 四化：四化、化禄、化权、化科、化忌、生年四化、宫干四化。\n- 关系和状态：三方四正、庙旺利陷、辅星、煞星。\n\n这些词条都保留 `source_refs` 和 `boundary_notes`。这样后续可以先查“这个字段从哪里来”，再决定是否进入算法或案例层。\n\n## 3. 来源分层\n\n本轮纳入的紫微来源：\n\n| 等级 | 来源 | 作用 |\n|---|---|---|\n| A | 维基文库《紫微斗數全書》 | 公共古籍文本候选，用于星曜、宫位和结构字段索引；引用前仍需逐段校对 |\n| B | 中文维基百科“紫微斗数” | 百科导览，用于确认体系、宫位、星曜、四化等概念入口 |\n| B | 英文 Wikipedia “Zi Wei Dou Shu” | 英文命名和跨语言导览 |\n| B | `Renhuai123/ziwei-doushu` | MIT 开源排盘项目，用于字段和测试颗粒度参考 |\n| B | `Brhiza/mingyu` | 多术数多入口项目，用于产品架构参考 |\n| C | `taskyoooo/ziwei-doushu-skill` | Skill 产品形态参考，不作为规则来源 |\n\n百科和开源项目只能帮助建立结构和检索入口。断语、格局和时段判断必须回到经典文本、现代流派说明和真实案例反馈。\n\n## 4. 后续 Schema 草案\n\n紫微案例后续至少需要这些字段：\n\n```json\n{\n  \"system\": \"ziwei\",\n  \"question\": \"\",\n  \"birth_data\": {\n    \"calendar\": \"solar|lunar\",\n    \"birth_datetime\": \"\",\n    \"gender\": \"\",\n    \"timezone\": \"\"\n  },\n  \"chart\": {\n    \"natal_chart\": {},\n    \"ming_palace\": \"\",\n    \"shen_palace\": \"\",\n    \"palaces\": [],\n    \"major_stars\": [],\n    \"transformations\": []\n  },\n  \"period\": {\n    \"major_limit\": \"\",\n    \"annual_year\": \"\",\n    \"annual_month\": \"\"\n  },\n  \"method_boundary\": {\n    \"school\": \"\",\n    \"source_refs\": []\n  },\n  \"judgment\": {\n    \"summary\": \"\",\n    \"evidence\": [],\n    \"rule_refs\": []\n  },\n  \"feedback\": {\n    \"actual_result\": \"\",\n    \"verified_at\": \"\"\n  }\n}\n```\n\n这只是草案。真正进入 `data/ziwei_case_schema.json` 前，要先确认排盘算法、流派字段和最小案例录入需求。\n\n## 5. 下一步\n\n1. 校对《紫微斗數全書》里与十二宫、星曜、四化相关的原文段落。\n2. 对 `Renhuai123/ziwei-doushu` 做源码和测试抽样，确认字段命名、四化输入输出和边界。\n3. 建立 `data/ziwei_case_schema.json`，先支持手工录入，不急着自动排盘。\n4. 收集有反馈的公开命例或事件复盘，但回测样本只用于字段校准，不计入真实准确率。\n"
     },
     {
+      "id": "17-qimen-foundation",
+      "title": "奇门遁甲第一版资料层",
+      "path": "docs/17-qimen-foundation.md",
+      "summary": "奇门遁甲第一版资料层 本页记录奇门遁甲第一版落地范围：术语、盘式字段、九宫、八门、九星、八神、值符值使、阴阳遁、局数和来源索引。它是知识库的结构层，不是自动起局算法，也不是断语规则库。 1. 本轮做了什么 | 文件 | 用途 | 入口 | |---|---|---| | `data/qimen_terms.json` | 奇门遁甲术语、别名、分类、定义、来源",
+      "markdown": "# 奇门遁甲第一版资料层\n\n本页记录奇门遁甲第一版落地范围：术语、盘式字段、九宫、八门、九星、八神、值符值使、阴阳遁、局数和来源索引。它是知识库的结构层，不是自动起局算法，也不是断语规则库。\n\n## 1. 本轮做了什么\n\n| 文件 | 用途 | 入口 |\n|---|---|---|\n| `data/qimen_terms.json` | 奇门遁甲术语、别名、分类、定义、来源和边界说明 | 全库搜索、奇门资料页、后续案例字段 |\n| `data/qimen_structures.json` | 九宫、八门、九星、八神和盘式字段结构 | 起局 Schema 设计、前端结构展示 |\n| `data/systems.json` | 奇门体系状态和下一步 | 多体系路线图和体系总览 |\n| `data/sources.json` | 奇门百科、开源项目和视频搜索线索 | 来源库、规则采信边界 |\n\n本轮只写结构字段，不把奇门断语混入 `data/rules.json`。后续如果增加规则，必须单独标明盘式体系、来源、适用条件、例外和案例证据。\n\n## 2. 第一批术语范围\n\n本轮术语覆盖 25 个入口：\n\n- 体系：奇门遁甲、奇门盘、流派差异。\n- 盘式：九宫、天盘、地盘、人盘、神盘、门星神。\n- 结构：八门、九星、八神、三奇六仪、遁甲。\n- 起局字段：值符、值使、阴遁阳遁、局数。\n- 体系边界：转盘奇门、飞盘奇门、时家奇门、日家奇门。\n- 案例复盘：用神、格局。\n\n这些术语用于学习检索和案例字段，不代表已经完成自动排盘或断法。\n\n## 3. 来源分级\n\n本轮纳入的奇门来源：\n\n| 等级 | 来源 | 用法 |\n|---|---|---|\n| B | 中文维基百科“奇门遁甲” | 体系、九宫、八门、九星、八神等概念入口 |\n| B | 英文 Wikipedia “Qimen Dunjia” | 英文命名和跨语言概念入口 |\n| B | `qfdk/qimen` | MIT 开源转盘奇门在线排盘项目，用于字段和前端盘面参考 |\n| B | `arc119226/qimen_dunjia` | MIT 开源起盘模块，用于起局字段和值符值使输出颗粒度参考 |\n| B | `banderzhm/ZhouYiLab` | 多体系计算引擎，用于工程分层参考 |\n| C | B站奇门遁甲入门搜索结果 | 学习生态观察，不作为规则来源 |\n\n本轮 Jina Reader 读取 Wikipedia 镜像时返回匿名 401；因此百科来源只记录可直接访问的原始页面 URL，后续逐段校对前不能升为 A 类材料。\n\n## 4. 结构草案\n\n奇门案例后续至少需要这些字段：\n\n```json\n{\n  \"system\": \"qimen\",\n  \"chart_type\": \"hour-qimen\",\n  \"plate_style\": \"rotating-plate\",\n  \"cast_time\": \"2026-06-21T10:00:00+08:00\",\n  \"dun_type\": \"yang\",\n  \"ju_number\": 1,\n  \"zhi_fu\": {\n    \"name\": \"值符\",\n    \"palace_id\": \"palace-kan-1\"\n  },\n  \"zhi_shi\": {\n    \"gate\": \"开门\",\n    \"palace_id\": \"palace-li-9\"\n  },\n  \"palaces\": [\n    {\n      \"palace_id\": \"palace-kan-1\",\n      \"gate\": \"休门\",\n      \"star\": \"天蓬\",\n      \"deity\": \"值符\",\n      \"heaven_stem\": \"\",\n      \"earth_stem\": \"\",\n      \"notes\": []\n    }\n  ],\n  \"question\": {\n    \"topic\": \"event\",\n    \"target\": \"\",\n    \"yong_shen\": []\n  },\n  \"source_refs\": []\n}\n```\n\n这只是草案。真正进入 `data/qimen_case_schema.json` 前，要先确认盘式体系、节气/局数算法、值符值使字段和最小案例录入需求。\n\n## 5. 下一步\n\n1. 抽样审计 `qfdk/qimen` 和 `arc119226/qimen_dunjia` 的源码字段，确认输入、输出、节气和局数边界。\n2. 建立 `data/qimen_case_schema.json`，先支持手工录入，不急着自动起局。\n3. 建立阴阳遁、局数、值符和值使的最小测试样本。\n4. 继续寻找可逐段校对的公开古籍文本入口，再决定哪些来源可以升为 A 类。\n"
+    },
+    {
       "id": "sources",
       "title": "来源索引",
       "path": "docs/sources.md",
-      "summary": "来源索引 本索引记录第一版知识库用到的公开资料线索。它不是完整书目，后续应继续扩展到逐章读书笔记和案例库。 当前深入资料仍以六爻为主。紫微斗数已进入第一版资料层，见 [紫微斗数第一版资料层](16-ziwei-foundation.md)、`data/ziwei_terms.json` 和 `data/ziwei_structures.json`；奇门遁甲、",
-      "markdown": "# 来源索引\n\n本索引记录第一版知识库用到的公开资料线索。它不是完整书目，后续应继续扩展到逐章读书笔记和案例库。\n\n当前深入资料仍以六爻为主。紫微斗数已进入第一版资料层，见 [紫微斗数第一版资料层](16-ziwei-foundation.md)、`data/ziwei_terms.json` 和 `data/ziwei_structures.json`；奇门遁甲、大六壬/小六壬仍先保留在 [多术数体系路线图](15-multi-system-roadmap.md) 和 `data/systems.json`，后续按体系独立扩展来源、术语、盘式和案例，不与六爻规则混写。\n\n## A 类：经典与公共文本\n\n| 标题 | 链接 | 用途 |\n|---|---|---|\n| 卜筮正宗 - 中国哲学书电子化计划 | https://ctext.org/wiki.pl?chapter=889452&if=gb | 经典系统框架、用神原忌仇、飞伏、旬空月破等纲领 |\n| 增删卜易 - 维基文库 | https://zh.wikisource.org/wiki/%E5%A2%9E%E5%88%AA%E5%8D%9C%E6%98%93 | 分类占断和卦例学习线索；页面自身提示未完全校对，使用时需核验 |\n| 黄金策 - 维基文库 | https://zh.wikisource.org/wiki/%E9%BB%84%E9%87%91%E7%AD%96 | 火珠林法经典资料，适合总纲和分类断法 |\n| 黄金策 - 中国哲学书电子化计划 | https://ctext.org/wiki.pl?chapter=767055&if=gb&remap=gb | 对照阅读黄金策文本 |\n| 易隐 PDF - Wikimedia Commons | https://upload.wikimedia.org/wikipedia/commons/2/27/NLC416-12jh005346-45345_%E6%98%93%E9%9A%B1.pdf | 古籍脉络与纳甲筮法扩展 |\n| 紫微斗數全書 - 维基文库 | https://zh.wikisource.org/wiki/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8 | 紫微斗数术语、星曜、宫位和结构字段的第一版索引；引用前仍需校对版本与段落 |\n\n## B 类：现代教程与百科\n\n| 标题 | 链接 | 用途 |\n|---|---|---|\n| 纳甲说 - 中国孔子网 | https://www.chinakongzi.org/baike/MINGCI/zhexue/201708/t20170825_142777.htm | 纳甲说源流与京房易背景 |\n| 六爻神卦 - 维基百科 | https://zh.wikipedia.org/wiki/%E5%85%AD%E7%88%BB%E7%A5%9E%E5%8D%A6 | 六爻作为民间卜卦方式的概览 |\n| 六爻纳甲怎么装卦 - 天机要 | https://wiki.tianjiyao.com/yijing/najia-system.html | 纳甲、六亲、六神、世应、伏神的现代入门框架 |\n| 六爻占卜体系 - OldBird | https://oldbird.run/yijing/liuyaozanbutixi/ | 起卦装卦七步、旺衰、世用、动变模型 |\n| 六爻装卦纳卦 - 三六风水网 | https://www.36fengshui.com/ly/lyzg.asp | 装地支、装世应、装六亲、装六神的流程参考 |\n| 六爻讲义：京房纳甲 - 知乎专栏 | https://zhuanlan.zhihu.com/p/709241395 | 纳支口诀和八卦纳支记忆 |\n| bopo/najia - 纳甲六爻排盘源码 | https://github.com/bopo/najia | 开源排盘库，用于对照卦码、纳甲表、世应、伏神和测试颗粒度 |\n| 六爻排盘教程 - Cosmic Tao | https://www.cosmictao.com/zh/library/liuyao-tutorial | 三钱法、八宫、六亲、六神、世应和伏神流程说明 |\n| Liuyao Najia World & Response Guide - FateMaster | https://www.fatemaster.ai/guides/liuyao-shiying | 八宫世应定位表，用于校验游魂、归魂和世应位置 |\n| 紫微斗数 - 维基百科 | https://zh.wikipedia.org/wiki/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8 | 紫微体系、十二宫、星曜、四化和时段概念的百科导览 |\n| Zi Wei Dou Shu - Wikipedia | https://en.wikipedia.org/wiki/Zi_Wei_Dou_Shu | 英文命名和跨语言概念入口 |\n| Renhuai123/ziwei-doushu - 紫微斗数排盘引擎 | https://github.com/Renhuai123/ziwei-doushu | MIT 开源排盘项目，用于参考命盘字段、四化系统和测试颗粒度 |\n| Brhiza/mingyu - 多术数排盘平台 | https://github.com/Brhiza/mingyu | 多入口结构化输出参考，不作为紫微规则来源 |\n\n## C 类：视频与讨论材料\n\n| 标题 | 链接 | 用途 |\n|---|---|---|\n| B站六爻纳甲入门到实战全套课程 | https://www.bilibili.com/video/BV1pL1KBiEKj/ | 课程目录显示八卦、地支、起卦纳甲、世应、飞伏、专题占法等学习路径 |\n| B站小白六爻课程 | https://www.bilibili.com/video/BV1Xw411M7UV/ | 课程目录显示阴阳五行、天干地支、六亲用神、六神、起卦、纳甲、世应、旬空月破等顺序 |\n| Reddit EasternOccult 六亲飞宫讨论 | https://www.reddit.com/r/EasternOccult/comments/1iv5c18/ | 高阶民间技法讨论，只作经验观察，不作为基础规则 |\n| taskyoooo/ziwei-doushu-skill | https://github.com/taskyoooo/ziwei-doushu-skill | 紫微 skill 产品形态参考；仅作流派边界和交互形态线索 |\n\n## 下一步采集计划\n\n- 对《卜筮正宗》建立逐章主题索引。第一版索引见 [古籍阅读索引](06-classics-reading-index.md) 和 `data/classics_index.json`。\n- 对《增删卜易》建立卦例索引：题目、用神、动变、结果、争议点。\n- 对《黄金策》建立分类断法索引。第一版专题映射见 [古籍阅读索引](06-classics-reading-index.md)。\n- 对紫微斗数继续校对《紫微斗數全書》原文，并建立命例 Schema、排盘字段测试和流派差异记录。\n- 对奇门遁甲建立九宫、八门、九星、八神、盘式差异来源索引。\n- 对大六壬/小六壬分别建立四课三传、课体和小六壬六宫来源索引。\n- 搜集至少 100 个有反馈的现代案例，按专题归档。\n- 建立「规则来源」字段：每条规则都能指向古籍、现代解释或案例统计。第一版规则卡见 [规则卡索引](07-rule-cards.md) 和 `data/rules.json`。\n\n## 已核验摘录说明\n\n2026-06-20 使用 Agent Reach 可用后端核验：\n\n- Jina Reader 可读取《卜筮正宗》CText 页面，目录含凡例、启蒙节要、纳甲装卦歌、安世应诀、十八论、十八问答等。\n- Jina Reader 可读取天机要纳甲装卦教程，确认其把装卦拆为定卦宫、纳地支、配六亲、安六神、定世应并查伏神。\n- Jina Reader 可读取 OldBird 六爻体系页，确认其把知识拆为基础符号、起卦装卦、能量模型、实战解盘、高阶扩展。\n- B站搜索可返回六爻用神、原神忌神、纳甲装卦、世应等课程线索；因终端编码限制，标题以源站链接和 bvid 为准。\n\n2026-06-21 使用 Agent Reach 可用后端和 Node fetch 追加核验：\n\n- GitHub raw 可读取 `bopo/najia` README、`const.py`、`utils.py` 和测试文件，确认卦码自下而上、纳甲表、世应、卦宫、六亲、伏神字段。\n- Jina Reader 可读取 Cosmic Tao 六爻教程，确认三钱法 6/7/8/9、八宫、六亲、世应、六神和伏神流程。\n- Jina Reader 可读取 FateMaster 世应表，确认八纯、一至五世、游魂、归魂的世应位置。\n\n2026-06-21 紫微斗数第一版资料层核验：\n\n- Node fetch 可读取中文维基百科“紫微斗数”、英文 Wikipedia “Zi Wei Dou Shu”和维基文库《紫微斗數全書》页面。\n- GitHub 仓库元数据可确认 `Renhuai123/ziwei-doushu` 为 MIT 许可 TypeScript 项目，描述覆盖排盘算法和四化系统。\n- B站搜索可返回紫微斗数入门、十四主星和课程目录线索；因终端标题编码限制，本版不把 B站结果写成规则来源。\n\n## 采集边界记录\n\n2026-06-20 至 2026-06-21 的采集边界：\n\n- 公开网页、古籍页面、B站课程目录和 GitHub 公开源码已进入本版来源池。\n- 社媒、论坛、播客和需要登录态的平台暂不作为规则来源，只作为后续线索池。\n- 任何 C 类材料都需要经过古籍、现代教程或案例反馈交叉校验，才能影响规则卡。\n\n- 紫微斗数已建立独立来源索引、术语和盘式结构层；下一轮进入命例 Schema、排盘算法抽样和原文校对。\n- 奇门遁甲、大六壬/小六壬仍应先建立独立来源索引，再进入术语、盘式和案例层。\n"
+      "summary": "来源索引 本索引记录第一版知识库用到的公开资料线索。它不是完整书目，后续应继续扩展到逐章读书笔记和案例库。 当前深入资料仍以六爻为主。紫微斗数已进入第一版资料层，见 [紫微斗数第一版资料层](16-ziwei-foundation.md)、`data/ziwei_terms.json` 和 `data/ziwei_structures.json`；奇门遁甲也",
+      "markdown": "# 来源索引\n\n本索引记录第一版知识库用到的公开资料线索。它不是完整书目，后续应继续扩展到逐章读书笔记和案例库。\n\n当前深入资料仍以六爻为主。紫微斗数已进入第一版资料层，见 [紫微斗数第一版资料层](16-ziwei-foundation.md)、`data/ziwei_terms.json` 和 `data/ziwei_structures.json`；奇门遁甲也已进入第一版资料层，见 [奇门遁甲第一版资料层](17-qimen-foundation.md)、`data/qimen_terms.json` 和 `data/qimen_structures.json`；大六壬/小六壬仍先保留在 [多术数体系路线图](15-multi-system-roadmap.md) 和 `data/systems.json`，后续按体系独立扩展来源、术语、盘式和案例，不与六爻规则混写。\n\n## A 类：经典与公共文本\n\n| 标题 | 链接 | 用途 |\n|---|---|---|\n| 卜筮正宗 - 中国哲学书电子化计划 | https://ctext.org/wiki.pl?chapter=889452&if=gb | 经典系统框架、用神原忌仇、飞伏、旬空月破等纲领 |\n| 增删卜易 - 维基文库 | https://zh.wikisource.org/wiki/%E5%A2%9E%E5%88%AA%E5%8D%9C%E6%98%93 | 分类占断和卦例学习线索；页面自身提示未完全校对，使用时需核验 |\n| 黄金策 - 维基文库 | https://zh.wikisource.org/wiki/%E9%BB%84%E9%87%91%E7%AD%96 | 火珠林法经典资料，适合总纲和分类断法 |\n| 黄金策 - 中国哲学书电子化计划 | https://ctext.org/wiki.pl?chapter=767055&if=gb&remap=gb | 对照阅读黄金策文本 |\n| 易隐 PDF - Wikimedia Commons | https://upload.wikimedia.org/wikipedia/commons/2/27/NLC416-12jh005346-45345_%E6%98%93%E9%9A%B1.pdf | 古籍脉络与纳甲筮法扩展 |\n| 紫微斗數全書 - 维基文库 | https://zh.wikisource.org/wiki/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8 | 紫微斗数术语、星曜、宫位和结构字段的第一版索引；引用前仍需校对版本与段落 |\n\n## B 类：现代教程与百科\n\n| 标题 | 链接 | 用途 |\n|---|---|---|\n| 纳甲说 - 中国孔子网 | https://www.chinakongzi.org/baike/MINGCI/zhexue/201708/t20170825_142777.htm | 纳甲说源流与京房易背景 |\n| 六爻神卦 - 维基百科 | https://zh.wikipedia.org/wiki/%E5%85%AD%E7%88%BB%E7%A5%9E%E5%8D%A6 | 六爻作为民间卜卦方式的概览 |\n| 六爻纳甲怎么装卦 - 天机要 | https://wiki.tianjiyao.com/yijing/najia-system.html | 纳甲、六亲、六神、世应、伏神的现代入门框架 |\n| 六爻占卜体系 - OldBird | https://oldbird.run/yijing/liuyaozanbutixi/ | 起卦装卦七步、旺衰、世用、动变模型 |\n| 六爻装卦纳卦 - 三六风水网 | https://www.36fengshui.com/ly/lyzg.asp | 装地支、装世应、装六亲、装六神的流程参考 |\n| 六爻讲义：京房纳甲 - 知乎专栏 | https://zhuanlan.zhihu.com/p/709241395 | 纳支口诀和八卦纳支记忆 |\n| bopo/najia - 纳甲六爻排盘源码 | https://github.com/bopo/najia | 开源排盘库，用于对照卦码、纳甲表、世应、伏神和测试颗粒度 |\n| 六爻排盘教程 - Cosmic Tao | https://www.cosmictao.com/zh/library/liuyao-tutorial | 三钱法、八宫、六亲、六神、世应和伏神流程说明 |\n| Liuyao Najia World & Response Guide - FateMaster | https://www.fatemaster.ai/guides/liuyao-shiying | 八宫世应定位表，用于校验游魂、归魂和世应位置 |\n| 紫微斗数 - 维基百科 | https://zh.wikipedia.org/wiki/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8 | 紫微体系、十二宫、星曜、四化和时段概念的百科导览 |\n| Zi Wei Dou Shu - Wikipedia | https://en.wikipedia.org/wiki/Zi_Wei_Dou_Shu | 英文命名和跨语言概念入口 |\n| Renhuai123/ziwei-doushu - 紫微斗数排盘引擎 | https://github.com/Renhuai123/ziwei-doushu | MIT 开源排盘项目，用于参考命盘字段、四化系统和测试颗粒度 |\n| Brhiza/mingyu - 多术数排盘平台 | https://github.com/Brhiza/mingyu | 多入口结构化输出参考，不作为紫微规则来源 |\n| 奇门遁甲 - 维基百科 | https://zh.wikipedia.org/wiki/%E5%A5%87%E9%96%80%E9%81%81%E7%94%B2 | 奇门体系、九宫、八门、九星、八神等概念入口 |\n| Qimen Dunjia - Wikipedia | https://en.wikipedia.org/wiki/Qimen_Dunjia | 英文命名和跨语言概念入口 |\n| qfdk/qimen - 奇门遁甲在线排盘 | https://github.com/qfdk/qimen | MIT 开源转盘奇门项目，用于盘式字段和前端展示参考 |\n| arc119226/qimen_dunjia - 奇门遁甲起盘模块 | https://github.com/arc119226/qimen_dunjia | MIT 开源起盘模块，用于起局字段和值符值使输出颗粒度参考 |\n| banderzhm/ZhouYiLab - 玄学计算引擎 | https://github.com/banderzhm/ZhouYiLab | 多体系计算引擎，用于工程分层参考 |\n\n## C 类：视频与讨论材料\n\n| 标题 | 链接 | 用途 |\n|---|---|---|\n| B站六爻纳甲入门到实战全套课程 | https://www.bilibili.com/video/BV1pL1KBiEKj/ | 课程目录显示八卦、地支、起卦纳甲、世应、飞伏、专题占法等学习路径 |\n| B站小白六爻课程 | https://www.bilibili.com/video/BV1Xw411M7UV/ | 课程目录显示阴阳五行、天干地支、六亲用神、六神、起卦、纳甲、世应、旬空月破等顺序 |\n| Reddit EasternOccult 六亲飞宫讨论 | https://www.reddit.com/r/EasternOccult/comments/1iv5c18/ | 高阶民间技法讨论，只作经验观察，不作为基础规则 |\n| taskyoooo/ziwei-doushu-skill | https://github.com/taskyoooo/ziwei-doushu-skill | 紫微 skill 产品形态参考；仅作流派边界和交互形态线索 |\n| B站奇门遁甲入门课程搜索结果 | https://search.bilibili.com/all?keyword=%E5%A5%87%E9%97%A8%E9%81%81%E7%94%B2%20%E5%85%A5%E9%97%A8 | 学习生态观察，不作为规则来源 |\n\n## 下一步采集计划\n\n- 对《卜筮正宗》建立逐章主题索引。第一版索引见 [古籍阅读索引](06-classics-reading-index.md) 和 `data/classics_index.json`。\n- 对《增删卜易》建立卦例索引：题目、用神、动变、结果、争议点。\n- 对《黄金策》建立分类断法索引。第一版专题映射见 [古籍阅读索引](06-classics-reading-index.md)。\n- 对紫微斗数继续校对《紫微斗數全書》原文，并建立命例 Schema、排盘字段测试和流派差异记录。\n- 对奇门遁甲继续校对公开古籍入口，并抽样审计 qfdk/qimen 与 arc119226/qimen_dunjia 的起局字段。\n- 对大六壬/小六壬分别建立四课三传、课体和小六壬六宫来源索引。\n- 搜集至少 100 个有反馈的现代案例，按专题归档。\n- 建立「规则来源」字段：每条规则都能指向古籍、现代解释或案例统计。第一版规则卡见 [规则卡索引](07-rule-cards.md) 和 `data/rules.json`。\n\n## 已核验摘录说明\n\n2026-06-20 使用 Agent Reach 可用后端核验：\n\n- Jina Reader 可读取《卜筮正宗》CText 页面，目录含凡例、启蒙节要、纳甲装卦歌、安世应诀、十八论、十八问答等。\n- Jina Reader 可读取天机要纳甲装卦教程，确认其把装卦拆为定卦宫、纳地支、配六亲、安六神、定世应并查伏神。\n- Jina Reader 可读取 OldBird 六爻体系页，确认其把知识拆为基础符号、起卦装卦、能量模型、实战解盘、高阶扩展。\n- B站搜索可返回六爻用神、原神忌神、纳甲装卦、世应等课程线索；因终端编码限制，标题以源站链接和 bvid 为准。\n\n2026-06-21 使用 Agent Reach 可用后端和 Node fetch 追加核验：\n\n- GitHub raw 可读取 `bopo/najia` README、`const.py`、`utils.py` 和测试文件，确认卦码自下而上、纳甲表、世应、卦宫、六亲、伏神字段。\n- Jina Reader 可读取 Cosmic Tao 六爻教程，确认三钱法 6/7/8/9、八宫、六亲、世应、六神和伏神流程。\n- Jina Reader 可读取 FateMaster 世应表，确认八纯、一至五世、游魂、归魂的世应位置。\n\n2026-06-21 紫微斗数第一版资料层核验：\n\n- Node fetch 可读取中文维基百科“紫微斗数”、英文 Wikipedia “Zi Wei Dou Shu”和维基文库《紫微斗數全書》页面。\n- GitHub 仓库元数据可确认 `Renhuai123/ziwei-doushu` 为 MIT 许可 TypeScript 项目，描述覆盖排盘算法和四化系统。\n- B站搜索可返回紫微斗数入门、十四主星和课程目录线索；因终端标题编码限制，本版不把 B站结果写成规则来源。\n\n## 采集边界记录\n\n2026-06-20 至 2026-06-21 的采集边界：\n\n- 公开网页、古籍页面、B站课程目录和 GitHub 公开源码已进入本版来源池。\n- 社媒、论坛、播客和需要登录态的平台暂不作为规则来源，只作为后续线索池。\n- 任何 C 类材料都需要经过古籍、现代教程或案例反馈交叉校验，才能影响规则卡。\n\n- 紫微斗数已建立独立来源索引、术语和盘式结构层；下一轮进入命例 Schema、排盘算法抽样和原文校对。\n- 奇门遁甲已建立独立来源索引、术语和盘式结构层；下一轮进入案例 Schema、源码抽样和起局测试。\n\n2026-06-21 奇门遁甲第一版资料层核验：\n- Node fetch 可直接访问中文维基百科“奇门遁甲”和英文 Wikipedia “Qimen Dunjia” 页面。\n- Jina Reader 读取 Wikipedia 镜像时返回匿名 401，因此本轮不把其作为可摘录正文来源。\n- GitHub 元数据确认 `qfdk/qimen` 为 MIT JavaScript 转盘奇门在线排盘项目，`arc119226/qimen_dunjia` 为 MIT JavaScript 起盘模块，`banderzhm/ZhouYiLab` 为 MIT 多体系计算引擎。\n- B站搜索可返回奇门遁甲入门和长课目录线索；因终端标题编码限制，本轮只作为 C 类学习生态观察。\n"
     },
     {
       "id": "website-plan",
       "title": "网站化方案",
       "path": "docs/website-plan.md",
-      "summary": "网站化方案 本地知识库已经把内容拆成 Markdown 文档和 JSON 数据。网站化时不需要重写内容，只需要把这些文件作为内容源。 1. 产品定位 网站第一版已经做成「术数知识库工作台」，不是营销页。当前以六爻作为完整样板线，紫微斗数已进入第一版术语和盘式结构资料层，同时为奇门遁甲、大六壬/小六壬保留独立体系入口。 核心用户： - 初学者：需要按学习路径掌",
-      "markdown": "# 网站化方案\n\n本地知识库已经把内容拆成 Markdown 文档和 JSON 数据。网站化时不需要重写内容，只需要把这些文件作为内容源。\n\n## 1. 产品定位\n\n网站第一版已经做成「术数知识库工作台」，不是营销页。当前以六爻作为完整样板线，紫微斗数已进入第一版术语和盘式结构资料层，同时为奇门遁甲、大六壬/小六壬保留独立体系入口。\n\n核心用户：\n\n- 初学者：需要按学习路径掌握术语和流程。\n- 进阶学习者：需要快速查术语、规则、古籍来源。\n- 案例复盘者：需要记录卦例、标注用神、动变、反馈。\n- 后续扩展维护者：需要清楚区分六爻、紫微、奇门、六壬的资料层和规则边界。\n\n## 2. 首屏结构\n\n首屏直接进入工作台：\n\n- 左侧：学习路径导航。\n- 中间：当前教材或搜索结果。\n- 右侧：术语卡、来源卡、案例快捷记录。\n- 顶部：全局搜索框、主题筛选、来源等级筛选。\n\n不做大幅营销 hero，不做单纯介绍页。\n\n## 3. 页面清单\n\n| 页面 | 功能 |\n|---|---|\n| 学习路径 | 展示 `docs/00-learning-map.md` 的章节导航和进度 |\n| 体系总览 | 读取 `data/systems.json`，展示六爻、紫微斗数、奇门遁甲、大六壬/小六壬的状态、核心对象、资料路线和风险边界 |\n| 教材阅读 | 渲染 `docs/*.md`，支持标题目录和引用跳转 |\n| 术语检索 | 读取 `data/terms.json`，按 term、alias、category 搜索 |\n| 紫微资料 | 读取 `data/ziwei_terms.json` 和 `data/ziwei_structures.json`，展示紫微术语、十二宫、十四主星、四化和命盘字段 |\n| 来源库 | 读取 `data/sources.json`，按 A/B/C 类、类型、关键词筛选 |\n| 规则卡 | 读取 `data/rules.json`，按 layer、source_refs、confidence 筛选 |\n| 古籍路线 | 读取 `data/classics_index.json`，展示每部经典的阅读任务 |\n| 外部项目 | 读取 `data/external_projects.json`，展示类似项目、源码参考、可借鉴点和风险 |\n| 案例库 | 新建、编辑、搜索案例，使用 `docs/05-case-template.md` 字段 |\n| 装卦辅助 | 手工输入六爻，自动生成本卦、变卦、动爻、卦宫、纳甲、六亲、六神、世应、伏神、旬空和月日状态 |\n| 验证评分 | 读取 `data/accuracy_cases.json`，展示事件验证、实际结果和评分维度 |\n\n## 4. 前端建议\n\n当前栈：\n\n- 静态 HTML、CSS 和原生 JavaScript。\n- 构建脚本把 Markdown 与 JSON 汇总为 `web/assets/kb-data.json` 和 `web/assets/kb-data.js`。\n- 前端使用内置数据包做离线检索，部署后优先调用 `/api/search`。\n- Netlify Functions 只承担搜索和 Schema 这类薄 API。\n\n暂不引入 React、Next、数据库、登录或复杂权限。等真实案例量、多人协作和在线保存需求明确后，再决定是否升级到 React/Next + SQLite/Postgres。\n\n界面原则：\n\n- 信息密度高，适合查资料。\n- 不使用玄学感过强的装饰，避免廉价感。\n- 用标签区分「经典来源」「现代教程」「视频/讨论」。\n- 每条规则旁边能显示来源等级和来源链接。\n\n## 5. 后端建议\n\n第一版可零后端：\n\n- 构建时读取 Markdown 和 JSON。\n- 浏览器端完成搜索。\n- 案例先保存为本地导入/导出 JSON。\n\n当前版本已经在零数据库基础上补了 Netlify Functions：\n\n- `GET /api/search?q=...`：读取构建期数据模块，返回文档、规则、术语、紫微术语、紫微结构、来源、古籍、读书笔记和案例槽位的统一检索结果。\n- `GET /api/search?q=四化&kind=ziwei_terms`：检索紫微术语。\n- `GET /api/search?q=命宫&kind=ziwei_structures`：检索紫微盘式结构。\n- `GET /api/search?q=najia&kind=external_projects`：检索类似项目与源码参考。\n- `GET /api/case-schema`：返回案例录入 Schema，方便后续在线案例保存接口复用。\n- 前端搜索会优先尝试 `/api/search`；本地 `file://` 或普通静态服务不可用时，自动回退到内置数据包检索。\n\n进阶版再加后端：\n\n- SQLite 存术语、来源、案例。\n- FTS5 做全文搜索。\n- API：\n  - `GET /api/search?q=...`\n  - `GET /api/terms`\n  - `GET /api/sources`\n  - `GET /api/rules`\n  - `GET /api/classics`\n  - `GET /api/docs/:slug`\n  - `POST /api/cases`\n  - `GET /api/cases?topic=...`\n\n## 6. 数据模型\n\n### Term\n\n```json\n{\n  \"term\": \"用神\",\n  \"aliases\": [\"主用神\"],\n  \"category\": \"judgment\",\n  \"definition\": \"...\",\n  \"see_also\": [\"原神\", \"忌神\"],\n  \"source_refs\": [\"ctext-bushi-zhengzong\"]\n}\n```\n\n### Source\n\n```json\n{\n  \"id\": \"ctext-bushi-zhengzong\",\n  \"title\": \"卜筮正宗 - 中国哲学书电子化计划\",\n  \"url\": \"https://ctext.org/wiki.pl?chapter=889452&if=gb\",\n  \"class\": \"A\",\n  \"type\": \"classic\",\n  \"notes\": \"...\"\n}\n```\n\n### Case\n\n```json\n{\n  \"id\": \"case-2026-06-20-001\",\n  \"question\": \"本周五面试能否进入下一轮？\",\n  \"topic\": \"事业\",\n  \"cast_time\": \"2026-06-20T10:30:00+08:00\",\n  \"main_god\": \"官鬼\",\n  \"world_line\": \"...\",\n  \"response_line\": \"...\",\n  \"judgment\": \"...\",\n  \"feedback\": \"...\"\n}\n```\n\n### Rule\n\n```json\n{\n  \"id\": \"month-environment-day-trigger\",\n  \"title\": \"月建定大势，日辰定触发\",\n  \"layer\": \"strength\",\n  \"statement\": \"...\",\n  \"source_refs\": [\"ctext-bushi-zhengzong\"],\n  \"confidence\": \"A\"\n}\n```\n\n## 7. 当前静态工作台\n\n当前仓库已经包含第一版静态工作台：\n\n- 入口：`web/index.html`\n- 样式：`web/styles.css`\n- 交互：`web/app.js`\n- 数据包：`web/assets/kb-data.json` 和 `web/assets/kb-data.js`\n- 后端接口：`netlify/functions/search.mts` 和 `netlify/functions/case-schema.mts`\n- 数据构建：`web/scripts/build-data.py`\n- 冒烟测试：`web/scripts/smoke-test.py`\n- 函数测试：`scripts/test-functions.mjs`\n- 部署前检查：`scripts/predeploy_check.py`\n\n它不是占位原型，而是可用的本地学习和检索界面。当前支持：\n\n- 文档阅读\n- 全库检索\n- 部署后 API 检索，离线时本地回退\n- 外部项目参考库\n- 规则卡浏览\n- 术语速查\n- 古籍路线浏览\n- 来源库浏览\n- 紫微资料浏览：术语、十二宫、十四主星、四化、命盘字段\n- 案例录入和 JSON 导出\n- 装卦辅助：本卦、变卦、卦码、纳甲干支、地支五行、卦宫、六亲、六神、世应、伏神、旬空和月日状态\n- 验证评分：比赛、人物或公开事件的预测、结果和评分 rubric\n\n## 8. 部署路线\n\n### 静态版\n\n当前第一阶段已采用：\n\n- 静态 `web` 目录。\n- 部署到 Netlify、Vercel 或 GitHub Pages。\n- 优点：快、稳定、无数据库。\n- 缺点：案例不能多人在线保存，除非接第三方存储。\n\n### 全栈版\n\n适合第二阶段：\n\n- Next.js + SQLite/Postgres。\n- 部署到 Vercel/Netlify + 托管数据库。\n- 增加登录、私有案例、全文检索和批注。\n\n## 9. 下一步实施清单\n\n1. 持续扩展 `data/systems.json`，但不同体系不要混写规则。\n2. 为紫微补 `data/ziwei_case_schema.json` 和排盘算法测试用例。\n3. 用线上 URL 复跑桌面搜索、案例录入、体系总览、紫微资料和移动端布局 QA。\n4. 建立至少 20 条事前锁定的真实前瞻样本后，再公开命中率。\n5. 第二阶段再决定是否新建 React/Next 工程；当前静态工作台已经足够承载第一版学习、检索和体系路线图。\n"
+      "summary": "网站化方案 本地知识库已经把内容拆成 Markdown 文档和 JSON 数据。网站化时不需要重写内容，只需要把这些文件作为内容源。 1. 产品定位 网站第一版已经做成「术数知识库工作台」，不是营销页。当前以六爻作为完整样板线，紫微斗数和奇门遁甲已进入第一版术语和盘式结构资料层，同时为大六壬/小六壬保留独立体系入口。 核心用户： - 初学者：需要按学习路径掌",
+      "markdown": "# 网站化方案\n\n本地知识库已经把内容拆成 Markdown 文档和 JSON 数据。网站化时不需要重写内容，只需要把这些文件作为内容源。\n\n## 1. 产品定位\n\n网站第一版已经做成「术数知识库工作台」，不是营销页。当前以六爻作为完整样板线，紫微斗数和奇门遁甲已进入第一版术语和盘式结构资料层，同时为大六壬/小六壬保留独立体系入口。\n\n核心用户：\n\n- 初学者：需要按学习路径掌握术语和流程。\n- 进阶学习者：需要快速查术语、规则、古籍来源。\n- 案例复盘者：需要记录卦例、标注用神、动变、反馈。\n- 后续扩展维护者：需要清楚区分六爻、紫微、奇门、六壬的资料层和规则边界。\n\n## 2. 首屏结构\n\n首屏直接进入工作台：\n\n- 左侧：学习路径导航。\n- 中间：当前教材或搜索结果。\n- 右侧：术语卡、来源卡、案例快捷记录。\n- 顶部：全局搜索框、主题筛选、来源等级筛选。\n\n不做大幅营销 hero，不做单纯介绍页。\n\n## 3. 页面清单\n\n| 页面 | 功能 |\n|---|---|\n| 学习路径 | 展示 `docs/00-learning-map.md` 的章节导航和进度 |\n| 体系总览 | 读取 `data/systems.json`，展示六爻、紫微斗数、奇门遁甲、大六壬/小六壬的状态、核心对象、资料路线和风险边界 |\n| 教材阅读 | 渲染 `docs/*.md`，支持标题目录和引用跳转 |\n| 术语检索 | 读取 `data/terms.json`，按 term、alias、category 搜索 |\n| 紫微资料 | 读取 `data/ziwei_terms.json` 和 `data/ziwei_structures.json`，展示紫微术语、十二宫、十四主星、四化和命盘字段 |\n| 奇门资料 | 读取 `data/qimen_terms.json` 和 `data/qimen_structures.json`，展示奇门术语、九宫、八门、九星、八神和值符值使字段 |\n| 来源库 | 读取 `data/sources.json`，按 A/B/C 类、类型、关键词筛选 |\n| 规则卡 | 读取 `data/rules.json`，按 layer、source_refs、confidence 筛选 |\n| 古籍路线 | 读取 `data/classics_index.json`，展示每部经典的阅读任务 |\n| 外部项目 | 读取 `data/external_projects.json`，展示类似项目、源码参考、可借鉴点和风险 |\n| 案例库 | 新建、编辑、搜索案例，使用 `docs/05-case-template.md` 字段 |\n| 装卦辅助 | 手工输入六爻，自动生成本卦、变卦、动爻、卦宫、纳甲、六亲、六神、世应、伏神、旬空和月日状态 |\n| 验证评分 | 读取 `data/accuracy_cases.json`，展示事件验证、实际结果和评分维度 |\n\n## 4. 前端建议\n\n当前栈：\n\n- 静态 HTML、CSS 和原生 JavaScript。\n- 构建脚本把 Markdown 与 JSON 汇总为 `web/assets/kb-data.json` 和 `web/assets/kb-data.js`。\n- 前端使用内置数据包做离线检索，部署后优先调用 `/api/search`。\n- Netlify Functions 只承担搜索和 Schema 这类薄 API。\n\n暂不引入 React、Next、数据库、登录或复杂权限。等真实案例量、多人协作和在线保存需求明确后，再决定是否升级到 React/Next + SQLite/Postgres。\n\n界面原则：\n\n- 信息密度高，适合查资料。\n- 不使用玄学感过强的装饰，避免廉价感。\n- 用标签区分「经典来源」「现代教程」「视频/讨论」。\n- 每条规则旁边能显示来源等级和来源链接。\n\n## 5. 后端建议\n\n第一版可零后端：\n\n- 构建时读取 Markdown 和 JSON。\n- 浏览器端完成搜索。\n- 案例先保存为本地导入/导出 JSON。\n\n当前版本已经在零数据库基础上补了 Netlify Functions：\n\n- `GET /api/search?q=...`：读取构建期数据模块，返回文档、规则、术语、紫微术语、紫微结构、奇门术语、奇门结构、来源、古籍、读书笔记和案例槽位的统一检索结果。\n- `GET /api/search?q=四化&kind=ziwei_terms`：检索紫微术语。\n- `GET /api/search?q=命宫&kind=ziwei_structures`：检索紫微盘式结构。\n- `GET /api/search?q=八门&kind=qimen_terms`：检索奇门术语。\n- `GET /api/search?q=坎一宫&kind=qimen_structures`：检索奇门盘式结构。\n- `GET /api/search?q=najia&kind=external_projects`：检索类似项目与源码参考。\n- `GET /api/case-schema`：返回案例录入 Schema，方便后续在线案例保存接口复用。\n- 前端搜索会优先尝试 `/api/search`；本地 `file://` 或普通静态服务不可用时，自动回退到内置数据包检索。\n\n进阶版再加后端：\n\n- SQLite 存术语、来源、案例。\n- FTS5 做全文搜索。\n- API：\n  - `GET /api/search?q=...`\n  - `GET /api/terms`\n  - `GET /api/sources`\n  - `GET /api/rules`\n  - `GET /api/classics`\n  - `GET /api/docs/:slug`\n  - `POST /api/cases`\n  - `GET /api/cases?topic=...`\n\n## 6. 数据模型\n\n### Term\n\n```json\n{\n  \"term\": \"用神\",\n  \"aliases\": [\"主用神\"],\n  \"category\": \"judgment\",\n  \"definition\": \"...\",\n  \"see_also\": [\"原神\", \"忌神\"],\n  \"source_refs\": [\"ctext-bushi-zhengzong\"]\n}\n```\n\n### Source\n\n```json\n{\n  \"id\": \"ctext-bushi-zhengzong\",\n  \"title\": \"卜筮正宗 - 中国哲学书电子化计划\",\n  \"url\": \"https://ctext.org/wiki.pl?chapter=889452&if=gb\",\n  \"class\": \"A\",\n  \"type\": \"classic\",\n  \"notes\": \"...\"\n}\n```\n\n### Case\n\n```json\n{\n  \"id\": \"case-2026-06-20-001\",\n  \"question\": \"本周五面试能否进入下一轮？\",\n  \"topic\": \"事业\",\n  \"cast_time\": \"2026-06-20T10:30:00+08:00\",\n  \"main_god\": \"官鬼\",\n  \"world_line\": \"...\",\n  \"response_line\": \"...\",\n  \"judgment\": \"...\",\n  \"feedback\": \"...\"\n}\n```\n\n### Rule\n\n```json\n{\n  \"id\": \"month-environment-day-trigger\",\n  \"title\": \"月建定大势，日辰定触发\",\n  \"layer\": \"strength\",\n  \"statement\": \"...\",\n  \"source_refs\": [\"ctext-bushi-zhengzong\"],\n  \"confidence\": \"A\"\n}\n```\n\n## 7. 当前静态工作台\n\n当前仓库已经包含第一版静态工作台：\n\n- 入口：`web/index.html`\n- 样式：`web/styles.css`\n- 交互：`web/app.js`\n- 数据包：`web/assets/kb-data.json` 和 `web/assets/kb-data.js`\n- 后端接口：`netlify/functions/search.mts` 和 `netlify/functions/case-schema.mts`\n- 数据构建：`web/scripts/build-data.py`\n- 冒烟测试：`web/scripts/smoke-test.py`\n- 函数测试：`scripts/test-functions.mjs`\n- 部署前检查：`scripts/predeploy_check.py`\n\n它不是占位原型，而是可用的本地学习和检索界面。当前支持：\n\n- 文档阅读\n- 全库检索\n- 部署后 API 检索，离线时本地回退\n- 外部项目参考库\n- 规则卡浏览\n- 术语速查\n- 古籍路线浏览\n- 来源库浏览\n- 紫微资料浏览：术语、十二宫、十四主星、四化、命盘字段\n- 奇门资料浏览：术语、九宫、八门、九星、八神、值符值使、盘式字段\n- 案例录入和 JSON 导出\n- 装卦辅助：本卦、变卦、卦码、纳甲干支、地支五行、卦宫、六亲、六神、世应、伏神、旬空和月日状态\n- 验证评分：比赛、人物或公开事件的预测、结果和评分 rubric\n\n## 8. 部署路线\n\n### 静态版\n\n当前第一阶段已采用：\n\n- 静态 `web` 目录。\n- 部署到 Netlify、Vercel 或 GitHub Pages。\n- 优点：快、稳定、无数据库。\n- 缺点：案例不能多人在线保存，除非接第三方存储。\n\n### 全栈版\n\n适合第二阶段：\n\n- Next.js + SQLite/Postgres。\n- 部署到 Vercel/Netlify + 托管数据库。\n- 增加登录、私有案例、全文检索和批注。\n\n## 9. 下一步实施清单\n\n1. 持续扩展 `data/systems.json`，但不同体系不要混写规则。\n2. 为紫微补 `data/ziwei_case_schema.json` 和排盘算法测试用例。\n3. 为奇门补 `data/qimen_case_schema.json`、源码抽样和节气/局数/值符值使测试。\n3. 用线上 URL 复跑桌面搜索、案例录入、体系总览、紫微资料和移动端布局 QA。\n4. 建立至少 20 条事前锁定的真实前瞻样本后，再公开命中率。\n5. 第二阶段再决定是否新建 React/Next 工程；当前静态工作台已经足够承载第一版学习、检索和体系路线图。\n"
     }
   ],
   "terms": [
@@ -1633,6 +1640,991 @@ window.LIUYAO_KB_DATA = {
       }
     ]
   },
+  "qimen_terms": [
+    {
+      "id": "qimen-dunjia",
+      "term": "奇门遁甲",
+      "aliases": [
+        "奇門遁甲",
+        "Qimen Dunjia",
+        "Qi Men Dun Jia"
+      ],
+      "category": "system",
+      "group": "体系",
+      "definition": "以九宫、八门、九星、八神、天盘、地盘和值符值使等结构组织时空信息的传统术数体系。本库先记录盘式结构和术语边界，不提供确定性断语。",
+      "see_also": [
+        "九宫",
+        "八门",
+        "九星",
+        "八神",
+        "值符",
+        "值使"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "wikipedia-qimen-dunjia-en",
+        "github-qfdk-qimen"
+      ],
+      "boundary_notes": "奇门分转盘、飞盘、时家、日家等不同体系；规则必须标明盘式和来源。"
+    },
+    {
+      "id": "qimen-chart",
+      "term": "奇门盘",
+      "aliases": [
+        "盘局",
+        "局盘",
+        "遁甲盘"
+      ],
+      "category": "chart",
+      "group": "盘式",
+      "definition": "奇门遁甲的结构化记录对象，通常包含起局时间、阴阳遁、局数、九宫排布、门星神干和用神取象等字段。",
+      "see_also": [
+        "天盘",
+        "地盘",
+        "人盘",
+        "神盘",
+        "局数"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-qfdk-qimen",
+        "github-arc119226-qimen-dunjia"
+      ],
+      "boundary_notes": "本库当前只做字段结构，不自动起局。"
+    },
+    {
+      "id": "nine-palaces",
+      "term": "九宫",
+      "aliases": [
+        "九宫格",
+        "洛书九宫"
+      ],
+      "category": "structure",
+      "group": "宫位",
+      "definition": "奇门盘的九个空间位置，常以坎一、坤二、震三、巽四、中五、乾六、兑七、艮八、离九组织盘面。",
+      "see_also": [
+        "九宫盘",
+        "洛书",
+        "宫位"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-qfdk-qimen"
+      ],
+      "boundary_notes": "九宫排列是盘面骨架，不等同于具体断事结论。"
+    },
+    {
+      "id": "eight-gates",
+      "term": "八门",
+      "aliases": [
+        "八門"
+      ],
+      "category": "structure",
+      "group": "门",
+      "definition": "休、生、伤、杜、景、死、惊、开八个门类，用来记录人事活动、状态和取象入口。",
+      "see_also": [
+        "休门",
+        "生门",
+        "开门",
+        "值使"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-qfdk-qimen"
+      ],
+      "boundary_notes": "八门解释强依赖流派和题型，本层只记录名称与结构位置。"
+    },
+    {
+      "id": "nine-stars",
+      "term": "九星",
+      "aliases": [
+        "九星盘"
+      ],
+      "category": "structure",
+      "group": "星",
+      "definition": "天蓬、天任、天冲、天辅、天英、天芮、天柱、天心、天禽等星曜结构，用于盘面天盘层取象。",
+      "see_also": [
+        "天蓬星",
+        "天禽星",
+        "值符"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-qfdk-qimen",
+        "github-arc119226-qimen-dunjia"
+      ],
+      "boundary_notes": "九星次序和落宫算法需按具体起局体系复核。"
+    },
+    {
+      "id": "eight-deities",
+      "term": "八神",
+      "aliases": [
+        "八神盘",
+        "神盘"
+      ],
+      "category": "structure",
+      "group": "神",
+      "definition": "值符、腾蛇、太阴、六合、白虎、玄武、九地、九天等神盘结构，用于记录盘中神类取象。",
+      "see_also": [
+        "值符",
+        "九天",
+        "九地"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-qfdk-qimen"
+      ],
+      "boundary_notes": "不同资料可能出现白虎/勾陈等命名差异，需保留来源。"
+    },
+    {
+      "id": "heaven-plate",
+      "term": "天盘",
+      "aliases": [
+        "天干盘",
+        "天盤"
+      ],
+      "category": "chart_layer",
+      "group": "盘层",
+      "definition": "奇门盘中记录天干、九星等上层运动信息的盘层。后续算法接入时需明确天盘干、星曜和落宫字段。",
+      "see_also": [
+        "地盘",
+        "九星",
+        "天盘干"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-qfdk-qimen"
+      ],
+      "boundary_notes": "当前只定义字段，不推导排盘。"
+    },
+    {
+      "id": "earth-plate",
+      "term": "地盘",
+      "aliases": [
+        "地盤",
+        "地盘干"
+      ],
+      "category": "chart_layer",
+      "group": "盘层",
+      "definition": "奇门盘中相对稳定的下层结构，常与地盘干、宫位和基础方位一起记录。",
+      "see_also": [
+        "天盘",
+        "九宫",
+        "地盘干"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-qfdk-qimen"
+      ],
+      "boundary_notes": "地盘字段是起局算法输入输出的一部分，不直接产生断语。"
+    },
+    {
+      "id": "human-plate",
+      "term": "人盘",
+      "aliases": [
+        "门盘",
+        "人盤"
+      ],
+      "category": "chart_layer",
+      "group": "盘层",
+      "definition": "以八门为核心的人事活动盘层，用于记录门的落宫和与题型相关的取象入口。",
+      "see_also": [
+        "八门",
+        "值使"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-qfdk-qimen"
+      ],
+      "boundary_notes": "人盘取象不能脱离题型、用神和完整盘面。"
+    },
+    {
+      "id": "spirit-plate",
+      "term": "神盘",
+      "aliases": [
+        "八神盘"
+      ],
+      "category": "chart_layer",
+      "group": "盘层",
+      "definition": "以八神为核心的盘层，用于记录神类落宫和辅助取象。",
+      "see_also": [
+        "八神",
+        "值符"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-qfdk-qimen"
+      ],
+      "boundary_notes": "神盘解释须保留流派边界。"
+    },
+    {
+      "id": "zhi-fu",
+      "term": "值符",
+      "aliases": [
+        "直符"
+      ],
+      "category": "key_marker",
+      "group": "值符值使",
+      "definition": "奇门盘中的核心标记之一，常用于定位主导星神或盘局主轴。",
+      "see_also": [
+        "值使",
+        "八神",
+        "九星"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-qfdk-qimen",
+        "github-arc119226-qimen-dunjia"
+      ],
+      "boundary_notes": "值符算法与盘式体系相关，本层只记录字段位置。"
+    },
+    {
+      "id": "zhi-shi",
+      "term": "值使",
+      "aliases": [
+        "直使"
+      ],
+      "category": "key_marker",
+      "group": "值符值使",
+      "definition": "奇门盘中的核心标记之一，常与八门中的主使之门相关，用于定位盘局人事活动轴线。",
+      "see_also": [
+        "值符",
+        "八门"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-qfdk-qimen",
+        "github-arc119226-qimen-dunjia"
+      ],
+      "boundary_notes": "值使取法需按具体起局规则确认。"
+    },
+    {
+      "id": "yin-yang-dun",
+      "term": "阴遁阳遁",
+      "aliases": [
+        "阴阳遁",
+        "陽遁",
+        "陰遁"
+      ],
+      "category": "chart_setup",
+      "group": "起局",
+      "definition": "奇门起局中的方向性和时令性字段，常与节气、局数和顺逆排布相关。",
+      "see_also": [
+        "局数",
+        "节气",
+        "起局"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-qfdk-qimen",
+        "github-arc119226-qimen-dunjia"
+      ],
+      "boundary_notes": "阴阳遁切换与节气算法需要独立测试，不在本轮实现。"
+    },
+    {
+      "id": "ju-number",
+      "term": "局数",
+      "aliases": [
+        "几局",
+        "阳遁几局",
+        "阴遁几局"
+      ],
+      "category": "chart_setup",
+      "group": "起局",
+      "definition": "奇门盘局的基础编号，常与阴阳遁、节气和时辰共同决定盘面排布。",
+      "see_also": [
+        "阴遁阳遁",
+        "节气",
+        "时家奇门"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-qfdk-qimen"
+      ],
+      "boundary_notes": "局数计算是后续算法层任务。"
+    },
+    {
+      "id": "chart-casting",
+      "term": "起局",
+      "aliases": [
+        "起盘",
+        "排盘",
+        "起局排盘"
+      ],
+      "category": "chart_setup",
+      "group": "起局",
+      "definition": "依据时间、节气、阴阳遁、局数和值符值使等字段生成奇门盘的过程。本库当前只记录起局所需字段和来源，不执行自动起局。",
+      "see_also": [
+        "阴遁阳遁",
+        "局数",
+        "值符",
+        "值使"
+      ],
+      "source_refs": [
+        "github-qfdk-qimen",
+        "github-arc119226-qimen-dunjia"
+      ],
+      "boundary_notes": "起局算法必须有测试样本和体系标注后才能接入。"
+    },
+    {
+      "id": "three-wonders-six-yi",
+      "term": "三奇六仪",
+      "aliases": [
+        "三奇",
+        "六仪",
+        "三奇六儀"
+      ],
+      "category": "structure",
+      "group": "天干",
+      "definition": "奇门盘中组织天干和遁甲结构的基础概念，通常作为天盘干、地盘干和格局判断的字段来源。",
+      "see_also": [
+        "天盘",
+        "地盘",
+        "遁甲"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-qfdk-qimen"
+      ],
+      "boundary_notes": "本层只记录概念，不写具体吉凶格局。"
+    },
+    {
+      "id": "dun-jia",
+      "term": "遁甲",
+      "aliases": [
+        "甲遁"
+      ],
+      "category": "concept",
+      "group": "天干",
+      "definition": "奇门遁甲名称中的核心概念，涉及甲在六仪系统中的隐藏和组织方式。",
+      "see_also": [
+        "三奇六仪",
+        "天干"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "wikipedia-qimen-dunjia-en"
+      ],
+      "boundary_notes": "不同解释传统存在差异，需按来源并列。"
+    },
+    {
+      "id": "rotating-plate",
+      "term": "转盘奇门",
+      "aliases": [
+        "转盘",
+        "轉盤奇門"
+      ],
+      "category": "school_boundary",
+      "group": "盘式差异",
+      "definition": "奇门盘式的一类组织方式，常与飞盘等体系区分。记录规则时必须标明是否适用于转盘。",
+      "see_also": [
+        "飞盘奇门",
+        "盘式差异"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-qfdk-qimen"
+      ],
+      "boundary_notes": "本库不能把转盘和飞盘规则合并成单一规则。"
+    },
+    {
+      "id": "flying-plate",
+      "term": "飞盘奇门",
+      "aliases": [
+        "飞盘",
+        "飛盤奇門"
+      ],
+      "category": "school_boundary",
+      "group": "盘式差异",
+      "definition": "奇门盘式的一类组织方式，与转盘体系在排布和解释口径上可能不同。",
+      "see_also": [
+        "转盘奇门",
+        "盘式差异"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-arc119226-qimen-dunjia"
+      ],
+      "boundary_notes": "本轮不判定飞盘规则，只保留体系入口。"
+    },
+    {
+      "id": "hour-qimen",
+      "term": "时家奇门",
+      "aliases": [
+        "时家",
+        "時家奇門"
+      ],
+      "category": "school_boundary",
+      "group": "时间体系",
+      "definition": "按时辰起局的奇门体系入口，后续案例和算法字段必须标明时间粒度。",
+      "see_also": [
+        "日家奇门",
+        "局数",
+        "起局时间"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-qfdk-qimen"
+      ],
+      "boundary_notes": "当前不把时家算法写入规则卡。"
+    },
+    {
+      "id": "day-qimen",
+      "term": "日家奇门",
+      "aliases": [
+        "日家",
+        "日家奇門"
+      ],
+      "category": "school_boundary",
+      "group": "时间体系",
+      "definition": "按日期层级组织的奇门体系入口，与时家奇门在起局颗粒度上不同。",
+      "see_also": [
+        "时家奇门",
+        "盘式差异"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh"
+      ],
+      "boundary_notes": "本轮只记录术语边界。"
+    },
+    {
+      "id": "yong-shen-qimen",
+      "term": "用神",
+      "aliases": [
+        "取用",
+        "用神取象"
+      ],
+      "category": "interpretation_input",
+      "group": "取象",
+      "definition": "奇门案例复盘中需要记录的目标对象和取象入口，可来自宫、门、星、神、干、方位或题型约定。",
+      "see_also": [
+        "取象",
+        "案例 Schema"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-qfdk-qimen"
+      ],
+      "boundary_notes": "取用规则必须跟题型、流派和案例证据绑定。"
+    },
+    {
+      "id": "qimen-pattern",
+      "term": "格局",
+      "aliases": [
+        "奇门格局"
+      ],
+      "category": "interpretation_input",
+      "group": "格局",
+      "definition": "奇门盘中由门、星、神、干、宫等组合形成的判断单元。本库后续会把格局拆成来源、条件、例外和案例证据。",
+      "see_also": [
+        "三奇六仪",
+        "门星神"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-qfdk-qimen"
+      ],
+      "boundary_notes": "当前不收录具体吉凶格局，避免无来源断语。"
+    },
+    {
+      "id": "gate-star-deity",
+      "term": "门星神",
+      "aliases": [
+        "门星神组合",
+        "门星神干"
+      ],
+      "category": "chart_summary",
+      "group": "组合字段",
+      "definition": "把某宫中的门、星、神和天干等字段合并观察的复盘单位，适合前端卡片和案例记录。",
+      "see_also": [
+        "八门",
+        "九星",
+        "八神",
+        "九宫"
+      ],
+      "source_refs": [
+        "github-qfdk-qimen",
+        "github-arc119226-qimen-dunjia"
+      ],
+      "boundary_notes": "这是本库为了结构化展示定义的工程字段，不是古籍术语。"
+    },
+    {
+      "id": "qimen-school-difference",
+      "term": "流派差异",
+      "aliases": [
+        "体系差异",
+        "盘式差异"
+      ],
+      "category": "governance",
+      "group": "边界",
+      "definition": "记录奇门不同起局体系、盘式、断法和字段命名的差异。本库后续并列保存，不合并成唯一标准。",
+      "see_also": [
+        "转盘奇门",
+        "飞盘奇门",
+        "时家奇门",
+        "日家奇门"
+      ],
+      "source_refs": [
+        "wikipedia-qimen-dunjia-zh",
+        "github-qfdk-qimen",
+        "github-arc119226-qimen-dunjia"
+      ],
+      "boundary_notes": "这是奇门层的核心治理规则。"
+    }
+  ],
+  "qimen_structures": {
+    "schema_version": "qimen-structure-seed-2026-06-21",
+    "system": "qimen",
+    "boundary": "本文件只记录奇门遁甲第一版盘式结构字段，用于学习检索、案例复盘和后续起局算法设计；不提供自动起局，也不提供确定性吉凶判断。",
+    "palaces": [
+      {
+        "id": "palace-kan-1",
+        "name": "坎一宫",
+        "number": 1,
+        "direction": "北",
+        "trigram": "坎",
+        "element": "水",
+        "focus": "九宫北方位置，作为盘面宫位和字段容器。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "palace-kun-2",
+        "name": "坤二宫",
+        "number": 2,
+        "direction": "西南",
+        "trigram": "坤",
+        "element": "土",
+        "focus": "九宫西南位置，作为盘面宫位和字段容器。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "palace-zhen-3",
+        "name": "震三宫",
+        "number": 3,
+        "direction": "东",
+        "trigram": "震",
+        "element": "木",
+        "focus": "九宫东方位置，作为盘面宫位和字段容器。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "palace-xun-4",
+        "name": "巽四宫",
+        "number": 4,
+        "direction": "东南",
+        "trigram": "巽",
+        "element": "木",
+        "focus": "九宫东南位置，作为盘面宫位和字段容器。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "palace-center-5",
+        "name": "中五宫",
+        "number": 5,
+        "direction": "中",
+        "trigram": "中",
+        "element": "土",
+        "focus": "九宫中央位置；部分盘式会把中宫信息寄到其他宫位，需要标明规则。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "palace-qian-6",
+        "name": "乾六宫",
+        "number": 6,
+        "direction": "西北",
+        "trigram": "乾",
+        "element": "金",
+        "focus": "九宫西北位置，作为盘面宫位和字段容器。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "palace-dui-7",
+        "name": "兑七宫",
+        "number": 7,
+        "direction": "西",
+        "trigram": "兑",
+        "element": "金",
+        "focus": "九宫西方位置，作为盘面宫位和字段容器。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "palace-gen-8",
+        "name": "艮八宫",
+        "number": 8,
+        "direction": "东北",
+        "trigram": "艮",
+        "element": "土",
+        "focus": "九宫东北位置，作为盘面宫位和字段容器。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "palace-li-9",
+        "name": "离九宫",
+        "number": 9,
+        "direction": "南",
+        "trigram": "离",
+        "element": "火",
+        "focus": "九宫南方位置，作为盘面宫位和字段容器。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "id": "gate-xiu",
+        "name": "休门",
+        "group": "八门",
+        "core_focus": "八门之一，结构层记录门名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "gate-sheng",
+        "name": "生门",
+        "group": "八门",
+        "core_focus": "八门之一，结构层记录门名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "gate-shang",
+        "name": "伤门",
+        "group": "八门",
+        "core_focus": "八门之一，结构层记录门名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "gate-du",
+        "name": "杜门",
+        "group": "八门",
+        "core_focus": "八门之一，结构层记录门名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "gate-jing",
+        "name": "景门",
+        "group": "八门",
+        "core_focus": "八门之一，结构层记录门名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "gate-si",
+        "name": "死门",
+        "group": "八门",
+        "core_focus": "八门之一，结构层记录门名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "gate-jing2",
+        "name": "惊门",
+        "group": "八门",
+        "core_focus": "八门之一，结构层记录门名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "gate-kai",
+        "name": "开门",
+        "group": "八门",
+        "core_focus": "八门之一，结构层记录门名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      }
+    ],
+    "stars": [
+      {
+        "id": "star-tianpeng",
+        "name": "天蓬",
+        "group": "九星",
+        "core_focus": "九星之一，结构层记录星名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "star-tianren",
+        "name": "天任",
+        "group": "九星",
+        "core_focus": "九星之一，结构层记录星名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "star-tianchong",
+        "name": "天冲",
+        "group": "九星",
+        "core_focus": "九星之一，结构层记录星名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "star-tianfu",
+        "name": "天辅",
+        "group": "九星",
+        "core_focus": "九星之一，结构层记录星名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "star-tianying",
+        "name": "天英",
+        "group": "九星",
+        "core_focus": "九星之一，结构层记录星名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "star-tianrui",
+        "name": "天芮",
+        "group": "九星",
+        "core_focus": "九星之一，结构层记录星名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "star-tianzhu",
+        "name": "天柱",
+        "group": "九星",
+        "core_focus": "九星之一，结构层记录星名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "star-tianxin",
+        "name": "天心",
+        "group": "九星",
+        "core_focus": "九星之一，结构层记录星名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "star-tianqin",
+        "name": "天禽",
+        "group": "九星",
+        "core_focus": "九星之一，中宫相关规则需按盘式来源标注。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      }
+    ],
+    "deities": [
+      {
+        "id": "deity-zhifu",
+        "name": "值符",
+        "group": "八神",
+        "core_focus": "八神之一，也是盘局关键标记。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "deity-tengshe",
+        "name": "腾蛇",
+        "group": "八神",
+        "core_focus": "八神之一，结构层记录神名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "deity-taiyin",
+        "name": "太阴",
+        "group": "八神",
+        "core_focus": "八神之一，结构层记录神名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "deity-liuhe",
+        "name": "六合",
+        "group": "八神",
+        "core_focus": "八神之一，结构层记录神名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "deity-baihu",
+        "name": "白虎",
+        "group": "八神",
+        "core_focus": "八神之一；若来源使用勾陈等替称，需并列记录。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "deity-xuanwu",
+        "name": "玄武",
+        "group": "八神",
+        "core_focus": "八神之一，结构层记录神名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "deity-jiudi",
+        "name": "九地",
+        "group": "八神",
+        "core_focus": "八神之一，结构层记录神名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "deity-jiutian",
+        "name": "九天",
+        "group": "八神",
+        "core_focus": "八神之一，结构层记录神名和落宫。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      }
+    ],
+    "chart_fields": [
+      {
+        "id": "field-cast-time",
+        "name": "起局时间",
+        "description": "记录公历时间、时区、农历/干支推导来源和是否手工修正。",
+        "source_refs": [
+          "github-qfdk-qimen",
+          "github-arc119226-qimen-dunjia"
+        ]
+      },
+      {
+        "id": "field-dun-type",
+        "name": "阴阳遁",
+        "description": "记录阳遁或阴遁，以及该字段的来源算法或人工录入。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "field-ju-number",
+        "name": "局数",
+        "description": "记录几局和计算依据；接入算法前需建立节气测试。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      },
+      {
+        "id": "field-zhi-fu",
+        "name": "值符",
+        "description": "记录值符星/神及其落宫，字段命名需标注来源项目或流派。",
+        "source_refs": [
+          "github-qfdk-qimen",
+          "github-arc119226-qimen-dunjia"
+        ]
+      },
+      {
+        "id": "field-zhi-shi",
+        "name": "值使",
+        "description": "记录值使门及其落宫，后续用于案例复盘。",
+        "source_refs": [
+          "github-qfdk-qimen",
+          "github-arc119226-qimen-dunjia"
+        ]
+      },
+      {
+        "id": "field-palace-cells",
+        "name": "九宫单元",
+        "description": "每宫记录宫位、门、星、神、天盘干、地盘干、空亡/马星等可选字段。",
+        "source_refs": [
+          "github-qfdk-qimen",
+          "github-arc119226-qimen-dunjia"
+        ]
+      },
+      {
+        "id": "field-school",
+        "name": "盘式体系",
+        "description": "记录转盘、飞盘、时家、日家等体系边界，避免规则混用。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh"
+        ]
+      },
+      {
+        "id": "field-yong-shen",
+        "name": "用神取象",
+        "description": "记录题型、用神、取象理由和相关宫位；不把取象结论写死。",
+        "source_refs": [
+          "wikipedia-qimen-dunjia-zh",
+          "github-qfdk-qimen"
+        ]
+      }
+    ]
+  },
   "sources": [
     {
       "id": "ctext-bushi-zhengzong",
@@ -1833,6 +2825,54 @@ window.LIUYAO_KB_DATA = {
       "class": "B",
       "type": "open-source-code",
       "notes": "多术数 Web/API/MCP/skill 项目，已在外部项目库记录；用于参考多入口结构化输出，不作为紫微规则来源。"
+    },
+    {
+      "id": "wikipedia-qimen-dunjia-zh",
+      "title": "奇门遁甲 - 维基百科",
+      "url": "https://zh.wikipedia.org/wiki/%E5%A5%87%E9%96%80%E9%81%81%E7%94%B2",
+      "class": "B",
+      "type": "encyclopedia",
+      "notes": "用于奇门遁甲、九宫、八门、九星、八神和值符值使等概念入口；只作百科级导览，不作规则来源。"
+    },
+    {
+      "id": "wikipedia-qimen-dunjia-en",
+      "title": "Qimen Dunjia - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Qimen_Dunjia",
+      "class": "B",
+      "type": "encyclopedia",
+      "notes": "英文百科入口，用于核对 Qimen Dunjia 英文命名和跨语言概念入口；不作断语来源。"
+    },
+    {
+      "id": "github-qfdk-qimen",
+      "title": "qfdk/qimen - 奇门遁甲在线排盘",
+      "url": "https://github.com/qfdk/qimen",
+      "class": "B",
+      "type": "open-source-code",
+      "notes": "MIT 开源 JavaScript 转盘奇门在线排盘项目；用于参考九宫、门星神、盘面字段和前端呈现，不直接采信断语。"
+    },
+    {
+      "id": "github-arc119226-qimen-dunjia",
+      "title": "arc119226/qimen_dunjia - 奇门遁甲起盘模块",
+      "url": "https://github.com/arc119226/qimen_dunjia",
+      "class": "B",
+      "type": "open-source-code",
+      "notes": "MIT 开源 JavaScript 起盘模块；用于参考起局字段、值符值使和盘式输出颗粒度，接入算法前需独立测试。"
+    },
+    {
+      "id": "github-banderzhm-zhouyilab",
+      "title": "banderzhm/ZhouYiLab - 玄学计算引擎",
+      "url": "https://github.com/banderzhm/ZhouYiLab",
+      "class": "B",
+      "type": "open-source-code",
+      "notes": "MIT 开源多术数计算引擎，包含大六壬、六爻、紫微、八字和奇门遁甲；用于多体系工程分层参考，不直接复制规则。"
+    },
+    {
+      "id": "bilibili-qimen-search-20260621",
+      "title": "B站奇门遁甲入门课程搜索结果",
+      "url": "https://search.bilibili.com/all?keyword=%E5%A5%87%E9%97%A8%E9%81%81%E7%94%B2%20%E5%85%A5%E9%97%A8",
+      "class": "C",
+      "type": "video-search",
+      "notes": "Agent Reach B站搜索返回奇门遁甲入门和长课目录线索；因终端标题编码限制，本轮只作为学习生态观察，不写入规则。"
     }
   ],
   "systems": [
@@ -1903,33 +2943,41 @@ window.LIUYAO_KB_DATA = {
     {
       "id": "qimen",
       "name": "奇门遁甲",
-      "status": "planned",
-      "scope": "先做资料和盘式结构，不急于实现复杂起局；重点是九宫、八门、九星、八神、天盘地盘和用神取象。",
+      "status": "active-v0.6-seed",
+      "scope": "已建立第一版独立资料层：术语表、九宫、八门、九星、八神、值符值使、阴阳遁、局数和盘式字段结构；当前不实现自动起局，也不写确定性断语。",
       "core_objects": [
+        "奇门盘",
         "九宫",
         "八门",
         "九星",
         "八神",
         "天盘",
         "地盘",
+        "人盘",
+        "神盘",
         "值符",
         "值使",
+        "阴阳遁",
         "局数",
+        "三奇六仪",
         "用神"
       ],
-      "source_strategy": "先分清转盘/飞盘、时家/日家等体系边界；每条判断规则必须标明盘式体系。",
+      "source_strategy": "先用百科导览和公开排盘项目建立术语与字段，再抽样源码和经典资料校对起局算法；转盘、飞盘、时家、日家等体系必须保留来源和适用边界。",
       "product_modules": [
         "盘式字段 Schema",
-        "九宫关系表",
+        "九宫结构表",
         "门星神词典",
+        "值符值使字段",
+        "盘式差异说明",
         "事件复盘模板"
       ],
       "next_steps": [
-        "调研开源起局算法",
-        "建立奇门术语表",
-        "拆出盘式差异说明"
+        "抽样审计 qfdk/qimen 和 arc119226/qimen_dunjia 的起局字段",
+        "补 data/qimen_case_schema.json",
+        "建立节气、阴阳遁、局数和值符值使测试用例",
+        "继续寻找可校对的公开古籍文本入口"
       ],
-      "risk_notes": "起局体系差异大，若未标注体系会导致规则互相冲突。"
+      "risk_notes": "奇门起局体系差异大，转盘、飞盘、时家、日家不能混成单一规则；当前只是结构资料层，不代表自动排盘或断法准确。"
     },
     {
       "id": "liuren",
@@ -5115,6 +6163,93 @@ window.LIUYAO_KB_DATA = {
         "其具体流派体系不能直接变成本库唯一规则"
       ],
       "adoption": "先作为紫微资料层的字段和工程参考；接入算法前必须做测试用例和流派边界复核。"
+    },
+    {
+      "id": "github-qfdk-qimen",
+      "name": "qimen",
+      "owner": "qfdk",
+      "url": "https://github.com/qfdk/qimen",
+      "platform": "GitHub",
+      "language": "JavaScript",
+      "stars": 184,
+      "forks": 62,
+      "license": "MIT",
+      "updated_at": "2026-06-19T09:23:29Z",
+      "project_type": "javascript-web-chart",
+      "scope": "奇门遁甲在线排盘项目，仓库描述标明转盘奇门，适合参考九宫盘面、门星神字段和前端展示颗粒度。",
+      "evidence": [
+        "GitHub repository metadata collected via repo view",
+        "repo view shows MIT license, JavaScript primary language and 184 stars",
+        "description explicitly states 奇门遁甲在线排盘(转盘)"
+      ],
+      "useful_patterns": [
+        "把奇门输出组织成九宫盘面",
+        "前端直接呈现盘局而不是先做营销页",
+        "适合作为转盘奇门字段和 UI 颗粒度参考"
+      ],
+      "risks": [
+        "只确认到 metadata 级信息，尚未逐文件审计源码",
+        "仓库标明转盘，不能把其字段口径扩展成所有奇门体系通用规则"
+      ],
+      "adoption": "先作为奇门资料层的字段和前端展示参考；接入算法前必须抽样源码、建立节气/局数/值符值使测试。"
+    },
+    {
+      "id": "github-arc119226-qimen-dunjia",
+      "name": "qimen_dunjia",
+      "owner": "arc119226",
+      "url": "https://github.com/arc119226/qimen_dunjia",
+      "platform": "GitHub",
+      "language": "JavaScript",
+      "stars": 3,
+      "forks": 1,
+      "license": "MIT",
+      "updated_at": "2026-06-19T11:16:36Z",
+      "project_type": "javascript-chart-module",
+      "scope": "奇门遁甲起盘模块，可作为后续算法接口、字段命名和值符值使输出的抽样参考。",
+      "evidence": [
+        "GitHub repository metadata collected via repo view",
+        "repo view shows MIT license and JavaScript primary language",
+        "description explicitly states 奇門遁甲起盤模組"
+      ],
+      "useful_patterns": [
+        "以模块形态提供奇门起盘能力",
+        "适合后续比较起局输入输出字段",
+        "可与 qfdk/qimen 做字段差异对照"
+      ],
+      "risks": [
+        "stars 很少，不能直接作为准确性依据",
+        "未完成源码级审计前不能复用算法或断法"
+      ],
+      "adoption": "作为奇门起局算法调研候选；本轮只写 metadata 和结构层，不接入代码。"
+    },
+    {
+      "id": "github-banderzhm-zhouyilab",
+      "name": "ZhouYiLab",
+      "owner": "banderzhm",
+      "url": "https://github.com/banderzhm/ZhouYiLab",
+      "platform": "GitHub",
+      "language": "C++",
+      "stars": 94,
+      "forks": 37,
+      "license": "MIT",
+      "updated_at": "2026-06-20T06:13:45Z",
+      "project_type": "multi-system-computation-engine",
+      "scope": "玄学计算引擎，描述包含大六壬、六爻、紫微斗数、八字和奇门遁甲，适合作为多体系工程边界参考。",
+      "evidence": [
+        "GitHub repository metadata collected via repo view",
+        "repo view shows MIT license and C++ primary language",
+        "description names 大六壬、六爻、紫微斗数、八字、奇门遁甲"
+      ],
+      "useful_patterns": [
+        "多体系计算引擎需要清楚隔离不同体系",
+        "适合作为后续大六壬和奇门算法项目的对照样本",
+        "MIT license lowers后续接口参考成本"
+      ],
+      "risks": [
+        "综合引擎范围很大，不能替代本库逐体系来源校验",
+        "尚未源码审计，不能直接采信具体规则"
+      ],
+      "adoption": "作为多体系工程参考；每个体系仍独立做来源、结构和测试。"
     }
   ],
   "case_schema": {
@@ -5360,5 +6495,5 @@ window.LIUYAO_KB_DATA = {
     },
     "additionalProperties": true
   },
-  "built_at": "content-6f66515a5a230d2e"
+  "built_at": "content-75bd725ff10c92b1"
 };

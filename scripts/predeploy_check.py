@@ -111,6 +111,7 @@ def main() -> int:
     check("app_uses_api_search_with_fallback", "/api/search" in app and "localSearchResults" in app, failures)
     check("app_has_systems_view", 'systems: ["体系总览"' in app and 'data-view="systems"' in html, failures)
     check("app_has_ziwei_view", 'ziwei: ["紫微资料"' in app and 'data-view="ziwei"' in html, failures)
+    check("app_has_qimen_view", 'qimen: ["奇门资料"' in app and 'data-view="qimen"' in html, failures)
     check("app_has_caster_view", 'caster: ["装卦辅助", "手工起卦排盘"]' in app, failures)
     check("engine_exports_builder", "buildLiuyaoChart" in engine and "validateLiuyaoInput" in engine, failures)
     check("css_has_mobile_breakpoint", "@media (max-width: 820px)" in css, failures)
@@ -127,6 +128,8 @@ def main() -> int:
     check("function_search_core_has_external_projects", "external_projects" in function_search_core, failures)
     check("function_search_core_has_ziwei_terms", "ziwei_terms" in function_search_core, failures)
     check("function_search_core_has_ziwei_structures", "ziwei_structures" in function_search_core, failures)
+    check("function_search_core_has_qimen_terms", "qimen_terms" in function_search_core, failures)
+    check("function_search_core_has_qimen_structures", "qimen_structures" in function_search_core, failures)
     check("docs_count", len(data.get("docs", [])) >= 13, failures)
     check(
         "research_log_in_site_data",
@@ -158,6 +161,11 @@ def main() -> int:
         any(doc.get("title") == "紫微斗数第一版资料层" for doc in data.get("docs", [])),
         failures,
     )
+    check(
+        "qimen_foundation_doc_in_site_data",
+        any(doc.get("title") == "奇门遁甲第一版资料层" for doc in data.get("docs", [])),
+        failures,
+    )
     check("systems_count", len(data.get("systems", [])) >= 4, failures)
     check(
         "systems_cover_requested_scope",
@@ -176,6 +184,22 @@ def main() -> int:
         len(data.get("ziwei_structures", {}).get("palaces", [])) == 12
         and len(data.get("ziwei_structures", {}).get("major_stars", [])) == 14
         and len(data.get("ziwei_structures", {}).get("transformations", [])) == 4,
+        failures,
+    )
+    check("qimen_terms_count", len(data.get("qimen_terms", [])) >= 24, failures)
+    check(
+        "qimen_terms_have_core_terms",
+        {"奇门遁甲", "九宫", "八门", "九星", "八神", "值符", "值使"}.issubset(
+            {item.get("term") for item in data.get("qimen_terms", [])}
+        ),
+        failures,
+    )
+    check(
+        "qimen_structures_have_core_counts",
+        len(data.get("qimen_structures", {}).get("palaces", [])) == 9
+        and len(data.get("qimen_structures", {}).get("gates", [])) == 8
+        and len(data.get("qimen_structures", {}).get("stars", [])) == 9
+        and len(data.get("qimen_structures", {}).get("deities", [])) == 8,
         failures,
     )
     check("classic_notes_count", len(data.get("classic_notes", [])) >= 36, failures)
@@ -232,7 +256,7 @@ def main() -> int:
         "npm run check" in readme and "npx netlify deploy --prod" in readme,
         failures,
     )
-    check("changelog_has_current_version", "## v0.5.0 - 2026-06-21" in changelog, failures)
+    check("changelog_has_current_version", "## v0.6.0 - 2026-06-21" in changelog, failures)
 
     if failures:
         print("\nPredeploy check failed:")

@@ -18,6 +18,9 @@ const ziweiTerms = searchKnowledgeBase(data, { query: "紫微", kind: "ziwei_ter
 const ziweiMajorStars = searchKnowledgeBase(data, { query: "十四主星", kind: "ziwei_terms", limit: 20 });
 const ziweiRelations = searchKnowledgeBase(data, { query: "三方四正", kind: "ziwei_terms", limit: 10 });
 const ziweiStructures = searchKnowledgeBase(data, { query: "命宫", kind: "ziwei_structures", limit: 10 });
+const qimenTerms = searchKnowledgeBase(data, { query: "奇门遁甲", kind: "qimen_terms", limit: 10 });
+const qimenGates = searchKnowledgeBase(data, { query: "八门", kind: "qimen_terms", limit: 10 });
+const qimenStructures = searchKnowledgeBase(data, { query: "坎一宫", kind: "qimen_structures", limit: 10 });
 const accuracy = searchKnowledgeBase(data, { query: "评分", kind: "accuracy_cases", limit: 10 });
 const retroAccuracy = searchKnowledgeBase(data, { query: "retrospective-calibration", kind: "accuracy_cases", limit: 10 });
 const all = searchKnowledgeBase(data, { query: "回头克", limit: 20 });
@@ -29,6 +32,14 @@ check("function_data_has_case_slots", data.case_index.length >= 24);
 check("function_data_has_systems", data.systems.length >= 4);
 check("function_data_has_ziwei_terms", data.ziwei_terms.length >= 30);
 check("function_data_has_ziwei_structures", data.ziwei_structures.palaces.length === 12 && data.ziwei_structures.major_stars.length === 14);
+check("function_data_has_qimen_terms", data.qimen_terms.length >= 24);
+check(
+  "function_data_has_qimen_structures",
+  data.qimen_structures.palaces.length === 9
+    && data.qimen_structures.gates.length === 8
+    && data.qimen_structures.stars.length === 9
+    && data.qimen_structures.deities.length === 8,
+);
 check("function_data_has_accuracy_cases", data.accuracy_cases.length >= 4);
 check("function_data_has_external_projects", data.external_projects.length >= 6);
 check("search_case_index_lost_object", lost.results.some((item) => item.id === "zengshan-case-slot-010-lost-object-home"));
@@ -42,6 +53,9 @@ check(
 );
 check("search_ziwei_terms_sanfang", ziweiRelations.results.some((item) => item.id === "sanfang-sizheng"));
 check("search_ziwei_structures_ming", ziweiStructures.results.some((item) => item.id === "palace-ming"));
+check("search_qimen_terms_qimen", qimenTerms.results.some((item) => item.kind === "qimen_terms" && item.id === "qimen-dunjia"));
+check("search_qimen_terms_gates", qimenGates.results.some((item) => item.id === "eight-gates"));
+check("search_qimen_structures_kan", qimenStructures.results.some((item) => item.id === "palace-kan-1"));
 check("search_accuracy_cases_scoring", accuracy.results.some((item) => item.id === "accuracy-demo-2026-nba-finals-game-7"));
 check("search_accuracy_cases_retro", retroAccuracy.results.some((item) => item.id === "accuracy-retro-2024-super-bowl-lviii"));
 check("search_all_back_control", all.results.some((item) => item.title.includes("回头克") || JSON.stringify(item.item).includes("回头克")));
@@ -54,6 +68,10 @@ check("handler_search_get_ok", searchResponse.status === 200 && searchPayload.re
 const ziweiResponse = await searchHandler(new Request("https://example.test/api/search?q=%E5%9B%9B%E5%8C%96&kind=ziwei_terms"));
 const ziweiPayload = await ziweiResponse.json();
 check("handler_search_ziwei_terms_ok", ziweiResponse.status === 200 && ziweiPayload.results.some((item) => item.id === "four-transformations"));
+
+const qimenResponse = await searchHandler(new Request("https://example.test/api/search?q=%E5%85%AB%E9%97%A8&kind=qimen_terms"));
+const qimenPayload = await qimenResponse.json();
+check("handler_search_qimen_terms_ok", qimenResponse.status === 200 && qimenPayload.results.some((item) => item.id === "eight-gates"));
 
 const schemaResponse = await caseSchemaHandler(new Request("https://example.test/api/case-schema"));
 const schemaPayload = await schemaResponse.json();

@@ -38,10 +38,13 @@ def main() -> int:
         "has_github_versioning_doc": any(doc["title"] == "GitHub 项目化与版本迭代" for doc in data["docs"]),
         "has_multi_system_doc": any(doc["title"] == "多术数体系路线图" for doc in data["docs"]),
         "has_ziwei_foundation_doc": any(doc["title"] == "紫微斗数第一版资料层" for doc in data["docs"]),
+        "has_qimen_foundation_doc": any(doc["title"] == "奇门遁甲第一版资料层" for doc in data["docs"]),
         "has_systems": len(data.get("systems", [])) >= 4,
         "systems_contains_ziwei": any(contains(item, "紫微斗数") for item in data.get("systems", [])),
+        "systems_contains_qimen": any(contains(item, "奇门遁甲") for item in data.get("systems", [])),
         "app_has_systems_view": 'systems: ["体系总览"' in app,
         "app_has_ziwei_view": 'ziwei: ["紫微资料"' in app and 'data-view="ziwei"' in html,
+        "app_has_qimen_view": 'qimen: ["奇门资料"' in app and 'data-view="qimen"' in html,
         "has_ziwei_terms": len(data.get("ziwei_terms", [])) >= 30,
         "ziwei_contains_core_terms": all(
             any(item.get("term") == term for item in data.get("ziwei_terms", []))
@@ -49,6 +52,15 @@ def main() -> int:
         ),
         "has_ziwei_structures": len(data.get("ziwei_structures", {}).get("palaces", [])) == 12
         and len(data.get("ziwei_structures", {}).get("major_stars", [])) == 14,
+        "has_qimen_terms": len(data.get("qimen_terms", [])) >= 24,
+        "qimen_contains_core_terms": all(
+            any(item.get("term") == term for item in data.get("qimen_terms", []))
+            for term in ["奇门遁甲", "九宫", "八门", "值符", "值使"]
+        ),
+        "has_qimen_structures": len(data.get("qimen_structures", {}).get("palaces", [])) == 9
+        and len(data.get("qimen_structures", {}).get("gates", [])) == 8
+        and len(data.get("qimen_structures", {}).get("stars", [])) == 9
+        and len(data.get("qimen_structures", {}).get("deities", [])) == 8,
         "has_rules": len(data["rules"]) >= 20,
         "has_classic_notes": len(data.get("classic_notes", [])) >= 36,
         "has_case_index": len(data.get("case_index", [])) >= 24,

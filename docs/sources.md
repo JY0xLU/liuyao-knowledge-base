@@ -2,7 +2,7 @@
 
 本索引记录第一版知识库用到的公开资料线索。它不是完整书目，后续应继续扩展到逐章读书笔记和案例库。
 
-当前深入资料仍以六爻为主。紫微斗数已进入第一版资料层，见 [紫微斗数第一版资料层](16-ziwei-foundation.md)、`data/ziwei_terms.json` 和 `data/ziwei_structures.json`；奇门遁甲、大六壬/小六壬仍先保留在 [多术数体系路线图](15-multi-system-roadmap.md) 和 `data/systems.json`，后续按体系独立扩展来源、术语、盘式和案例，不与六爻规则混写。
+当前深入资料仍以六爻为主。紫微斗数已进入第一版资料层，见 [紫微斗数第一版资料层](16-ziwei-foundation.md)、`data/ziwei_terms.json` 和 `data/ziwei_structures.json`；奇门遁甲也已进入第一版资料层，见 [奇门遁甲第一版资料层](17-qimen-foundation.md)、`data/qimen_terms.json` 和 `data/qimen_structures.json`；大六壬/小六壬仍先保留在 [多术数体系路线图](15-multi-system-roadmap.md) 和 `data/systems.json`，后续按体系独立扩展来源、术语、盘式和案例，不与六爻规则混写。
 
 ## A 类：经典与公共文本
 
@@ -32,6 +32,11 @@
 | Zi Wei Dou Shu - Wikipedia | https://en.wikipedia.org/wiki/Zi_Wei_Dou_Shu | 英文命名和跨语言概念入口 |
 | Renhuai123/ziwei-doushu - 紫微斗数排盘引擎 | https://github.com/Renhuai123/ziwei-doushu | MIT 开源排盘项目，用于参考命盘字段、四化系统和测试颗粒度 |
 | Brhiza/mingyu - 多术数排盘平台 | https://github.com/Brhiza/mingyu | 多入口结构化输出参考，不作为紫微规则来源 |
+| 奇门遁甲 - 维基百科 | https://zh.wikipedia.org/wiki/%E5%A5%87%E9%96%80%E9%81%81%E7%94%B2 | 奇门体系、九宫、八门、九星、八神等概念入口 |
+| Qimen Dunjia - Wikipedia | https://en.wikipedia.org/wiki/Qimen_Dunjia | 英文命名和跨语言概念入口 |
+| qfdk/qimen - 奇门遁甲在线排盘 | https://github.com/qfdk/qimen | MIT 开源转盘奇门项目，用于盘式字段和前端展示参考 |
+| arc119226/qimen_dunjia - 奇门遁甲起盘模块 | https://github.com/arc119226/qimen_dunjia | MIT 开源起盘模块，用于起局字段和值符值使输出颗粒度参考 |
+| banderzhm/ZhouYiLab - 玄学计算引擎 | https://github.com/banderzhm/ZhouYiLab | 多体系计算引擎，用于工程分层参考 |
 
 ## C 类：视频与讨论材料
 
@@ -41,6 +46,7 @@
 | B站小白六爻课程 | https://www.bilibili.com/video/BV1Xw411M7UV/ | 课程目录显示阴阳五行、天干地支、六亲用神、六神、起卦、纳甲、世应、旬空月破等顺序 |
 | Reddit EasternOccult 六亲飞宫讨论 | https://www.reddit.com/r/EasternOccult/comments/1iv5c18/ | 高阶民间技法讨论，只作经验观察，不作为基础规则 |
 | taskyoooo/ziwei-doushu-skill | https://github.com/taskyoooo/ziwei-doushu-skill | 紫微 skill 产品形态参考；仅作流派边界和交互形态线索 |
+| B站奇门遁甲入门课程搜索结果 | https://search.bilibili.com/all?keyword=%E5%A5%87%E9%97%A8%E9%81%81%E7%94%B2%20%E5%85%A5%E9%97%A8 | 学习生态观察，不作为规则来源 |
 
 ## 下一步采集计划
 
@@ -48,7 +54,7 @@
 - 对《增删卜易》建立卦例索引：题目、用神、动变、结果、争议点。
 - 对《黄金策》建立分类断法索引。第一版专题映射见 [古籍阅读索引](06-classics-reading-index.md)。
 - 对紫微斗数继续校对《紫微斗數全書》原文，并建立命例 Schema、排盘字段测试和流派差异记录。
-- 对奇门遁甲建立九宫、八门、九星、八神、盘式差异来源索引。
+- 对奇门遁甲继续校对公开古籍入口，并抽样审计 qfdk/qimen 与 arc119226/qimen_dunjia 的起局字段。
 - 对大六壬/小六壬分别建立四课三传、课体和小六壬六宫来源索引。
 - 搜集至少 100 个有反馈的现代案例，按专题归档。
 - 建立「规则来源」字段：每条规则都能指向古籍、现代解释或案例统计。第一版规则卡见 [规则卡索引](07-rule-cards.md) 和 `data/rules.json`。
@@ -83,4 +89,10 @@
 - 任何 C 类材料都需要经过古籍、现代教程或案例反馈交叉校验，才能影响规则卡。
 
 - 紫微斗数已建立独立来源索引、术语和盘式结构层；下一轮进入命例 Schema、排盘算法抽样和原文校对。
-- 奇门遁甲、大六壬/小六壬仍应先建立独立来源索引，再进入术语、盘式和案例层。
+- 奇门遁甲已建立独立来源索引、术语和盘式结构层；下一轮进入案例 Schema、源码抽样和起局测试。
+
+2026-06-21 奇门遁甲第一版资料层核验：
+- Node fetch 可直接访问中文维基百科“奇门遁甲”和英文 Wikipedia “Qimen Dunjia” 页面。
+- Jina Reader 读取 Wikipedia 镜像时返回匿名 401，因此本轮不把其作为可摘录正文来源。
+- GitHub 元数据确认 `qfdk/qimen` 为 MIT JavaScript 转盘奇门在线排盘项目，`arc119226/qimen_dunjia` 为 MIT JavaScript 起盘模块，`banderzhm/ZhouYiLab` 为 MIT 多体系计算引擎。
+- B站搜索可返回奇门遁甲入门和长课目录线索；因终端标题编码限制，本轮只作为 C 类学习生态观察。

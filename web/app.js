@@ -35,6 +35,7 @@ const viewTitles = {
   rules: ["规则卡", "可追踪断法规则"],
   terms: ["术语表", "六爻术语速查"],
   ziwei: ["紫微资料", "术语 · 宫位 · 星曜 · 四化"],
+  qimen: ["奇门资料", "九宫 · 八门 · 九星 · 八神"],
   classics: ["古籍索引", "经典阅读路线"],
   notes: ["读书笔记", "十八论与问答笔记"],
   caseIndex: ["案例索引", "增删卜易案例槽位"],
@@ -186,11 +187,27 @@ function localSearchResults(query) {
       body: `${item.definition} ${item.boundary_notes || ""}`,
       item,
     })),
+    ...(state.data.qimen_terms || []).map((item) => ({
+      type: "奇门术语",
+      title: item.term,
+      body: `${item.definition} ${item.boundary_notes || ""}`,
+      item,
+    })),
     ...Object.entries(state.data.ziwei_structures || {})
       .filter(([, value]) => Array.isArray(value))
       .flatMap(([group, items]) =>
         items.map((item) => ({
           type: "紫微结构",
+          title: item.name,
+          body: item.focus || item.core_focus || item.description || item.group || "",
+          item: { group, ...item },
+        })),
+      ),
+    ...Object.entries(state.data.qimen_structures || {})
+      .filter(([, value]) => Array.isArray(value))
+      .flatMap(([group, items]) =>
+        items.map((item) => ({
+          type: "奇门结构",
           title: item.name,
           body: item.focus || item.core_focus || item.description || item.group || "",
           item: { group, ...item },
@@ -288,6 +305,7 @@ function renderStats() {
     ["体系", (data.systems || []).length],
     ["术语", (data.terms || []).length],
     ["紫微术语", (data.ziwei_terms || []).length],
+    ["奇门术语", (data.qimen_terms || []).length],
     ["规则", (data.rules || []).length],
     ["来源", (data.sources || []).length],
     ["古籍", (data.classics || []).length],
@@ -501,6 +519,73 @@ function renderZiwei() {
         ${renderStructureColumn("十二宫", palaces)}
         ${renderStructureColumn("十四主星", stars)}
         ${renderStructureColumn("四化", transformations)}
+        ${renderStructureColumn("字段", fields)}
+      </div>
+    </div>
+  `;
+}
+
+function renderQimen() {
+  const query = state.query.trim();
+  const terms = (state.data.qimen_terms || []).filter((term) => matchText(term, query));
+  const structures = state.data.qimen_structures || {};
+  const palaces = (structures.palaces || []).filter((item) => matchText(item, query));
+  const gates = (structures.gates || []).filter((item) => matchText(item, query));
+  const stars = (structures.stars || []).filter((item) => matchText(item, query));
+  const deities = (structures.deities || []).filter((item) => matchText(item, query));
+  const fields = (structures.chart_fields || []).filter((item) => matchText(item, query));
+
+  els.content.innerHTML = `
+    <div class="hero-grid">
+      <article class="hero-card">
+        <h3>奇门遁甲第一版资料层</h3>
+        <p>本层先收术语、九宫、八门、九星、八神和值符值使等盘式字段，用于学习检索和案例复盘；不自动起局，也不写确定性断语。</p>
+        <div class="tag-row">
+          <span class="tag">术语 ${terms.length}</span>
+          <span class="tag">九宫 ${structures.palaces?.length || 0}</span>
+          <span class="tag">八门 ${structures.gates?.length || 0}</span>
+          <span class="tag">九星 ${structures.stars?.length || 0}</span>
+          <span class="tag">八神 ${structures.deities?.length || 0}</span>
+        </div>
+      </article>
+      <article class="card">
+        <h3>边界</h3>
+        <p>${escapeHtml(structures.boundary || "转盘、飞盘、时家、日家等体系并列记录，不合并成单一断法。")}</p>
+        <div class="tag-row">
+          <span class="tag">active-v0.6-seed</span>
+          <span class="tag">结构先行</span>
+        </div>
+      </article>
+    </div>
+    <div class="section-band">
+      <h3>术语</h3>
+      <div class="result-grid">
+        ${terms
+          .map(
+            (term) => `
+              <article class="card">
+                <div class="meta-row">
+                  <span class="tag">${escapeHtml(term.category)}</span>
+                  <span class="tag">${escapeHtml(term.group || "奇门")}</span>
+                  ${(term.aliases || []).slice(0, 3).map((alias) => `<span class="tag">${escapeHtml(alias)}</span>`).join("")}
+                </div>
+                <h3>${escapeHtml(term.term)}</h3>
+                <p>${escapeHtml(term.definition)}</p>
+                ${term.boundary_notes ? `<p><strong>边界：</strong>${escapeHtml(term.boundary_notes)}</p>` : ""}
+                <div class="tag-row">${(term.source_refs || []).map((ref) => `<span class="tag">${escapeHtml(ref)}</span>`).join("")}</div>
+              </article>
+            `,
+          )
+          .join("")}
+      </div>
+    </div>
+    <div class="section-band">
+      <h3>盘式结构</h3>
+      <div class="structure-grid">
+        ${renderStructureColumn("九宫", palaces)}
+        ${renderStructureColumn("八门", gates)}
+        ${renderStructureColumn("九星", stars)}
+        ${renderStructureColumn("八神", deities)}
         ${renderStructureColumn("字段", fields)}
       </div>
     </div>
@@ -981,6 +1066,7 @@ function render() {
   if (state.view === "rules") renderRules();
   if (state.view === "terms") renderTerms();
   if (state.view === "ziwei") renderZiwei();
+  if (state.view === "qimen") renderQimen();
   if (state.view === "classics") renderClassics();
   if (state.view === "notes") renderNotes();
   if (state.view === "caseIndex") renderCaseIndex();

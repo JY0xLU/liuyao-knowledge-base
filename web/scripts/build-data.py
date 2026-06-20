@@ -36,6 +36,7 @@ DOC_ORDER = [
     "14-github-versioning.md",
     "15-multi-system-roadmap.md",
     "16-ziwei-foundation.md",
+    "17-qimen-foundation.md",
     "sources.md",
     "website-plan.md",
 ]
@@ -92,6 +93,8 @@ def main() -> int:
         "terms": load_json("terms.json"),
         "ziwei_terms": load_json("ziwei_terms.json"),
         "ziwei_structures": load_json("ziwei_structures.json"),
+        "qimen_terms": load_json("qimen_terms.json"),
+        "qimen_structures": load_json("qimen_structures.json"),
         "sources": load_json("sources.json"),
         "systems": load_json("systems.json"),
         "rules": load_json("rules.json"),
@@ -113,6 +116,7 @@ def main() -> int:
         "Built web data: "
         f"{len(payload['docs'])} docs, {len(payload['terms'])} terms, "
         f"{len(payload['ziwei_terms'])} ziwei terms, "
+        f"{len(payload['qimen_terms'])} qimen terms, "
         f"{len(payload['systems'])} systems, "
         f"{len(payload['rules'])} rules, {len(payload['classic_notes'])} notes, "
         f"{len(payload['case_index'])} case slots, "

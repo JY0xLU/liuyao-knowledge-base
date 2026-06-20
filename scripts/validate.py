@@ -49,6 +49,13 @@ def iter_ziwei_structure_items(structures):
                 yield key, item
 
 
+def iter_qimen_structure_items(structures):
+    for key, value in structures.items():
+        if isinstance(value, list):
+            for item in value:
+                yield key, item
+
+
 def check_ziwei_terms(terms, source_ids: set[str]) -> list[str]:
     errors: list[str] = []
     errors += require_unique(terms, "id", "ziwei_terms")
@@ -69,6 +76,29 @@ def check_ziwei_terms(terms, source_ids: set[str]) -> list[str]:
     if missing:
         errors.append(f"ziwei_terms missing required terms: {', '.join(sorted(missing))}")
     errors += check_refs(terms, source_ids, "ziwei_term")
+    return errors
+
+
+def check_qimen_terms(terms, source_ids: set[str]) -> list[str]:
+    errors: list[str] = []
+    errors += require_unique(terms, "id", "qimen_terms")
+    seen_terms: set[str] = set()
+    for item in terms:
+        term = item.get("term")
+        if not term:
+            errors.append(f"qimen_term missing term: {item}")
+            continue
+        if term in seen_terms:
+            errors.append(f"qimen_term duplicate term: {term}")
+        seen_terms.add(term)
+        for key in ["category", "definition", "group", "boundary_notes"]:
+            if not item.get(key):
+                errors.append(f"qimen_term {term} missing {key}")
+    required = {"奇门遁甲", "九宫", "八门", "九星", "八神", "值符", "值使", "阴遁阳遁"}
+    missing = required - seen_terms
+    if missing:
+        errors.append(f"qimen_terms missing required terms: {', '.join(sorted(missing))}")
+    errors += check_refs(terms, source_ids, "qimen_term")
     return errors
 
 
@@ -106,6 +136,44 @@ def check_ziwei_structures(structures, source_ids: set[str]) -> list[str]:
         for ref in item.get("source_refs", []):
             if ref not in source_ids:
                 errors.append(f"ziwei_structure {item_id} references missing source {ref}")
+    return errors
+
+
+def check_qimen_structures(structures, source_ids: set[str]) -> list[str]:
+    errors: list[str] = []
+    if structures.get("system") != "qimen":
+        errors.append("qimen_structures system must be qimen")
+    if not structures.get("boundary"):
+        errors.append("qimen_structures missing boundary")
+
+    required_counts = {
+        "palaces": 9,
+        "gates": 8,
+        "stars": 9,
+        "deities": 8,
+        "chart_fields": 6,
+    }
+    for key, minimum in required_counts.items():
+        value = structures.get(key)
+        if not isinstance(value, list) or len(value) < minimum:
+            errors.append(f"qimen_structures {key} must have at least {minimum} items")
+
+    ids: set[str] = set()
+    for group, item in iter_qimen_structure_items(structures):
+        item_id = item.get("id")
+        if not item_id:
+            errors.append(f"qimen_structure {group} item missing id: {item}")
+            continue
+        if item_id in ids:
+            errors.append(f"qimen_structure duplicate id: {item_id}")
+        ids.add(item_id)
+        if not item.get("name"):
+            errors.append(f"qimen_structure {item_id} missing name")
+        if not (item.get("focus") or item.get("core_focus") or item.get("description")):
+            errors.append(f"qimen_structure {item_id} missing focus/core_focus/description")
+        for ref in item.get("source_refs", []):
+            if ref not in source_ids:
+                errors.append(f"qimen_structure {item_id} references missing source {ref}")
     return errors
 
 
@@ -268,6 +336,8 @@ def main() -> int:
     terms = load_json("terms.json")
     ziwei_terms = load_json("ziwei_terms.json")
     ziwei_structures = load_json("ziwei_structures.json")
+    qimen_terms = load_json("qimen_terms.json")
+    qimen_structures = load_json("qimen_structures.json")
     rules = load_json("rules.json")
     classics = load_json("classics_index.json")
     classic_notes = load_json("classic_notes.json")
@@ -288,6 +358,8 @@ def main() -> int:
     errors += check_refs(terms, source_ids, "term")
     errors += check_ziwei_terms(ziwei_terms, source_ids)
     errors += check_ziwei_structures(ziwei_structures, source_ids)
+    errors += check_qimen_terms(qimen_terms, source_ids)
+    errors += check_qimen_structures(qimen_structures, source_ids)
     errors += check_refs(rules, source_ids, "rule")
     errors += check_refs(classics, source_ids, "classic")
     errors += check_rule_ids(case_schema, rule_ids)
@@ -315,6 +387,7 @@ def main() -> int:
         "docs/14-github-versioning.md",
         "docs/15-multi-system-roadmap.md",
         "docs/16-ziwei-foundation.md",
+        "docs/17-qimen-foundation.md",
         "docs/sources.md",
         "docs/website-plan.md",
     ]
@@ -332,6 +405,7 @@ def main() -> int:
         "Validation ok: "
         f"{len(sources)} sources, {len(systems)} systems, {len(terms)} terms, "
         f"{len(ziwei_terms)} ziwei terms, "
+        f"{len(qimen_terms)} qimen terms, "
         f"{len(rules)} rules, {len(classics)} classics, "
         f"{len(classic_notes)} classic notes, {len(case_index)} case slots, "
         f"{len(accuracy_cases)} accuracy cases, "

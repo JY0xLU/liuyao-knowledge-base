@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.6.0 - 2026-06-21
+
+- Added the first Qi Men Dun Jia content layer with `data/qimen_terms.json` and `data/qimen_structures.json`.
+- Added a "奇门资料" workbench view and backend search kinds for `qimen_terms` and `qimen_structures`.
+- Added Qimen public sources and open-source project references while keeping interpretation rules out of the Liuyao rule layer.
+- Expanded validation, smoke tests, function tests, and predeploy checks for the new Qimen layer.
+
 ## v0.5.0 - 2026-06-21
 
 - Added the first Zi Wei Dou Shu content layer with `data/ziwei_terms.json` and `data/ziwei_structures.json`.

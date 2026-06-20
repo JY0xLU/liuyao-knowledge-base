@@ -1,0 +1,57 @@
+{
+  "schema_version": "qimen-structure-seed-2026-06-21",
+  "system": "qimen",
+  "boundary": "本文件只记录奇门遁甲第一版盘式结构字段，用于学习检索、案例复盘和后续起局算法设计；不提供自动起局，也不提供确定性吉凶判断。",
+  "palaces": [
+    {"id": "palace-kan-1", "name": "坎一宫", "number": 1, "direction": "北", "trigram": "坎", "element": "水", "focus": "九宫北方位置，作为盘面宫位和字段容器。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "palace-kun-2", "name": "坤二宫", "number": 2, "direction": "西南", "trigram": "坤", "element": "土", "focus": "九宫西南位置，作为盘面宫位和字段容器。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "palace-zhen-3", "name": "震三宫", "number": 3, "direction": "东", "trigram": "震", "element": "木", "focus": "九宫东方位置，作为盘面宫位和字段容器。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "palace-xun-4", "name": "巽四宫", "number": 4, "direction": "东南", "trigram": "巽", "element": "木", "focus": "九宫东南位置，作为盘面宫位和字段容器。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "palace-center-5", "name": "中五宫", "number": 5, "direction": "中", "trigram": "中", "element": "土", "focus": "九宫中央位置；部分盘式会把中宫信息寄到其他宫位，需要标明规则。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "palace-qian-6", "name": "乾六宫", "number": 6, "direction": "西北", "trigram": "乾", "element": "金", "focus": "九宫西北位置，作为盘面宫位和字段容器。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "palace-dui-7", "name": "兑七宫", "number": 7, "direction": "西", "trigram": "兑", "element": "金", "focus": "九宫西方位置，作为盘面宫位和字段容器。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "palace-gen-8", "name": "艮八宫", "number": 8, "direction": "东北", "trigram": "艮", "element": "土", "focus": "九宫东北位置，作为盘面宫位和字段容器。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "palace-li-9", "name": "离九宫", "number": 9, "direction": "南", "trigram": "离", "element": "火", "focus": "九宫南方位置，作为盘面宫位和字段容器。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]}
+  ],
+  "gates": [
+    {"id": "gate-xiu", "name": "休门", "group": "八门", "core_focus": "八门之一，结构层记录门名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "gate-sheng", "name": "生门", "group": "八门", "core_focus": "八门之一，结构层记录门名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "gate-shang", "name": "伤门", "group": "八门", "core_focus": "八门之一，结构层记录门名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "gate-du", "name": "杜门", "group": "八门", "core_focus": "八门之一，结构层记录门名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "gate-jing", "name": "景门", "group": "八门", "core_focus": "八门之一，结构层记录门名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "gate-si", "name": "死门", "group": "八门", "core_focus": "八门之一，结构层记录门名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "gate-jing2", "name": "惊门", "group": "八门", "core_focus": "八门之一，结构层记录门名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "gate-kai", "name": "开门", "group": "八门", "core_focus": "八门之一，结构层记录门名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]}
+  ],
+  "stars": [
+    {"id": "star-tianpeng", "name": "天蓬", "group": "九星", "core_focus": "九星之一，结构层记录星名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "star-tianren", "name": "天任", "group": "九星", "core_focus": "九星之一，结构层记录星名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "star-tianchong", "name": "天冲", "group": "九星", "core_focus": "九星之一，结构层记录星名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "star-tianfu", "name": "天辅", "group": "九星", "core_focus": "九星之一，结构层记录星名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "star-tianying", "name": "天英", "group": "九星", "core_focus": "九星之一，结构层记录星名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "star-tianrui", "name": "天芮", "group": "九星", "core_focus": "九星之一，结构层记录星名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "star-tianzhu", "name": "天柱", "group": "九星", "core_focus": "九星之一，结构层记录星名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "star-tianxin", "name": "天心", "group": "九星", "core_focus": "九星之一，结构层记录星名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "star-tianqin", "name": "天禽", "group": "九星", "core_focus": "九星之一，中宫相关规则需按盘式来源标注。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]}
+  ],
+  "deities": [
+    {"id": "deity-zhifu", "name": "值符", "group": "八神", "core_focus": "八神之一，也是盘局关键标记。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "deity-tengshe", "name": "腾蛇", "group": "八神", "core_focus": "八神之一，结构层记录神名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "deity-taiyin", "name": "太阴", "group": "八神", "core_focus": "八神之一，结构层记录神名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "deity-liuhe", "name": "六合", "group": "八神", "core_focus": "八神之一，结构层记录神名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "deity-baihu", "name": "白虎", "group": "八神", "core_focus": "八神之一；若来源使用勾陈等替称，需并列记录。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "deity-xuanwu", "name": "玄武", "group": "八神", "core_focus": "八神之一，结构层记录神名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "deity-jiudi", "name": "九地", "group": "八神", "core_focus": "八神之一，结构层记录神名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "deity-jiutian", "name": "九天", "group": "八神", "core_focus": "八神之一，结构层记录神名和落宫。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]}
+  ],
+  "chart_fields": [
+    {"id": "field-cast-time", "name": "起局时间", "description": "记录公历时间、时区、农历/干支推导来源和是否手工修正。", "source_refs": ["github-qfdk-qimen", "github-arc119226-qimen-dunjia"]},
+    {"id": "field-dun-type", "name": "阴阳遁", "description": "记录阳遁或阴遁，以及该字段的来源算法或人工录入。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "field-ju-number", "name": "局数", "description": "记录几局和计算依据；接入算法前需建立节气测试。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]},
+    {"id": "field-zhi-fu", "name": "值符", "description": "记录值符星/神及其落宫，字段命名需标注来源项目或流派。", "source_refs": ["github-qfdk-qimen", "github-arc119226-qimen-dunjia"]},
+    {"id": "field-zhi-shi", "name": "值使", "description": "记录值使门及其落宫，后续用于案例复盘。", "source_refs": ["github-qfdk-qimen", "github-arc119226-qimen-dunjia"]},
+    {"id": "field-palace-cells", "name": "九宫单元", "description": "每宫记录宫位、门、星、神、天盘干、地盘干、空亡/马星等可选字段。", "source_refs": ["github-qfdk-qimen", "github-arc119226-qimen-dunjia"]},
+    {"id": "field-school", "name": "盘式体系", "description": "记录转盘、飞盘、时家、日家等体系边界，避免规则混用。", "source_refs": ["wikipedia-qimen-dunjia-zh"]},
+    {"id": "field-yong-shen", "name": "用神取象", "description": "记录题型、用神、取象理由和相关宫位；不把取象结论写死。", "source_refs": ["wikipedia-qimen-dunjia-zh", "github-qfdk-qimen"]}
+  ]
+}

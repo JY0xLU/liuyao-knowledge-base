@@ -4,7 +4,7 @@
 
 ## 1. 产品定位
 
-网站第一版已经做成「术数知识库工作台」，不是营销页。当前以六爻作为完整样板线，紫微斗数已进入第一版术语和盘式结构资料层，同时为奇门遁甲、大六壬/小六壬保留独立体系入口。
+网站第一版已经做成「术数知识库工作台」，不是营销页。当前以六爻作为完整样板线，紫微斗数和奇门遁甲已进入第一版术语和盘式结构资料层，同时为大六壬/小六壬保留独立体系入口。
 
 核心用户：
 
@@ -33,6 +33,7 @@
 | 教材阅读 | 渲染 `docs/*.md`，支持标题目录和引用跳转 |
 | 术语检索 | 读取 `data/terms.json`，按 term、alias、category 搜索 |
 | 紫微资料 | 读取 `data/ziwei_terms.json` 和 `data/ziwei_structures.json`，展示紫微术语、十二宫、十四主星、四化和命盘字段 |
+| 奇门资料 | 读取 `data/qimen_terms.json` 和 `data/qimen_structures.json`，展示奇门术语、九宫、八门、九星、八神和值符值使字段 |
 | 来源库 | 读取 `data/sources.json`，按 A/B/C 类、类型、关键词筛选 |
 | 规则卡 | 读取 `data/rules.json`，按 layer、source_refs、confidence 筛选 |
 | 古籍路线 | 读取 `data/classics_index.json`，展示每部经典的阅读任务 |
@@ -69,9 +70,11 @@
 
 当前版本已经在零数据库基础上补了 Netlify Functions：
 
-- `GET /api/search?q=...`：读取构建期数据模块，返回文档、规则、术语、紫微术语、紫微结构、来源、古籍、读书笔记和案例槽位的统一检索结果。
+- `GET /api/search?q=...`：读取构建期数据模块，返回文档、规则、术语、紫微术语、紫微结构、奇门术语、奇门结构、来源、古籍、读书笔记和案例槽位的统一检索结果。
 - `GET /api/search?q=四化&kind=ziwei_terms`：检索紫微术语。
 - `GET /api/search?q=命宫&kind=ziwei_structures`：检索紫微盘式结构。
+- `GET /api/search?q=八门&kind=qimen_terms`：检索奇门术语。
+- `GET /api/search?q=坎一宫&kind=qimen_structures`：检索奇门盘式结构。
 - `GET /api/search?q=najia&kind=external_projects`：检索类似项目与源码参考。
 - `GET /api/case-schema`：返回案例录入 Schema，方便后续在线案例保存接口复用。
 - 前端搜索会优先尝试 `/api/search`；本地 `file://` 或普通静态服务不可用时，自动回退到内置数据包检索。
@@ -172,6 +175,7 @@
 - 古籍路线浏览
 - 来源库浏览
 - 紫微资料浏览：术语、十二宫、十四主星、四化、命盘字段
+- 奇门资料浏览：术语、九宫、八门、九星、八神、值符值使、盘式字段
 - 案例录入和 JSON 导出
 - 装卦辅助：本卦、变卦、卦码、纳甲干支、地支五行、卦宫、六亲、六神、世应、伏神、旬空和月日状态
 - 验证评分：比赛、人物或公开事件的预测、结果和评分 rubric
@@ -199,6 +203,7 @@
 
 1. 持续扩展 `data/systems.json`，但不同体系不要混写规则。
 2. 为紫微补 `data/ziwei_case_schema.json` 和排盘算法测试用例。
+3. 为奇门补 `data/qimen_case_schema.json`、源码抽样和节气/局数/值符值使测试。
 3. 用线上 URL 复跑桌面搜索、案例录入、体系总览、紫微资料和移动端布局 QA。
 4. 建立至少 20 条事前锁定的真实前瞻样本后，再公开命中率。
 5. 第二阶段再决定是否新建 React/Next 工程；当前静态工作台已经足够承载第一版学习、检索和体系路线图。
