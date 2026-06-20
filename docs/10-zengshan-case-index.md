@@ -107,11 +107,10 @@
 
 ## 5. 本轮外部检索记录
 
-2026-06-20 使用 Agent Reach：
+2026-06-20 的公开资料采集：
 
-- `agent-reach doctor --json` 显示 web/Jina、B站、V2EX、RSS、小宇宙可用；Exa、GitHub CLI、Reddit、小红书不可用或未配置。
 - `bili search "增删卜易 卦例 六爻" --type video -n 8` 返回《增删卜易》全套及多条编号卦例视频线索，包含 `BV1ky8kz7EqG`、`BV1zB4reGEWL`、`BV1qE421F72V`、`BV1bQseeYETc`、`BV14s4nehEek`、`BV1uw4m1k7wR` 等。
-- 终端标题编码不稳定，因此本轮只记录 bvid 和“存在案例视频线索”这一事实，不把视频标题内容升级为规则。
+- 本轮只记录 bvid 和“存在案例视频线索”这一事实，不把视频标题或讲解内容升级为规则。
 
 ## 6. 下一步
 

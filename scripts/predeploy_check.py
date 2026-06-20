@@ -109,6 +109,7 @@ def main() -> int:
     )
     check("app_has_file_protocol_fallback", "window.LIUYAO_KB_DATA" in app, failures)
     check("app_uses_api_search_with_fallback", "/api/search" in app and "localSearchResults" in app, failures)
+    check("app_has_systems_view", 'systems: ["体系总览"' in app and 'data-view="systems"' in html, failures)
     check("app_has_caster_view", 'caster: ["装卦辅助", "手工起卦排盘"]' in app, failures)
     check("engine_exports_builder", "buildLiuyaoChart" in engine and "validateLiuyaoInput" in engine, failures)
     check("css_has_mobile_breakpoint", "@media (max-width: 820px)" in css, failures)
@@ -120,6 +121,7 @@ def main() -> int:
     check("function_search_api_path", 'path: "/api/search"' in function_search, failures)
     check("function_case_schema_api_path", 'path: "/api/case-schema"' in function_schema, failures)
     check("function_search_core_has_case_index", "case_index" in function_search_core, failures)
+    check("function_search_core_has_systems", "data.systems" in function_search_core, failures)
     check("function_search_core_has_accuracy_cases", "accuracy_cases" in function_search_core, failures)
     check("function_search_core_has_external_projects", "external_projects" in function_search_core, failures)
     check("docs_count", len(data.get("docs", [])) >= 13, failures)
@@ -141,6 +143,17 @@ def main() -> int:
     check(
         "external_project_doc_in_site_data",
         any(doc.get("title") == "外部项目与源码参考" for doc in data.get("docs", [])),
+        failures,
+    )
+    check(
+        "multi_system_doc_in_site_data",
+        any(doc.get("title") == "多术数体系路线图" for doc in data.get("docs", [])),
+        failures,
+    )
+    check("systems_count", len(data.get("systems", [])) >= 4, failures)
+    check(
+        "systems_cover_requested_scope",
+        {"liuyao", "ziwei", "qimen", "liuren"}.issubset({item.get("id") for item in data.get("systems", [])}),
         failures,
     )
     check("rules_count", len(data.get("rules", [])) >= 20, failures)
@@ -198,7 +211,7 @@ def main() -> int:
         "npm run check" in readme and "npx netlify deploy --prod" in readme,
         failures,
     )
-    check("changelog_has_current_version", "## v0.3.1 - 2026-06-21" in changelog, failures)
+    check("changelog_has_current_version", "## v0.4.0 - 2026-06-21" in changelog, failures)
 
     if failures:
         print("\nPredeploy check failed:")

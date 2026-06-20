@@ -110,7 +110,7 @@
     ],
     "risks": [
       "stars 较少，准确度需要自行回归测试",
-      "GitHub API rate limit interrupted source inspection"
+      "源码只做轻量抽样，尚未完成逐文件复核"
     ],
     "adoption": "借鉴输出字段，不采信其旺衰评分为规则真值。"
   },
@@ -139,7 +139,7 @@
     ],
     "risks": [
       "偏周易筮法，不等同于纳甲六爻断法",
-      "GitHub API rate limit interrupted deeper source inspection"
+      "源码只做轻量抽样，尚未完成逐文件复核"
     ],
     "adoption": "用于蓍草法和六十四卦数据参考，不直接替代六爻纳甲规则。"
   },

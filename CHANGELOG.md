@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.4.0 - 2026-06-21
+
+- Added a lightweight multi-system roadmap for Liuyao, Zi Wei Dou Shu, Qi Men Dun Jia, and Da/Siao Liu Ren.
+- Added `data/systems.json` and a "体系总览" workbench view.
+- Kept the project on the existing static frontend plus thin Netlify Functions architecture to avoid framework bloat.
+- Updated README and source notes to present the project as a broader professional knowledge workbench while clearly marking Liuyao as the first deep implementation.
+
 ## v0.3.1 - 2026-06-21
 
 - Added three retrospective sports calibration cases with official result sources.

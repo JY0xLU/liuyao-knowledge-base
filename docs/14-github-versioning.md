@@ -7,7 +7,7 @@
 | 字段 | 建议 |
 |---|---|
 | 仓库名 | `liuyao-knowledge-base` |
-| 描述 | 本地优先的六爻学习、检索、排盘和验证评分工作台 |
+| 描述 | 本地优先的传统术数学习、检索、排盘和验证评分工作台 |
 | 可见性 | public |
 | License | 已补 `LICENSE`：代码 MIT；原创整理内容 CC BY-NC-SA 4.0；第三方来源保留原授权 |
 | 默认分支 | `main` |
@@ -19,7 +19,7 @@
 | v0.1 | 本地知识库、搜索、来源、规则卡、Netlify 静态站 |
 | v0.2 | 纳甲排盘：卦宫、纳甲、六亲、六神、世应、伏神 |
 | v0.3 | 旬空、月建、日辰基础状态、验证评分模型、GitHub Actions 检查 |
-| v0.4 | 公历自动换算、真实事件验证集、GitHub Actions 检查 |
+| v0.4 | 多体系入口、体系路线图、真实事件回测校准、GitHub Actions 检查 |
 | v1.0 | 稳定文档、案例库、排盘回归集和公开发布说明 |
 
 ## 3. 上传前检查
@@ -34,7 +34,7 @@ python .\scripts\check.py
 
 - `README.md` 不含本地绝对路径。
 - `web/assets/kb-data.json` 不含个人隐私。
-- `.pnpm-runtime/`、`.netlify/`、`node_modules/` 不会被提交。
+- 本地缓存、部署缓存和 `node_modules/` 不会被提交。
 - 来源说明不会把 C 类材料误写成 A 类规则。
 - Netlify 站点 ID 和 deploy ID 是否适合公开展示。
 
@@ -75,8 +75,7 @@ jobs:
 - GitHub 远程仓库已创建并推送：`https://github.com/JY0xLU/liuyao-knowledge-base`。
 - 仓库可见性为 public。
 - GitHub Actions `check` 工作流已通过一次远程运行。
-- 本轮使用项目内 portable GitHub CLI 完成创建和验证；该工具位于 `.tools/`，已被 `.gitignore` 排除，不作为公开项目依赖。
-- 本机普通 Git HTTPS 可能仍受 Windows TLS 凭据问题影响；需要推送时可继续使用已验证的 `gh auth token` + Git extraheader 路线，或后续修复全局 Git 凭据。
+- 项目已配置 GitHub Actions `check`，每次推送后应确认远程检查通过。
 
 下一步：
 

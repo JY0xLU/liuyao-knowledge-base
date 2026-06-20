@@ -2,18 +2,16 @@
 
 本页记录使用 Agent Reach、GitHub 公开 API、B站搜索和网页读取得到的类似项目线索。目的不是复制源码，而是提炼可验证的产品形态、数据字段、测试颗粒度和风险边界。
 
-## 1. 本轮检索状态
+## 1. 本轮检索范围
 
-2026-06-21 Agent Reach 状态：
+2026-06-21 本轮只纳入可复查的公开材料：
 
-- web / Jina Reader 可用。
-- B站 / bili-cli 可用。
-- V2EX、RSS、小宇宙可用。
-- GitHub CLI 未安装；GitHub raw 源码可用 Node fetch 抽样读取。
-- Twitter/X 后端存在但未认证。
-- Reddit、小红书、Exa 当前不可用或未配置。
+- 公开网页和古籍页面用于资料来源核验。
+- B站搜索只用于观察课程目录和案例线索，不直接升级为规则。
+- GitHub 公开 API、README、目录和 raw 源码抽样用于参考产品形态、数据字段和测试颗粒度。
+- 需要登录态或授权的平台暂不进入规则来源池。
 
-GitHub API 搜索命中后很快出现 rate limit，因此本轮只做轻量 metadata、README 和少量目录/文件抽样，不做大规模源码抓取。2026-06-21 已对 `bopo/najia` 的 README、`const.py`、`utils.py` 和测试文件做 raw 源码抽样，用于排盘回归。
+GitHub 搜索只做轻量 metadata、README 和少量目录/文件抽样，不做大规模源码抓取。2026-06-21 已对 `bopo/najia` 的 README、`const.py`、`utils.py` 和测试文件做 raw 源码抽样，用于排盘回归。
 
 ## 2. 可借鉴项目
 

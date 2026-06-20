@@ -29,7 +29,8 @@ const els = {
 };
 
 const viewTitles = {
-  learn: ["学习路径", "六爻学习工作台"],
+  learn: ["学习路径", "术数学习工作台"],
+  systems: ["体系总览", "奇门 · 六壬 · 紫微 · 六爻"],
   search: ["检索结果", "全库检索"],
   rules: ["规则卡", "可追踪断法规则"],
   terms: ["术语表", "六爻术语速查"],
@@ -179,6 +180,12 @@ function localSearchResults(query) {
     ...(state.data.rules || []).map((item) => ({ type: "规则", title: item.title, body: item.statement, item })),
     ...(state.data.terms || []).map((item) => ({ type: "术语", title: item.term, body: item.definition, item })),
     ...(state.data.sources || []).map((item) => ({ type: "来源", title: item.title, body: item.notes, item })),
+    ...(state.data.systems || []).map((item) => ({
+      type: "体系",
+      title: item.name,
+      body: `${item.scope} ${item.core_objects.join("；")} ${item.product_modules.join("；")}`,
+      item,
+    })),
     ...(state.data.classics || []).map((item) => ({ type: "古籍", title: item.title, body: item.knowledge_tasks.join("；"), item })),
     ...(state.data.classic_notes || []).map((item) => ({
       type: "笔记",
@@ -261,6 +268,7 @@ function renderStats() {
   const data = state.data;
   const stats = [
     ["文档", (data.docs || []).length],
+    ["体系", (data.systems || []).length],
     ["术语", (data.terms || []).length],
     ["规则", (data.rules || []).length],
     ["来源", (data.sources || []).length],
@@ -687,6 +695,38 @@ function renderProjects() {
     .join("")}</div>`;
 }
 
+function renderSystems() {
+  const query = state.query.trim();
+  const systems = (state.data.systems || []).filter((item) => matchText(item, query));
+  els.content.innerHTML = `<div class="result-grid">${systems
+    .map(
+      (item) => `
+        <article class="card">
+          <div class="meta-row">
+            <span class="tag">${escapeHtml(item.id)}</span>
+            <span class="tag">${escapeHtml(item.status)}</span>
+          </div>
+          <h3>${escapeHtml(item.name)}</h3>
+          <p>${escapeHtml(item.scope)}</p>
+          <p><strong>资料路线：</strong>${escapeHtml(item.source_strategy)}</p>
+          <p><strong>风险边界：</strong>${escapeHtml(item.risk_notes)}</p>
+          <div class="tag-row">${item.core_objects.map((term) => `<span class="tag">${escapeHtml(term)}</span>`).join("")}</div>
+          <div class="score-grid">
+            <div>
+              <strong>产品模块</strong>
+              <span>${escapeHtml(String(item.product_modules.length))}</span>
+            </div>
+            <div>
+              <strong>下一步</strong>
+              <span>${escapeHtml(String(item.next_steps.length))}</span>
+            </div>
+          </div>
+        </article>
+      `,
+    )
+    .join("")}</div>`;
+}
+
 function renderSources() {
   const query = state.query.trim();
   const sources = state.data.sources.filter((source) => matchText(source, query));
@@ -836,6 +876,7 @@ function render() {
     return;
   }
   if (state.view === "learn") renderLearn();
+  if (state.view === "systems") renderSystems();
   if (state.view === "search") renderSearch();
   if (state.view === "rules") renderRules();
   if (state.view === "terms") renderTerms();

@@ -4,11 +4,12 @@
 
 ## 1. 当前版本结论
 
-当前版本选择先做「六爻」方向，而不是同时铺开紫微斗数和六爻。原因是六爻知识可以较快拆成起卦、装卦、用神、旺衰、动变、专题和案例反馈几个结构层，适合做成本地知识库和静态检索工作台。
+当前版本以「六爻」作为第一条完整样板线，同时把奇门遁甲、大小六壬、紫微斗数拆成独立体系入口。这样可以先把资料分层、规则追踪、案例复盘、网站化和部署链路跑通，再逐个扩展其他体系，避免把不同规则混成一套无法校验的断法。
 
 已经完成的基础形态：
 
 - 本地知识库：Markdown 教材、来源索引、古籍阅读路线、规则卡、术语表、古籍读书笔记、案例槽位、案例 Schema。
+- 多体系骨架：已加入 `data/systems.json` 和 [多术数体系路线图](15-multi-system-roadmap.md)，把奇门遁甲、大小六壬、紫微斗数、六爻拆成独立资料层，避免规则混写。
 - 搜索工具：`scripts/search.py` 支持全文检索，`scripts/query.py` 支持按术语、规则、来源、古籍、读书笔记、案例槽位做结构化查询。
 - 静态网站：`web/index.html` 可读取内置数据包，展示学习路径、全库搜索、规则卡、术语表、古籍索引、读书笔记、案例索引、外部项目、来源库和案例录入。
 - 装卦辅助：`web/liuyao-engine.js` 已支持手工输入六爻，生成本卦、变卦、动爻、卦宫、纳甲干支、地支五行、六神、六亲、自动世应、伏神提示、旬空和月建/日辰基础状态。
@@ -20,27 +21,17 @@
 仍未完成的完整目标：
 
 - 还没有把经典逐章整理到逐条原文释义和真实卦例复盘级别。
+- 还没有把紫微斗数、奇门遁甲、大六壬/小六壬展开到六爻同等深度；当前只是体系索引和扩展路线。
 - 还没有建立大规模反馈卦例库；当前只有《增删卜易》案例抽取槽位。
 - 还没有从公历自动换算月建、日辰、旬空，也还没有完整飞神伏神生克、旺衰和应期模型。
 - 还没有在线保存案例的后端。
 - 线上站点当前是只读知识库和检索 API，尚未接入用户案例持久化。
 
-## 2. Agent Reach 状态
+## 2. 资料采集与工具状态
 
-2026-06-21 当前机器上 Agent Reach 体检结果要点：
+2026-06-21 的资料采集以公开网页、古籍页面、B站课程目录、GitHub 公开源码和公开赛果页面为主。需要登录态或专用后端的平台暂不作为规则来源，只作为后续采集候选。
 
-| 通道 | 状态 | 用途 |
-|---|---|---|
-| web / Jina Reader | 可用 | 读取公开网页和古籍页面 |
-| B站 / bili-cli | 可用 | 搜索课程线索、视频目录线索 |
-| RSS | 可用 | 后续订阅资料源 |
-| 小宇宙 | 可用 | 后续播客转录 |
-| Exa | 不可用 | 需要 mcporter + Exa MCP |
-| GitHub CLI | 可用但非全局 | 本项目已下载 portable `gh` 到 `.tools/` 并完成仓库创建、推送和 Actions 验证；普通 PATH 里仍不保证有 `gh` |
-| Reddit | 不可用 | 需要登录态后端 |
-| 小红书 | 不可用 | 需要 OpenCLI 或专用后端 |
-
-本轮已补 GitHub portable 工具；X、Reddit、小红书等需要登录态的通道仍按现有可用性处理。
+当前规则只从可复查来源进入 A/B/C 分层；视频、论坛、社媒和个人经验材料最多作为 C 类线索，不能直接升级为规则。
 
 ## 3. 已纳入来源边界
 
@@ -77,12 +68,12 @@
 
 | 验证项 | 结果 |
 |---|---|
-| 数据校验 | `scripts/validate.py` 通过：19 sources、16 terms、31 rules、4 classics、36 classic notes、24 case slots、4 accuracy cases、6 external projects |
-| 数据构建 | `web/scripts/build-data.py` 通过：17 docs、16 terms、31 rules、36 notes、24 case slots、4 accuracy cases、6 external projects |
-| 静态冒烟 | `web/scripts/smoke-test.py` 通过，覆盖读书笔记、案例索引、验证评分和外部项目 |
-| 函数测试 | `scripts/test-functions.mjs` 通过，覆盖 `/api/search` 核心搜索语义、验证评分搜索、外部项目搜索和案例 Schema 数据 |
+| 数据校验 | `scripts/validate.py` 通过：19 sources、4 systems、16 terms、31 rules、4 classics、36 classic notes、24 case slots、4 accuracy cases、6 external projects |
+| 数据构建 | `web/scripts/build-data.py` 通过：18 docs、4 systems、16 terms、31 rules、36 notes、24 case slots、4 accuracy cases、6 external projects |
+| 静态冒烟 | `web/scripts/smoke-test.py` 通过，覆盖多体系入口、读书笔记、案例索引、验证评分和外部项目 |
+| 函数测试 | `scripts/test-functions.mjs` 通过，覆盖 `/api/search` 核心搜索语义、体系搜索、验证评分搜索、外部项目搜索和案例 Schema 数据 |
 | 装卦测试 | `scripts/test-liuyao-engine.mjs` 通过，覆盖本卦、变卦、动爻、卦码、纳甲、卦宫、六神、六亲、自动世应、游魂、归魂、伏神、旬空和月建/日辰基础状态 |
-| 部署前检查 | `scripts/predeploy_check.py` 通过，覆盖公开资产路径、规则引用、读书笔记和案例槽位 |
+| 部署前检查 | `scripts/predeploy_check.py` 通过，覆盖公开资产路径、体系入口、规则引用、读书笔记和案例槽位 |
 | 搜索脚本 | `scripts/search.py 旬空` 可返回文档、术语、规则、来源 |
 | 结构化查询 | `scripts/query.py rules 旬空`、`scripts/query.py notes 旬空`、`scripts/query.py cases 失物` 均可返回结构化结果 |
 | 浏览器桌面 QA | `http://127.0.0.1:8765/web/` 可加载，搜索「旬空」返回 15 张结果卡 |
@@ -110,16 +101,16 @@ Netlify 上线结果：
 
 | 验证项 | 结果 |
 |---|---|
-| 首页 | `https://liuyao-knowledge-base.netlify.app/` 返回 200，HTML 含 `六爻知识库` 和 `kb-data.js` |
+| 首页 | `https://liuyao-knowledge-base.netlify.app/` 返回 200，HTML 含 `kb-data.js` |
+| 体系搜索 API | `/api/search?q=紫微斗数&kind=systems` 返回 200，结果包含 `ziwei` |
 | 外部项目 API | `/api/search?q=najia&kind=external_projects` 返回 200，首条为 `github-bopo-najia` |
 | 案例索引 API | `/api/search?q=失物&kind=case_index` 返回 200，首条为 `zengshan-case-slot-010-lost-object-home` |
 | 案例 Schema API | `/api/case-schema` 返回 200，Schema title 为 `LiuyaoCase` |
 
 部署工具链记录：
 
-- `netlify-cli@26.1.0` 通过 `pnpm dlx` 下载时因 `esbuild@0.28.0` tarball 超时失败。
-- Netlify MCP uploader 已能上传干净部署副本；第一次上传误含 `.pnpm-runtime` 缓存导致长时间卡住，已把 `.pnpm-runtime/` 加入 `.gitignore` 并改用临时干净目录上传。
-- Netlify 当前在部署时运行 `npm run build:netlify` 重建 `web/assets/kb-data.json`、`web/assets/kb-data.js` 和 `netlify/functions/_shared/kb-data.mjs`，避免源数据变更后发布旧资产。
+- Netlify 部署时运行 `npm run build:netlify` 重建 `web/assets/kb-data.json`、`web/assets/kb-data.js` 和 `netlify/functions/_shared/kb-data.mjs`，避免源数据变更后发布旧资产。
+- 发布前使用干净部署副本，只包含源码、文档、数据、前端和函数目录，不携带本地缓存或临时工具目录。
 
 ## 6. 外部项目参考状态
 

@@ -34,6 +34,7 @@ DOC_ORDER = [
     "12-najia-engine-notes.md",
     "13-accuracy-evaluation.md",
     "14-github-versioning.md",
+    "15-multi-system-roadmap.md",
     "sources.md",
     "website-plan.md",
 ]
@@ -89,6 +90,7 @@ def main() -> int:
         "docs": load_docs(),
         "terms": load_json("terms.json"),
         "sources": load_json("sources.json"),
+        "systems": load_json("systems.json"),
         "rules": load_json("rules.json"),
         "classics": load_json("classics_index.json"),
         "classic_notes": load_json("classic_notes.json"),
@@ -107,6 +109,7 @@ def main() -> int:
     print(
         "Built web data: "
         f"{len(payload['docs'])} docs, {len(payload['terms'])} terms, "
+        f"{len(payload['systems'])} systems, "
         f"{len(payload['rules'])} rules, {len(payload['classic_notes'])} notes, "
         f"{len(payload['case_index'])} case slots, "
         f"{len(payload['accuracy_cases'])} accuracy cases, "

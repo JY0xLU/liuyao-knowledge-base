@@ -1,8 +1,8 @@
 {
   "name": "liuyao-knowledge-base",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "private": true,
-  "description": "Local-first Liuyao knowledge base and static workbench.",
+  "description": "Local-first traditional divination knowledge base and static workbench.",
   "scripts": {
     "build": "python web/scripts/build-data.py",
     "build:netlify": "python3 web/scripts/build-data.py",

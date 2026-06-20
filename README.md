@@ -1,6 +1,6 @@
-# 六爻知识库
+# 术数知识库工作台
 
-这是一个本地优先的六爻学习与检索知识库。当前版本先做「六爻」方向，把公开资料、传统典籍线索、现代教程框架和断卦模板整理成可搜索、可复盘的资料库。
+这是一个本地优先的传统术数学习、检索、排盘和验证评分工作台。当前版本以「六爻」作为第一条完整样板线，已经打通资料分层、规则卡、装卦辅助、案例槽位、准确度校准、GitHub CI 和 Netlify 上线；奇门遁甲、大小六壬、紫微斗数已预留独立体系入口，后续按同一套轻量架构扩展。
 
 > 定位：传统术数与文化研究资料库。这里的内容不能作为医疗、法律、金融、考试、婚恋等现实决策的唯一依据。
 
@@ -21,6 +21,7 @@ python .\scripts\query.py cases 失物
 常用入口：
 
 - [静态网站工作台](web/index.html)
+- [多术数体系路线图](docs/15-multi-system-roadmap.md)
 - [学习地图](docs/00-learning-map.md)
 - [基础理论](docs/01-foundations.md)
 - [起卦与装卦](docs/02-casting-and-installing.md)
@@ -40,6 +41,7 @@ python .\scripts\query.py cases 失物
 - [来源索引](docs/sources.md)
 - [术语表 JSON](data/terms.json)
 - [来源 JSON](data/sources.json)
+- [体系 JSON](data/systems.json)
 - [规则卡 JSON](data/rules.json)
 - [古籍索引 JSON](data/classics_index.json)
 - [古籍笔记 JSON](data/classic_notes.json)
@@ -52,6 +54,7 @@ python .\scripts\query.py cases 失物
 已覆盖：
 
 - 六爻体系的学习边界和知识地图
+- 奇门遁甲、大小六壬、紫微斗数、六爻的体系索引与扩展路线
 - 起卦、动爻、变卦、本卦、互参逻辑
 - 纳甲、六亲、六神、世应、伏神等装卦层
 - 用神、原神、忌神、仇神、进退神、旬空、月破、日破等判断层
@@ -70,6 +73,9 @@ python .\scripts\query.py cases 失物
 
 - 典籍逐章读书笔记
 - 大量卦例拆解
+- 紫微斗数星曜/宫位/四化资料层
+- 奇门遁甲盘式和门星神资料层
+- 大六壬/小六壬分层课式资料层
 - 公历自动换算月建/日辰、飞神伏神生克、旺衰和应期的完整自动判断
 - 后端在线案例库
 - GitHub release 与长期版本迭代；远程仓库已创建、推送并配置 CI，release 尚未创建

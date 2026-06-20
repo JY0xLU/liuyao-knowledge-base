@@ -128,6 +128,30 @@ def check_external_projects(projects) -> list[str]:
     return errors
 
 
+def check_systems(systems) -> list[str]:
+    errors: list[str] = []
+    seen: set[str] = set()
+    for item in systems:
+        system_id = item.get("id")
+        if not system_id:
+            errors.append(f"system missing id: {item}")
+            continue
+        if system_id in seen:
+            errors.append(f"system duplicate id: {system_id}")
+        seen.add(system_id)
+        for key in ["name", "status", "scope", "source_strategy", "risk_notes"]:
+            if not item.get(key):
+                errors.append(f"system {system_id} missing {key}")
+        for list_key in ["core_objects", "product_modules", "next_steps"]:
+            if not item.get(list_key):
+                errors.append(f"system {system_id} missing {list_key}")
+    required = {"liuyao", "ziwei", "qimen", "liuren"}
+    missing = required - seen
+    if missing:
+        errors.append(f"systems missing required ids: {', '.join(sorted(missing))}")
+    return errors
+
+
 def check_accuracy_cases(cases, source_ids: set[str], rule_ids: set[str]) -> list[str]:
     errors: list[str] = []
     seen: set[str] = set()
@@ -173,6 +197,7 @@ def main() -> int:
         sys.stdout.reconfigure(encoding="utf-8")
 
     sources = load_json("sources.json")
+    systems = load_json("systems.json")
     terms = load_json("terms.json")
     rules = load_json("rules.json")
     classics = load_json("classics_index.json")
@@ -184,6 +209,7 @@ def main() -> int:
 
     errors: list[str] = []
     errors += require_unique(sources, "id", "sources")
+    errors += require_unique(systems, "id", "systems")
     errors += require_unique(rules, "id", "rules")
     errors += require_unique(classics, "id", "classics")
 
@@ -198,6 +224,7 @@ def main() -> int:
     errors += check_case_index_refs(case_index, source_ids, rule_ids)
     errors += check_accuracy_cases(accuracy_cases, source_ids, rule_ids)
     errors += check_external_projects(external_projects)
+    errors += check_systems(systems)
 
     required_docs = [
         "docs/00-learning-map.md",
@@ -215,6 +242,7 @@ def main() -> int:
         "docs/12-najia-engine-notes.md",
         "docs/13-accuracy-evaluation.md",
         "docs/14-github-versioning.md",
+        "docs/15-multi-system-roadmap.md",
         "docs/sources.md",
         "docs/website-plan.md",
     ]
@@ -230,7 +258,7 @@ def main() -> int:
 
     print(
         "Validation ok: "
-        f"{len(sources)} sources, {len(terms)} terms, "
+        f"{len(sources)} sources, {len(systems)} systems, {len(terms)} terms, "
         f"{len(rules)} rules, {len(classics)} classics, "
         f"{len(classic_notes)} classic notes, {len(case_index)} case slots, "
         f"{len(accuracy_cases)} accuracy cases, "

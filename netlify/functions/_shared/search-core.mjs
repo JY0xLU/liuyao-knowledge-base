@@ -64,6 +64,14 @@ export function searchPools(data) {
       summary: item.notes,
       item,
     })),
+    ...(data.systems || []).map((item) => ({
+      kind: "systems",
+      kind_label: "体系",
+      id: item.id,
+      title: item.name,
+      summary: `${item.scope} ${item.core_objects.join("；")} ${item.product_modules.join("；")}`,
+      item,
+    })),
     ...(data.classics || []).map((item) => ({
       kind: "classics",
       kind_label: "古籍",
