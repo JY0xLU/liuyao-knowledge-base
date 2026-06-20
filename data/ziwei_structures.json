@@ -1,0 +1,307 @@
+{
+  "schema_version": "ziwei-structure-seed-2026-06-21",
+  "system": "ziwei",
+  "boundary": "本文件只记录紫微斗数第一版盘式结构字段，用于学习检索、案例复盘和后续排盘算法设计；不提供确定性命运判断。",
+  "palaces": [
+    {
+      "id": "palace-ming",
+      "name": "命宫",
+      "aliases": ["命宮"],
+      "group": "十二宫",
+      "focus": "命盘主体字段，后续案例需要记录宫位、星曜、四化和时段关系。",
+      "case_fields": ["palace_name", "stars", "transformations", "period_context"],
+      "source_refs": ["wikisource-ziwei-doushu-quanshu", "wikipedia-ziwei-doushu-zh"]
+    },
+    {
+      "id": "palace-xiongdi",
+      "name": "兄弟宫",
+      "aliases": ["兄弟宮"],
+      "group": "十二宫",
+      "focus": "关系类宫位字段之一，第一版只进入结构表。",
+      "case_fields": ["palace_name", "stars", "transformations", "period_context"],
+      "source_refs": ["wikisource-ziwei-doushu-quanshu", "wikipedia-ziwei-doushu-zh"]
+    },
+    {
+      "id": "palace-fuqi",
+      "name": "夫妻宫",
+      "aliases": ["夫妻宮"],
+      "group": "十二宫",
+      "focus": "关系类宫位字段之一，第一版只进入结构表。",
+      "case_fields": ["palace_name", "stars", "transformations", "period_context"],
+      "source_refs": ["wikisource-ziwei-doushu-quanshu", "wikipedia-ziwei-doushu-zh"]
+    },
+    {
+      "id": "palace-zinv",
+      "name": "子女宫",
+      "aliases": ["子女宮"],
+      "group": "十二宫",
+      "focus": "家庭关系类宫位字段之一，第一版只进入结构表。",
+      "case_fields": ["palace_name", "stars", "transformations", "period_context"],
+      "source_refs": ["wikisource-ziwei-doushu-quanshu", "wikipedia-ziwei-doushu-zh"]
+    },
+    {
+      "id": "palace-caibo",
+      "name": "财帛宫",
+      "aliases": ["財帛宮"],
+      "group": "十二宫",
+      "focus": "资源与财务类宫位字段之一，第一版只进入结构表。",
+      "case_fields": ["palace_name", "stars", "transformations", "period_context"],
+      "source_refs": ["wikisource-ziwei-doushu-quanshu", "wikipedia-ziwei-doushu-zh"]
+    },
+    {
+      "id": "palace-jie",
+      "name": "疾厄宫",
+      "aliases": ["疾厄宮"],
+      "group": "十二宫",
+      "focus": "健康相关宫位字段之一；本库不提供医疗判断，只保留文化研究字段。",
+      "case_fields": ["palace_name", "stars", "transformations", "period_context", "medical_disclaimer"],
+      "source_refs": ["wikisource-ziwei-doushu-quanshu", "wikipedia-ziwei-doushu-zh"]
+    },
+    {
+      "id": "palace-qianyi",
+      "name": "迁移宫",
+      "aliases": ["遷移宮"],
+      "group": "十二宫",
+      "focus": "外部环境、迁动相关宫位字段之一，第一版只进入结构表。",
+      "case_fields": ["palace_name", "stars", "transformations", "period_context"],
+      "source_refs": ["wikisource-ziwei-doushu-quanshu", "wikipedia-ziwei-doushu-zh"]
+    },
+    {
+      "id": "palace-jiaoyou",
+      "name": "交友宫",
+      "aliases": ["仆役宫", "奴仆宫", "交友宮", "僕役宮"],
+      "group": "十二宫",
+      "focus": "人际协作类宫位字段之一；不同命名并列保留。",
+      "case_fields": ["palace_name", "aliases_used", "stars", "transformations", "period_context"],
+      "source_refs": ["wikisource-ziwei-doushu-quanshu", "wikipedia-ziwei-doushu-zh"]
+    },
+    {
+      "id": "palace-guanlu",
+      "name": "官禄宫",
+      "aliases": ["官祿宮", "事业宫"],
+      "group": "十二宫",
+      "focus": "事业与职务类宫位字段之一，第一版只进入结构表。",
+      "case_fields": ["palace_name", "stars", "transformations", "period_context"],
+      "source_refs": ["wikisource-ziwei-doushu-quanshu", "wikipedia-ziwei-doushu-zh"]
+    },
+    {
+      "id": "palace-tianzhai",
+      "name": "田宅宫",
+      "aliases": ["田宅宮"],
+      "group": "十二宫",
+      "focus": "资产、居处类宫位字段之一，第一版只进入结构表。",
+      "case_fields": ["palace_name", "stars", "transformations", "period_context"],
+      "source_refs": ["wikisource-ziwei-doushu-quanshu", "wikipedia-ziwei-doushu-zh"]
+    },
+    {
+      "id": "palace-fude",
+      "name": "福德宫",
+      "aliases": ["福德宮"],
+      "group": "十二宫",
+      "focus": "福德类宫位字段之一，第一版只进入结构表。",
+      "case_fields": ["palace_name", "stars", "transformations", "period_context"],
+      "source_refs": ["wikisource-ziwei-doushu-quanshu", "wikipedia-ziwei-doushu-zh"]
+    },
+    {
+      "id": "palace-fumu",
+      "name": "父母宫",
+      "aliases": ["父母宮"],
+      "group": "十二宫",
+      "focus": "家庭关系类宫位字段之一，第一版只进入结构表。",
+      "case_fields": ["palace_name", "stars", "transformations", "period_context"],
+      "source_refs": ["wikisource-ziwei-doushu-quanshu", "wikipedia-ziwei-doushu-zh"]
+    }
+  ],
+  "major_stars": [
+    {
+      "id": "star-ziwei",
+      "name": "紫微",
+      "group": "十四主星",
+      "core_focus": "主星字段；解释需另挂来源和流派。",
+      "source_refs": ["wikisource-ziwei-doushu-quanshu"]
+    },
+    {
+      "id": "star-tianji",
+      "name": "天机",
+      "group": "十四主星",
+      "core_focus": "主星字段；解释需另挂来源和流派。",
+      "source_refs": ["wikisource-ziwei-doushu-quanshu"]
+    },
+    {
+      "id": "star-taiyang",
+      "name": "太阳",
+      "group": "十四主星",
+      "core_focus": "主星字段；解释需另挂来源和流派。",
+      "source_refs": ["wikisource-ziwei-doushu-quanshu"]
+    },
+    {
+      "id": "star-wuqu",
+      "name": "武曲",
+      "group": "十四主星",
+      "core_focus": "主星字段；解释需另挂来源和流派。",
+      "source_refs": ["wikisource-ziwei-doushu-quanshu"]
+    },
+    {
+      "id": "star-tiantong",
+      "name": "天同",
+      "group": "十四主星",
+      "core_focus": "主星字段；解释需另挂来源和流派。",
+      "source_refs": ["wikisource-ziwei-doushu-quanshu"]
+    },
+    {
+      "id": "star-lianzhen",
+      "name": "廉贞",
+      "group": "十四主星",
+      "core_focus": "主星字段；解释需另挂来源和流派。",
+      "source_refs": ["wikisource-ziwei-doushu-quanshu"]
+    },
+    {
+      "id": "star-tianfu",
+      "name": "天府",
+      "group": "十四主星",
+      "core_focus": "主星字段；解释需另挂来源和流派。",
+      "source_refs": ["wikisource-ziwei-doushu-quanshu"]
+    },
+    {
+      "id": "star-taiyin",
+      "name": "太阴",
+      "group": "十四主星",
+      "core_focus": "主星字段；解释需另挂来源和流派。",
+      "source_refs": ["wikisource-ziwei-doushu-quanshu"]
+    },
+    {
+      "id": "star-tanlang",
+      "name": "贪狼",
+      "group": "十四主星",
+      "core_focus": "主星字段；解释需另挂来源和流派。",
+      "source_refs": ["wikisource-ziwei-doushu-quanshu"]
+    },
+    {
+      "id": "star-jumen",
+      "name": "巨门",
+      "group": "十四主星",
+      "core_focus": "主星字段；解释需另挂来源和流派。",
+      "source_refs": ["wikisource-ziwei-doushu-quanshu"]
+    },
+    {
+      "id": "star-tianxiang",
+      "name": "天相",
+      "group": "十四主星",
+      "core_focus": "主星字段；解释需另挂来源和流派。",
+      "source_refs": ["wikisource-ziwei-doushu-quanshu"]
+    },
+    {
+      "id": "star-tianliang",
+      "name": "天梁",
+      "group": "十四主星",
+      "core_focus": "主星字段；解释需另挂来源和流派。",
+      "source_refs": ["wikisource-ziwei-doushu-quanshu"]
+    },
+    {
+      "id": "star-qisha",
+      "name": "七杀",
+      "group": "十四主星",
+      "core_focus": "主星字段；解释需另挂来源和流派。",
+      "source_refs": ["wikisource-ziwei-doushu-quanshu"]
+    },
+    {
+      "id": "star-pojun",
+      "name": "破军",
+      "group": "十四主星",
+      "core_focus": "主星字段；解释需另挂来源和流派。",
+      "source_refs": ["wikisource-ziwei-doushu-quanshu"]
+    }
+  ],
+  "transformations": [
+    {
+      "id": "transform-hualu",
+      "name": "化禄",
+      "group": "四化",
+      "description": "四化字段之一，记录触发来源、目标星曜、目标宫位和时段上下文。",
+      "case_fields": ["source_type", "trigger_stem", "target_star", "target_palace", "period_context"],
+      "source_refs": ["wikipedia-ziwei-doushu-zh", "github-renhuai-ziwei-doushu"]
+    },
+    {
+      "id": "transform-huaquan",
+      "name": "化权",
+      "group": "四化",
+      "description": "四化字段之一，记录触发来源、目标星曜、目标宫位和时段上下文。",
+      "case_fields": ["source_type", "trigger_stem", "target_star", "target_palace", "period_context"],
+      "source_refs": ["wikipedia-ziwei-doushu-zh", "github-renhuai-ziwei-doushu"]
+    },
+    {
+      "id": "transform-huake",
+      "name": "化科",
+      "group": "四化",
+      "description": "四化字段之一，记录触发来源、目标星曜、目标宫位和时段上下文。",
+      "case_fields": ["source_type", "trigger_stem", "target_star", "target_palace", "period_context"],
+      "source_refs": ["wikipedia-ziwei-doushu-zh", "github-renhuai-ziwei-doushu"]
+    },
+    {
+      "id": "transform-huaji",
+      "name": "化忌",
+      "group": "四化",
+      "description": "四化字段之一，记录触发来源、目标星曜、目标宫位和时段上下文。",
+      "case_fields": ["source_type", "trigger_stem", "target_star", "target_palace", "period_context"],
+      "source_refs": ["wikipedia-ziwei-doushu-zh", "github-renhuai-ziwei-doushu"]
+    }
+  ],
+  "chart_fields": [
+    {
+      "id": "field-birth-data",
+      "name": "出生资料",
+      "group": "输入字段",
+      "description": "公历/农历、出生年月日时、性别、时区等排盘输入字段；本库尚未实现自动换算。",
+      "source_refs": ["github-renhuai-ziwei-doushu", "github-brhiza-mingyu"]
+    },
+    {
+      "id": "field-natal-chart",
+      "name": "本命盘",
+      "group": "盘式字段",
+      "description": "基础命盘层，用于承载十二宫、星曜、四化等结构。",
+      "source_refs": ["wikipedia-ziwei-doushu-zh", "github-renhuai-ziwei-doushu"]
+    },
+    {
+      "id": "field-major-limit",
+      "name": "大限盘",
+      "group": "时段字段",
+      "description": "较长周期盘式字段，后续案例必须标注起止范围。",
+      "source_refs": ["wikipedia-ziwei-doushu-zh", "github-renhuai-ziwei-doushu"]
+    },
+    {
+      "id": "field-annual-chart",
+      "name": "流年盘",
+      "group": "时段字段",
+      "description": "年度盘式字段，后续用于事件复盘和前瞻样本。",
+      "source_refs": ["wikipedia-ziwei-doushu-zh", "github-renhuai-ziwei-doushu"]
+    },
+    {
+      "id": "field-monthly-chart",
+      "name": "流月盘",
+      "group": "时段字段",
+      "description": "月份盘式字段，后续根据案例量决定是否进入第一版录入 Schema。",
+      "source_refs": ["github-renhuai-ziwei-doushu"]
+    },
+    {
+      "id": "field-palaces",
+      "name": "十二宫字段",
+      "group": "结构字段",
+      "description": "十二宫数组，每宫记录宫名、星曜、四化、庙旺利陷和时段上下文。",
+      "source_refs": ["wikisource-ziwei-doushu-quanshu", "github-renhuai-ziwei-doushu"]
+    },
+    {
+      "id": "field-major-stars",
+      "name": "十四主星字段",
+      "group": "结构字段",
+      "description": "十四主星清单和落宫字段，解释层后置。",
+      "source_refs": ["wikisource-ziwei-doushu-quanshu", "github-renhuai-ziwei-doushu"]
+    },
+    {
+      "id": "field-transformations",
+      "name": "四化字段",
+      "group": "结构字段",
+      "description": "化禄、化权、化科、化忌及其触发来源、目标星曜、目标宫位和时段。",
+      "source_refs": ["wikipedia-ziwei-doushu-zh", "github-renhuai-ziwei-doushu"]
+    }
+  ]
+}

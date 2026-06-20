@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -20,6 +21,8 @@ DEFAULT_EXCLUDED_PARTS = {
     "__pycache__",
     "node_modules",
 }
+DEFAULT_EXCLUDED_PREFIXES = (".deploy-netlify-clean-",)
+DEFAULT_EXCLUDED_FILES = {".last-deploy-dir.txt"}
 DEFAULT_EXCLUDED_PATHS = {
     ("web", "assets"),
     ("netlify", "functions", "_shared"),
@@ -31,12 +34,24 @@ def normalize(text: str) -> str:
 
 
 def iter_files(root: Path):
-    for path in root.rglob("*"):
-        if path.is_file() and path.suffix.lower() in TEXT_SUFFIXES:
-            relative_parts = path.relative_to(root).parts
-            if any(part in DEFAULT_EXCLUDED_PARTS for part in relative_parts):
-                continue
-            if any(relative_parts[: len(excluded)] == excluded for excluded in DEFAULT_EXCLUDED_PATHS):
+    for current, dirs, files in os.walk(root):
+        current_path = Path(current)
+        relative_parts = current_path.relative_to(root).parts
+        dirs[:] = [
+            item
+            for item in dirs
+            if item not in DEFAULT_EXCLUDED_PARTS and not item.startswith(DEFAULT_EXCLUDED_PREFIXES)
+        ]
+        if any(part in DEFAULT_EXCLUDED_PARTS for part in relative_parts):
+            continue
+        if any(part.startswith(DEFAULT_EXCLUDED_PREFIXES) for part in relative_parts):
+            continue
+        if any(relative_parts[: len(excluded)] == excluded for excluded in DEFAULT_EXCLUDED_PATHS):
+            dirs[:] = []
+            continue
+        for name in files:
+            path = current_path / name
+            if name in DEFAULT_EXCLUDED_FILES or path.suffix.lower() not in TEXT_SUFFIXES:
                 continue
             yield path
 

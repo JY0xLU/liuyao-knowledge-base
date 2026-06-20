@@ -170,5 +170,34 @@
       "未发现明确 license，不能直接复制代码"
     ],
     "adoption": "只作为后续起卦交互和 CLI 形态参考。"
+  },
+  {
+    "id": "github-renhuai-ziwei-doushu",
+    "name": "ziwei-doushu",
+    "owner": "Renhuai123",
+    "url": "https://github.com/Renhuai123/ziwei-doushu",
+    "platform": "GitHub",
+    "language": "TypeScript",
+    "stars": 2582,
+    "forks": null,
+    "license": "MIT",
+    "updated_at": "2026-06-20T15:53:32Z",
+    "project_type": "typescript-library",
+    "scope": "紫微斗数开源排盘引擎，描述包含排盘算法、四化系统、格局知识库和古籍原文数据。",
+    "evidence": [
+      "GitHub repository metadata collected during public repo search",
+      "repo view shows MIT license, TypeScript primary language and recent 2026-06-20 update",
+      "description explicitly names charting algorithm and four-transformations system"
+    ],
+    "useful_patterns": [
+      "把紫微斗数拆为排盘算法、四化、格局和古籍数据层",
+      "适合作为后续命盘字段和测试颗粒度参考",
+      "MIT license makes算法参考和接口对照更容易复核"
+    ],
+    "risks": [
+      "本轮只做 metadata 级核验，尚未逐文件审计",
+      "其具体流派体系不能直接变成本库唯一规则"
+    ],
+    "adoption": "先作为紫微资料层的字段和工程参考；接入算法前必须做测试用例和流派边界复核。"
   }
 ]

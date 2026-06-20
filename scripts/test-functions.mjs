@@ -14,6 +14,10 @@ const lost = searchKnowledgeBase(data, { query: "失物", kind: "case_index", li
 const voidNotes = searchKnowledgeBase(data, { query: "旬空", kind: "classic_notes", limit: 10 });
 const projects = searchKnowledgeBase(data, { query: "najia", kind: "external_projects", limit: 10 });
 const systems = searchKnowledgeBase(data, { query: "紫微斗数", kind: "systems", limit: 10 });
+const ziweiTerms = searchKnowledgeBase(data, { query: "紫微", kind: "ziwei_terms", limit: 10 });
+const ziweiMajorStars = searchKnowledgeBase(data, { query: "十四主星", kind: "ziwei_terms", limit: 20 });
+const ziweiRelations = searchKnowledgeBase(data, { query: "三方四正", kind: "ziwei_terms", limit: 10 });
+const ziweiStructures = searchKnowledgeBase(data, { query: "命宫", kind: "ziwei_structures", limit: 10 });
 const accuracy = searchKnowledgeBase(data, { query: "评分", kind: "accuracy_cases", limit: 10 });
 const retroAccuracy = searchKnowledgeBase(data, { query: "retrospective-calibration", kind: "accuracy_cases", limit: 10 });
 const all = searchKnowledgeBase(data, { query: "回头克", limit: 20 });
@@ -23,12 +27,21 @@ check("function_data_has_rules", data.rules.length >= 25);
 check("function_data_has_notes", data.classic_notes.length >= 36);
 check("function_data_has_case_slots", data.case_index.length >= 24);
 check("function_data_has_systems", data.systems.length >= 4);
+check("function_data_has_ziwei_terms", data.ziwei_terms.length >= 30);
+check("function_data_has_ziwei_structures", data.ziwei_structures.palaces.length === 12 && data.ziwei_structures.major_stars.length === 14);
 check("function_data_has_accuracy_cases", data.accuracy_cases.length >= 4);
 check("function_data_has_external_projects", data.external_projects.length >= 6);
 check("search_case_index_lost_object", lost.results.some((item) => item.id === "zengshan-case-slot-010-lost-object-home"));
 check("search_notes_void", voidNotes.results.some((item) => item.kind === "classic_notes" && item.title.includes("旬空")));
 check("search_external_projects_najia", projects.results.some((item) => item.id === "github-bopo-najia"));
 check("search_systems_ziwei", systems.results.some((item) => item.id === "ziwei"));
+check("search_ziwei_terms_ziwei", ziweiTerms.results.some((item) => item.kind === "ziwei_terms" && item.title.includes("紫微")));
+check(
+  "search_ziwei_terms_major_stars",
+  ziweiMajorStars.results.some((item) => item.id === "fourteen-major-stars" || item.item.group === "十四主星"),
+);
+check("search_ziwei_terms_sanfang", ziweiRelations.results.some((item) => item.id === "sanfang-sizheng"));
+check("search_ziwei_structures_ming", ziweiStructures.results.some((item) => item.id === "palace-ming"));
 check("search_accuracy_cases_scoring", accuracy.results.some((item) => item.id === "accuracy-demo-2026-nba-finals-game-7"));
 check("search_accuracy_cases_retro", retroAccuracy.results.some((item) => item.id === "accuracy-retro-2024-super-bowl-lviii"));
 check("search_all_back_control", all.results.some((item) => item.title.includes("回头克") || JSON.stringify(item.item).includes("回头克")));
@@ -37,6 +50,10 @@ check("case_schema_available", data.case_schema.required.includes("judgment"));
 const searchResponse = await searchHandler(new Request("https://example.test/api/search?q=najia&kind=external_projects"));
 const searchPayload = await searchResponse.json();
 check("handler_search_get_ok", searchResponse.status === 200 && searchPayload.results.some((item) => item.id === "github-bopo-najia"));
+
+const ziweiResponse = await searchHandler(new Request("https://example.test/api/search?q=%E5%9B%9B%E5%8C%96&kind=ziwei_terms"));
+const ziweiPayload = await ziweiResponse.json();
+check("handler_search_ziwei_terms_ok", ziweiResponse.status === 200 && ziweiPayload.results.some((item) => item.id === "four-transformations"));
 
 const schemaResponse = await caseSchemaHandler(new Request("https://example.test/api/case-schema"));
 const schemaPayload = await schemaResponse.json();

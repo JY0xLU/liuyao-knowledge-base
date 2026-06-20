@@ -150,5 +150,53 @@
     "class": "B",
     "type": "official-result",
     "notes": "Olympics.com 官方赛报，用作 Paris 2024 男篮决赛回测校准样本的赛果来源；记录 USA 98-87 France 和 Stephen Curry 末节表现。"
+  },
+  {
+    "id": "wikisource-ziwei-doushu-quanshu",
+    "title": "紫微斗數全書 - 维基文库",
+    "url": "https://zh.wikisource.org/wiki/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8",
+    "class": "A",
+    "type": "classic",
+    "notes": "公共古籍文本，用于紫微斗数术语、星曜、宫位和结构字段的第一版索引；具体引用前仍需校对版本与段落。"
+  },
+  {
+    "id": "wikipedia-ziwei-doushu-zh",
+    "title": "紫微斗数 - 维基百科",
+    "url": "https://zh.wikipedia.org/wiki/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8",
+    "class": "B",
+    "type": "encyclopedia",
+    "notes": "用于紫微斗数、十二宫、星曜、四化和时段概念的百科级导览；页面维护提示意味着只能作方向性来源。"
+  },
+  {
+    "id": "wikipedia-ziwei-dou-shu-en",
+    "title": "Zi Wei Dou Shu - Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Zi_Wei_Dou_Shu",
+    "class": "B",
+    "type": "encyclopedia",
+    "notes": "英文百科导览，用于核对 Zi Wei Dou Shu 英文命名和跨语言概念入口。"
+  },
+  {
+    "id": "github-renhuai-ziwei-doushu",
+    "title": "Renhuai123/ziwei-doushu - 紫微斗数排盘引擎",
+    "url": "https://github.com/Renhuai123/ziwei-doushu",
+    "class": "B",
+    "type": "open-source-code",
+    "notes": "MIT 开源 TypeScript 排盘引擎；用于参考命盘字段、四化系统、测试颗粒度和工程边界，不直接采信断语。"
+  },
+  {
+    "id": "github-taskyoooo-ziwei-doushu-skill",
+    "title": "taskyoooo/ziwei-doushu-skill - 紫微斗数 Skill",
+    "url": "https://github.com/taskyoooo/ziwei-doushu-skill",
+    "class": "C",
+    "type": "skill-project",
+    "notes": "公开 skill 项目，描述覆盖命盘、宫位、四化、大限流年等分析入口；仅作为产品形态和流派边界参考，不能复制规则。"
+  },
+  {
+    "id": "github-brhiza-mingyu",
+    "title": "Brhiza/mingyu - 多术数排盘平台",
+    "url": "https://github.com/Brhiza/mingyu",
+    "class": "B",
+    "type": "open-source-code",
+    "notes": "多术数 Web/API/MCP/skill 项目，已在外部项目库记录；用于参考多入口结构化输出，不作为紫微规则来源。"
   }
 ]

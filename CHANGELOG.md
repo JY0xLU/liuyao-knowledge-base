@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.5.0 - 2026-06-21
+
+- Added the first Zi Wei Dou Shu content layer with `data/ziwei_terms.json` and `data/ziwei_structures.json`.
+- Added a "紫微资料" workbench view and backend search kinds for `ziwei_terms` and `ziwei_structures`.
+- Added Zi Wei public sources and a foundation document while keeping interpretation rules out of the Liuyao rule layer.
+- Expanded local validation, smoke tests, function tests, and predeploy checks for the new Zi Wei layer.
+
 ## v0.4.0 - 2026-06-21
 
 - Added a lightweight multi-system roadmap for Liuyao, Zi Wei Dou Shu, Qi Men Dun Jia, and Da/Siao Liu Ren.

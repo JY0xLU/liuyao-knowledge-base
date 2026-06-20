@@ -34,6 +34,7 @@ const viewTitles = {
   search: ["检索结果", "全库检索"],
   rules: ["规则卡", "可追踪断法规则"],
   terms: ["术语表", "六爻术语速查"],
+  ziwei: ["紫微资料", "术语 · 宫位 · 星曜 · 四化"],
   classics: ["古籍索引", "经典阅读路线"],
   notes: ["读书笔记", "十八论与问答笔记"],
   caseIndex: ["案例索引", "增删卜易案例槽位"],
@@ -179,6 +180,22 @@ function localSearchResults(query) {
     ...(state.data.docs || []).map((item) => ({ type: "文档", title: item.title, body: item.summary, item })),
     ...(state.data.rules || []).map((item) => ({ type: "规则", title: item.title, body: item.statement, item })),
     ...(state.data.terms || []).map((item) => ({ type: "术语", title: item.term, body: item.definition, item })),
+    ...(state.data.ziwei_terms || []).map((item) => ({
+      type: "紫微术语",
+      title: item.term,
+      body: `${item.definition} ${item.boundary_notes || ""}`,
+      item,
+    })),
+    ...Object.entries(state.data.ziwei_structures || {})
+      .filter(([, value]) => Array.isArray(value))
+      .flatMap(([group, items]) =>
+        items.map((item) => ({
+          type: "紫微结构",
+          title: item.name,
+          body: item.focus || item.core_focus || item.description || item.group || "",
+          item: { group, ...item },
+        })),
+      ),
     ...(state.data.sources || []).map((item) => ({ type: "来源", title: item.title, body: item.notes, item })),
     ...(state.data.systems || []).map((item) => ({
       type: "体系",
@@ -270,6 +287,7 @@ function renderStats() {
     ["文档", (data.docs || []).length],
     ["体系", (data.systems || []).length],
     ["术语", (data.terms || []).length],
+    ["紫微术语", (data.ziwei_terms || []).length],
     ["规则", (data.rules || []).length],
     ["来源", (data.sources || []).length],
     ["古籍", (data.classics || []).length],
@@ -423,6 +441,88 @@ function renderTerms() {
       `,
     )
     .join("")}</div>`;
+}
+
+function renderZiwei() {
+  const query = state.query.trim();
+  const terms = (state.data.ziwei_terms || []).filter((term) => matchText(term, query));
+  const structures = state.data.ziwei_structures || {};
+  const palaces = (structures.palaces || []).filter((item) => matchText(item, query));
+  const stars = (structures.major_stars || []).filter((item) => matchText(item, query));
+  const transformations = (structures.transformations || []).filter((item) => matchText(item, query));
+  const fields = (structures.chart_fields || []).filter((item) => matchText(item, query));
+
+  els.content.innerHTML = `
+    <div class="hero-grid">
+      <article class="hero-card">
+        <h3>紫微斗数第一版资料层</h3>
+        <p>本层先收术语、盘式字段、十二宫、十四主星和四化结构，用于学习检索和案例复盘；不提供确定性命运判断。</p>
+        <div class="tag-row">
+          <span class="tag">术语 ${terms.length}</span>
+          <span class="tag">十二宫 ${structures.palaces?.length || 0}</span>
+          <span class="tag">十四主星 ${structures.major_stars?.length || 0}</span>
+          <span class="tag">四化 ${structures.transformations?.length || 0}</span>
+        </div>
+      </article>
+      <article class="card">
+        <h3>边界</h3>
+        <p>${escapeHtml(structures.boundary || "不同流派规则并列记录，不合并成单一断法。")}</p>
+        <div class="tag-row">
+          <span class="tag">active-v0.5-seed</span>
+          <span class="tag">结构先行</span>
+        </div>
+      </article>
+    </div>
+    <div class="section-band">
+      <h3>术语</h3>
+      <div class="result-grid">
+        ${terms
+          .map(
+            (term) => `
+              <article class="card">
+                <div class="meta-row">
+                  <span class="tag">${escapeHtml(term.category)}</span>
+                  <span class="tag">${escapeHtml(term.group || "紫微")}</span>
+                  ${(term.aliases || []).slice(0, 3).map((alias) => `<span class="tag">${escapeHtml(alias)}</span>`).join("")}
+                </div>
+                <h3>${escapeHtml(term.term)}</h3>
+                <p>${escapeHtml(term.definition)}</p>
+                ${term.boundary_notes ? `<p><strong>边界：</strong>${escapeHtml(term.boundary_notes)}</p>` : ""}
+                <div class="tag-row">${(term.source_refs || []).map((ref) => `<span class="tag">${escapeHtml(ref)}</span>`).join("")}</div>
+              </article>
+            `,
+          )
+          .join("")}
+      </div>
+    </div>
+    <div class="section-band">
+      <h3>盘式结构</h3>
+      <div class="structure-grid">
+        ${renderStructureColumn("十二宫", palaces)}
+        ${renderStructureColumn("十四主星", stars)}
+        ${renderStructureColumn("四化", transformations)}
+        ${renderStructureColumn("字段", fields)}
+      </div>
+    </div>
+  `;
+}
+
+function renderStructureColumn(title, items) {
+  return `
+    <section class="structure-column">
+      <h4>${escapeHtml(title)}</h4>
+      ${items
+        .map(
+          (item) => `
+            <article class="mini-card">
+              <strong>${escapeHtml(item.name)}</strong>
+              <span>${escapeHtml(item.focus || item.core_focus || item.description || item.group || "")}</span>
+            </article>
+          `,
+        )
+        .join("")}
+    </section>
+  `;
 }
 
 function renderClassics() {
@@ -880,6 +980,7 @@ function render() {
   if (state.view === "search") renderSearch();
   if (state.view === "rules") renderRules();
   if (state.view === "terms") renderTerms();
+  if (state.view === "ziwei") renderZiwei();
   if (state.view === "classics") renderClassics();
   if (state.view === "notes") renderNotes();
   if (state.view === "caseIndex") renderCaseIndex();

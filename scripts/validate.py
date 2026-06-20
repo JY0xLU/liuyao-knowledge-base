@@ -42,6 +42,73 @@ def check_refs(items, source_ids: set[str], label: str) -> list[str]:
     return errors
 
 
+def iter_ziwei_structure_items(structures):
+    for key, value in structures.items():
+        if isinstance(value, list):
+            for item in value:
+                yield key, item
+
+
+def check_ziwei_terms(terms, source_ids: set[str]) -> list[str]:
+    errors: list[str] = []
+    errors += require_unique(terms, "id", "ziwei_terms")
+    seen_terms: set[str] = set()
+    for item in terms:
+        term = item.get("term")
+        if not term:
+            errors.append(f"ziwei_term missing term: {item}")
+            continue
+        if term in seen_terms:
+            errors.append(f"ziwei_term duplicate term: {term}")
+        seen_terms.add(term)
+        for key in ["category", "definition", "group", "boundary_notes"]:
+            if not item.get(key):
+                errors.append(f"ziwei_term {term} missing {key}")
+    required = {"紫微斗数", "命盘", "命宫", "十二宫", "十四主星", "四化", "三方四正"}
+    missing = required - seen_terms
+    if missing:
+        errors.append(f"ziwei_terms missing required terms: {', '.join(sorted(missing))}")
+    errors += check_refs(terms, source_ids, "ziwei_term")
+    return errors
+
+
+def check_ziwei_structures(structures, source_ids: set[str]) -> list[str]:
+    errors: list[str] = []
+    if structures.get("system") != "ziwei":
+        errors.append("ziwei_structures system must be ziwei")
+    if not structures.get("boundary"):
+        errors.append("ziwei_structures missing boundary")
+
+    required_counts = {
+        "palaces": 12,
+        "major_stars": 14,
+        "transformations": 4,
+        "chart_fields": 6,
+    }
+    for key, minimum in required_counts.items():
+        value = structures.get(key)
+        if not isinstance(value, list) or len(value) < minimum:
+            errors.append(f"ziwei_structures {key} must have at least {minimum} items")
+
+    ids: set[str] = set()
+    for group, item in iter_ziwei_structure_items(structures):
+        item_id = item.get("id")
+        if not item_id:
+            errors.append(f"ziwei_structure {group} item missing id: {item}")
+            continue
+        if item_id in ids:
+            errors.append(f"ziwei_structure duplicate id: {item_id}")
+        ids.add(item_id)
+        if not item.get("name"):
+            errors.append(f"ziwei_structure {item_id} missing name")
+        if not (item.get("focus") or item.get("core_focus") or item.get("description")):
+            errors.append(f"ziwei_structure {item_id} missing focus/core_focus/description")
+        for ref in item.get("source_refs", []):
+            if ref not in source_ids:
+                errors.append(f"ziwei_structure {item_id} references missing source {ref}")
+    return errors
+
+
 def check_rule_ids(case_schema, rule_ids: set[str]) -> list[str]:
     errors: list[str] = []
     judgment = case_schema.get("properties", {}).get("judgment", {})
@@ -199,6 +266,8 @@ def main() -> int:
     sources = load_json("sources.json")
     systems = load_json("systems.json")
     terms = load_json("terms.json")
+    ziwei_terms = load_json("ziwei_terms.json")
+    ziwei_structures = load_json("ziwei_structures.json")
     rules = load_json("rules.json")
     classics = load_json("classics_index.json")
     classic_notes = load_json("classic_notes.json")
@@ -217,6 +286,8 @@ def main() -> int:
     rule_ids = {item["id"] for item in rules if "id" in item}
 
     errors += check_refs(terms, source_ids, "term")
+    errors += check_ziwei_terms(ziwei_terms, source_ids)
+    errors += check_ziwei_structures(ziwei_structures, source_ids)
     errors += check_refs(rules, source_ids, "rule")
     errors += check_refs(classics, source_ids, "classic")
     errors += check_rule_ids(case_schema, rule_ids)
@@ -243,6 +314,7 @@ def main() -> int:
         "docs/13-accuracy-evaluation.md",
         "docs/14-github-versioning.md",
         "docs/15-multi-system-roadmap.md",
+        "docs/16-ziwei-foundation.md",
         "docs/sources.md",
         "docs/website-plan.md",
     ]
@@ -259,6 +331,7 @@ def main() -> int:
     print(
         "Validation ok: "
         f"{len(sources)} sources, {len(systems)} systems, {len(terms)} terms, "
+        f"{len(ziwei_terms)} ziwei terms, "
         f"{len(rules)} rules, {len(classics)} classics, "
         f"{len(classic_notes)} classic notes, {len(case_index)} case slots, "
         f"{len(accuracy_cases)} accuracy cases, "

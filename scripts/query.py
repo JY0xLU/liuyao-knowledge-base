@@ -52,6 +52,26 @@ def query_terms(keyword: str, as_json: bool) -> int:
     return 0 if matches else 1
 
 
+def query_ziwei_terms(keyword: str, as_json: bool) -> int:
+    terms = load("ziwei_terms.json")
+    matches = [item for item in terms if contains(item, keyword)]
+    if as_json:
+        print_json(matches)
+        return 0 if matches else 1
+    for item in matches:
+        aliases = ", ".join(item.get("aliases", []))
+        print(f"- {item['term']} ({item.get('category', '-')}/{item.get('group', '-')})")
+        if aliases:
+            print(f"  aliases: {aliases}")
+        print(f"  {item.get('definition', '')}")
+        refs = ", ".join(item.get("source_refs", []))
+        if refs:
+            print(f"  sources: {refs}")
+        if item.get("boundary_notes"):
+            print(f"  boundary: {item['boundary_notes']}")
+    return 0 if matches else 1
+
+
 def query_rules(keyword: str, layer: str | None, as_json: bool) -> int:
     rules = load("rules.json")
     matches = []
@@ -160,6 +180,10 @@ def main() -> int:
     terms.add_argument("keyword")
     terms.add_argument("--json", action="store_true")
 
+    ziwei_terms = sub.add_parser("ziwei_terms")
+    ziwei_terms.add_argument("keyword")
+    ziwei_terms.add_argument("--json", action="store_true")
+
     rules = sub.add_parser("rules")
     rules.add_argument("keyword")
     rules.add_argument("--layer")
@@ -187,6 +211,8 @@ def main() -> int:
     args = parser.parse_args()
     if args.kind == "terms":
         return query_terms(args.keyword, args.json)
+    if args.kind == "ziwei_terms":
+        return query_ziwei_terms(args.keyword, args.json)
     if args.kind == "rules":
         return query_rules(args.keyword, args.layer, args.json)
     if args.kind == "sources":

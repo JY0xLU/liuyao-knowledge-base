@@ -218,7 +218,7 @@ button {
 
 .topbar h2 {
   margin-top: 4px;
-  font-size: clamp(22px, 3vw, 34px);
+  font-size: 32px;
   line-height: 1.1;
 }
 
@@ -292,7 +292,7 @@ button {
 .hero-card h3 {
   margin: 0;
   max-width: 760px;
-  font-size: clamp(30px, 5vw, 56px);
+  font-size: 48px;
   line-height: 1.02;
 }
 
@@ -432,6 +432,33 @@ button {
 .score-grid span {
   color: var(--accent-strong);
   font-weight: 800;
+}
+
+.section-band {
+  margin-top: 18px;
+}
+
+.section-band h3 {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+.structure-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.structure-column {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+}
+
+.structure-column h4 {
+  margin: 0;
+  color: var(--accent-strong);
+  font-size: 14px;
 }
 
 .stack {
@@ -675,6 +702,7 @@ button {
   .hero-grid,
   .cards-grid,
   .result-grid,
+  .structure-grid,
   .two-column,
   .form-grid {
     grid-template-columns: 1fr;
@@ -720,5 +748,13 @@ button {
   .hero-card,
   .article {
     padding: 20px;
+  }
+
+  .topbar h2 {
+    font-size: 26px;
+  }
+
+  .hero-card h3 {
+    font-size: 32px;
   }
 }

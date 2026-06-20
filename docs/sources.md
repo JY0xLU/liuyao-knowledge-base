@@ -2,7 +2,7 @@
 
 本索引记录第一版知识库用到的公开资料线索。它不是完整书目，后续应继续扩展到逐章读书笔记和案例库。
 
-当前深入资料主要集中在六爻。紫微斗数、奇门遁甲、大六壬/小六壬先进入 [多术数体系路线图](15-multi-system-roadmap.md) 和 `data/systems.json`，后续按体系独立扩展来源、术语、盘式和案例，不与六爻规则混写。
+当前深入资料仍以六爻为主。紫微斗数已进入第一版资料层，见 [紫微斗数第一版资料层](16-ziwei-foundation.md)、`data/ziwei_terms.json` 和 `data/ziwei_structures.json`；奇门遁甲、大六壬/小六壬仍先保留在 [多术数体系路线图](15-multi-system-roadmap.md) 和 `data/systems.json`，后续按体系独立扩展来源、术语、盘式和案例，不与六爻规则混写。
 
 ## A 类：经典与公共文本
 
@@ -13,6 +13,7 @@
 | 黄金策 - 维基文库 | https://zh.wikisource.org/wiki/%E9%BB%84%E9%87%91%E7%AD%96 | 火珠林法经典资料，适合总纲和分类断法 |
 | 黄金策 - 中国哲学书电子化计划 | https://ctext.org/wiki.pl?chapter=767055&if=gb&remap=gb | 对照阅读黄金策文本 |
 | 易隐 PDF - Wikimedia Commons | https://upload.wikimedia.org/wikipedia/commons/2/27/NLC416-12jh005346-45345_%E6%98%93%E9%9A%B1.pdf | 古籍脉络与纳甲筮法扩展 |
+| 紫微斗數全書 - 维基文库 | https://zh.wikisource.org/wiki/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8%E5%85%A8%E6%9B%B8 | 紫微斗数术语、星曜、宫位和结构字段的第一版索引；引用前仍需校对版本与段落 |
 
 ## B 类：现代教程与百科
 
@@ -27,6 +28,10 @@
 | bopo/najia - 纳甲六爻排盘源码 | https://github.com/bopo/najia | 开源排盘库，用于对照卦码、纳甲表、世应、伏神和测试颗粒度 |
 | 六爻排盘教程 - Cosmic Tao | https://www.cosmictao.com/zh/library/liuyao-tutorial | 三钱法、八宫、六亲、六神、世应和伏神流程说明 |
 | Liuyao Najia World & Response Guide - FateMaster | https://www.fatemaster.ai/guides/liuyao-shiying | 八宫世应定位表，用于校验游魂、归魂和世应位置 |
+| 紫微斗数 - 维基百科 | https://zh.wikipedia.org/wiki/%E7%B4%AB%E5%BE%AE%E6%96%97%E6%95%B8 | 紫微体系、十二宫、星曜、四化和时段概念的百科导览 |
+| Zi Wei Dou Shu - Wikipedia | https://en.wikipedia.org/wiki/Zi_Wei_Dou_Shu | 英文命名和跨语言概念入口 |
+| Renhuai123/ziwei-doushu - 紫微斗数排盘引擎 | https://github.com/Renhuai123/ziwei-doushu | MIT 开源排盘项目，用于参考命盘字段、四化系统和测试颗粒度 |
+| Brhiza/mingyu - 多术数排盘平台 | https://github.com/Brhiza/mingyu | 多入口结构化输出参考，不作为紫微规则来源 |
 
 ## C 类：视频与讨论材料
 
@@ -35,13 +40,14 @@
 | B站六爻纳甲入门到实战全套课程 | https://www.bilibili.com/video/BV1pL1KBiEKj/ | 课程目录显示八卦、地支、起卦纳甲、世应、飞伏、专题占法等学习路径 |
 | B站小白六爻课程 | https://www.bilibili.com/video/BV1Xw411M7UV/ | 课程目录显示阴阳五行、天干地支、六亲用神、六神、起卦、纳甲、世应、旬空月破等顺序 |
 | Reddit EasternOccult 六亲飞宫讨论 | https://www.reddit.com/r/EasternOccult/comments/1iv5c18/ | 高阶民间技法讨论，只作经验观察，不作为基础规则 |
+| taskyoooo/ziwei-doushu-skill | https://github.com/taskyoooo/ziwei-doushu-skill | 紫微 skill 产品形态参考；仅作流派边界和交互形态线索 |
 
 ## 下一步采集计划
 
 - 对《卜筮正宗》建立逐章主题索引。第一版索引见 [古籍阅读索引](06-classics-reading-index.md) 和 `data/classics_index.json`。
 - 对《增删卜易》建立卦例索引：题目、用神、动变、结果、争议点。
 - 对《黄金策》建立分类断法索引。第一版专题映射见 [古籍阅读索引](06-classics-reading-index.md)。
-- 对紫微斗数建立星曜、宫位、四化、大限流年来源索引。
+- 对紫微斗数继续校对《紫微斗數全書》原文，并建立命例 Schema、排盘字段测试和流派差异记录。
 - 对奇门遁甲建立九宫、八门、九星、八神、盘式差异来源索引。
 - 对大六壬/小六壬分别建立四课三传、课体和小六壬六宫来源索引。
 - 搜集至少 100 个有反馈的现代案例，按专题归档。
@@ -62,6 +68,12 @@
 - Jina Reader 可读取 Cosmic Tao 六爻教程，确认三钱法 6/7/8/9、八宫、六亲、世应、六神和伏神流程。
 - Jina Reader 可读取 FateMaster 世应表，确认八纯、一至五世、游魂、归魂的世应位置。
 
+2026-06-21 紫微斗数第一版资料层核验：
+
+- Node fetch 可读取中文维基百科“紫微斗数”、英文 Wikipedia “Zi Wei Dou Shu”和维基文库《紫微斗數全書》页面。
+- GitHub 仓库元数据可确认 `Renhuai123/ziwei-doushu` 为 MIT 许可 TypeScript 项目，描述覆盖排盘算法和四化系统。
+- B站搜索可返回紫微斗数入门、十四主星和课程目录线索；因终端标题编码限制，本版不把 B站结果写成规则来源。
+
 ## 采集边界记录
 
 2026-06-20 至 2026-06-21 的采集边界：
@@ -70,4 +82,5 @@
 - 社媒、论坛、播客和需要登录态的平台暂不作为规则来源，只作为后续线索池。
 - 任何 C 类材料都需要经过古籍、现代教程或案例反馈交叉校验，才能影响规则卡。
 
-下一轮扩展到紫微斗数、奇门遁甲、大六壬/小六壬时，应先建立独立来源索引，再进入术语、盘式和案例层。
+- 紫微斗数已建立独立来源索引、术语和盘式结构层；下一轮进入命例 Schema、排盘算法抽样和原文校对。
+- 奇门遁甲、大六壬/小六壬仍应先建立独立来源索引，再进入术语、盘式和案例层。

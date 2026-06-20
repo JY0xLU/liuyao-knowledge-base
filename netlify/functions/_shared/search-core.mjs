@@ -56,6 +56,26 @@ export function searchPools(data) {
       summary: item.definition,
       item,
     })),
+    ...(data.ziwei_terms || []).map((item) => ({
+      kind: "ziwei_terms",
+      kind_label: "紫微术语",
+      id: item.id || item.term,
+      title: item.term,
+      summary: item.definition,
+      item,
+    })),
+    ...Object.entries(data.ziwei_structures || {})
+      .filter(([, value]) => Array.isArray(value))
+      .flatMap(([group, items]) =>
+        items.map((item) => ({
+          kind: "ziwei_structures",
+          kind_label: "紫微结构",
+          id: item.id || `${group}-${item.name}`,
+          title: item.name,
+          summary: item.focus || item.core_focus || item.description || item.group || "",
+          item: { group, ...item },
+        })),
+      ),
     ...(data.sources || []).map((item) => ({
       kind: "sources",
       kind_label: "来源",
