@@ -4,6 +4,7 @@ node_modules/
 .tools/
 .deploy-netlify-clean-*/
 .last-deploy-dir.txt
+deploy-*.zip
 __pycache__/
 .pytest_cache/
 *.pyc
