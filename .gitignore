@@ -2,6 +2,8 @@
 node_modules/
 .pnpm-runtime/
 .tools/
+.deploy-netlify-clean-*/
+.last-deploy-dir.txt
 __pycache__/
 .pytest_cache/
 *.pyc
