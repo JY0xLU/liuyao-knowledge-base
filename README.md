@@ -62,7 +62,7 @@ python .\scripts\query.py cases 失物
 - 《增删卜易》案例抽取索引和 24 条案例槽位
 - GitHub/平台类似项目参考库和可借鉴设计记录
 - 自动六爻装卦辅助：本卦、变卦、动爻、卦宫、纳甲干支、地支五行、六神、六亲、自动世应、伏神提示、旬空、月建/日辰基础状态
-- 事件/比赛准确度验证与评分数据模型
+- 事件/比赛准确度验证与评分数据模型；含 1 条方法演示和 3 条回测校准样本，回测样本不计入真实命中率
 - GitHub 项目化与版本迭代说明
 - 静态网站工作台、Netlify 配置和部署前检查脚本
 
@@ -72,7 +72,7 @@ python .\scripts\query.py cases 失物
 - 大量卦例拆解
 - 公历自动换算月建/日辰、飞神伏神生克、旺衰和应期的完整自动判断
 - 后端在线案例库
-- GitHub 远程仓库创建、推送和 release，需要先确认仓库可见性与 GitHub CLI/认证状态
+- GitHub release 与长期版本迭代；远程仓库已创建、推送并配置 CI，release 尚未创建
 
 ## 推荐学习顺序
 
@@ -104,6 +104,10 @@ python .\scripts\query.py cases 失物
 - Site ID: `e4b6e282-daac-49d6-b251-15acf3c896c8`
 - Latest deploy: 以 Netlify 项目页为准，避免部署 ID 自引用后变成旧值。
 
+GitHub 仓库：
+
+- [https://github.com/JY0xLU/liuyao-knowledge-base](https://github.com/JY0xLU/liuyao-knowledge-base)
+
 当前已提供静态网站工作台，入口为 `web/index.html`。页面内置 `web/assets/kb-data.js`，可以直接双击或用浏览器打开；若要模拟部署环境，可在本目录运行：
 
 ```powershell
@@ -114,7 +118,7 @@ python -m http.server 8765
 
 本目录已经包含 Netlify 静态部署配置：
 
-- `netlify.toml`：发布目录为 `web`，部署时直接使用本地预生成的 `web/assets` 数据包。
+- `netlify.toml`：发布目录为 `web`，部署时运行 `npm run build:netlify` 生成 `web/assets` 与函数共享数据包。
 - `netlify/functions/search.mts`：部署后提供 `GET /api/search?q=...` 后端检索接口。
 - `netlify/functions/case-schema.mts`：部署后提供 `GET /api/case-schema` 案例 Schema 接口。
 - `package.json`：提供 `build`、`check`、`serve` 脚本，方便本地和 CI 复用。
@@ -160,8 +164,8 @@ npx netlify deploy --prod
 python .\scripts\validate.py
 python .\web\scripts\build-data.py
 python .\web\scripts\smoke-test.py
-C:\Users\吴彦祖\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe .\scripts\test-functions.mjs
-C:\Users\吴彦祖\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe .\scripts\test-liuyao-engine.mjs
+node .\scripts\test-functions.mjs
+node .\scripts\test-liuyao-engine.mjs
 python .\scripts\predeploy_check.py
 ```
 
@@ -171,7 +175,7 @@ python .\scripts\predeploy_check.py
 python .\scripts\check.py
 ```
 
-注意：`build-data.py` 必须先于 `smoke-test.py` 和线上部署运行；Netlify 当前直接发布已生成的 `web/assets/kb-data.json`、`web/assets/kb-data.js` 和 `netlify/functions/_shared/kb-data.mjs`。
+注意：`build-data.py` 必须先于 `smoke-test.py` 运行；`scripts/check.py` 会重建数据包并检查生成资产是否已同步。Netlify 部署时也会运行 `npm run build:netlify`，避免线上使用旧数据包。
 
 结构化查询示例：
 

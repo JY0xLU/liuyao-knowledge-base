@@ -6,6 +6,7 @@ from __future__ import annotations
 import shutil
 import subprocess
 import sys
+import os
 from pathlib import Path
 
 
@@ -36,6 +37,31 @@ def run(args: list[str]) -> None:
     subprocess.run(args, cwd=ROOT, check=True)
 
 
+def assert_generated_assets_committed() -> None:
+    if not (os.environ.get("CI") or os.environ.get("LIUYAO_STRICT_ASSETS")):
+        return
+    if not (ROOT / ".git").exists():
+        return
+
+    generated_paths = [
+        "web/assets/kb-data.json",
+        "web/assets/kb-data.js",
+        "netlify/functions/_shared/kb-data.mjs",
+    ]
+    result = subprocess.run(
+        ["git", "status", "--porcelain", "--", *generated_paths],
+        cwd=ROOT,
+        check=True,
+        text=True,
+        capture_output=True,
+    )
+    if result.stdout.strip():
+        raise RuntimeError(
+            "Generated deploy assets are out of sync after build-data.py. "
+            "Review and commit:\n" + result.stdout
+        )
+
+
 def main() -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
@@ -53,6 +79,7 @@ def main() -> int:
     try:
         for command in commands:
             run(command)
+        assert_generated_assets_committed()
     except (RuntimeError, subprocess.CalledProcessError) as error:
         print(f"\nCheck failed: {error}", file=sys.stderr)
         return 1

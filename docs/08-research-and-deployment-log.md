@@ -12,8 +12,8 @@
 - 搜索工具：`scripts/search.py` 支持全文检索，`scripts/query.py` 支持按术语、规则、来源、古籍、读书笔记、案例槽位做结构化查询。
 - 静态网站：`web/index.html` 可读取内置数据包，展示学习路径、全库搜索、规则卡、术语表、古籍索引、读书笔记、案例索引、外部项目、来源库和案例录入。
 - 装卦辅助：`web/liuyao-engine.js` 已支持手工输入六爻，生成本卦、变卦、动爻、卦宫、纳甲干支、地支五行、六神、六亲、自动世应、伏神提示、旬空和月建/日辰基础状态。
-- 准确度验证：已加入 `data/accuracy_cases.json`、验证评分页面和评分 rubric，用于后续接入比赛、人物或公开事件验证。
-- GitHub 项目化：已加入 `.github/workflows/check.yml` 和版本迭代文档；当前机器缺 `gh` 且目录不是 git 仓库，尚未执行远程上传。
+- 准确度验证：已加入 `data/accuracy_cases.json`、验证评分页面和评分 rubric；当前含 1 条方法演示和 3 条回测校准样本，回测样本不计入真实命中率。
+- GitHub 项目化：已创建并推送 public 仓库 `JY0xLU/liuyao-knowledge-base`，已加入 `.github/workflows/check.yml`，远程 Actions 已通过一次检查。
 - 后端接口：Netlify Functions 提供 `/api/search` 和 `/api/case-schema`，前端可优先用后端检索并在本地环境回退到内置数据包。
 - 部署配置：`netlify.toml`、`package.json`、`.gitignore`、`scripts/predeploy_check.py` 已加入。
 
@@ -36,11 +36,11 @@
 | RSS | 可用 | 后续订阅资料源 |
 | 小宇宙 | 可用 | 后续播客转录 |
 | Exa | 不可用 | 需要 mcporter + Exa MCP |
-| GitHub CLI | 不可用 | 当前机器未检测到 gh；GitHub raw 源码仍可用 Node fetch 抽样读取 |
+| GitHub CLI | 可用但非全局 | 本项目已下载 portable `gh` 到 `.tools/` 并完成仓库创建、推送和 Actions 验证；普通 PATH 里仍不保证有 `gh` |
 | Reddit | 不可用 | 需要登录态后端 |
 | 小红书 | 不可用 | 需要 OpenCLI 或专用后端 |
 
-本轮未中断任务去安装登录态后端；GitHub、X、Reddit、小红书仍按现有可用性处理。
+本轮已补 GitHub portable 工具；X、Reddit、小红书等需要登录态的通道仍按现有可用性处理。
 
 ## 3. 已纳入来源边界
 
@@ -56,7 +56,7 @@
 2. B 类用于补齐现代流程、学习顺序和术语解释。
 3. C 类用于观察课程结构和案例线索，不直接升级为规则。
 
-当前 `data/sources.json` 已收录 16 条来源，其中 A 类 5 条。
+当前 `data/sources.json` 已收录 19 条来源，其中 A 类 5 条；新增的体育结果来源只用于赛果事实锁定，不用于提升六爻规则等级。
 
 2026-06-21 新增的装卦引擎校验来源：
 
@@ -65,14 +65,20 @@
 - Cosmic Tao 六爻教程：确认三钱法、八宫、六亲、世应、六神、伏神等现代流程说明。
 - FateMaster 世应表：确认八纯、一至五世、游魂、归魂的世应位置。
 
+2026-06-21 新增的回测校准赛果来源：
+
+- Kansas City Chiefs 官方赛报：Super Bowl LVIII，Chiefs 25-22 49ers，加时。
+- UEFA 官方赛报：EURO 2024 决赛，Spain 2-1 England，Oyarzabal 后段进球。
+- Olympics.com 官方赛报：Paris 2024 男篮决赛，USA 98-87 France，Stephen Curry 末段关键投篮。
+
 ## 4. 网站化验证结果
 
 本地静态工作台已完成以下验证：
 
 | 验证项 | 结果 |
 |---|---|
-| 数据校验 | `scripts/validate.py` 通过：16 sources、16 terms、31 rules、4 classics、36 classic notes、24 case slots、1 accuracy case、6 external projects |
-| 数据构建 | `web/scripts/build-data.py` 通过：17 docs、16 terms、31 rules、36 notes、24 case slots、1 accuracy case、6 external projects |
+| 数据校验 | `scripts/validate.py` 通过：19 sources、16 terms、31 rules、4 classics、36 classic notes、24 case slots、4 accuracy cases、6 external projects |
+| 数据构建 | `web/scripts/build-data.py` 通过：17 docs、16 terms、31 rules、36 notes、24 case slots、4 accuracy cases、6 external projects |
 | 静态冒烟 | `web/scripts/smoke-test.py` 通过，覆盖读书笔记、案例索引、验证评分和外部项目 |
 | 函数测试 | `scripts/test-functions.mjs` 通过，覆盖 `/api/search` 核心搜索语义、验证评分搜索、外部项目搜索和案例 Schema 数据 |
 | 装卦测试 | `scripts/test-liuyao-engine.mjs` 通过，覆盖本卦、变卦、动爻、卦码、纳甲、卦宫、六神、六亲、自动世应、游魂、归魂、伏神、旬空和月建/日辰基础状态 |
@@ -113,7 +119,7 @@ Netlify 上线结果：
 
 - `netlify-cli@26.1.0` 通过 `pnpm dlx` 下载时因 `esbuild@0.28.0` tarball 超时失败。
 - Netlify MCP uploader 已能上传干净部署副本；第一次上传误含 `.pnpm-runtime` 缓存导致长时间卡住，已把 `.pnpm-runtime/` 加入 `.gitignore` 并改用临时干净目录上传。
-- Netlify 当前采用预生成资产部署模式：本地先运行 `scripts/check.py` 生成 `web/assets/kb-data.json`、`web/assets/kb-data.js` 和 `netlify/functions/_shared/kb-data.mjs`，部署包直接发布这些产物。
+- Netlify 当前在部署时运行 `npm run build:netlify` 重建 `web/assets/kb-data.json`、`web/assets/kb-data.js` 和 `netlify/functions/_shared/kb-data.mjs`，避免源数据变更后发布旧资产。
 
 ## 6. 外部项目参考状态
 
@@ -149,6 +155,6 @@ Netlify 上线结果：
 
 1. 加入在线案例持久化后端。
 2. 建立真实前瞻事件验证集，至少 20 条可评分样本。
-3. 初始化 Git 仓库、确认可见性、安装或配置 GitHub CLI 后上传到 GitHub。
+3. 创建 release 标签和 release notes。
 4. 使用线上 URL 定期复跑桌面和移动端 QA。
 5. 把每轮公网验证结果写回 README 和本日志。

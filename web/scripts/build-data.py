@@ -6,7 +6,7 @@ from __future__ import annotations
 import json
 import re
 import sys
-from datetime import datetime, timezone
+import hashlib
 from pathlib import Path
 
 
@@ -76,12 +76,16 @@ def load_docs():
     return docs
 
 
+def content_hash(payload: dict) -> str:
+    stable = json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(stable.encode("utf-8")).hexdigest()[:16]
+
+
 def main() -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
 
     payload = {
-        "built_at": datetime.now(timezone.utc).isoformat(),
         "docs": load_docs(),
         "terms": load_json("terms.json"),
         "sources": load_json("sources.json"),
@@ -93,6 +97,7 @@ def main() -> int:
         "external_projects": load_json("external_projects.json"),
         "case_schema": load_json("case_schema.json"),
     }
+    payload["built_at"] = f"content-{content_hash(payload)}"
     OUT.parent.mkdir(parents=True, exist_ok=True)
     FUNCTION_DATA.parent.mkdir(parents=True, exist_ok=True)
     data = json.dumps(payload, ensure_ascii=False, indent=2)

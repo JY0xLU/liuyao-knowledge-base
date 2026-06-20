@@ -8,8 +8,8 @@
 |---|---|
 | 仓库名 | `liuyao-knowledge-base` |
 | 描述 | 本地优先的六爻学习、检索、排盘和验证评分工作台 |
-| 可见性 | 由用户确认：public 或 private |
-| License | 若公开发布，建议补 `MIT` 或 `CC BY-NC-SA` 之类明确授权 |
+| 可见性 | public |
+| License | 已补 `LICENSE`：代码 MIT；原创整理内容 CC BY-NC-SA 4.0；第三方来源保留原授权 |
 | 默认分支 | `main` |
 
 ## 2. 版本线
@@ -69,20 +69,17 @@ jobs:
 
 ## 6. 当前上传状态
 
-2026-06-21 本地检查：
+2026-06-21 已完成：
 
-- 当前目录还不是 git 仓库。
-- 本机未检测到 `gh` CLI。
-- 因此本轮只完成 GitHub-ready 项目化材料和 CI 配置，没有执行远程创建或推送。
+- 本地仓库已初始化，默认分支为 `main`。
+- GitHub 远程仓库已创建并推送：`https://github.com/JY0xLU/liuyao-knowledge-base`。
+- 仓库可见性为 public。
+- GitHub Actions `check` 工作流已通过一次远程运行。
+- 本轮使用项目内 portable GitHub CLI 完成创建和验证；该工具位于 `.tools/`，已被 `.gitignore` 排除，不作为公开项目依赖。
+- 本机普通 Git HTTPS 可能仍受 Windows TLS 凭据问题影响；需要推送时可继续使用已验证的 `gh auth token` + Git extraheader 路线，或后续修复全局 Git 凭据。
 
-上传前建议执行：
+下一步：
 
-```powershell
-git init
-git add .
-git commit -m "Initial Liuyao knowledge base workbench"
-gh auth login
-gh repo create liuyao-knowledge-base --public --source=. --remote=origin --push
-```
-
-若仓库需要私有，把 `--public` 改为 `--private`。
+1. 建立 release 标签和 release notes。
+2. 每轮新增规则、样本或排盘能力后，先跑 `python .\scripts\check.py`，再提交和推送。
+3. 准确度验证只在事前锁定样本达到统计量后发布命中率结论。

@@ -17,6 +17,7 @@
       "outcome": "pending-source-lock"
     },
     "score": {
+      "mode": "method_demo_not_accuracy",
       "total": 0,
       "dimensions": [
         {
@@ -52,5 +53,170 @@
       "case-feedback-required"
     ],
     "notes": "新增目标要求可用人物或比赛做准确度验证。本条只建立评分结构，不回填伪预测。"
+  },
+  {
+    "id": "accuracy-retro-2024-super-bowl-lviii",
+    "title": "Super Bowl LVIII Chiefs vs 49ers 回测校准",
+    "event_type": "sports_match",
+    "event_date": "2024-02-11",
+    "subject": "Kansas City Chiefs vs San Francisco 49ers",
+    "status": "retrospective-calibration",
+    "prediction": {
+      "summary": "回测校准文本：若赛前判断 Chiefs 胜、比赛胶着、关键变量集中在 Mahomes 末段执行力和加时赛处理，则赛后可按 direction、margin_band、key_factors 和 timing_and_clarity 拆分评分。该文本是赛后校准模板，不是事前锁定预测。",
+      "made_at": "retrospective-not-precommitted",
+      "method": "liuyao-case-rubric",
+      "confidence": "not_scored_as_real_prediction"
+    },
+    "actual_result": {
+      "summary": "Chiefs 25-22 49ers，比赛进入 overtime，Chiefs 完成连续夺冠。",
+      "outcome": "chiefs_win_overtime"
+    },
+    "score": {
+      "mode": "retrospective_calibration_not_accuracy",
+      "total": 0,
+      "dimensions": [
+        {
+          "name": "direction",
+          "weight": 40,
+          "value": 0,
+          "notes": "未赛前锁定，不能把赛后知道的 Chiefs 胜补成真实命中。"
+        },
+        {
+          "name": "margin_band",
+          "weight": 25,
+          "value": 0,
+          "notes": "可用于校准胶着/小分差的判定边界，但不计入准确率。"
+        },
+        {
+          "name": "key_factors",
+          "weight": 25,
+          "value": 0,
+          "notes": "可用于训练关键变量记录格式：末段执行力、核心球员处理球、加时赛变量。"
+        },
+        {
+          "name": "timing_and_clarity",
+          "weight": 10,
+          "value": 0,
+          "notes": "made_at 明确标为 retrospective-not-precommitted，因此真实评分为 0。"
+        }
+      ]
+    },
+    "source_refs": [
+      "chiefs-super-bowl-lviii-result"
+    ],
+    "linked_rule_ids": [
+      "case-feedback-required"
+    ],
+    "notes": "用途是校准评分表和防止事后诸葛；不进入前瞻命中率统计。"
+  },
+  {
+    "id": "accuracy-retro-2024-euro-final-spain-england",
+    "title": "EURO 2024 Final Spain vs England 回测校准",
+    "event_type": "sports_match",
+    "event_date": "2024-07-14",
+    "subject": "Spain vs England",
+    "status": "retrospective-calibration",
+    "prediction": {
+      "summary": "回测校准文本：若赛前判断 Spain 胜、常规时间小胜、关键变量为边路推进和后段换人终结，则可按同一 rubric 评分。该文本是赛后校准模板，不是事前锁定预测。",
+      "made_at": "retrospective-not-precommitted",
+      "method": "liuyao-case-rubric",
+      "confidence": "not_scored_as_real_prediction"
+    },
+    "actual_result": {
+      "summary": "Spain 2-1 England，Oyarzabal 后段进球帮助 Spain 夺冠。",
+      "outcome": "spain_win_2_1"
+    },
+    "score": {
+      "mode": "retrospective_calibration_not_accuracy",
+      "total": 0,
+      "dimensions": [
+        {
+          "name": "direction",
+          "weight": 40,
+          "value": 0,
+          "notes": "未赛前锁定，不能计入 Spain 胜的真实命中。"
+        },
+        {
+          "name": "margin_band",
+          "weight": 25,
+          "value": 0,
+          "notes": "可校准足球决赛中 1 球小胜与常规时间胜负的记录方式。"
+        },
+        {
+          "name": "key_factors",
+          "weight": 25,
+          "value": 0,
+          "notes": "可校准边路、换人、后段进球等变量如何写成可判定字段。"
+        },
+        {
+          "name": "timing_and_clarity",
+          "weight": 10,
+          "value": 0,
+          "notes": "made_at 明确标为 retrospective-not-precommitted，因此真实评分为 0。"
+        }
+      ]
+    },
+    "source_refs": [
+      "uefa-euro-2024-final-result"
+    ],
+    "linked_rule_ids": [
+      "case-feedback-required"
+    ],
+    "notes": "用途是训练足球类样本的分差、时间段和关键变量字段；不进入前瞻命中率统计。"
+  },
+  {
+    "id": "accuracy-retro-2024-paris-olympics-basketball-final",
+    "title": "Paris 2024 Men's Basketball Final USA vs France 回测校准",
+    "event_type": "sports_match",
+    "event_date": "2024-08-10",
+    "subject": "USA vs France",
+    "status": "retrospective-calibration",
+    "prediction": {
+      "summary": "回测校准文本：若赛前判断 USA 胜、France 能咬住比分、关键变量为 Curry 末节投射和美国队关键回合处理，则可按同一 rubric 评分。该文本是赛后校准模板，不是事前锁定预测。",
+      "made_at": "retrospective-not-precommitted",
+      "method": "liuyao-case-rubric",
+      "confidence": "not_scored_as_real_prediction"
+    },
+    "actual_result": {
+      "summary": "USA 98-87 France，USA 获得连续第五个奥运男篮冠军，Stephen Curry 在末段命中关键投篮。",
+      "outcome": "usa_win_98_87"
+    },
+    "score": {
+      "mode": "retrospective_calibration_not_accuracy",
+      "total": 0,
+      "dimensions": [
+        {
+          "name": "direction",
+          "weight": 40,
+          "value": 0,
+          "notes": "未赛前锁定，不能计入 USA 胜的真实命中。"
+        },
+        {
+          "name": "margin_band",
+          "weight": 25,
+          "value": 0,
+          "notes": "可校准篮球决赛中 10 分左右分差和主队抵抗强度的记录方式。"
+        },
+        {
+          "name": "key_factors",
+          "weight": 25,
+          "value": 0,
+          "notes": "可校准核心球员末节爆发、关键回合处理等变量如何写成可判定字段。"
+        },
+        {
+          "name": "timing_and_clarity",
+          "weight": 10,
+          "value": 0,
+          "notes": "made_at 明确标为 retrospective-not-precommitted，因此真实评分为 0。"
+        }
+      ]
+    },
+    "source_refs": [
+      "olympics-paris-2024-usa-france-basketball-result"
+    ],
+    "linked_rule_ids": [
+      "case-feedback-required"
+    ],
+    "notes": "用途是训练篮球类样本的方向、分差和关键变量字段；不进入前瞻命中率统计。"
   }
 ]

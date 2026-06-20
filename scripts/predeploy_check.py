@@ -43,6 +43,7 @@ def main() -> int:
     engine_test_path = ROOT / "scripts" / "test-liuyao-engine.mjs"
     changelog_path = ROOT / "CHANGELOG.md"
     readme_path = ROOT / "README.md"
+    docs_paths = sorted((ROOT / "docs").glob("*.md"))
 
     for path in [
         netlify_path,
@@ -81,11 +82,12 @@ def main() -> int:
     function_schema = read_text(function_schema_path)
     changelog = read_text(changelog_path)
     readme = read_text(readme_path)
+    public_text = "\n".join([readme, *(read_text(path) for path in docs_paths)])
 
     check("netlify_publish_web", re.search(r'publish\s*=\s*"web"', netlify) is not None, failures)
     check(
-        "netlify_uses_prebuilt_data",
-        re.search(r'command\s*=\s*""', netlify) is not None
+        "netlify_rebuilds_data",
+        re.search(r'command\s*=\s*"npm run build:netlify"', netlify) is not None
         and data_path.exists()
         and data_js_path.exists()
         and function_data_path.exists(),
@@ -149,7 +151,12 @@ def main() -> int:
         failures,
     )
     check("case_index_count", len(data.get("case_index", [])) >= 24, failures)
-    check("accuracy_cases_count", len(data.get("accuracy_cases", [])) >= 1, failures)
+    check("accuracy_cases_count", len(data.get("accuracy_cases", [])) >= 4, failures)
+    check(
+        "accuracy_cases_mark_retrospective",
+        any(item.get("status") == "retrospective-calibration" for item in data.get("accuracy_cases", [])),
+        failures,
+    )
     check("external_projects_count", len(data.get("external_projects", [])) >= 6, failures)
     check(
         "case_index_have_linked_rules",
@@ -180,11 +187,18 @@ def main() -> int:
         failures,
     )
     check(
+        "no_local_windows_paths_in_public_docs",
+        "C:\\Users\\" not in public_text
+        and "Desktop\\新建文件夹" not in public_text
+        and "codex-runtimes" not in public_text,
+        failures,
+    )
+    check(
         "readme_has_deploy_commands",
         "npm run check" in readme and "npx netlify deploy --prod" in readme,
         failures,
     )
-    check("changelog_has_current_version", "## v0.3.0 - 2026-06-21" in changelog, failures)
+    check("changelog_has_current_version", "## v0.3.1 - 2026-06-21" in changelog, failures)
 
     if failures:
         print("\nPredeploy check failed:")

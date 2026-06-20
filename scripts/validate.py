@@ -154,6 +154,11 @@ def check_accuracy_cases(cases, source_ids: set[str], rule_ids: set[str]) -> lis
             errors.append(f"accuracy_case {case_id} score.total must be 0-100")
         if not score.get("dimensions"):
             errors.append(f"accuracy_case {case_id} missing score.dimensions")
+        if item.get("status") == "retrospective-calibration":
+            if prediction.get("made_at") != "retrospective-not-precommitted":
+                errors.append(f"accuracy_case {case_id} retrospective case must not look precommitted")
+            if score.get("mode") != "retrospective_calibration_not_accuracy" or total != 0:
+                errors.append(f"accuracy_case {case_id} retrospective case must not count toward accuracy")
         for ref in item.get("source_refs", []):
             if ref not in source_ids:
                 errors.append(f"accuracy_case {case_id} references missing source {ref}")

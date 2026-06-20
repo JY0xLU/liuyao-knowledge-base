@@ -126,5 +126,29 @@
     "class": "B",
     "type": "reference-table",
     "notes": "八宫世应定位表，列出八纯、一至五世、游魂、归魂的世应位置，用于校验自动世应规则。"
+  },
+  {
+    "id": "chiefs-super-bowl-lviii-result",
+    "title": "Chiefs Defeat 49ers, 25-22 - Kansas City Chiefs",
+    "url": "https://www.chiefs.com/news/chiefs-defeat-49ers-25-22-to-secure-a-second-straight-world-championship",
+    "class": "B",
+    "type": "official-result",
+    "notes": "球队官方赛报，用作 Super Bowl LVIII 回测校准样本的赛果来源；记录 Chiefs 25-22 49ers 和加时赛信息。"
+  },
+  {
+    "id": "uefa-euro-2024-final-result",
+    "title": "Spain 2-1 England - UEFA EURO 2024",
+    "url": "https://www.uefa.com/euro2024/news/028f-1b5e55d7ab8d-6ef2e1d9aee7-1000--spain-2-1-england-late-oyarzabal-winner-earns-la-roja-record-fourth-euro-crown/",
+    "class": "B",
+    "type": "official-result",
+    "notes": "UEFA 官方赛报，用作 EURO 2024 决赛回测校准样本的赛果来源；记录 Spain 2-1 England 和 Oyarzabal late winner。"
+  },
+  {
+    "id": "olympics-paris-2024-usa-france-basketball-result",
+    "title": "USA beats France 98-87 - Olympics.com",
+    "url": "https://www.olympics.com/en/news/paris-2024-basketball-steph-curry-soars-us-beats-france-98-87-for-fifth-olympic-title",
+    "class": "B",
+    "type": "official-result",
+    "notes": "Olympics.com 官方赛报，用作 Paris 2024 男篮决赛回测校准样本的赛果来源；记录 USA 98-87 France 和 Stephen Curry 末节表现。"
   }
 ]

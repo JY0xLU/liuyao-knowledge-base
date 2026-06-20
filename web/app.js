@@ -495,6 +495,7 @@ function renderAccuracy() {
             <span class="tag">${escapeHtml(item.status)}</span>
             <span class="tag">${escapeHtml(item.event_date)}</span>
             <span class="tag">score ${escapeHtml(String(item.score.total))}</span>
+            ${item.score.mode ? `<span class="tag">${escapeHtml(item.score.mode)}</span>` : ""}
           </div>
           <h3>${escapeHtml(item.title)}</h3>
           <p><strong>对象：</strong>${escapeHtml(item.subject)}</p>
@@ -512,7 +513,9 @@ function renderAccuracy() {
               )
               .join("")}
           </div>
-          <div class="tag-row">${item.linked_rule_ids.map((ref) => `<span class="tag">${escapeHtml(ref)}</span>`).join("")}</div>
+          <div class="tag-row">
+            ${[...(item.linked_rule_ids || []), ...(item.source_refs || [])].map((ref) => `<span class="tag">${escapeHtml(ref)}</span>`).join("")}
+          </div>
         </article>
       `,
     )

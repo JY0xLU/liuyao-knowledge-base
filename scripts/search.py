@@ -11,6 +11,19 @@ from pathlib import Path
 
 
 TEXT_SUFFIXES = {".md", ".txt", ".json"}
+DEFAULT_EXCLUDED_PARTS = {
+    ".git",
+    ".netlify",
+    ".pnpm-runtime",
+    ".pytest_cache",
+    ".tools",
+    "__pycache__",
+    "node_modules",
+}
+DEFAULT_EXCLUDED_PATHS = {
+    ("web", "assets"),
+    ("netlify", "functions", "_shared"),
+}
 
 
 def normalize(text: str) -> str:
@@ -20,7 +33,10 @@ def normalize(text: str) -> str:
 def iter_files(root: Path):
     for path in root.rglob("*"):
         if path.is_file() and path.suffix.lower() in TEXT_SUFFIXES:
-            if ".git" in path.parts:
+            relative_parts = path.relative_to(root).parts
+            if any(part in DEFAULT_EXCLUDED_PARTS for part in relative_parts):
+                continue
+            if any(relative_parts[: len(excluded)] == excluded for excluded in DEFAULT_EXCLUDED_PATHS):
                 continue
             yield path
 

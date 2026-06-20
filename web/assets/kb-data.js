@@ -1,5 +1,4 @@
 window.LIUYAO_KB_DATA = {
-  "built_at": "2026-06-20T20:07:57.585758+00:00",
   "docs": [
     {
       "id": "00-learning-map",
@@ -62,7 +61,7 @@ window.LIUYAO_KB_DATA = {
       "title": "研究与部署日志",
       "path": "docs/08-research-and-deployment-log.md",
       "summary": "研究与部署日志 本日志记录资料调研、网站化、验证和部署状态。它不是学习正文，只说明当前版本做到了哪里、证据来自哪里、下一步还缺什么。 1. 当前版本结论 当前版本选择先做「六爻」方向，而不是同时铺开紫微斗数和六爻。原因是六爻知识可以较快拆成起卦、装卦、用神、旺衰、动变、专题和案例反馈几个结构层，适合做成本地知识库和静态检索工作台。 已经完成的基础形态： - ",
-      "markdown": "# 研究与部署日志\n\n本日志记录资料调研、网站化、验证和部署状态。它不是学习正文，只说明当前版本做到了哪里、证据来自哪里、下一步还缺什么。\n\n## 1. 当前版本结论\n\n当前版本选择先做「六爻」方向，而不是同时铺开紫微斗数和六爻。原因是六爻知识可以较快拆成起卦、装卦、用神、旺衰、动变、专题和案例反馈几个结构层，适合做成本地知识库和静态检索工作台。\n\n已经完成的基础形态：\n\n- 本地知识库：Markdown 教材、来源索引、古籍阅读路线、规则卡、术语表、古籍读书笔记、案例槽位、案例 Schema。\n- 搜索工具：`scripts/search.py` 支持全文检索，`scripts/query.py` 支持按术语、规则、来源、古籍、读书笔记、案例槽位做结构化查询。\n- 静态网站：`web/index.html` 可读取内置数据包，展示学习路径、全库搜索、规则卡、术语表、古籍索引、读书笔记、案例索引、外部项目、来源库和案例录入。\n- 装卦辅助：`web/liuyao-engine.js` 已支持手工输入六爻，生成本卦、变卦、动爻、卦宫、纳甲干支、地支五行、六神、六亲、自动世应、伏神提示、旬空和月建/日辰基础状态。\n- 准确度验证：已加入 `data/accuracy_cases.json`、验证评分页面和评分 rubric，用于后续接入比赛、人物或公开事件验证。\n- GitHub 项目化：已加入 `.github/workflows/check.yml` 和版本迭代文档；当前机器缺 `gh` 且目录不是 git 仓库，尚未执行远程上传。\n- 后端接口：Netlify Functions 提供 `/api/search` 和 `/api/case-schema`，前端可优先用后端检索并在本地环境回退到内置数据包。\n- 部署配置：`netlify.toml`、`package.json`、`.gitignore`、`scripts/predeploy_check.py` 已加入。\n\n仍未完成的完整目标：\n\n- 还没有把经典逐章整理到逐条原文释义和真实卦例复盘级别。\n- 还没有建立大规模反馈卦例库；当前只有《增删卜易》案例抽取槽位。\n- 还没有从公历自动换算月建、日辰、旬空，也还没有完整飞神伏神生克、旺衰和应期模型。\n- 还没有在线保存案例的后端。\n- 线上站点当前是只读知识库和检索 API，尚未接入用户案例持久化。\n\n## 2. Agent Reach 状态\n\n2026-06-21 当前机器上 Agent Reach 体检结果要点：\n\n| 通道 | 状态 | 用途 |\n|---|---|---|\n| web / Jina Reader | 可用 | 读取公开网页和古籍页面 |\n| B站 / bili-cli | 可用 | 搜索课程线索、视频目录线索 |\n| RSS | 可用 | 后续订阅资料源 |\n| 小宇宙 | 可用 | 后续播客转录 |\n| Exa | 不可用 | 需要 mcporter + Exa MCP |\n| GitHub CLI | 不可用 | 当前机器未检测到 gh；GitHub raw 源码仍可用 Node fetch 抽样读取 |\n| Reddit | 不可用 | 需要登录态后端 |\n| 小红书 | 不可用 | 需要 OpenCLI 或专用后端 |\n\n本轮未中断任务去安装登录态后端；GitHub、X、Reddit、小红书仍按现有可用性处理。\n\n## 3. 已纳入来源边界\n\n本版来源按 A/B/C 分层：\n\n- A 类：CText、维基文库、Wikimedia Commons 等经典或公共文本。\n- B 类：现代教程、百科、流程文章。\n- C 类：视频课程、讨论帖、个人经验材料。\n\n采信方式：\n\n1. A 类用于定义术语、规则主干和古籍阅读路线。\n2. B 类用于补齐现代流程、学习顺序和术语解释。\n3. C 类用于观察课程结构和案例线索，不直接升级为规则。\n\n当前 `data/sources.json` 已收录 16 条来源，其中 A 类 5 条。\n\n2026-06-21 新增的装卦引擎校验来源：\n\n- `bopo/najia` README 和源码：确认卦码自下而上、纳甲表、六神、六亲、伏神字段，以及 README 中关于地天泰世应和归魂卦 bug 的修复说明。\n- `bopo/najia` 测试：确认离为火 `101101` 的纳甲结果为 `己卯、己丑、己亥、己酉、己未、己巳`。\n- Cosmic Tao 六爻教程：确认三钱法、八宫、六亲、世应、六神、伏神等现代流程说明。\n- FateMaster 世应表：确认八纯、一至五世、游魂、归魂的世应位置。\n\n## 4. 网站化验证结果\n\n本地静态工作台已完成以下验证：\n\n| 验证项 | 结果 |\n|---|---|\n| 数据校验 | `scripts/validate.py` 通过：16 sources、16 terms、31 rules、4 classics、36 classic notes、24 case slots、1 accuracy case、6 external projects |\n| 数据构建 | `web/scripts/build-data.py` 通过：17 docs、16 terms、31 rules、36 notes、24 case slots、1 accuracy case、6 external projects |\n| 静态冒烟 | `web/scripts/smoke-test.py` 通过，覆盖读书笔记、案例索引、验证评分和外部项目 |\n| 函数测试 | `scripts/test-functions.mjs` 通过，覆盖 `/api/search` 核心搜索语义、验证评分搜索、外部项目搜索和案例 Schema 数据 |\n| 装卦测试 | `scripts/test-liuyao-engine.mjs` 通过，覆盖本卦、变卦、动爻、卦码、纳甲、卦宫、六神、六亲、自动世应、游魂、归魂、伏神、旬空和月建/日辰基础状态 |\n| 部署前检查 | `scripts/predeploy_check.py` 通过，覆盖公开资产路径、规则引用、读书笔记和案例槽位 |\n| 搜索脚本 | `scripts/search.py 旬空` 可返回文档、术语、规则、来源 |\n| 结构化查询 | `scripts/query.py rules 旬空`、`scripts/query.py notes 旬空`、`scripts/query.py cases 失物` 均可返回结构化结果 |\n| 浏览器桌面 QA | `http://127.0.0.1:8765/web/` 可加载，搜索「旬空」返回 15 张结果卡 |\n| 读书笔记 QA | 读书笔记页可显示 36 张十八论/十八问答笔记卡 |\n| 案例索引 QA | 案例索引页可显示 24 张《增删卜易》案例槽位卡 |\n| 外部项目 QA | 外部项目页可显示 6 个 GitHub/平台参考项目 |\n| 案例录入 QA | 案例页可填写问题字段，能显示 `case_schema.json` 标识 |\n| 移动端 QA | 390px 断点生效，`.app-shell` 变为单列布局 |\n| 控制台 | 浏览器 QA 中未记录 error/warn |\n\n`file://` 直接打开已在文件层由 `web/assets/kb-data.js` 支持；Browser 插件阻止访问 `file://` 页面，因此没有绕过安全策略做浏览器复查。\n\n## 5. Netlify 状态\n\nNetlify 上线结果：\n\n- Team: `jy0xlu`\n- Project: `liuyao-knowledge-base`\n- Site ID: `e4b6e282-daac-49d6-b251-15acf3c896c8`\n- Site URL: https://liuyao-knowledge-base.netlify.app\n- Latest deploy: 以 Netlify 项目页为准，避免部署 ID 自引用后变成旧值。\n- Deploy state: `ready`\n\n线上 HTTP 验证：\n\n| 验证项 | 结果 |\n|---|---|\n| 首页 | `https://liuyao-knowledge-base.netlify.app/` 返回 200，HTML 含 `六爻知识库` 和 `kb-data.js` |\n| 外部项目 API | `/api/search?q=najia&kind=external_projects` 返回 200，首条为 `github-bopo-najia` |\n| 案例索引 API | `/api/search?q=失物&kind=case_index` 返回 200，首条为 `zengshan-case-slot-010-lost-object-home` |\n| 案例 Schema API | `/api/case-schema` 返回 200，Schema title 为 `LiuyaoCase` |\n\n部署工具链记录：\n\n- `netlify-cli@26.1.0` 通过 `pnpm dlx` 下载时因 `esbuild@0.28.0` tarball 超时失败。\n- Netlify MCP uploader 已能上传干净部署副本；第一次上传误含 `.pnpm-runtime` 缓存导致长时间卡住，已把 `.pnpm-runtime/` 加入 `.gitignore` 并改用临时干净目录上传。\n- Netlify 当前采用预生成资产部署模式：本地先运行 `scripts/check.py` 生成 `web/assets/kb-data.json`、`web/assets/kb-data.js` 和 `netlify/functions/_shared/kb-data.mjs`，部署包直接发布这些产物。\n\n## 6. 外部项目参考状态\n\n2026-06-20 使用 GitHub 公开 API 和 Agent Reach 搜索：\n\n- 已结构化记录 6 个参考项目：`RealKai42/liu-yao-divining`、`Brhiza/mingyu`、`bopo/najia`、`xiongdun8/liuyao`、`kentang2017/ichingshifa`、`abbeymondshein/i-ching-cli`。\n- 已写入 `data/external_projects.json` 和 [外部项目与源码参考](11-external-project-benchmark.md)。\n- 可借鉴重点：结构化输出、多入口 API/MCP/skill、装卦函数拆分、六神/六亲/世应/旬空测试颗粒度、AI 解读与规则数据分层。\n- 风险：部分项目未确认 license；部分项目定位为娱乐或泛命理平台；GitHub API 本轮出现 rate limit，未做深度源码抓取。\n\n## 7. 下一轮扩展优先级\n\n### 第一优先：经典细化\n\n1. 《卜筮正宗》十八论逐条读书笔记。\n2. 每条读书笔记拆成：原章节、核心问题、规则、适用条件、例外、对应规则卡。\n3. 把「十八问答」改造成案例问题集。\n\n### 第二优先：反馈案例库\n\n1. 从《增删卜易》抽取至少 100 条卦例。\n2. 每条卦例按 `data/case_schema.json` 记录。\n3. 按财、婚、病、官、考试、失物、出行等专题聚类。\n4. 把规则是否应验记录成可统计字段。\n\n### 第三优先：装卦辅助\n\n1. 从公历时间自动换算月建、日辰、旬空。\n2. 继续补飞神伏神的生克关系、旺衰、空破、墓绝、合冲和应期字段。\n3. 接入案例表单，自动保存排盘字段。\n\n### 第四优先：上线增强\n\n1. 加入在线案例持久化后端。\n2. 建立真实前瞻事件验证集，至少 20 条可评分样本。\n3. 初始化 Git 仓库、确认可见性、安装或配置 GitHub CLI 后上传到 GitHub。\n4. 使用线上 URL 定期复跑桌面和移动端 QA。\n5. 把每轮公网验证结果写回 README 和本日志。\n"
+      "markdown": "# 研究与部署日志\n\n本日志记录资料调研、网站化、验证和部署状态。它不是学习正文，只说明当前版本做到了哪里、证据来自哪里、下一步还缺什么。\n\n## 1. 当前版本结论\n\n当前版本选择先做「六爻」方向，而不是同时铺开紫微斗数和六爻。原因是六爻知识可以较快拆成起卦、装卦、用神、旺衰、动变、专题和案例反馈几个结构层，适合做成本地知识库和静态检索工作台。\n\n已经完成的基础形态：\n\n- 本地知识库：Markdown 教材、来源索引、古籍阅读路线、规则卡、术语表、古籍读书笔记、案例槽位、案例 Schema。\n- 搜索工具：`scripts/search.py` 支持全文检索，`scripts/query.py` 支持按术语、规则、来源、古籍、读书笔记、案例槽位做结构化查询。\n- 静态网站：`web/index.html` 可读取内置数据包，展示学习路径、全库搜索、规则卡、术语表、古籍索引、读书笔记、案例索引、外部项目、来源库和案例录入。\n- 装卦辅助：`web/liuyao-engine.js` 已支持手工输入六爻，生成本卦、变卦、动爻、卦宫、纳甲干支、地支五行、六神、六亲、自动世应、伏神提示、旬空和月建/日辰基础状态。\n- 准确度验证：已加入 `data/accuracy_cases.json`、验证评分页面和评分 rubric；当前含 1 条方法演示和 3 条回测校准样本，回测样本不计入真实命中率。\n- GitHub 项目化：已创建并推送 public 仓库 `JY0xLU/liuyao-knowledge-base`，已加入 `.github/workflows/check.yml`，远程 Actions 已通过一次检查。\n- 后端接口：Netlify Functions 提供 `/api/search` 和 `/api/case-schema`，前端可优先用后端检索并在本地环境回退到内置数据包。\n- 部署配置：`netlify.toml`、`package.json`、`.gitignore`、`scripts/predeploy_check.py` 已加入。\n\n仍未完成的完整目标：\n\n- 还没有把经典逐章整理到逐条原文释义和真实卦例复盘级别。\n- 还没有建立大规模反馈卦例库；当前只有《增删卜易》案例抽取槽位。\n- 还没有从公历自动换算月建、日辰、旬空，也还没有完整飞神伏神生克、旺衰和应期模型。\n- 还没有在线保存案例的后端。\n- 线上站点当前是只读知识库和检索 API，尚未接入用户案例持久化。\n\n## 2. Agent Reach 状态\n\n2026-06-21 当前机器上 Agent Reach 体检结果要点：\n\n| 通道 | 状态 | 用途 |\n|---|---|---|\n| web / Jina Reader | 可用 | 读取公开网页和古籍页面 |\n| B站 / bili-cli | 可用 | 搜索课程线索、视频目录线索 |\n| RSS | 可用 | 后续订阅资料源 |\n| 小宇宙 | 可用 | 后续播客转录 |\n| Exa | 不可用 | 需要 mcporter + Exa MCP |\n| GitHub CLI | 可用但非全局 | 本项目已下载 portable `gh` 到 `.tools/` 并完成仓库创建、推送和 Actions 验证；普通 PATH 里仍不保证有 `gh` |\n| Reddit | 不可用 | 需要登录态后端 |\n| 小红书 | 不可用 | 需要 OpenCLI 或专用后端 |\n\n本轮已补 GitHub portable 工具；X、Reddit、小红书等需要登录态的通道仍按现有可用性处理。\n\n## 3. 已纳入来源边界\n\n本版来源按 A/B/C 分层：\n\n- A 类：CText、维基文库、Wikimedia Commons 等经典或公共文本。\n- B 类：现代教程、百科、流程文章。\n- C 类：视频课程、讨论帖、个人经验材料。\n\n采信方式：\n\n1. A 类用于定义术语、规则主干和古籍阅读路线。\n2. B 类用于补齐现代流程、学习顺序和术语解释。\n3. C 类用于观察课程结构和案例线索，不直接升级为规则。\n\n当前 `data/sources.json` 已收录 19 条来源，其中 A 类 5 条；新增的体育结果来源只用于赛果事实锁定，不用于提升六爻规则等级。\n\n2026-06-21 新增的装卦引擎校验来源：\n\n- `bopo/najia` README 和源码：确认卦码自下而上、纳甲表、六神、六亲、伏神字段，以及 README 中关于地天泰世应和归魂卦 bug 的修复说明。\n- `bopo/najia` 测试：确认离为火 `101101` 的纳甲结果为 `己卯、己丑、己亥、己酉、己未、己巳`。\n- Cosmic Tao 六爻教程：确认三钱法、八宫、六亲、世应、六神、伏神等现代流程说明。\n- FateMaster 世应表：确认八纯、一至五世、游魂、归魂的世应位置。\n\n2026-06-21 新增的回测校准赛果来源：\n\n- Kansas City Chiefs 官方赛报：Super Bowl LVIII，Chiefs 25-22 49ers，加时。\n- UEFA 官方赛报：EURO 2024 决赛，Spain 2-1 England，Oyarzabal 后段进球。\n- Olympics.com 官方赛报：Paris 2024 男篮决赛，USA 98-87 France，Stephen Curry 末段关键投篮。\n\n## 4. 网站化验证结果\n\n本地静态工作台已完成以下验证：\n\n| 验证项 | 结果 |\n|---|---|\n| 数据校验 | `scripts/validate.py` 通过：19 sources、16 terms、31 rules、4 classics、36 classic notes、24 case slots、4 accuracy cases、6 external projects |\n| 数据构建 | `web/scripts/build-data.py` 通过：17 docs、16 terms、31 rules、36 notes、24 case slots、4 accuracy cases、6 external projects |\n| 静态冒烟 | `web/scripts/smoke-test.py` 通过，覆盖读书笔记、案例索引、验证评分和外部项目 |\n| 函数测试 | `scripts/test-functions.mjs` 通过，覆盖 `/api/search` 核心搜索语义、验证评分搜索、外部项目搜索和案例 Schema 数据 |\n| 装卦测试 | `scripts/test-liuyao-engine.mjs` 通过，覆盖本卦、变卦、动爻、卦码、纳甲、卦宫、六神、六亲、自动世应、游魂、归魂、伏神、旬空和月建/日辰基础状态 |\n| 部署前检查 | `scripts/predeploy_check.py` 通过，覆盖公开资产路径、规则引用、读书笔记和案例槽位 |\n| 搜索脚本 | `scripts/search.py 旬空` 可返回文档、术语、规则、来源 |\n| 结构化查询 | `scripts/query.py rules 旬空`、`scripts/query.py notes 旬空`、`scripts/query.py cases 失物` 均可返回结构化结果 |\n| 浏览器桌面 QA | `http://127.0.0.1:8765/web/` 可加载，搜索「旬空」返回 15 张结果卡 |\n| 读书笔记 QA | 读书笔记页可显示 36 张十八论/十八问答笔记卡 |\n| 案例索引 QA | 案例索引页可显示 24 张《增删卜易》案例槽位卡 |\n| 外部项目 QA | 外部项目页可显示 6 个 GitHub/平台参考项目 |\n| 案例录入 QA | 案例页可填写问题字段，能显示 `case_schema.json` 标识 |\n| 移动端 QA | 390px 断点生效，`.app-shell` 变为单列布局 |\n| 控制台 | 浏览器 QA 中未记录 error/warn |\n\n`file://` 直接打开已在文件层由 `web/assets/kb-data.js` 支持；Browser 插件阻止访问 `file://` 页面，因此没有绕过安全策略做浏览器复查。\n\n## 5. Netlify 状态\n\nNetlify 上线结果：\n\n- Team: `jy0xlu`\n- Project: `liuyao-knowledge-base`\n- Site ID: `e4b6e282-daac-49d6-b251-15acf3c896c8`\n- Site URL: https://liuyao-knowledge-base.netlify.app\n- Latest deploy: 以 Netlify 项目页为准，避免部署 ID 自引用后变成旧值。\n- Deploy state: `ready`\n\n线上 HTTP 验证：\n\n| 验证项 | 结果 |\n|---|---|\n| 首页 | `https://liuyao-knowledge-base.netlify.app/` 返回 200，HTML 含 `六爻知识库` 和 `kb-data.js` |\n| 外部项目 API | `/api/search?q=najia&kind=external_projects` 返回 200，首条为 `github-bopo-najia` |\n| 案例索引 API | `/api/search?q=失物&kind=case_index` 返回 200，首条为 `zengshan-case-slot-010-lost-object-home` |\n| 案例 Schema API | `/api/case-schema` 返回 200，Schema title 为 `LiuyaoCase` |\n\n部署工具链记录：\n\n- `netlify-cli@26.1.0` 通过 `pnpm dlx` 下载时因 `esbuild@0.28.0` tarball 超时失败。\n- Netlify MCP uploader 已能上传干净部署副本；第一次上传误含 `.pnpm-runtime` 缓存导致长时间卡住，已把 `.pnpm-runtime/` 加入 `.gitignore` 并改用临时干净目录上传。\n- Netlify 当前在部署时运行 `npm run build:netlify` 重建 `web/assets/kb-data.json`、`web/assets/kb-data.js` 和 `netlify/functions/_shared/kb-data.mjs`，避免源数据变更后发布旧资产。\n\n## 6. 外部项目参考状态\n\n2026-06-20 使用 GitHub 公开 API 和 Agent Reach 搜索：\n\n- 已结构化记录 6 个参考项目：`RealKai42/liu-yao-divining`、`Brhiza/mingyu`、`bopo/najia`、`xiongdun8/liuyao`、`kentang2017/ichingshifa`、`abbeymondshein/i-ching-cli`。\n- 已写入 `data/external_projects.json` 和 [外部项目与源码参考](11-external-project-benchmark.md)。\n- 可借鉴重点：结构化输出、多入口 API/MCP/skill、装卦函数拆分、六神/六亲/世应/旬空测试颗粒度、AI 解读与规则数据分层。\n- 风险：部分项目未确认 license；部分项目定位为娱乐或泛命理平台；GitHub API 本轮出现 rate limit，未做深度源码抓取。\n\n## 7. 下一轮扩展优先级\n\n### 第一优先：经典细化\n\n1. 《卜筮正宗》十八论逐条读书笔记。\n2. 每条读书笔记拆成：原章节、核心问题、规则、适用条件、例外、对应规则卡。\n3. 把「十八问答」改造成案例问题集。\n\n### 第二优先：反馈案例库\n\n1. 从《增删卜易》抽取至少 100 条卦例。\n2. 每条卦例按 `data/case_schema.json` 记录。\n3. 按财、婚、病、官、考试、失物、出行等专题聚类。\n4. 把规则是否应验记录成可统计字段。\n\n### 第三优先：装卦辅助\n\n1. 从公历时间自动换算月建、日辰、旬空。\n2. 继续补飞神伏神的生克关系、旺衰、空破、墓绝、合冲和应期字段。\n3. 接入案例表单，自动保存排盘字段。\n\n### 第四优先：上线增强\n\n1. 加入在线案例持久化后端。\n2. 建立真实前瞻事件验证集，至少 20 条可评分样本。\n3. 创建 release 标签和 release notes。\n4. 使用线上 URL 定期复跑桌面和移动端 QA。\n5. 把每轮公网验证结果写回 README 和本日志。\n"
     },
     {
       "id": "09-bushi-zhengzong-notes",
@@ -97,14 +96,14 @@ window.LIUYAO_KB_DATA = {
       "title": "准确度验证与评分",
       "path": "docs/13-accuracy-evaluation.md",
       "summary": "准确度验证与评分 本页定义如何用已有事件、人物或比赛做可复盘验证。它的目标不是证明术数必然准确，而是避免事后补叙，把预测、结果和评分固定成可审计数据。 1. 基本原则 - 预测必须在事件发生前锁定。 - 预测必须有可判定结论，不能只写模糊象意。 - 评分必须拆维度，不能只给一个主观总分。 - 赛后不得把实际结果反写成“原来早已看出”。 - 无来源或无时间戳的",
-      "markdown": "# 准确度验证与评分\n\n本页定义如何用已有事件、人物或比赛做可复盘验证。它的目标不是证明术数必然准确，而是避免事后补叙，把预测、结果和评分固定成可审计数据。\n\n## 1. 基本原则\n\n- 预测必须在事件发生前锁定。\n- 预测必须有可判定结论，不能只写模糊象意。\n- 评分必须拆维度，不能只给一个主观总分。\n- 赛后不得把实际结果反写成“原来早已看出”。\n- 无来源或无时间戳的记录只能作为方法演示，不计入准确率。\n\n## 2. 推荐事件类型\n\n| 类型 | 示例 | 适合验证 |\n|---|---|---|\n| 体育比赛 | NBA、足球、网球、电竞 | 胜负、分差、关键变量 |\n| 公开事件 | 发布会、竞选、判决、财报 | 是否发生、方向、时间窗口 |\n| 人物阶段 | 公开人物职业节点 | 趋势、阻力、应期 |\n| 历史案例 | 已发生事件回测 | 只能验证模型解释力，不能计入前瞻准确率 |\n\n## 3. 评分维度\n\n默认 100 分：\n\n| 维度 | 权重 | 说明 |\n|---|---:|---|\n| direction | 40 | 方向是否命中，例如胜负、成败、涨跌、是否发生 |\n| margin_band | 25 | 强弱程度或分差区间是否接近 |\n| key_factors | 25 | 关键变量是否命中，例如伤病、主力状态、规则阻碍 |\n| timing_and_clarity | 10 | 是否提前锁定、是否清楚可判定 |\n\n不同事件可以调整权重，但必须在预测前记录。\n\n## 4. 数据字段\n\n结构化数据存放在 `data/accuracy_cases.json`：\n\n```json\n{\n  \"id\": \"accuracy-demo-2026-nba-finals-game-7\",\n  \"title\": \"2026 NBA Finals Game 7 赛果验证样例\",\n  \"event_type\": \"sports_match\",\n  \"event_date\": \"2026-06-18\",\n  \"subject\": \"Thunder vs Pacers\",\n  \"prediction\": {\n    \"summary\": \"...\",\n    \"made_at\": \"2026-06-18T00:00:00Z\",\n    \"method\": \"liuyao-case-rubric\"\n  },\n  \"actual_result\": {\n    \"summary\": \"...\"\n  },\n  \"score\": {\n    \"total\": 0,\n    \"dimensions\": []\n  }\n}\n```\n\n## 5. 下一步\n\n1. 建立真实赛前预测样本，先做 20 条。\n2. 每条记录保留排盘、问题、时间、预测文本和结果来源。\n3. 分别统计前瞻预测和历史回测，不混在一个准确率里。\n4. 每满 20 条复盘一次：命中率、偏差类型、规则冲突和应改字段。\n\n"
+      "markdown": "# 准确度验证与评分\n\n本页定义如何用已有事件、人物或比赛做可复盘验证。它的目标不是证明术数必然准确，而是避免事后补叙，把预测、结果和评分固定成可审计数据。\n\n## 1. 基本原则\n\n- 预测必须在事件发生前锁定。\n- 预测必须有可判定结论，不能只写模糊象意。\n- 评分必须拆维度，不能只给一个主观总分。\n- 赛后不得把实际结果反写成“原来早已看出”。\n- 无来源或无时间戳的记录只能作为方法演示，不计入准确率。\n\n## 2. 推荐事件类型\n\n| 类型 | 示例 | 适合验证 |\n|---|---|---|\n| 体育比赛 | NBA、足球、网球、电竞 | 胜负、分差、关键变量 |\n| 公开事件 | 发布会、竞选、判决、财报 | 是否发生、方向、时间窗口 |\n| 人物阶段 | 公开人物职业节点 | 趋势、阻力、应期 |\n| 历史案例 | 已发生事件回测 | 只能验证模型解释力，不能计入前瞻准确率 |\n\n## 3. 评分维度\n\n默认 100 分：\n\n| 维度 | 权重 | 说明 |\n|---|---:|---|\n| direction | 40 | 方向是否命中，例如胜负、成败、涨跌、是否发生 |\n| margin_band | 25 | 强弱程度或分差区间是否接近 |\n| key_factors | 25 | 关键变量是否命中，例如伤病、主力状态、规则阻碍 |\n| timing_and_clarity | 10 | 是否提前锁定、是否清楚可判定 |\n\n不同事件可以调整权重，但必须在预测前记录。\n\n## 4. 数据字段\n\n结构化数据存放在 `data/accuracy_cases.json`：\n\n```json\n{\n  \"id\": \"accuracy-demo-2026-nba-finals-game-7\",\n  \"title\": \"2026 NBA Finals Game 7 赛果验证样例\",\n  \"event_type\": \"sports_match\",\n  \"event_date\": \"2026-06-18\",\n  \"subject\": \"Thunder vs Pacers\",\n  \"prediction\": {\n    \"summary\": \"...\",\n    \"made_at\": \"2026-06-18T00:00:00Z\",\n    \"method\": \"liuyao-case-rubric\"\n  },\n  \"actual_result\": {\n    \"summary\": \"...\"\n  },\n  \"score\": {\n    \"total\": 0,\n    \"dimensions\": []\n  }\n}\n```\n\n## 5. 当前样本边界\n\n当前数据集含两类样本：\n\n- `method-demo`：只演示字段结构，不代表真实预测。\n- `retrospective-calibration`：使用已发生比赛校准评分表、字段粒度和错误分析方式，不进入前瞻命中率。\n\n回测样本必须把 `prediction.made_at` 写成 `retrospective-not-precommitted`，并把 `score.mode` 写成 `retrospective_calibration_not_accuracy`。这样可以用真实赛果训练记录方式，但不会把赛后知道的结果包装成预测能力。\n\n## 6. 下一步\n\n1. 建立真实赛前预测样本，先做 20 条。\n2. 每条记录保留排盘、问题、时间、预测文本和结果来源。\n3. 分别统计前瞻预测和历史回测，不混在一个准确率里。\n4. 每满 20 条复盘一次：命中率、偏差类型、规则冲突和应改字段。\n"
     },
     {
       "id": "14-github-versioning",
       "title": "GitHub 项目化与版本迭代",
       "path": "docs/14-github-versioning.md",
       "summary": "GitHub 项目化与版本迭代 本项目可以上传到 GitHub 作为专业知识库与排盘工具持续迭代。上传前必须确认仓库名、可见性和 license。 1. 建议仓库信息 | 字段 | 建议 | |---|---| | 仓库名 | `liuyao-knowledge-base` | | 描述 | 本地优先的六爻学习、检索、排盘和验证评分工作台 | | 可见性 |",
-      "markdown": "# GitHub 项目化与版本迭代\n\n本项目可以上传到 GitHub 作为专业知识库与排盘工具持续迭代。上传前必须确认仓库名、可见性和 license。\n\n## 1. 建议仓库信息\n\n| 字段 | 建议 |\n|---|---|\n| 仓库名 | `liuyao-knowledge-base` |\n| 描述 | 本地优先的六爻学习、检索、排盘和验证评分工作台 |\n| 可见性 | 由用户确认：public 或 private |\n| License | 若公开发布，建议补 `MIT` 或 `CC BY-NC-SA` 之类明确授权 |\n| 默认分支 | `main` |\n\n## 2. 版本线\n\n| 版本 | 范围 |\n|---|---|\n| v0.1 | 本地知识库、搜索、来源、规则卡、Netlify 静态站 |\n| v0.2 | 纳甲排盘：卦宫、纳甲、六亲、六神、世应、伏神 |\n| v0.3 | 旬空、月建、日辰基础状态、验证评分模型、GitHub Actions 检查 |\n| v0.4 | 公历自动换算、真实事件验证集、GitHub Actions 检查 |\n| v1.0 | 稳定文档、案例库、排盘回归集和公开发布说明 |\n\n## 3. 上传前检查\n\n必须通过：\n\n```powershell\npython .\\scripts\\check.py\n```\n\n还要人工确认：\n\n- `README.md` 不含本地绝对路径。\n- `web/assets/kb-data.json` 不含个人隐私。\n- `.pnpm-runtime/`、`.netlify/`、`node_modules/` 不会被提交。\n- 来源说明不会把 C 类材料误写成 A 类规则。\n- Netlify 站点 ID 和 deploy ID 是否适合公开展示。\n\n## 4. 建议 GitHub Actions\n\n已添加 `.github/workflows/check.yml`：\n\n```yaml\nname: check\non: [push, pull_request]\njobs:\n  check:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with:\n          python-version: \"3.11\"\n      - uses: actions/setup-node@v4\n        with:\n          node-version: \"22\"\n      - run: python scripts/check.py\n```\n\n## 5. 发布边界\n\n公开项目说明应强调：\n\n- 这是传统术数文化研究和工具项目。\n- 排盘、规则和评分是可复盘研究，不是现实决策建议。\n- 医疗、法律、金融、考试、婚恋等问题不能依赖本项目作唯一依据。\n\n## 6. 当前上传状态\n\n2026-06-21 本地检查：\n\n- 当前目录还不是 git 仓库。\n- 本机未检测到 `gh` CLI。\n- 因此本轮只完成 GitHub-ready 项目化材料和 CI 配置，没有执行远程创建或推送。\n\n上传前建议执行：\n\n```powershell\ngit init\ngit add .\ngit commit -m \"Initial Liuyao knowledge base workbench\"\ngh auth login\ngh repo create liuyao-knowledge-base --public --source=. --remote=origin --push\n```\n\n若仓库需要私有，把 `--public` 改为 `--private`。\n"
+      "markdown": "# GitHub 项目化与版本迭代\n\n本项目可以上传到 GitHub 作为专业知识库与排盘工具持续迭代。上传前必须确认仓库名、可见性和 license。\n\n## 1. 建议仓库信息\n\n| 字段 | 建议 |\n|---|---|\n| 仓库名 | `liuyao-knowledge-base` |\n| 描述 | 本地优先的六爻学习、检索、排盘和验证评分工作台 |\n| 可见性 | public |\n| License | 已补 `LICENSE`：代码 MIT；原创整理内容 CC BY-NC-SA 4.0；第三方来源保留原授权 |\n| 默认分支 | `main` |\n\n## 2. 版本线\n\n| 版本 | 范围 |\n|---|---|\n| v0.1 | 本地知识库、搜索、来源、规则卡、Netlify 静态站 |\n| v0.2 | 纳甲排盘：卦宫、纳甲、六亲、六神、世应、伏神 |\n| v0.3 | 旬空、月建、日辰基础状态、验证评分模型、GitHub Actions 检查 |\n| v0.4 | 公历自动换算、真实事件验证集、GitHub Actions 检查 |\n| v1.0 | 稳定文档、案例库、排盘回归集和公开发布说明 |\n\n## 3. 上传前检查\n\n必须通过：\n\n```powershell\npython .\\scripts\\check.py\n```\n\n还要人工确认：\n\n- `README.md` 不含本地绝对路径。\n- `web/assets/kb-data.json` 不含个人隐私。\n- `.pnpm-runtime/`、`.netlify/`、`node_modules/` 不会被提交。\n- 来源说明不会把 C 类材料误写成 A 类规则。\n- Netlify 站点 ID 和 deploy ID 是否适合公开展示。\n\n## 4. 建议 GitHub Actions\n\n已添加 `.github/workflows/check.yml`：\n\n```yaml\nname: check\non: [push, pull_request]\njobs:\n  check:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with:\n          python-version: \"3.11\"\n      - uses: actions/setup-node@v4\n        with:\n          node-version: \"22\"\n      - run: python scripts/check.py\n```\n\n## 5. 发布边界\n\n公开项目说明应强调：\n\n- 这是传统术数文化研究和工具项目。\n- 排盘、规则和评分是可复盘研究，不是现实决策建议。\n- 医疗、法律、金融、考试、婚恋等问题不能依赖本项目作唯一依据。\n\n## 6. 当前上传状态\n\n2026-06-21 已完成：\n\n- 本地仓库已初始化，默认分支为 `main`。\n- GitHub 远程仓库已创建并推送：`https://github.com/JY0xLU/liuyao-knowledge-base`。\n- 仓库可见性为 public。\n- GitHub Actions `check` 工作流已通过一次远程运行。\n- 本轮使用项目内 portable GitHub CLI 完成创建和验证；该工具位于 `.tools/`，已被 `.gitignore` 排除，不作为公开项目依赖。\n- 本机普通 Git HTTPS 可能仍受 Windows TLS 凭据问题影响；需要推送时可继续使用已验证的 `gh auth token` + Git extraheader 路线，或后续修复全局 Git 凭据。\n\n下一步：\n\n1. 建立 release 标签和 release notes。\n2. 每轮新增规则、样本或排盘能力后，先跑 `python .\\scripts\\check.py`，再提交和推送。\n3. 准确度验证只在事前锁定样本达到统计量后发布命中率结论。\n"
     },
     {
       "id": "sources",
@@ -525,6 +524,30 @@ window.LIUYAO_KB_DATA = {
       "class": "B",
       "type": "reference-table",
       "notes": "八宫世应定位表，列出八纯、一至五世、游魂、归魂的世应位置，用于校验自动世应规则。"
+    },
+    {
+      "id": "chiefs-super-bowl-lviii-result",
+      "title": "Chiefs Defeat 49ers, 25-22 - Kansas City Chiefs",
+      "url": "https://www.chiefs.com/news/chiefs-defeat-49ers-25-22-to-secure-a-second-straight-world-championship",
+      "class": "B",
+      "type": "official-result",
+      "notes": "球队官方赛报，用作 Super Bowl LVIII 回测校准样本的赛果来源；记录 Chiefs 25-22 49ers 和加时赛信息。"
+    },
+    {
+      "id": "uefa-euro-2024-final-result",
+      "title": "Spain 2-1 England - UEFA EURO 2024",
+      "url": "https://www.uefa.com/euro2024/news/028f-1b5e55d7ab8d-6ef2e1d9aee7-1000--spain-2-1-england-late-oyarzabal-winner-earns-la-roja-record-fourth-euro-crown/",
+      "class": "B",
+      "type": "official-result",
+      "notes": "UEFA 官方赛报，用作 EURO 2024 决赛回测校准样本的赛果来源；记录 Spain 2-1 England 和 Oyarzabal late winner。"
+    },
+    {
+      "id": "olympics-paris-2024-usa-france-basketball-result",
+      "title": "USA beats France 98-87 - Olympics.com",
+      "url": "https://www.olympics.com/en/news/paris-2024-basketball-steph-curry-soars-us-beats-france-98-87-for-fifth-olympic-title",
+      "class": "B",
+      "type": "official-result",
+      "notes": "Olympics.com 官方赛报，用作 Paris 2024 男篮决赛回测校准样本的赛果来源；记录 USA 98-87 France 和 Stephen Curry 末节表现。"
     }
   ],
   "rules": [
@@ -3277,6 +3300,7 @@ window.LIUYAO_KB_DATA = {
         "outcome": "pending-source-lock"
       },
       "score": {
+        "mode": "method_demo_not_accuracy",
         "total": 0,
         "dimensions": [
           {
@@ -3312,6 +3336,171 @@ window.LIUYAO_KB_DATA = {
         "case-feedback-required"
       ],
       "notes": "新增目标要求可用人物或比赛做准确度验证。本条只建立评分结构，不回填伪预测。"
+    },
+    {
+      "id": "accuracy-retro-2024-super-bowl-lviii",
+      "title": "Super Bowl LVIII Chiefs vs 49ers 回测校准",
+      "event_type": "sports_match",
+      "event_date": "2024-02-11",
+      "subject": "Kansas City Chiefs vs San Francisco 49ers",
+      "status": "retrospective-calibration",
+      "prediction": {
+        "summary": "回测校准文本：若赛前判断 Chiefs 胜、比赛胶着、关键变量集中在 Mahomes 末段执行力和加时赛处理，则赛后可按 direction、margin_band、key_factors 和 timing_and_clarity 拆分评分。该文本是赛后校准模板，不是事前锁定预测。",
+        "made_at": "retrospective-not-precommitted",
+        "method": "liuyao-case-rubric",
+        "confidence": "not_scored_as_real_prediction"
+      },
+      "actual_result": {
+        "summary": "Chiefs 25-22 49ers，比赛进入 overtime，Chiefs 完成连续夺冠。",
+        "outcome": "chiefs_win_overtime"
+      },
+      "score": {
+        "mode": "retrospective_calibration_not_accuracy",
+        "total": 0,
+        "dimensions": [
+          {
+            "name": "direction",
+            "weight": 40,
+            "value": 0,
+            "notes": "未赛前锁定，不能把赛后知道的 Chiefs 胜补成真实命中。"
+          },
+          {
+            "name": "margin_band",
+            "weight": 25,
+            "value": 0,
+            "notes": "可用于校准胶着/小分差的判定边界，但不计入准确率。"
+          },
+          {
+            "name": "key_factors",
+            "weight": 25,
+            "value": 0,
+            "notes": "可用于训练关键变量记录格式：末段执行力、核心球员处理球、加时赛变量。"
+          },
+          {
+            "name": "timing_and_clarity",
+            "weight": 10,
+            "value": 0,
+            "notes": "made_at 明确标为 retrospective-not-precommitted，因此真实评分为 0。"
+          }
+        ]
+      },
+      "source_refs": [
+        "chiefs-super-bowl-lviii-result"
+      ],
+      "linked_rule_ids": [
+        "case-feedback-required"
+      ],
+      "notes": "用途是校准评分表和防止事后诸葛；不进入前瞻命中率统计。"
+    },
+    {
+      "id": "accuracy-retro-2024-euro-final-spain-england",
+      "title": "EURO 2024 Final Spain vs England 回测校准",
+      "event_type": "sports_match",
+      "event_date": "2024-07-14",
+      "subject": "Spain vs England",
+      "status": "retrospective-calibration",
+      "prediction": {
+        "summary": "回测校准文本：若赛前判断 Spain 胜、常规时间小胜、关键变量为边路推进和后段换人终结，则可按同一 rubric 评分。该文本是赛后校准模板，不是事前锁定预测。",
+        "made_at": "retrospective-not-precommitted",
+        "method": "liuyao-case-rubric",
+        "confidence": "not_scored_as_real_prediction"
+      },
+      "actual_result": {
+        "summary": "Spain 2-1 England，Oyarzabal 后段进球帮助 Spain 夺冠。",
+        "outcome": "spain_win_2_1"
+      },
+      "score": {
+        "mode": "retrospective_calibration_not_accuracy",
+        "total": 0,
+        "dimensions": [
+          {
+            "name": "direction",
+            "weight": 40,
+            "value": 0,
+            "notes": "未赛前锁定，不能计入 Spain 胜的真实命中。"
+          },
+          {
+            "name": "margin_band",
+            "weight": 25,
+            "value": 0,
+            "notes": "可校准足球决赛中 1 球小胜与常规时间胜负的记录方式。"
+          },
+          {
+            "name": "key_factors",
+            "weight": 25,
+            "value": 0,
+            "notes": "可校准边路、换人、后段进球等变量如何写成可判定字段。"
+          },
+          {
+            "name": "timing_and_clarity",
+            "weight": 10,
+            "value": 0,
+            "notes": "made_at 明确标为 retrospective-not-precommitted，因此真实评分为 0。"
+          }
+        ]
+      },
+      "source_refs": [
+        "uefa-euro-2024-final-result"
+      ],
+      "linked_rule_ids": [
+        "case-feedback-required"
+      ],
+      "notes": "用途是训练足球类样本的分差、时间段和关键变量字段；不进入前瞻命中率统计。"
+    },
+    {
+      "id": "accuracy-retro-2024-paris-olympics-basketball-final",
+      "title": "Paris 2024 Men's Basketball Final USA vs France 回测校准",
+      "event_type": "sports_match",
+      "event_date": "2024-08-10",
+      "subject": "USA vs France",
+      "status": "retrospective-calibration",
+      "prediction": {
+        "summary": "回测校准文本：若赛前判断 USA 胜、France 能咬住比分、关键变量为 Curry 末节投射和美国队关键回合处理，则可按同一 rubric 评分。该文本是赛后校准模板，不是事前锁定预测。",
+        "made_at": "retrospective-not-precommitted",
+        "method": "liuyao-case-rubric",
+        "confidence": "not_scored_as_real_prediction"
+      },
+      "actual_result": {
+        "summary": "USA 98-87 France，USA 获得连续第五个奥运男篮冠军，Stephen Curry 在末段命中关键投篮。",
+        "outcome": "usa_win_98_87"
+      },
+      "score": {
+        "mode": "retrospective_calibration_not_accuracy",
+        "total": 0,
+        "dimensions": [
+          {
+            "name": "direction",
+            "weight": 40,
+            "value": 0,
+            "notes": "未赛前锁定，不能计入 USA 胜的真实命中。"
+          },
+          {
+            "name": "margin_band",
+            "weight": 25,
+            "value": 0,
+            "notes": "可校准篮球决赛中 10 分左右分差和主队抵抗强度的记录方式。"
+          },
+          {
+            "name": "key_factors",
+            "weight": 25,
+            "value": 0,
+            "notes": "可校准核心球员末节爆发、关键回合处理等变量如何写成可判定字段。"
+          },
+          {
+            "name": "timing_and_clarity",
+            "weight": 10,
+            "value": 0,
+            "notes": "made_at 明确标为 retrospective-not-precommitted，因此真实评分为 0。"
+          }
+        ]
+      },
+      "source_refs": [
+        "olympics-paris-2024-usa-france-basketball-result"
+      ],
+      "linked_rule_ids": [
+        "case-feedback-required"
+      ],
+      "notes": "用途是训练篮球类样本的方向、分差和关键变量字段；不进入前瞻命中率统计。"
     }
   ],
   "external_projects": [
@@ -3730,5 +3919,6 @@ window.LIUYAO_KB_DATA = {
       }
     },
     "additionalProperties": true
-  }
+  },
+  "built_at": "content-9e2465923c2a0cac"
 };
