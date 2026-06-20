@@ -1,0 +1,131 @@
+[
+  {
+    "term": "六爻",
+    "aliases": ["文王卦", "纳甲筮法", "火珠林"],
+    "category": "system",
+    "definition": "以六画卦为载体，结合纳甲、六亲、六神、世应、月日、动变和五行生克判断事情趋势的传统占筮体系。",
+    "see_also": ["纳甲", "六亲", "世应", "动爻"],
+    "source_refs": ["wikipedia-liuyao-shengua", "ctext-bushi-zhengzong"]
+  },
+  {
+    "term": "纳甲",
+    "aliases": ["浑天甲子", "纳干纳支"],
+    "category": "installation",
+    "definition": "把天干地支按固定规则纳入八卦各爻，使卦爻具有干支五行属性，是六爻装卦的底层步骤。",
+    "see_also": ["纳支", "卦宫", "六亲"],
+    "source_refs": ["chinakongzi-najia", "tianjiyao-najia", "zhihu-najia-table"]
+  },
+  {
+    "term": "卦宫",
+    "aliases": ["八宫"],
+    "category": "installation",
+    "definition": "六十四卦归属乾、坤、震、巽、坎、离、艮、兑八宫之一。六亲以卦宫五行为中心配定。",
+    "see_also": ["六亲", "世应"],
+    "source_refs": ["tianjiyao-najia", "oldbird-liuyao-system"]
+  },
+  {
+    "term": "六亲",
+    "aliases": ["父母", "兄弟", "子孙", "妻财", "官鬼"],
+    "category": "symbol",
+    "definition": "以卦宫五行为中心按五行生克定出的五类人事符号：同我为兄弟，我生为子孙，我克为妻财，克我为官鬼，生我为父母。",
+    "see_also": ["用神", "卦宫", "五行"],
+    "source_refs": ["ctext-bushi-zhengzong", "tianjiyao-najia"]
+  },
+  {
+    "term": "六神",
+    "aliases": ["青龙", "朱雀", "勾陈", "螣蛇", "白虎", "玄武"],
+    "category": "symbol",
+    "definition": "按日干从初爻起排的辅助取象层，用于观察喜庆、口舌、迟滞、惊疑、伤灾、隐私等象，不宜越过六亲旺衰成为主判。",
+    "see_also": ["日辰", "六亲"],
+    "source_refs": ["tianjiyao-najia", "fengshui36-zhuanggua"]
+  },
+  {
+    "term": "世爻",
+    "aliases": ["世"],
+    "category": "relationship",
+    "definition": "代表求测人、自身立场或自己这一方的爻。判断时常与应爻、用神一起观察。",
+    "see_also": ["应爻", "世应"],
+    "source_refs": ["oldbird-liuyao-system", "fengshui36-zhuanggua"]
+  },
+  {
+    "term": "应爻",
+    "aliases": ["应"],
+    "category": "relationship",
+    "definition": "代表对方、外部环境、事情对象或对立面的爻，与世爻隔两位。",
+    "see_also": ["世爻", "世应"],
+    "source_refs": ["oldbird-liuyao-system", "fengshui36-zhuanggua"]
+  },
+  {
+    "term": "用神",
+    "aliases": ["主用神"],
+    "category": "judgment",
+    "definition": "所问事情在卦中的代表，是断卦主线的中心。不同问题取不同六亲为用神。",
+    "see_also": ["原神", "忌神", "仇神", "六亲"],
+    "source_refs": ["ctext-bushi-zhengzong", "wikisource-zengshan-buyi"]
+  },
+  {
+    "term": "原神",
+    "aliases": [],
+    "category": "judgment",
+    "definition": "生用神者，代表帮助、资源、成事条件。原神有力发动，多能扶助用神。",
+    "see_also": ["用神", "忌神", "仇神"],
+    "source_refs": ["ctext-bushi-zhengzong"]
+  },
+  {
+    "term": "忌神",
+    "aliases": [],
+    "category": "judgment",
+    "definition": "克用神者，代表阻力、伤害、破坏条件。忌神旺动时通常不利于用神。",
+    "see_also": ["用神", "原神", "仇神"],
+    "source_refs": ["ctext-bushi-zhengzong"]
+  },
+  {
+    "term": "仇神",
+    "aliases": [],
+    "category": "judgment",
+    "definition": "克原神或生忌神者，常表示间接破坏帮助条件、增强阻力的因素。",
+    "see_also": ["用神", "原神", "忌神"],
+    "source_refs": ["ctext-bushi-zhengzong"]
+  },
+  {
+    "term": "动爻",
+    "aliases": ["发动", "变爻之源"],
+    "category": "judgment",
+    "definition": "起卦中老阳或老阴形成的变化爻，是事情变化的发动点。动爻的生克冲合常比静爻更有事件性。",
+    "see_also": ["变爻", "变卦", "化进", "化退"],
+    "source_refs": ["oldbird-liuyao-system", "wikipedia-liuyao-shengua"]
+  },
+  {
+    "term": "伏神",
+    "aliases": ["伏藏"],
+    "category": "installation",
+    "definition": "本卦中没有出现的某类六亲，借本宫首卦对应爻藏伏于飞神之下。用神不上卦时尤其重要。",
+    "see_also": ["飞神", "用神", "卦宫"],
+    "source_refs": ["ctext-bushi-zhengzong", "tianjiyao-najia"]
+  },
+  {
+    "term": "旬空",
+    "aliases": ["空亡"],
+    "category": "judgment",
+    "definition": "由日柱所在旬推得的两个空亡地支。落空多主暂虚、未实、不到位，但可出空、填实或被冲而转实。",
+    "see_also": ["日辰", "月破"],
+    "source_refs": ["ctext-bushi-zhengzong", "bilibili-bv1xw411m7uv"]
+  },
+  {
+    "term": "月破",
+    "aliases": [],
+    "category": "judgment",
+    "definition": "爻被月建所冲，称月破。用神月破多主基础受损，忌神月破则可能减轻阻力。",
+    "see_also": ["月建", "日破", "旬空"],
+    "source_refs": ["ctext-bushi-zhengzong", "bilibili-bv1xw411m7uv"]
+  },
+  {
+    "term": "应期",
+    "aliases": ["应验时间"],
+    "category": "judgment",
+    "definition": "事情显现或转折的时间推断，常从用神临值、冲合、填空、开墓、动变地支等触发点取。",
+    "see_also": ["用神", "动爻", "旬空", "墓库"],
+    "source_refs": ["wikisource-zengshan-buyi", "ctext-bushi-zhengzong"]
+  }
+]
+

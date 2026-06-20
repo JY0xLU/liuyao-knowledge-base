@@ -1,0 +1,67 @@
+#!/usr/bin/env python3
+"""Smoke-test static workbench data and core search semantics."""
+
+from __future__ import annotations
+
+import json
+import sys
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[2]
+
+
+def contains(item, query: str) -> bool:
+    return query.lower() in json.dumps(item, ensure_ascii=False).lower()
+
+
+def main() -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
+
+    html = (ROOT / "web" / "index.html").read_text(encoding="utf-8")
+    app = (ROOT / "web" / "app.js").read_text(encoding="utf-8")
+    data_path = ROOT / "web" / "assets" / "kb-data.json"
+    data_js_path = ROOT / "web" / "assets" / "kb-data.js"
+    data = json.loads(data_path.read_text(encoding="utf-8"))
+
+    checks = {
+        "html_loads_data_js": "./assets/kb-data.js" in html,
+        "app_uses_inline_data": "window.LIUYAO_KB_DATA" in app,
+        "data_js_exists": data_js_path.exists() and data_js_path.stat().st_size > 1000,
+        "has_docs": len(data["docs"]) >= 13,
+        "has_research_log": any(doc["title"] == "研究与部署日志" for doc in data["docs"]),
+        "has_bushi_notes_doc": any(doc["title"] == "卜筮正宗十八论与十八问答读书笔记" for doc in data["docs"]),
+        "has_zengshan_case_doc": any(doc["title"] == "增删卜易案例抽取索引" for doc in data["docs"]),
+        "has_external_project_doc": any(doc["title"] == "外部项目与源码参考" for doc in data["docs"]),
+        "has_accuracy_doc": any(doc["title"] == "准确度验证与评分" for doc in data["docs"]),
+        "has_github_versioning_doc": any(doc["title"] == "GitHub 项目化与版本迭代" for doc in data["docs"]),
+        "has_rules": len(data["rules"]) >= 20,
+        "has_classic_notes": len(data.get("classic_notes", [])) >= 36,
+        "has_case_index": len(data.get("case_index", [])) >= 24,
+        "has_accuracy_cases": len(data.get("accuracy_cases", [])) >= 1,
+        "has_external_projects": len(data.get("external_projects", [])) >= 6,
+        "notes_contains_void": any(contains(note, "旬空") for note in data.get("classic_notes", [])),
+        "cases_contains_lost_object": any(contains(item, "失物") for item in data.get("case_index", [])),
+        "projects_contains_najia": any(contains(item, "najia") for item in data.get("external_projects", [])),
+        "accuracy_contains_scoring": any(contains(item, "评分") for item in data.get("accuracy_cases", [])),
+        "has_sources": len(data["sources"]) >= 10,
+        "has_void_rule": any(rule["title"] == "旬空不是永远没有" for rule in data["rules"]),
+        "search_void_finds_rule": any(contains(rule, "旬空") for rule in data["rules"]),
+        "classics_contains_bushi": any(classic["title"] == "卜筮正宗" for classic in data["classics"]),
+        "case_schema_required": "judgment" in data["case_schema"].get("required", []),
+    }
+    failed = [name for name, ok in checks.items() if not ok]
+    if failed:
+        print("Smoke test failed:")
+        for name in failed:
+            print(f"- {name}")
+        return 1
+    print("Smoke test ok:")
+    for name in checks:
+        print(f"- {name}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

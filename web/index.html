@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>六爻知识库工作台</title>
+    <meta
+      name="description"
+      content="本地六爻学习、规则卡、来源索引和案例复盘工作台。"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="知识库导航">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">六</div>
+          <div>
+            <h1>六爻知识库</h1>
+            <p>学习 · 检索 · 复盘</p>
+          </div>
+        </div>
+
+        <label class="search-box">
+          <span>全库搜索</span>
+          <input id="globalSearch" type="search" placeholder="用神、旬空、卜筮正宗..." />
+        </label>
+
+        <nav class="nav-groups" aria-label="主要视图">
+          <button class="nav-button is-active" data-view="learn">学习路径</button>
+          <button class="nav-button" data-view="search">检索结果</button>
+          <button class="nav-button" data-view="rules">规则卡</button>
+          <button class="nav-button" data-view="terms">术语表</button>
+          <button class="nav-button" data-view="classics">古籍索引</button>
+          <button class="nav-button" data-view="notes">读书笔记</button>
+          <button class="nav-button" data-view="caseIndex">案例索引</button>
+          <button class="nav-button" data-view="accuracy">验证评分</button>
+          <button class="nav-button" data-view="caster">装卦辅助</button>
+          <button class="nav-button" data-view="projects">外部项目</button>
+          <button class="nav-button" data-view="sources">来源库</button>
+          <button class="nav-button" data-view="case">案例录入</button>
+        </nav>
+
+        <div class="doc-list" id="docList" aria-label="文档列表"></div>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <div>
+            <p class="section-label" id="viewLabel">学习路径</p>
+            <h2 id="viewTitle">六爻学习工作台</h2>
+          </div>
+          <div class="top-actions">
+            <button id="exportCaseButton" class="ghost-button" type="button">导出案例</button>
+            <button id="copyLinkButton" class="primary-button" type="button">复制当前视图</button>
+          </div>
+        </header>
+
+        <section id="content" class="content" aria-live="polite"></section>
+      </main>
+
+      <aside class="inspector" aria-label="上下文信息">
+        <section class="panel">
+          <h2>知识库状态</h2>
+          <dl class="stats-grid" id="statsGrid"></dl>
+        </section>
+
+        <section class="panel">
+          <h2>快速规则</h2>
+          <div id="quickRules" class="stack"></div>
+        </section>
+
+        <section class="panel">
+          <h2>A 类来源</h2>
+          <div id="primarySources" class="stack"></div>
+        </section>
+      </aside>
+    </div>
+
+    <template id="emptyTemplate">
+      <div class="empty-state">
+        <h3>没有匹配结果</h3>
+        <p>换一个关键词，或先从学习路径进入。</p>
+      </div>
+    </template>
+
+    <script src="./liuyao-engine.js"></script>
+    <script src="./assets/kb-data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>

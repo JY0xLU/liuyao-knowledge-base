@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LiuyaoCase",
+  "type": "object",
+  "required": [
+    "id",
+    "question",
+    "topic",
+    "cast_time",
+    "hexagram",
+    "judgment"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable case id, for example case-2026-06-20-001."
+    },
+    "question": {
+      "type": "string",
+      "description": "The exact question asked before casting."
+    },
+    "topic": {
+      "type": "string",
+      "enum": ["wealth", "relationship", "career", "exam", "health", "lost_object", "travel", "lawsuit", "home", "other"]
+    },
+    "querent": {
+      "type": "object",
+      "properties": {
+        "role": { "type": "string" },
+        "gender": { "type": "string" },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "time_scope": {
+      "type": "string",
+      "description": "The time range implied by the question."
+    },
+    "cast_time": {
+      "type": "string",
+      "description": "ISO 8601 timestamp when the hexagram was cast."
+    },
+    "month_branch": { "type": "string" },
+    "day_branch": { "type": "string" },
+    "void_branches": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "hexagram": {
+      "type": "object",
+      "required": ["primary", "changed", "moving_lines"],
+      "properties": {
+        "primary": { "type": "string" },
+        "changed": { "type": "string" },
+        "palace": { "type": "string" },
+        "palace_element": { "type": "string" },
+        "moving_lines": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1, "maximum": 6 }
+        }
+      },
+      "additionalProperties": true
+    },
+    "lines": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "required": ["position"],
+        "properties": {
+          "position": { "type": "integer", "minimum": 1, "maximum": 6 },
+          "branch": { "type": "string" },
+          "element": { "type": "string" },
+          "six_kin": { "type": "string" },
+          "six_spirit": { "type": "string" },
+          "world_response": { "type": "string", "enum": ["world", "response", "none"] },
+          "moving": { "type": "boolean" },
+          "changed_to": { "type": "string" },
+          "hidden_god": { "type": "string" },
+          "notes": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "use_gods": {
+      "type": "object",
+      "properties": {
+        "main": { "type": "string" },
+        "secondary": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "original": { "type": "string" },
+        "avoid": { "type": "string" },
+        "enemy": { "type": "string" },
+        "reason": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "judgment": {
+      "type": "object",
+      "required": ["summary"],
+      "properties": {
+        "summary": { "type": "string" },
+        "evidence": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "timing": { "type": "string" },
+        "risks": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "rule_refs": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "feedback": {
+      "type": "object",
+      "properties": {
+        "actual_result": { "type": "string" },
+        "outcome_date": { "type": "string" },
+        "matched": { "type": "string" },
+        "missed": { "type": "string" },
+        "review_notes": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "source_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "additionalProperties": true
+}
+

@@ -1,0 +1,12 @@
+{
+  "name": "liuyao-knowledge-base",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Local-first Liuyao knowledge base and static workbench.",
+  "scripts": {
+    "build": "python web/scripts/build-data.py",
+    "build:netlify": "python3 web/scripts/build-data.py",
+    "check": "python scripts/check.py",
+    "serve": "python -m http.server 8765"
+  }
+}

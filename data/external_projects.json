@@ -1,0 +1,174 @@
+[
+  {
+    "id": "github-realkai42-liu-yao-divining",
+    "name": "liu-yao-divining",
+    "owner": "RealKai42",
+    "url": "https://github.com/RealKai42/liu-yao-divining",
+    "platform": "GitHub",
+    "language": "Python",
+    "stars": 340,
+    "forks": 60,
+    "license": "MIT",
+    "updated_at": "2026-06-05T07:22:24Z",
+    "project_type": "streamlit-game",
+    "scope": "六爻游戏与 GPT 解读",
+    "evidence": [
+      "GitHub API repo metadata",
+      "README only shows demo images and project title",
+      "main.py uses Streamlit, gua.json, random casting, OpenAI env config and explicit entertainment disclaimer"
+    ],
+    "useful_patterns": [
+      "首屏直接进入交互，不做营销页",
+      "对占断结果加风险免责声明",
+      "把卦辞数据外置到 JSON"
+    ],
+    "risks": [
+      "源码自述为随机娱乐流程，不可作为严肃断卦准确度依据",
+      "GPT 解读依赖外部 API，不适合作为本库规则来源"
+    ],
+    "adoption": "只借鉴交互免责声明和数据外置方式，不复用判断逻辑。"
+  },
+  {
+    "id": "github-brhiza-mingyu",
+    "name": "mingyu",
+    "owner": "Brhiza",
+    "url": "https://github.com/Brhiza/mingyu",
+    "platform": "GitHub",
+    "language": "TypeScript",
+    "stars": 133,
+    "forks": 41,
+    "license": null,
+    "updated_at": "2026-06-19T19:32:26Z",
+    "project_type": "multi-system-app-api-mcp-skill",
+    "scope": "八字、紫微、星盘、六爻、梅花、奇门等一站式排盘，公开 API、MCP Server 与 skill",
+    "evidence": [
+      "GitHub API repo metadata",
+      "root contains Vite files, functions, mcp, src, tests and docs",
+      "README describes structured prompts and public API/MCP/skill surface"
+    ],
+    "useful_patterns": [
+      "把术数排盘输出成结构化数据和提示词",
+      "同时提供 Web、API、MCP、skill 多入口",
+      "项目包含 tests，可作为后续装卦器验证结构参考"
+    ],
+    "risks": [
+      "未在 API metadata 中发现明确 license，不能直接复制代码",
+      "综合平台范围很大，不适合作为本库第一阶段信息架构"
+    ],
+    "adoption": "借鉴多入口架构和结构化输出，暂不复制源码。"
+  },
+  {
+    "id": "github-bopo-najia",
+    "name": "najia",
+    "owner": "bopo",
+    "url": "https://github.com/bopo/najia",
+    "platform": "GitHub",
+    "language": "Python",
+    "stars": 42,
+    "forks": 12,
+    "license": "MIT",
+    "updated_at": "2026-06-18T08:05:04Z",
+    "project_type": "python-library",
+    "scope": "纳甲六爻排盘",
+    "evidence": [
+      "GitHub API repo metadata",
+      "README lists mark, name, bian, gong, qin6, god6, shiy, ying, naja, xkong and tests",
+      "pyproject declares click, arrow, jinja2, lunar-python and pytest"
+    ],
+    "useful_patterns": [
+      "将装卦拆为独立函数",
+      "为六神、卦宫、纳甲、六亲、旬空等核心步骤建立测试",
+      "使用 lunar-python 处理历法和干支相关字段"
+    ],
+    "risks": [
+      "README 提到历史 bug，接入前必须用本库案例和经典规则复测",
+      "库偏排盘，不覆盖断卦解释准确度"
+    ],
+    "adoption": "装卦器阶段优先参考其字段拆分和测试颗粒度。"
+  },
+  {
+    "id": "github-xiongdun8-liuyao",
+    "name": "liuyao",
+    "owner": "xiongdun8",
+    "url": "https://github.com/xiongdun8/liuyao",
+    "platform": "GitHub",
+    "language": "Python",
+    "stars": 13,
+    "forks": 3,
+    "license": "MIT",
+    "updated_at": "2026-06-13T12:48:50Z",
+    "project_type": "cli-desktop-divination",
+    "scope": "输入六爻后自动分析本卦、变卦、旺衰、旬空、卦辞爻辞，并可接 deepseek API",
+    "evidence": [
+      "GitHub API repo metadata",
+      "README includes CLI sample output with six spirits, six kin, world/response, branch element and strength score"
+    ],
+    "useful_patterns": [
+      "命令行排盘结果包含可复盘表格字段",
+      "旺衰分析输出为数值/状态，适合后续做可解释字段",
+      "AI 解读与排盘数据分层"
+    ],
+    "risks": [
+      "stars 较少，准确度需要自行回归测试",
+      "GitHub API rate limit interrupted source inspection"
+    ],
+    "adoption": "借鉴输出字段，不采信其旺衰评分为规则真值。"
+  },
+  {
+    "id": "github-kentang2017-ichingshifa",
+    "name": "ichingshifa",
+    "owner": "kentang2017",
+    "url": "https://github.com/kentang2017/ichingshifa",
+    "platform": "GitHub",
+    "language": "Python",
+    "stars": 256,
+    "forks": 107,
+    "license": "MIT",
+    "updated_at": "2026-06-17T09:46:29Z",
+    "project_type": "python-library-streamlit",
+    "scope": "周易筮法、大衍之数、六十四卦、六爻、京房易、爻辞、日期占卦",
+    "evidence": [
+      "GitHub API repo metadata",
+      "README describes Python IchingShifa and stalk divination",
+      "root contains app.py, data, docs, src and system_prompts.json"
+    ],
+    "useful_patterns": [
+      "将蓍草筮法和卦爻数据做成可复用库",
+      "保留中英文说明，方便公开项目传播",
+      "数据、文档、应用入口分层"
+    ],
+    "risks": [
+      "偏周易筮法，不等同于纳甲六爻断法",
+      "GitHub API rate limit interrupted deeper source inspection"
+    ],
+    "adoption": "用于蓍草法和六十四卦数据参考，不直接替代六爻纳甲规则。"
+  },
+  {
+    "id": "github-abbeymondshein-i-ching-cli",
+    "name": "i-ching-cli",
+    "owner": "abbeymondshein",
+    "url": "https://github.com/abbeymondshein/i-ching-cli",
+    "platform": "GitHub",
+    "language": "JavaScript",
+    "stars": 20,
+    "forks": 2,
+    "license": null,
+    "updated_at": "2026-01-24T14:58:19Z",
+    "project_type": "javascript-cli",
+    "scope": "命令行铜钱法生成 I Ching hexagram",
+    "evidence": [
+      "GitHub API repo metadata",
+      "README documents npm install -g and iching --cast",
+      "root contains cast.js and hexagrams.js"
+    ],
+    "useful_patterns": [
+      "铜钱起卦可以用极小 CLI 实现",
+      "hexagram 数据表和 casting 逻辑分离"
+    ],
+    "risks": [
+      "不是纳甲六爻排盘",
+      "未发现明确 license，不能直接复制代码"
+    ],
+    "adoption": "只作为后续起卦交互和 CLI 形态参考。"
+  }
+]

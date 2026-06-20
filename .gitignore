@@ -1,0 +1,7 @@
+.netlify/
+node_modules/
+.pnpm-runtime/
+.tools/
+__pycache__/
+.pytest_cache/
+*.pyc

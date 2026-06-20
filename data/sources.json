@@ -1,0 +1,130 @@
+[
+  {
+    "id": "ctext-bushi-zhengzong",
+    "title": "卜筮正宗 - 中国哲学书电子化计划",
+    "url": "https://ctext.org/wiki.pl?chapter=889452&if=gb",
+    "class": "A",
+    "type": "classic",
+    "notes": "用于六爻系统框架、十八论、用神、原神、忌神、仇神、飞伏、旬空、月破等核心术语追踪。"
+  },
+  {
+    "id": "wikisource-zengshan-buyi",
+    "title": "增删卜易 - 维基文库",
+    "url": "https://zh.wikisource.org/wiki/%E5%A2%9E%E5%88%AA%E5%8D%9C%E6%98%93",
+    "class": "A",
+    "type": "classic",
+    "notes": "用于分类占断和案例学习；页面提示未完全校对，引用前需核验。"
+  },
+  {
+    "id": "wikisource-huangjin-ce",
+    "title": "黄金策 - 维基文库",
+    "url": "https://zh.wikisource.org/wiki/%E9%BB%84%E9%87%91%E7%AD%96",
+    "class": "A",
+    "type": "classic",
+    "notes": "火珠林法经典资料，用于总纲和分类断法追踪。"
+  },
+  {
+    "id": "ctext-huangjin-ce",
+    "title": "黄金策 - 中国哲学书电子化计划",
+    "url": "https://ctext.org/wiki.pl?chapter=767055&if=gb&remap=gb",
+    "class": "A",
+    "type": "classic",
+    "notes": "用于与维基文库版本交叉对照。"
+  },
+  {
+    "id": "wikimedia-yi-yin",
+    "title": "易隐 PDF - Wikimedia Commons",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/2/27/NLC416-12jh005346-45345_%E6%98%93%E9%9A%B1.pdf",
+    "class": "A",
+    "type": "classic-scan",
+    "notes": "古籍扫描资料，适合后续做目录和主题索引。"
+  },
+  {
+    "id": "chinakongzi-najia",
+    "title": "纳甲说 - 中国孔子网",
+    "url": "https://www.chinakongzi.org/baike/MINGCI/zhexue/201708/t20170825_142777.htm",
+    "class": "B",
+    "type": "encyclopedia",
+    "notes": "用于纳甲源流、京房易背景和天干地支纳入八宫卦的概念解释。"
+  },
+  {
+    "id": "wikipedia-liuyao-shengua",
+    "title": "六爻神卦 - 维基百科",
+    "url": "https://zh.wikipedia.org/wiki/%E5%85%AD%E7%88%BB%E7%A5%9E%E5%8D%A6",
+    "class": "B",
+    "type": "encyclopedia",
+    "notes": "用于六爻作为民间卜卦方式的概览。"
+  },
+  {
+    "id": "tianjiyao-najia",
+    "title": "六爻纳甲怎么装卦 - 天机要",
+    "url": "https://wiki.tianjiyao.com/yijing/najia-system.html",
+    "class": "B",
+    "type": "tutorial",
+    "notes": "用于纳甲、六亲、六神、世应、伏神的现代流程整理。"
+  },
+  {
+    "id": "oldbird-liuyao-system",
+    "title": "六爻占卜体系 - OldBird",
+    "url": "https://oldbird.run/yijing/liuyaozanbutixi/",
+    "class": "B",
+    "type": "tutorial",
+    "notes": "用于起卦装卦步骤、旺衰模型、世用模型、动变模型的现代框架参考。"
+  },
+  {
+    "id": "fengshui36-zhuanggua",
+    "title": "六爻装卦纳卦 - 三六风水网",
+    "url": "https://www.36fengshui.com/ly/lyzg.asp",
+    "class": "B",
+    "type": "tutorial",
+    "notes": "用于装地支、装世应、装六亲、装六神流程参考。"
+  },
+  {
+    "id": "zhihu-najia-table",
+    "title": "六爻讲义：京房纳甲",
+    "url": "https://zhuanlan.zhihu.com/p/709241395",
+    "class": "B",
+    "type": "tutorial",
+    "notes": "用于纳支口诀和八卦纳支记忆规则。"
+  },
+  {
+    "id": "bilibili-bv1pl1kbiekj",
+    "title": "六爻纳甲入门到实战全套课程",
+    "url": "https://www.bilibili.com/video/BV1pL1KBiEKj/",
+    "class": "C",
+    "type": "video-course",
+    "notes": "课程目录覆盖八卦、地支、起卦纳甲、世应、飞伏、专题占法，可作学习顺序参考。"
+  },
+  {
+    "id": "bilibili-bv1xw411m7uv",
+    "title": "小白六爻课程",
+    "url": "https://www.bilibili.com/video/BV1Xw411M7UV/",
+    "class": "C",
+    "type": "video-course",
+    "notes": "课程目录覆盖阴阳五行、天干地支、六亲用神、六神、起卦、纳甲、世应、旬空月破。"
+  },
+  {
+    "id": "github-bopo-najia-source",
+    "title": "bopo/najia - 纳甲六爻排盘源码",
+    "url": "https://github.com/bopo/najia",
+    "class": "B",
+    "type": "open-source-code",
+    "notes": "MIT 开源纳甲六爻排盘库；用于对照卦码自下而上、纳甲表、六神、六亲、世应、伏神和历史 bug 修复说明。"
+  },
+  {
+    "id": "cosmictao-liuyao-tutorial",
+    "title": "六爻排盘教程 - Cosmic Tao",
+    "url": "https://www.cosmictao.com/zh/library/liuyao-tutorial",
+    "class": "B",
+    "type": "tutorial",
+    "notes": "现代六爻排盘教程，说明三钱法、八宫、世应、六亲、六神、伏神和月日参照，作为流程说明来源。"
+  },
+  {
+    "id": "fatemaster-shiying-guide",
+    "title": "Liuyao Najia World & Response Guide - FateMaster",
+    "url": "https://www.fatemaster.ai/guides/liuyao-shiying",
+    "class": "B",
+    "type": "reference-table",
+    "notes": "八宫世应定位表，列出八纯、一至五世、游魂、归魂的世应位置，用于校验自动世应规则。"
+  }
+]

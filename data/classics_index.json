@@ -1,0 +1,121 @@
+[
+  {
+    "id": "bushi-zhengzong",
+    "title": "卜筮正宗",
+    "source_refs": ["ctext-bushi-zhengzong"],
+    "role": "system_framework",
+    "priority": 1,
+    "read_first": [
+      "凡例",
+      "启蒙节要",
+      "以钱代蓍法",
+      "纳甲装卦歌",
+      "安世应诀",
+      "用神不上卦诀",
+      "日辰诀",
+      "月破定例",
+      "十八论"
+    ],
+    "core_topics": [
+      "用神分类",
+      "世应",
+      "原神忌神仇神",
+      "飞神伏神",
+      "六兽",
+      "月破",
+      "旬空",
+      "反吟伏吟",
+      "旺相休囚",
+      "合冲",
+      "进退神",
+      "验与不验"
+    ],
+    "knowledge_tasks": [
+      "把十八论逐条拆成规则卡",
+      "把十八问答拆成案例问题集",
+      "把装卦口诀转成机器可校验表"
+    ]
+  },
+  {
+    "id": "zengshan-buyi",
+    "title": "增删卜易",
+    "source_refs": ["wikisource-zengshan-buyi"],
+    "role": "case_training",
+    "priority": 2,
+    "read_first": [
+      "分类占验",
+      "财占",
+      "婚姻",
+      "疾病",
+      "行人",
+      "失物",
+      "求名仕宦"
+    ],
+    "core_topics": [
+      "案例拆解",
+      "用神取舍",
+      "动变证据",
+      "应期",
+      "经验辨析"
+    ],
+    "knowledge_tasks": [
+      "抽取至少 100 条有反馈卦例",
+      "按专题建立案例表",
+      "记录与卜筮正宗规则冲突处"
+    ]
+  },
+  {
+    "id": "huangjin-ce",
+    "title": "黄金策",
+    "source_refs": ["wikisource-huangjin-ce", "ctext-huangjin-ce"],
+    "role": "topic_playbook",
+    "priority": 3,
+    "read_first": [
+      "总断",
+      "婚姻",
+      "病症",
+      "医药",
+      "求名",
+      "仕宦",
+      "求财",
+      "家宅",
+      "词讼",
+      "失脱",
+      "出行",
+      "行人"
+    ],
+    "core_topics": [
+      "专题断法",
+      "象义扩展",
+      "分类问题映射"
+    ],
+    "knowledge_tasks": [
+      "把古代专题映射到现代问题",
+      "为每个专题补充主用神和辅助观察项",
+      "和增删卜易案例交叉验证"
+    ]
+  },
+  {
+    "id": "yi-yin",
+    "title": "易隐",
+    "source_refs": ["wikimedia-yi-yin"],
+    "role": "advanced_reference",
+    "priority": 4,
+    "read_first": [
+      "目录",
+      "纳甲相关章节",
+      "占例相关章节"
+    ],
+    "core_topics": [
+      "古籍脉络",
+      "门类差异",
+      "扩展术语"
+    ],
+    "knowledge_tasks": [
+      "先建目录索引",
+      "抽取术语，不急于抽规则",
+      "和前三部书做同题对照"
+    ]
+  }
+]
+

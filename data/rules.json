@@ -1,0 +1,820 @@
+[
+  {
+    "id": "question-one-matter-one-hexagram",
+    "title": "一事一卦",
+    "layer": "question",
+    "statement": "同一卦只处理一个明确问题；问题混杂会导致用神不清、反馈不可验证。",
+    "use_when": [
+      "起卦前",
+      "案例录入前",
+      "复盘时发现结论发散"
+    ],
+    "evidence_fields": [
+      "question",
+      "topic",
+      "time_scope",
+      "querent"
+    ],
+    "exceptions": [
+      "同一问题的不同侧面可以在同一卦中作为辅助线观察，但不能把多个独立问题并成一个结论。"
+    ],
+    "source_refs": [
+      "ctext-bushi-zhengzong",
+      "oldbird-liuyao-system"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "installation-before-judgment",
+    "title": "先装卦后断卦",
+    "layer": "installation",
+    "statement": "纳甲、六亲、六神、世应、伏神是断卦底盘；底盘错误会连带污染旺衰、取用和应期。",
+    "use_when": [
+      "所有断卦",
+      "排盘核对",
+      "教学练习"
+    ],
+    "evidence_fields": [
+      "hexagram",
+      "changed_hexagram",
+      "palace",
+      "branches",
+      "six_kin",
+      "six_spirits",
+      "world_response"
+    ],
+    "exceptions": [
+      "卦意占、梅花类方法可不走完整纳甲流程，但不属于本知识库主线。"
+    ],
+    "source_refs": [
+      "tianjiyao-najia",
+      "oldbird-liuyao-system",
+      "ctext-bushi-zhengzong"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "six-kin-by-palace-element",
+    "title": "六亲以卦宫五行为中心",
+    "layer": "installation",
+    "statement": "配六亲时以卦宫五行为我，同我为兄弟，我生为子孙，我克为妻财，克我为官鬼，生我为父母。",
+    "use_when": [
+      "手工装卦",
+      "排盘核对",
+      "术语教学"
+    ],
+    "evidence_fields": [
+      "palace_element",
+      "line_element",
+      "six_kin"
+    ],
+    "exceptions": [
+      "世爻可代表求测者，但不用于重新定义六亲。"
+    ],
+    "source_refs": [
+      "tianjiyao-najia",
+      "ctext-bushi-zhengzong"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "six-spirits-secondary",
+    "title": "六神只作辅助取象",
+    "layer": "installation",
+    "statement": "六神补充事件风格和细节，不应脱离用神、旺衰、动变单独断成败。",
+    "use_when": [
+      "看到青龙朱雀白虎玄武等六神时",
+      "判断细节象时"
+    ],
+    "evidence_fields": [
+      "six_spirits",
+      "main_god",
+      "strength",
+      "moving_lines"
+    ],
+    "exceptions": [
+      "具体取象可因题目变化，例如朱雀可为消息、文书、争辩或声音。"
+    ],
+    "source_refs": [
+      "tianjiyao-najia",
+      "ctext-bushi-zhengzong"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "world-response-separate-from-use-god",
+    "title": "世应和用神分开",
+    "layer": "relationship",
+    "statement": "世爻代表求测者立场，应爻代表对方或外部环境，用神代表所问事情；三者应分工观察。",
+    "use_when": [
+      "疾病",
+      "失物",
+      "官司",
+      "感情",
+      "合作"
+    ],
+    "evidence_fields": [
+      "world_line",
+      "response_line",
+      "main_god",
+      "topic"
+    ],
+    "exceptions": [
+      "某些题目中世爻也可兼作身体或自身状态，但仍需另取事情用神。"
+    ],
+    "source_refs": [
+      "tianjiyao-najia",
+      "oldbird-liuyao-system",
+      "ctext-bushi-zhengzong"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "use-god-by-topic",
+    "title": "按问题取用神",
+    "layer": "use_god",
+    "statement": "用神由问题决定：求财看妻财，求官职看官鬼，文书考试看父母，子女产出看子孙，竞争破财看兄弟。",
+    "use_when": [
+      "取主用神",
+      "专题断法",
+      "案例归类"
+    ],
+    "evidence_fields": [
+      "question",
+      "topic",
+      "main_god",
+      "secondary_gods"
+    ],
+    "exceptions": [
+      "感情、疾病、失物等题目需结合性别、对象和物象，不能机械套表。"
+    ],
+    "source_refs": [
+      "ctext-bushi-zhengzong",
+      "oldbird-liuyao-system",
+      "wikisource-zengshan-buyi"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "month-environment-day-trigger",
+    "title": "月建定大势，日辰定触发",
+    "layer": "strength",
+    "statement": "月建代表大环境和根气，日辰代表当下触发和近身作用；用神得月日生扶为有力，被冲克为空破受损。",
+    "use_when": [
+      "判断旺衰",
+      "判断近远",
+      "判断应期"
+    ],
+    "evidence_fields": [
+      "month_branch",
+      "day_branch",
+      "main_god_branch",
+      "main_god_element"
+    ],
+    "exceptions": [
+      "卦内强动爻可改变局部力量，但不能忽视月令大势。"
+    ],
+    "source_refs": [
+      "ctext-bushi-zhengzong",
+      "oldbird-liuyao-system"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "moving-line-event-trigger",
+    "title": "动爻是事件发动点",
+    "layer": "movement",
+    "statement": "静爻有象，动爻有事；动爻对用神、世爻、应爻的生克冲合，是变化机制的重点。",
+    "use_when": [
+      "分析变化",
+      "寻找转折",
+      "判断成败条件"
+    ],
+    "evidence_fields": [
+      "moving_lines",
+      "changed_lines",
+      "main_god",
+      "world_line",
+      "response_line"
+    ],
+    "exceptions": [
+      "日冲静爻可能形成暗动，需要和明动分开标注。"
+    ],
+    "source_refs": [
+      "oldbird-liuyao-system",
+      "ctext-bushi-zhengzong"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "changed-line-transmission",
+    "title": "看动爻到变爻的传导",
+    "layer": "movement",
+    "statement": "断动变时要看动爻、变爻、用神、世应之间的传导路径，而不是只看动爻单点吉凶。",
+    "use_when": [
+      "多动爻",
+      "回头生克",
+      "化进化退",
+      "通关"
+    ],
+    "evidence_fields": [
+      "moving_lines",
+      "changed_lines",
+      "transmission_path"
+    ],
+    "exceptions": [
+      "无动爻时重点转向月日、世应、用神静态旺衰。"
+    ],
+    "source_refs": [
+      "oldbird-liuyao-system",
+      "ctext-bushi-zhengzong"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "original-avoid-enemy-god",
+    "title": "原神忌神仇神看传导",
+    "layer": "use_god",
+    "statement": "生用神者为原神，克用神者为忌神，克原神或生忌神者为仇神；要看它们是否出现、发动和得月日。",
+    "use_when": [
+      "判断成败条件",
+      "分析帮助和阻力"
+    ],
+    "evidence_fields": [
+      "main_god",
+      "original_god",
+      "avoid_god",
+      "enemy_god",
+      "strength",
+      "moving_lines"
+    ],
+    "exceptions": [
+      "原神太弱或空破，虽名为原神也未必能生用；忌神受制时阻力可能减轻。"
+    ],
+    "source_refs": [
+      "ctext-bushi-zhengzong",
+      "wikisource-zengshan-buyi"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "hidden-god-when-use-god-absent",
+    "title": "用神不上卦查伏神",
+    "layer": "hidden",
+    "statement": "用神不上卦不等于事情不存在；应查伏神、飞神、月日和出伏条件。",
+    "use_when": [
+      "用神不上卦",
+      "事情隐藏",
+      "对方不出现",
+      "失物"
+    ],
+    "evidence_fields": [
+      "main_god_presence",
+      "hidden_god",
+      "flying_god",
+      "month_day"
+    ],
+    "exceptions": [
+      "伏神受飞神克制且不得月日，可能长期难显；伏神得冲生扶则可能出伏。"
+    ],
+    "source_refs": [
+      "ctext-bushi-zhengzong",
+      "tianjiyao-najia"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "void-is-temporary-unrealized",
+    "title": "旬空不是永远没有",
+    "layer": "strength",
+    "statement": "旬空多表示暂虚、未落实、不到位；出空、填实、逢冲、动化实都可能让空亡转为可用。",
+    "use_when": [
+      "用神空亡",
+      "原神空亡",
+      "忌神空亡",
+      "判断应期"
+    ],
+    "evidence_fields": [
+      "void_branches",
+      "main_god_branch",
+      "day_branch",
+      "moving_lines"
+    ],
+    "exceptions": [
+      "用神空且无生扶、无动化、又受冲克时，落空意味更重。"
+    ],
+    "source_refs": [
+      "ctext-bushi-zhengzong",
+      "oldbird-liuyao-system"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "monthly-break-heavy",
+    "title": "月破重于一时日冲",
+    "layer": "strength",
+    "statement": "爻被月建冲为月破，多主根基受损；用神月破通常不利，忌神月破则阻力减轻。",
+    "use_when": [
+      "判断用神基础",
+      "判断阻力是否真实"
+    ],
+    "evidence_fields": [
+      "month_branch",
+      "line_branch",
+      "main_god",
+      "avoid_god"
+    ],
+    "exceptions": [
+      "旺动得日生、逢合、出月后可能减轻月破影响，需结合时限判断。"
+    ],
+    "source_refs": [
+      "ctext-bushi-zhengzong",
+      "oldbird-liuyao-system"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "combine-and-clash-contextual",
+    "title": "合冲随题目定性",
+    "layer": "strength",
+    "statement": "合不一定吉，可能成事也可能绊住；冲不一定凶，可能破坏也可能冲开阻滞。",
+    "use_when": [
+      "世应相合",
+      "世应相冲",
+      "用神被合",
+      "用神被冲"
+    ],
+    "evidence_fields": [
+      "combine",
+      "clash",
+      "topic",
+      "main_god",
+      "world_response"
+    ],
+    "exceptions": [
+      "被合住的用神在需要行动的题目中常不利；被冲开的墓库或合绊有时反而成事。"
+    ],
+    "source_refs": [
+      "ctext-bushi-zhengzong"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "tomb-storage-contextual",
+    "title": "墓库要看收纳还是闭塞",
+    "layer": "strength",
+    "statement": "墓库可表示收藏、隐藏、停滞、关闭；财入库可能是存储，也可能是拿不出。",
+    "use_when": [
+      "财爻入墓",
+      "人事入墓",
+      "病象入墓",
+      "应期取开库"
+    ],
+    "evidence_fields": [
+      "tomb_branch",
+      "main_god",
+      "topic",
+      "clash"
+    ],
+    "exceptions": [
+      "问收藏、存款、入库时墓未必凶；问行动、消息、出行时墓多主迟滞。"
+    ],
+    "source_refs": [
+      "ctext-bushi-zhengzong",
+      "wikisource-zengshan-buyi"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "advance-retreat-trend",
+    "title": "进退神看趋势强弱",
+    "layer": "movement",
+    "statement": "化进多主趋势增强，化退多主趋势减弱；必须结合用神角色和月日旺衰判断。",
+    "use_when": [
+      "用神发动",
+      "忌神发动",
+      "原神发动",
+      "判断趋势"
+    ],
+    "evidence_fields": [
+      "moving_lines",
+      "changed_lines",
+      "advance_retreat",
+      "main_god"
+    ],
+    "exceptions": [
+      "忌神化退可能为喜，用神化退多为力减；不能把进退简单等同吉凶。"
+    ],
+    "source_refs": [
+      "ctext-bushi-zhengzong",
+      "wikisource-zengshan-buyi"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "timing-from-trigger-points",
+    "title": "应期从触发点取",
+    "layer": "timing",
+    "statement": "应期常从用神临值、冲合、填空、开墓、动变地支等处取，并必须符合问题时间尺度。",
+    "use_when": [
+      "判断时间",
+      "复盘时间误差",
+      "写结论"
+    ],
+    "evidence_fields": [
+      "time_scope",
+      "main_god_branch",
+      "moving_line_branch",
+      "void_branches",
+      "tomb_branch"
+    ],
+    "exceptions": [
+      "无明确时间尺度的问题只能给条件式应期，不宜硬断具体日期。"
+    ],
+    "source_refs": [
+      "ctext-bushi-zhengzong",
+      "oldbird-liuyao-system",
+      "wikisource-zengshan-buyi"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "wealth-finance-core",
+    "title": "求财以妻财为主",
+    "layer": "topic",
+    "statement": "求财、货款、收入多以妻财为主，用子孙看财源，兄弟看劫财和竞争，父母看合同票据手续。",
+    "use_when": [
+      "求财",
+      "货款",
+      "交易",
+      "投资"
+    ],
+    "evidence_fields": [
+      "topic",
+      "main_god",
+      "original_god",
+      "avoid_god",
+      "documents"
+    ],
+    "exceptions": [
+      "问工作薪资时还需看官鬼岗位和父母合同；问平台到账时父母手续可能成为关键。"
+    ],
+    "source_refs": [
+      "ctext-bushi-zhengzong",
+      "wikisource-zengshan-buyi",
+      "oldbird-liuyao-system"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "career-office-core",
+    "title": "求职仕宦以官鬼为主",
+    "layer": "topic",
+    "statement": "求职、职位、升迁、规则压力多看官鬼，父母为文书合同通知，财为资源和薪资。",
+    "use_when": [
+      "求职",
+      "升迁",
+      "职位",
+      "面试"
+    ],
+    "evidence_fields": [
+      "topic",
+      "official_god",
+      "parent_god",
+      "wealth_god",
+      "world_line"
+    ],
+    "exceptions": [
+      "自由职业或项目收入型问题可能以妻财为主、官鬼为约束或客户规则。"
+    ],
+    "source_refs": [
+      "ctext-bushi-zhengzong",
+      "wikisource-huangjin-ce",
+      "oldbird-liuyao-system"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "relationship-gender-and-response",
+    "title": "感情需兼看性别用神和世应",
+    "layer": "topic",
+    "statement": "传统男问女多取妻财，女问男多取官鬼，同时必须看世应生克合冲、竞争爻和现实阻隔。",
+    "use_when": [
+      "感情",
+      "婚姻",
+      "复合",
+      "暧昧"
+    ],
+    "evidence_fields": [
+      "querent_gender",
+      "main_god",
+      "world_line",
+      "response_line",
+      "rivals",
+      "parent_god"
+    ],
+    "exceptions": [
+      "现代关系问题应先明确对象与角色；同性关系或非传统角色不能机械套性别表。"
+    ],
+    "source_refs": [
+      "ctext-bushi-zhengzong",
+      "wikisource-huangjin-ce",
+      "wikisource-zengshan-buyi"
+    ],
+    "confidence": "B"
+  },
+  {
+    "id": "illness-medical-caution",
+    "title": "病占只能作文化记录",
+    "layer": "caution",
+    "statement": "病占可看官鬼病邪、世爻身体、子孙医药、父母报告，但不能替代正规诊断和治疗。",
+    "use_when": [
+      "疾病",
+      "健康",
+      "治疗",
+      "检查"
+    ],
+    "evidence_fields": [
+      "topic",
+      "official_god",
+      "world_line",
+      "child_god",
+      "parent_god",
+      "six_spirits"
+    ],
+    "exceptions": [
+      "任何紧急症状、诊断、用药和治疗选择都必须交给专业医疗。"
+    ],
+    "source_refs": [
+      "wikisource-huangjin-ce",
+      "ctext-bushi-zhengzong"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "lost-object-presence-and-place",
+    "title": "失物看用神、内外、伏藏和六神",
+    "layer": "topic",
+    "statement": "失物按物象取用神，兼看内外卦、伏神、玄武隐匿、勾陈固定旧处、冲出或出空时机。",
+    "use_when": [
+      "失物",
+      "遗失",
+      "被盗",
+      "寻找"
+    ],
+    "evidence_fields": [
+      "object_type",
+      "main_god",
+      "inner_outer",
+      "hidden_god",
+      "six_spirits",
+      "timing"
+    ],
+    "exceptions": [
+      "贵重物品、证件、被盗等现实问题应同步采取现实查找和报警等措施。"
+    ],
+    "source_refs": [
+      "wikisource-huangjin-ce",
+      "wikisource-zengshan-buyi"
+    ],
+    "confidence": "B"
+  },
+  {
+    "id": "case-feedback-required",
+    "title": "没有反馈的卦例不能沉淀强规则",
+    "layer": "caution",
+    "statement": "无反馈案例只能作为练习，不应作为证明规则准确的证据；规则升级需要可复盘结果。",
+    "use_when": [
+      "案例库整理",
+      "规则升级",
+      "复盘"
+    ],
+    "evidence_fields": [
+      "feedback",
+      "outcome_date",
+      "judgment",
+      "actual_result"
+    ],
+    "exceptions": [
+      "古籍无明确反馈的条目可作为文本来源，但应标注为未反馈或待核验。"
+    ],
+    "source_refs": [
+      "ctext-bushi-zhengzong",
+      "wikisource-zengshan-buyi"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "repeating-pattern-needs-feedback",
+    "title": "反吟伏吟必须看反馈形态",
+    "layer": "movement",
+    "statement": "反吟多主往复翻转，伏吟多主迟滞内耗；二者都不能只凭名称断吉凶，必须记录实际反馈中的反复、停滞或时间拖延。",
+    "use_when": [
+      "反吟",
+      "伏吟",
+      "事情反复",
+      "迟迟不动"
+    ],
+    "evidence_fields": [
+      "fan_yin_scope",
+      "fu_yin_scope",
+      "affected_lines",
+      "feedback_timeline",
+      "actual_result"
+    ],
+    "exceptions": [
+      "有强动爻、月日救应或题目本身要求重复流程时，反复未必直接等于失败。"
+    ],
+    "source_refs": [
+      "ctext-bushi-zhengzong",
+      "wikisource-zengshan-buyi"
+    ],
+    "confidence": "B"
+  },
+  {
+    "id": "rescue-must-reach-use-god",
+    "title": "救应必须传到用神",
+    "layer": "strength",
+    "statement": "绝处逢生、克处逢生只有在救应有力并且能传到用神时才成立；若救应空破、被截断或只生无关之爻，不能当作成事依据。",
+    "use_when": [
+      "用神受克",
+      "用神入绝",
+      "原神发动",
+      "通关救应"
+    ],
+    "evidence_fields": [
+      "main_god",
+      "rescue_line",
+      "transmission_path",
+      "rescue_strength",
+      "blocked_by_enemy"
+    ],
+    "exceptions": [
+      "忌神受救反而可能增强阻力；救应对象必须先判定其卦中身份。"
+    ],
+    "source_refs": [
+      "ctext-bushi-zhengzong",
+      "wikisource-zengshan-buyi"
+    ],
+    "confidence": "A"
+  },
+  {
+    "id": "hexagram-mark-bottom-to-top",
+    "title": "卦码必须自下而上",
+    "layer": "installation",
+    "statement": "六爻排盘的六位卦码按初爻到上爻记录，初二三为内卦、四五上为外卦；卦码方向错会导致卦名、纳甲和卦宫全部错位。",
+    "use_when": [
+      "手工起卦",
+      "装卦器校验",
+      "对照源码或排盘表"
+    ],
+    "evidence_fields": [
+      "lines",
+      "mark",
+      "inner_trigram",
+      "outer_trigram",
+      "hexagram_name"
+    ],
+    "exceptions": [
+      "某些 UI 会从上往下显示卦象，但底层计算仍应保留自下而上的爻序。"
+    ],
+    "source_refs": [
+      "github-bopo-najia-source",
+      "cosmictao-liuyao-tutorial"
+    ],
+    "confidence": "B"
+  },
+  {
+    "id": "auto-world-response-by-eight-palace",
+    "title": "世应按八宫世次自动定位",
+    "layer": "installation",
+    "statement": "八纯卦世在上爻，一至五世分别在初至五爻，游魂世在四爻，归魂世在三爻；应爻与世爻隔两位。",
+    "use_when": [
+      "装卦",
+      "世应用于主体客体分析",
+      "排盘回归测试"
+    ],
+    "evidence_fields": [
+      "palace",
+      "generation",
+      "world_line",
+      "response_line",
+      "soul_type"
+    ],
+    "exceptions": [
+      "若采用其他门派表格，应在案例中显式标注版本；本库默认使用八宫世次表。"
+    ],
+    "source_refs": [
+      "fatemaster-shiying-guide",
+      "github-bopo-najia-source",
+      "tianjiyao-najia"
+    ],
+    "confidence": "B"
+  },
+  {
+    "id": "hidden-god-from-palace-pure-hexagram",
+    "title": "伏神从本宫首卦补缺位六亲",
+    "layer": "hidden",
+    "statement": "本卦缺少某类六亲时，应回到该卦所属本宫首卦，查缺位六亲对应的纳甲爻作为伏神线索。",
+    "use_when": [
+      "用神不上卦",
+      "某类六亲缺位",
+      "失物或隐藏事项"
+    ],
+    "evidence_fields": [
+      "palace",
+      "missing_relative",
+      "hidden_palace_hexagram",
+      "hidden_ganzhi",
+      "hidden_line"
+    ],
+    "exceptions": [
+      "伏神只说明隐藏线索，是否可用仍要看飞神、月日、空破和动变。"
+    ],
+    "source_refs": [
+      "ctext-bushi-zhengzong",
+      "github-bopo-najia-source",
+      "cosmictao-liuyao-tutorial"
+    ],
+    "confidence": "B"
+  },
+  {
+    "id": "void-branches-by-day-ganzhi",
+    "title": "旬空按日干支计算",
+    "layer": "installation",
+    "statement": "旬空以日干支定旬，每旬缺两支；排盘时应标记每爻地支是否落入当日旬空。",
+    "use_when": [
+      "记录日干支后",
+      "判断用神是否暂虚",
+      "排盘回归测试"
+    ],
+    "evidence_fields": [
+      "day_ganzhi",
+      "void_branches",
+      "line_branch",
+      "line_void"
+    ],
+    "exceptions": [
+      "旬空不等于永远没有，仍需看出空、填实、逢冲、动化和月日生扶。"
+    ],
+    "source_refs": [
+      "github-bopo-najia-source",
+      "cosmictao-liuyao-tutorial",
+      "ctext-bushi-zhengzong"
+    ],
+    "confidence": "B"
+  },
+  {
+    "id": "month-day-basic-relation-labels",
+    "title": "月建日辰先标基础关系",
+    "layer": "strength",
+    "statement": "月建和日辰对各爻先标出生、克、同、冲等基础关系，再进入旺衰、空破、墓绝和应期综合判断。",
+    "use_when": [
+      "记录月建和日辰后",
+      "旺衰判断前",
+      "排盘证据链"
+    ],
+    "evidence_fields": [
+      "month_branch",
+      "day_branch",
+      "line_branch",
+      "month_status",
+      "day_status"
+    ],
+    "exceptions": [
+      "基础关系只是证据字段，不可单独推出完整吉凶。"
+    ],
+    "source_refs": [
+      "cosmictao-liuyao-tutorial",
+      "tianjiyao-najia",
+      "oldbird-liuyao-system"
+    ],
+    "confidence": "B"
+  },
+  {
+    "id": "prediction-scoring-requires-precommitment",
+    "title": "准确度评分必须先锁定预测",
+    "layer": "caution",
+    "statement": "比赛、人物或事件验证必须在事件发生前锁定预测文本、时间戳和评分 rubric；事后补叙不能计入准确率。",
+    "use_when": [
+      "事件验证",
+      "比赛预测",
+      "人物事件回测",
+      "准确率统计"
+    ],
+    "evidence_fields": [
+      "prediction_made_at",
+      "prediction_summary",
+      "actual_result",
+      "score_dimensions",
+      "source_refs"
+    ],
+    "exceptions": [
+      "历史回测可用于解释力训练，但必须和前瞻预测分开统计。"
+    ],
+    "source_refs": [
+      "cosmictao-liuyao-tutorial"
+    ],
+    "confidence": "B"
+  }
+]

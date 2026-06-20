@@ -1,0 +1,56 @@
+[
+  {
+    "id": "accuracy-demo-2026-nba-finals-game-7",
+    "title": "2026 NBA Finals Game 7 赛果验证样例",
+    "event_type": "sports_match",
+    "event_date": "2026-06-18",
+    "subject": "Thunder vs Pacers",
+    "status": "method-demo",
+    "prediction": {
+      "summary": "样例记录占位：赛前若给出胜负、分差区间、关键变量三类判断，可在赛后按统一 rubric 评分。",
+      "made_at": "2026-06-18T00:00:00Z",
+      "method": "liuyao-case-rubric",
+      "confidence": "not_scored_as_real_prediction"
+    },
+    "actual_result": {
+      "summary": "该条用于演示评分数据结构；实际赛果、比分、伤病和赔率信息需由后续采集器写入并锁定来源。",
+      "outcome": "pending-source-lock"
+    },
+    "score": {
+      "total": 0,
+      "dimensions": [
+        {
+          "name": "direction",
+          "weight": 40,
+          "value": 0,
+          "notes": "胜负方向。没有赛前真实预测时不得补评分。"
+        },
+        {
+          "name": "margin_band",
+          "weight": 25,
+          "value": 0,
+          "notes": "分差区间或强弱程度。"
+        },
+        {
+          "name": "key_factors",
+          "weight": 25,
+          "value": 0,
+          "notes": "命中的关键变量，例如伤病、犯规、主力表现、节奏。"
+        },
+        {
+          "name": "timing_and_clarity",
+          "weight": 10,
+          "value": 0,
+          "notes": "预测是否在事件前锁定，结论是否可判定。"
+        }
+      ]
+    },
+    "source_refs": [
+      "cosmictao-liuyao-tutorial"
+    ],
+    "linked_rule_ids": [
+      "case-feedback-required"
+    ],
+    "notes": "新增目标要求可用人物或比赛做准确度验证。本条只建立评分结构，不回填伪预测。"
+  }
+]
