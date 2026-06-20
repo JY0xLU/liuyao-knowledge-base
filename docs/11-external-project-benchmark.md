@@ -11,7 +11,7 @@
 - GitHub 公开 API、README、目录和 raw 源码抽样用于参考产品形态、数据字段和测试颗粒度。
 - 需要登录态或授权的平台暂不进入规则来源池。
 
-GitHub 搜索只做轻量 metadata、README 和少量目录/文件抽样，不做大规模源码抓取。2026-06-21 已对 `bopo/najia` 的 README、`const.py`、`utils.py` 和测试文件做 raw 源码抽样，用于排盘回归。
+GitHub 搜索只做轻量 metadata、README 和少量目录/文件抽样，不做大规模源码抓取；这是资料来源边界和速率控制。2026-06-21 已对 `bopo/najia` 的 README、`const.py`、`utils.py` 和测试文件做 raw 源码抽样，用于排盘回归。
 
 ## 2. 可借鉴项目
 
