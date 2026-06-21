@@ -116,6 +116,18 @@ export function searchPools(data) {
           item: { group, ...item },
         })),
       ),
+    ...(data.liuren_case_schema
+      ? [
+          {
+            kind: "liuren_case_schema",
+            kind_label: "六壬案例 Schema",
+            id: "liuren_case_schema",
+            title: data.liuren_case_schema.title || "LiurenCase",
+            summary: data.liuren_case_schema.description || "大六壬 / 小六壬案例录入契约",
+            item: data.liuren_case_schema,
+          },
+        ]
+      : []),
     ...(data.sources || []).map((item) => ({
       kind: "sources",
       kind_label: "来源",

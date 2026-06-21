@@ -2,6 +2,7 @@ import data from "../netlify/functions/_shared/kb-data.mjs";
 import { searchKnowledgeBase } from "../netlify/functions/_shared/search-core.mjs";
 import searchHandler from "../netlify/functions/search.mts";
 import caseSchemaHandler from "../netlify/functions/case-schema.mts";
+import liurenCaseSchemaHandler from "../netlify/functions/liuren-case-schema.mts";
 
 const failures = [];
 
@@ -25,6 +26,7 @@ const liurenTerms = searchKnowledgeBase(data, { query: "大六壬", kind: "liure
 const liurenThreeTransmissions = searchKnowledgeBase(data, { query: "三传", kind: "liuren_terms", limit: 20 });
 const liurenStructures = searchKnowledgeBase(data, { query: "初传", kind: "liuren_structures", limit: 10 });
 const xiaoLiurenStructures = searchKnowledgeBase(data, { query: "大安", kind: "liuren_structures", limit: 10 });
+const liurenCaseSchema = searchKnowledgeBase(data, { query: "four_lessons", kind: "liuren_case_schema", limit: 10 });
 const accuracy = searchKnowledgeBase(data, { query: "评分", kind: "accuracy_cases", limit: 10 });
 const retroAccuracy = searchKnowledgeBase(data, { query: "retrospective-calibration", kind: "accuracy_cases", limit: 10 });
 const all = searchKnowledgeBase(data, { query: "回头克", limit: 20 });
@@ -53,6 +55,12 @@ check(
     && data.liuren_structures.heavenly_generals.length === 12
     && data.liuren_structures.xiao_liuren_palaces.length === 6,
 );
+check(
+  "function_data_has_liuren_case_schema",
+  data.liuren_case_schema.title === "LiurenCase"
+    && data.liuren_case_schema.required.includes("subsystem")
+    && data.liuren_case_schema.properties.chart.oneOf.length === 2,
+);
 check("function_data_has_accuracy_cases", data.accuracy_cases.length >= 4);
 check("function_data_has_external_projects", data.external_projects.length >= 6);
 check("search_case_index_lost_object", lost.results.some((item) => item.id === "zengshan-case-slot-010-lost-object-home"));
@@ -73,6 +81,7 @@ check("search_liuren_terms_da", liurenTerms.results.some((item) => item.kind ===
 check("search_liuren_terms_three_transmissions", liurenThreeTransmissions.results.some((item) => item.id === "three-transmissions"));
 check("search_liuren_structures_initial", liurenStructures.results.some((item) => item.id === "transmission-initial"));
 check("search_liuren_structures_daan", xiaoLiurenStructures.results.some((item) => item.id === "xiao-palace-daan"));
+check("search_liuren_case_schema_four_lessons", liurenCaseSchema.results.some((item) => item.id === "liuren_case_schema"));
 check("search_accuracy_cases_scoring", accuracy.results.some((item) => item.id === "accuracy-demo-2026-nba-finals-game-7"));
 check("search_accuracy_cases_retro", retroAccuracy.results.some((item) => item.id === "accuracy-retro-2024-super-bowl-lviii"));
 check("search_all_back_control", all.results.some((item) => item.title.includes("回头克") || JSON.stringify(item.item).includes("回头克")));
@@ -97,6 +106,13 @@ check("handler_search_liuren_terms_ok", liurenResponse.status === 200 && liurenP
 const schemaResponse = await caseSchemaHandler(new Request("https://example.test/api/case-schema"));
 const schemaPayload = await schemaResponse.json();
 check("handler_case_schema_get_ok", schemaResponse.status === 200 && schemaPayload.schema.title === "LiuyaoCase");
+
+const liurenSchemaResponse = await liurenCaseSchemaHandler(new Request("https://example.test/api/liuren-case-schema"));
+const liurenSchemaPayload = await liurenSchemaResponse.json();
+check(
+  "handler_liuren_case_schema_get_ok",
+  liurenSchemaResponse.status === 200 && liurenSchemaPayload.schema.title === "LiurenCase",
+);
 
 const methodResponse = await searchHandler(new Request("https://example.test/api/search", { method: "POST" }));
 check("handler_rejects_post", methodResponse.status === 405);

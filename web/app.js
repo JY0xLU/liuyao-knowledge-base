@@ -230,6 +230,16 @@ function localSearchResults(query) {
           item: { group, ...item },
         })),
       ),
+    ...(state.data.liuren_case_schema
+      ? [
+          {
+            type: "六壬案例 Schema",
+            title: state.data.liuren_case_schema.title || "LiurenCase",
+            body: state.data.liuren_case_schema.description || "大六壬 / 小六壬案例录入契约",
+            item: state.data.liuren_case_schema,
+          },
+        ]
+      : []),
     ...(state.data.sources || []).map((item) => ({ type: "来源", title: item.title, body: item.notes, item })),
     ...(state.data.systems || []).map((item) => ({
       type: "体系",
@@ -324,6 +334,7 @@ function renderStats() {
     ["紫微术语", (data.ziwei_terms || []).length],
     ["奇门术语", (data.qimen_terms || []).length],
     ["六壬术语", (data.liuren_terms || []).length],
+    ["六壬 Schema", data.liuren_case_schema ? 1 : 0],
     ["规则", (data.rules || []).length],
     ["来源", (data.sources || []).length],
     ["古籍", (data.classics || []).length],
@@ -621,6 +632,9 @@ function renderLiuren() {
   const generals = (structures.heavenly_generals || []).filter((item) => matchText(item, query));
   const xiaoPalaces = (structures.xiao_liuren_palaces || []).filter((item) => matchText(item, query));
   const caseFields = (structures.case_fields || []).filter((item) => matchText(item, query));
+  const schema = state.data.liuren_case_schema || {};
+  const schemaRequired = schema.required || [];
+  const schemaProps = schema.properties || {};
 
   els.content.innerHTML = `
     <div class="hero-grid">
@@ -634,14 +648,17 @@ function renderLiuren() {
           <span class="tag">三传 ${structures.three_transmissions?.length || 0}</span>
           <span class="tag">天将 ${structures.heavenly_generals?.length || 0}</span>
           <span class="tag">六宫 ${structures.xiao_liuren_palaces?.length || 0}</span>
+          <span class="tag">Schema ${schema.title ? "1" : "0"}</span>
         </div>
       </article>
       <article class="card">
-        <h3>边界</h3>
+        <h3>案例契约</h3>
+        <p>${escapeHtml(schema.description || structures.boundary || "大六壬和小六壬分开来源、字段、案例和评分，不合并成同一断法。")}</p>
         <p>${escapeHtml(structures.boundary || "大六壬和小六壬分开来源、字段、案例和评分，不合并成同一断法。")}</p>
         <div class="tag-row">
-          <span class="tag">active-v0.7-seed</span>
-          <span class="tag">结构先行</span>
+          <span class="tag">${escapeHtml(schema.title || "LiurenCase")}</span>
+          <span class="tag">da_liuren</span>
+          <span class="tag">xiao_liuren</span>
         </div>
       </article>
     </div>
@@ -677,6 +694,35 @@ function renderLiuren() {
         ${renderStructureColumn("十二天将", generals)}
         ${renderStructureColumn("小六壬六宫", xiaoPalaces)}
         ${renderStructureColumn("案例字段", caseFields)}
+      </div>
+    </div>
+    <div class="section-band">
+      <h3>案例 Schema</h3>
+      <div class="result-grid">
+        <article class="card">
+          <div class="meta-row">
+            <span class="tag">${escapeHtml(schema.title || "LiurenCase")}</span>
+            <span class="tag">required ${schemaRequired.length}</span>
+          </div>
+          <h3>共享必填字段</h3>
+          <p>${escapeHtml(schemaRequired.join("、"))}</p>
+        </article>
+        <article class="card">
+          <div class="meta-row">
+            <span class="tag">chart.oneOf</span>
+            <span class="tag">分支录入</span>
+          </div>
+          <h3>子体系分流</h3>
+          <p>${escapeHtml(schemaProps.subsystem?.description || "大六壬与小六壬必须分开记录、搜索和评分。")}</p>
+        </article>
+        <article class="card">
+          <div class="meta-row">
+            <span class="tag">API</span>
+            <span class="tag">JSON Schema</span>
+          </div>
+          <h3>/api/liuren-case-schema</h3>
+          <p>部署后可返回六壬案例录入契约；本地数据包中同步为 liuren_case_schema。</p>
+        </article>
       </div>
     </div>
   `;

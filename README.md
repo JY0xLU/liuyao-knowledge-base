@@ -52,6 +52,7 @@ python .\scripts\query.py liuren_terms 三传 --json
 - [奇门结构 JSON](data/qimen_structures.json)
 - [六壬术语 JSON](data/liuren_terms.json)
 - [六壬结构 JSON](data/liuren_structures.json)
+- [六壬案例 Schema](data/liuren_case_schema.json)
 - [来源 JSON](data/sources.json)
 - [体系 JSON](data/systems.json)
 - [规则卡 JSON](data/rules.json)
@@ -69,7 +70,7 @@ python .\scripts\query.py liuren_terms 三传 --json
 - 奇门遁甲、大小六壬、紫微斗数、六爻的体系索引与扩展路线
 - 紫微斗数第一版资料层：36 个术语、十二宫、十四主星、四化和命盘字段结构
 - 奇门遁甲第一版资料层：25 个术语、九宫、八门、九星、八神和值符值使字段结构
-- 大六壬/小六壬第一版资料层：六壬术语、四课三传、十二天将、小六壬六宫和案例字段结构
+- 大六壬/小六壬第一版资料层：六壬术语、四课三传、十二天将、小六壬六宫、案例字段结构和独立案例 Schema
 - 起卦、动爻、变卦、本卦、互参逻辑
 - 纳甲、六亲、六神、世应、伏神等装卦层
 - 用神、原神、忌神、仇神、进退神、旬空、月破、日破等判断层
@@ -90,7 +91,7 @@ python .\scripts\query.py liuren_terms 三传 --json
 - 大量卦例拆解
 - 紫微斗数自动排盘、流派规则、命例 Schema 和案例校验
 - 奇门遁甲自动起局、盘式流派规则、案例 Schema 和案例校验
-- 大六壬/小六壬自动起课、课体规则、案例 Schema 和案例校验
+- 大六壬/小六壬自动起课、课体规则、案例校验和固定测试样本
 - 公历自动换算月建/日辰、飞神伏神生克、旺衰和应期的完整自动判断
 - 后端在线案例库
 - GitHub release 与长期版本迭代；远程仓库已创建、推送并配置 CI，release 尚未创建
@@ -170,6 +171,7 @@ npx netlify deploy --prod
 - `data/qimen_structures.json` 作为奇门盘式结构 API
 - `data/liuren_terms.json` 作为六壬术语检索 API
 - `data/liuren_structures.json` 作为六壬课式结构 API
+- `data/liuren_case_schema.json` 作为六壬案例录入和校验契约
 - `data/sources.json` 作为参考资料库
 - `data/rules.json` 作为规则卡 API
 - `data/classics_index.json` 作为古籍阅读路线 API

@@ -107,6 +107,7 @@ def main() -> int:
         "accuracy_cases": load_json("accuracy_cases.json"),
         "external_projects": load_json("external_projects.json"),
         "case_schema": load_json("case_schema.json"),
+        "liuren_case_schema": load_json("liuren_case_schema.json"),
     }
     payload["built_at"] = f"content-{content_hash(payload)}"
     OUT.parent.mkdir(parents=True, exist_ok=True)
@@ -126,6 +127,7 @@ def main() -> int:
         f"{len(payload['case_index'])} case slots, "
         f"{len(payload['accuracy_cases'])} accuracy cases, "
         f"{len(payload['external_projects'])} external projects "
+        f"and liuren case schema "
         f"-> {OUT}, {OUT_JS}, and {FUNCTION_DATA}"
     )
     return 0

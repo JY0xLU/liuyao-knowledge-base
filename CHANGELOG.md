@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.7.1 - 2026-06-21
+
+- Added `data/liuren_case_schema.json` with shared Liuren fields plus separate Da Liu Ren and Xiao Liu Ren chart branches.
+- Added `/api/liuren-case-schema` and a searchable `liuren_case_schema` backend kind while keeping `/api/case-schema` Liuyao-only.
+- Surfaced Liuren case schema metadata in the "六壬资料" workbench view and CLI query path.
+- Expanded validation, smoke tests, function tests, and predeploy checks for the new Liuren case contract.
+
 ## v0.7.0 - 2026-06-21
 
 - Added the first Da Liu Ren / Xiao Liu Ren content layer with `data/liuren_terms.json` and `data/liuren_structures.json`.

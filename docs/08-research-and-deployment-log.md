@@ -4,14 +4,14 @@
 
 ## 1. 当前版本结论
 
-当前版本以「六爻」作为第一条完整样板线，同时把奇门遁甲、大小六壬、紫微斗数拆成独立体系入口。紫微斗数已经进入第一版资料层，包含术语、十二宫、十四主星、四化和命盘字段结构；奇门遁甲也已进入第一版资料层，包含术语、九宫、八门、九星、八神和值符值使字段结构；大六壬/小六壬也已进入第一版资料层，包含子体系分层、四课、三传、十二天将、小六壬六宫和案例字段结构。这样可以先把资料分层、规则追踪、案例复盘、网站化和部署链路跑通，再逐个扩展其他体系，避免把不同规则混成一套无法校验的断法。
+当前版本以「六爻」作为第一条完整样板线，同时把奇门遁甲、大小六壬、紫微斗数拆成独立体系入口。紫微斗数已经进入第一版资料层，包含术语、十二宫、十四主星、四化和命盘字段结构；奇门遁甲也已进入第一版资料层，包含术语、九宫、八门、九星、八神和值符值使字段结构；大六壬/小六壬也已进入第一版资料层，包含子体系分层、四课、三传、十二天将、小六壬六宫、案例字段结构和独立案例 Schema。这样可以先把资料分层、规则追踪、案例复盘、网站化和部署链路跑通，再逐个扩展其他体系，避免把不同规则混成一套无法校验的断法。
 
 已经完成的基础形态：
 
 - 本地知识库：Markdown 教材、来源索引、古籍阅读路线、规则卡、术语表、古籍读书笔记、案例槽位、案例 Schema。
 - 多体系骨架：已加入 `data/systems.json` 和 [多术数体系路线图](15-multi-system-roadmap.md)，把奇门遁甲、大小六壬、紫微斗数、六爻拆成独立资料层，避免规则混写。
 - 紫微资料层：已加入 `data/ziwei_terms.json`、`data/ziwei_structures.json` 和 [紫微斗数第一版资料层](16-ziwei-foundation.md)，当前只记录结构字段，不写断语规则。
-- 六壬资料层：已加入 `data/liuren_terms.json`、`data/liuren_structures.json` 和 [大六壬 / 小六壬第一版资料层](18-liuren-foundation.md)，当前只记录结构字段，不写断语规则。
+- 六壬资料层：已加入 `data/liuren_terms.json`、`data/liuren_structures.json`、`data/liuren_case_schema.json` 和 [大六壬 / 小六壬第一版资料层](18-liuren-foundation.md)，当前只记录结构字段和案例契约，不写断语规则。
 - 搜索工具：`scripts/search.py` 支持全文检索，`scripts/query.py` 支持按术语、规则、来源、古籍、读书笔记、案例槽位做结构化查询。
 - 静态网站：`web/index.html` 可读取内置数据包，展示学习路径、全库搜索、规则卡、术语表、古籍索引、读书笔记、案例索引、外部项目、来源库和案例录入。
 - 装卦辅助：`web/liuyao-engine.js` 已支持手工输入六爻，生成本卦、变卦、动爻、卦宫、纳甲干支、地支五行、六神、六亲、自动世应、伏神提示、旬空和月建/日辰基础状态。
@@ -23,7 +23,7 @@
 仍未完成的完整目标：
 
 - 还没有把经典逐章整理到逐条原文释义和真实卦例复盘级别。
-- 还没有把紫微斗数、奇门遁甲、大六壬/小六壬展开到六爻同等深度；紫微、奇门和六壬当前都是第一版资料层。
+- 还没有把紫微斗数、奇门遁甲、大六壬/小六壬展开到六爻同等深度；紫微、奇门和六壬当前仍是第一版资料层。
 - 还没有建立大规模反馈卦例库；当前只有《增删卜易》案例抽取槽位。
 - 还没有从公历自动换算月建、日辰、旬空，也还没有完整飞神伏神生克、旺衰和应期模型。
 - 还没有在线保存案例的后端。
@@ -92,6 +92,7 @@
 | 紫微资料 QA | 新增紫微资料页和后端搜索 kind，覆盖 `ziwei_terms` 与 `ziwei_structures` |
 | 奇门资料 QA | 新增奇门资料页和后端搜索 kind，覆盖 `qimen_terms` 与 `qimen_structures` |
 | 六壬资料 QA | 新增六壬资料页和后端搜索 kind，覆盖 `liuren_terms` 与 `liuren_structures` |
+| 六壬案例 Schema QA | 新增 `liuren_case_schema` 数据包、搜索 kind 和 `/api/liuren-case-schema` |
 | 案例录入 QA | 案例页可填写问题字段，能显示 `case_schema.json` 标识 |
 | 移动端 QA | 390px 断点生效，`.app-shell` 变为单列布局 |
 | 控制台 | 浏览器 QA 中未记录 error/warn |
@@ -184,3 +185,11 @@ Netlify 上线结果：
 - 新增 [大六壬 / 小六壬第一版资料层](18-liuren-foundation.md)，明确本轮只做结构资料，不实现自动起课，不写确定性断语。
 - 接入前端“六壬资料”视图、后端 `liuren_terms` / `liuren_structures` 搜索池、CLI 查询和部署前检查。
 - 调研边界：Node fetch 可直接访问“大六壬 / 六壬”和“六曜 / 小六壬”页面；GitHub 元数据确认 `kentang2017/kinliuren`、`look-fate/liuren-ts-lib` 和 `maifusha/xiaoliuren`；B站搜索只作为 C 类学习生态线索。
+
+## 2026-06-21 六壬案例 Schema
+
+- 新增 `data/liuren_case_schema.json`：共享字段包含 `id`、`system`、`subsystem`、`topic`、`question`、`input_source`、`chart`、`judgment`、`outcome`、`score`、`license_notes` 和 `boundary_notes`。
+- 大六壬分支记录 `calendar_basis`、`month_general`、`divination_hour`、`day_ganzhi`、`plates`、`four_lessons`、`three_transmissions`、`heavenly_generals`、`lesson_types` 和 `markers`。
+- 小六壬分支记录 `qike_start`、`solar_date`、`lunar_date`、`hour_branch`、`finger_count`、`sangong`、`selected_palace`、`palace_order` 和 `favorable_hours`。
+- 新增 `/api/liuren-case-schema`，并把 `liuren_case_schema` 接入后端搜索池、本地搜索、CLI 查询、静态数据包和部署前检查。
+- 源码抽样边界：`kinliuren` 和 `maifusha/xiaoliuren` 为 MIT，可作字段和接口参考；`liuren-ts-lib` 为 Apache-2.0，可作 Web/API 字段结构参考；`wlhyl/dalurenpython` 未确认 license，只作词汇观察，不复制代码或数据。

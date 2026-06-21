@@ -39,6 +39,7 @@ def main() -> int:
     function_search_core_path = ROOT / "netlify" / "functions" / "_shared" / "search-core.mjs"
     function_search_path = ROOT / "netlify" / "functions" / "search.mts"
     function_schema_path = ROOT / "netlify" / "functions" / "case-schema.mts"
+    function_liuren_schema_path = ROOT / "netlify" / "functions" / "liuren-case-schema.mts"
     function_test_path = ROOT / "scripts" / "test-functions.mjs"
     engine_test_path = ROOT / "scripts" / "test-liuyao-engine.mjs"
     changelog_path = ROOT / "CHANGELOG.md"
@@ -58,6 +59,7 @@ def main() -> int:
         function_search_core_path,
         function_search_path,
         function_schema_path,
+        function_liuren_schema_path,
         function_test_path,
         engine_test_path,
         changelog_path,
@@ -80,6 +82,7 @@ def main() -> int:
     function_search_core = read_text(function_search_core_path)
     function_search = read_text(function_search_path)
     function_schema = read_text(function_schema_path)
+    function_liuren_schema = read_text(function_liuren_schema_path)
     changelog = read_text(changelog_path)
     readme = read_text(readme_path)
     public_text = "\n".join([readme, *(read_text(path) for path in docs_paths)])
@@ -123,6 +126,7 @@ def main() -> int:
     check("function_search_uses_modern_export", "export default async" in function_search, failures)
     check("function_search_api_path", 'path: "/api/search"' in function_search, failures)
     check("function_case_schema_api_path", 'path: "/api/case-schema"' in function_schema, failures)
+    check("function_liuren_case_schema_api_path", 'path: "/api/liuren-case-schema"' in function_liuren_schema, failures)
     check("function_search_core_has_case_index", "case_index" in function_search_core, failures)
     check("function_search_core_has_systems", "data.systems" in function_search_core, failures)
     check("function_search_core_has_accuracy_cases", "accuracy_cases" in function_search_core, failures)
@@ -133,6 +137,7 @@ def main() -> int:
     check("function_search_core_has_qimen_structures", "qimen_structures" in function_search_core, failures)
     check("function_search_core_has_liuren_terms", "liuren_terms" in function_search_core, failures)
     check("function_search_core_has_liuren_structures", "liuren_structures" in function_search_core, failures)
+    check("function_search_core_has_liuren_case_schema", "liuren_case_schema" in function_search_core, failures)
     check("docs_count", len(data.get("docs", [])) >= 13, failures)
     check(
         "research_log_in_site_data",
@@ -227,6 +232,13 @@ def main() -> int:
         and len(data.get("liuren_structures", {}).get("xiao_liuren_palaces", [])) == 6,
         failures,
     )
+    check(
+        "liuren_case_schema_available",
+        data.get("liuren_case_schema", {}).get("title") == "LiurenCase"
+        and "subsystem" in data.get("liuren_case_schema", {}).get("required", [])
+        and len(data.get("liuren_case_schema", {}).get("properties", {}).get("chart", {}).get("oneOf", [])) == 2,
+        failures,
+    )
     check("classic_notes_count", len(data.get("classic_notes", [])) >= 36, failures)
     check(
         "classic_notes_have_linked_rules",
@@ -281,7 +293,7 @@ def main() -> int:
         "npm run check" in readme and "npx netlify deploy --prod" in readme,
         failures,
     )
-    check("changelog_has_current_version", "## v0.7.0 - 2026-06-21" in changelog, failures)
+    check("changelog_has_current_version", "## v0.7.1 - 2026-06-21" in changelog, failures)
 
     if failures:
         print("\nPredeploy check failed:")

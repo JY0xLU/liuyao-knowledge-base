@@ -74,6 +74,8 @@ def main() -> int:
         and len(data.get("liuren_structures", {}).get("three_transmissions", [])) == 3
         and len(data.get("liuren_structures", {}).get("heavenly_generals", [])) == 12
         and len(data.get("liuren_structures", {}).get("xiao_liuren_palaces", [])) == 6,
+        "liuren_case_schema_required": "subsystem" in data.get("liuren_case_schema", {}).get("required", [])
+        and data.get("liuren_case_schema", {}).get("title") == "LiurenCase",
         "has_rules": len(data["rules"]) >= 20,
         "has_classic_notes": len(data.get("classic_notes", [])) >= 36,
         "has_case_index": len(data.get("case_index", [])) >= 24,

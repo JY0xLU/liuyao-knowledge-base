@@ -258,6 +258,59 @@ def check_rule_ids(case_schema, rule_ids: set[str]) -> list[str]:
     return errors
 
 
+def check_liuren_case_schema(schema, source_ids: set[str], liuren_structures) -> list[str]:
+    errors: list[str] = []
+    if schema.get("title") != "LiurenCase":
+        errors.append("liuren_case_schema title must be LiurenCase")
+    required = set(schema.get("required", []))
+    expected = {
+        "id",
+        "system",
+        "subsystem",
+        "topic",
+        "question",
+        "input_source",
+        "chart",
+        "judgment",
+        "boundary_notes",
+    }
+    missing = expected - required
+    if missing:
+        errors.append(f"liuren_case_schema missing required fields: {', '.join(sorted(missing))}")
+    props = schema.get("properties", {})
+    subsystem = props.get("subsystem", {})
+    if set(subsystem.get("enum", [])) != {"da_liuren", "xiao_liuren"}:
+        errors.append("liuren_case_schema subsystem must separate da_liuren and xiao_liuren")
+    chart = props.get("chart", {})
+    if "oneOf" not in chart:
+        errors.append("liuren_case_schema chart must use oneOf for Da/Xiao Liuren")
+    defs = schema.get("$defs", {})
+    for key in ["da_liuren_chart", "xiao_liuren_chart", "lesson", "transmission", "heavenly_general", "xiao_liuren_palace"]:
+        if key not in defs:
+            errors.append(f"liuren_case_schema missing $defs.{key}")
+    da_required = set(defs.get("da_liuren_chart", {}).get("required", []))
+    for key in ["month_general", "divination_hour", "day_ganzhi", "plates", "four_lessons", "three_transmissions"]:
+        if key not in da_required:
+            errors.append(f"liuren_case_schema da_liuren_chart missing required {key}")
+    xiao_required = set(defs.get("xiao_liuren_chart", {}).get("required", []))
+    for key in ["qike_start", "selected_palace", "sangong"]:
+        if key not in xiao_required:
+            errors.append(f"liuren_case_schema xiao_liuren_chart missing required {key}")
+    source_refs = schema.get("x_source_refs", [])
+    for ref in source_refs:
+        if ref not in source_ids:
+            errors.append(f"liuren_case_schema references missing source {ref}")
+    structure_ids = {
+        item.get("id")
+        for item in liuren_structures.get("case_fields", [])
+        if item.get("id")
+    }
+    for ref in schema.get("x_structure_refs", []):
+        if ref not in structure_ids:
+            errors.append(f"liuren_case_schema references missing liuren case field {ref}")
+    return errors
+
+
 def check_note_refs(notes, source_ids: set[str], rule_ids: set[str]) -> list[str]:
     errors: list[str] = []
     seen: set[str] = set()
@@ -417,6 +470,7 @@ def main() -> int:
     accuracy_cases = load_json("accuracy_cases.json")
     external_projects = load_json("external_projects.json")
     case_schema = load_json("case_schema.json")
+    liuren_case_schema = load_json("liuren_case_schema.json")
 
     errors: list[str] = []
     errors += require_unique(sources, "id", "sources")
@@ -437,6 +491,7 @@ def main() -> int:
     errors += check_refs(rules, source_ids, "rule")
     errors += check_refs(classics, source_ids, "classic")
     errors += check_rule_ids(case_schema, rule_ids)
+    errors += check_liuren_case_schema(liuren_case_schema, source_ids, liuren_structures)
     errors += check_note_refs(classic_notes, source_ids, rule_ids)
     errors += check_case_index_refs(case_index, source_ids, rule_ids)
     errors += check_accuracy_cases(accuracy_cases, source_ids, rule_ids)
@@ -485,7 +540,8 @@ def main() -> int:
         f"{len(rules)} rules, {len(classics)} classics, "
         f"{len(classic_notes)} classic notes, {len(case_index)} case slots, "
         f"{len(accuracy_cases)} accuracy cases, "
-        f"{len(external_projects)} external projects"
+        f"{len(external_projects)} external projects, "
+        f"liuren case schema"
     )
     return 0
 

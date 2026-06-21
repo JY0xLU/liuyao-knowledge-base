@@ -2,7 +2,7 @@
 
 本索引记录第一版知识库用到的公开资料线索。它不是完整书目，后续应继续扩展到逐章读书笔记和案例库。
 
-当前深入资料仍以六爻为主。紫微斗数已进入第一版资料层，见 [紫微斗数第一版资料层](16-ziwei-foundation.md)、`data/ziwei_terms.json` 和 `data/ziwei_structures.json`；奇门遁甲已进入第一版资料层，见 [奇门遁甲第一版资料层](17-qimen-foundation.md)、`data/qimen_terms.json` 和 `data/qimen_structures.json`；大六壬/小六壬也已进入第一版资料层，见 [大六壬 / 小六壬第一版资料层](18-liuren-foundation.md)、`data/liuren_terms.json` 和 `data/liuren_structures.json`。后续按体系独立扩展来源、术语、盘式和案例，不与六爻规则混写。
+当前深入资料仍以六爻为主。紫微斗数已进入第一版资料层，见 [紫微斗数第一版资料层](16-ziwei-foundation.md)、`data/ziwei_terms.json` 和 `data/ziwei_structures.json`；奇门遁甲已进入第一版资料层，见 [奇门遁甲第一版资料层](17-qimen-foundation.md)、`data/qimen_terms.json` 和 `data/qimen_structures.json`；大六壬/小六壬也已进入第一版资料层，见 [大六壬 / 小六壬第一版资料层](18-liuren-foundation.md)、`data/liuren_terms.json`、`data/liuren_structures.json` 和 `data/liuren_case_schema.json`。后续按体系独立扩展来源、术语、盘式和案例，不与六爻规则混写。
 
 ## A 类：经典与公共文本
 
@@ -39,9 +39,9 @@
 | banderzhm/ZhouYiLab - 玄学计算引擎 | https://github.com/banderzhm/ZhouYiLab | 多体系计算引擎，用于工程分层参考 |
 | 大六壬 - 维基百科 | https://zh.wikipedia.org/wiki/%E5%A4%A7%E5%85%AD%E5%A3%AC | 大六壬、四课、三传、天地盘、十二天将和课式结构入口 |
 | 六曜 - 维基百科 | https://zh.wikipedia.org/wiki/%E5%85%AD%E6%9B%9C | 小六壬六宫名称入口，用于大安、留连、速喜、赤口、小吉、空亡结构字段 |
-| kentang2017/kinliuren - Python 大六壬包 | https://github.com/kentang2017/kinliuren | MIT 开源大六壬包，用于四课三传字段和测试颗粒度参考 |
-| look-fate/liuren-ts-lib - 六壬神课 TypeScript lib | https://github.com/look-fate/liuren-ts-lib | Apache-2.0 开源六壬神课库，用于 Web/API 起课接口候选 |
-| maifusha/xiaoliuren - 道门小六壬 Go 实现 | https://github.com/maifusha/xiaoliuren | MIT 开源小六壬实现，用于六宫字段和轻量接口参考 |
+| kentang2017/kinliuren - Python 大六壬包 | https://github.com/kentang2017/kinliuren | MIT 开源大六壬包，用于四课三传字段、天地盘映射和测试颗粒度参考 |
+| look-fate/liuren-ts-lib - 六壬神课 TypeScript lib | https://github.com/look-fate/liuren-ts-lib | Apache-2.0 开源六壬神课库，用于 Date/四柱输入、tianDiPan、siKe、sanChuan、shenSha 等 Web/API 字段参考 |
+| maifusha/xiaoliuren - 道门小六壬 Go 实现 | https://github.com/maifusha/xiaoliuren | MIT 开源小六壬实现，用于 qike、sangong、selected_palace、六宫时辰分组等轻量接口参考 |
 
 ## C 类：视频与讨论材料
 
@@ -62,7 +62,7 @@
 - 对《黄金策》建立分类断法索引。第一版专题映射见 [古籍阅读索引](06-classics-reading-index.md)。
 - 对紫微斗数继续校对《紫微斗數全書》原文，并建立命例 Schema、排盘字段测试和流派差异记录。
 - 对奇门遁甲继续校对公开古籍入口，并抽样审计 qfdk/qimen 与 arc119226/qimen_dunjia 的起局字段。
-- 对大六壬/小六壬继续建立案例 Schema、起课字段测试和古籍来源索引。
+- 对大六壬/小六壬继续建立起课字段测试、手工案例样本和古籍来源索引。
 - 搜集至少 100 个有反馈的现代案例，按专题归档。
 - 建立「规则来源」字段：每条规则都能指向古籍、现代解释或案例统计。第一版规则卡见 [规则卡索引](07-rule-cards.md) 和 `data/rules.json`。
 
@@ -97,7 +97,7 @@
 
 - 紫微斗数已建立独立来源索引、术语和盘式结构层；下一轮进入命例 Schema、排盘算法抽样和原文校对。
 - 奇门遁甲已建立独立来源索引、术语和盘式结构层；下一轮进入案例 Schema、源码抽样和起局测试。
-- 大六壬/小六壬已建立独立来源索引、术语和课式结构层；下一轮进入案例 Schema、源码抽样和月将/占时/四课三传测试。
+- 大六壬/小六壬已建立独立来源索引、术语、课式结构层和案例 Schema；下一轮进入源码抽样样本和月将/占时/四课三传测试。
 
 2026-06-21 奇门遁甲第一版资料层核验：
 - Node fetch 可直接访问中文维基百科“奇门遁甲”和英文 Wikipedia “Qimen Dunjia” 页面。
@@ -109,3 +109,9 @@
 - Node fetch 可直接访问中文维基百科“大六壬 / 六壬”和“六曜 / 小六壬”页面；前者包含四课、三传等结构线索，后者包含大安、留连、速喜、赤口、小吉、空亡等名称入口。
 - GitHub 元数据确认 `kentang2017/kinliuren` 为 MIT Python 大六壬包，`look-fate/liuren-ts-lib` 为 Apache-2.0 TypeScript 六壬神课库，`maifusha/xiaoliuren` 为 MIT Go 小六壬实现。
 - B站搜索可返回大六壬入门、四课三传、小六壬六宫等课程线索；因终端标题编码限制，本轮只作为 C 类学习生态观察。
+
+2026-06-21 六壬案例 Schema 源码抽样：
+- `kentang2017/kinliuren` 提供太阳节气、农历月、日干支、时干支等输入概念，以及四课、三传、天地盘、地到天盘映射、天将映射等输出概念；本库只采用字段概念。
+- `look-fate/liuren-ts-lib` 提供 Date 或四柱输入，输出 `dateInfo`、`tianDiPan`、`siKe`、`sanChuan`、`dunGan`、`chuJian`、`fuJian`、`jianChu`、`shenSha`、`yinYangGuiRen` 等分组；本库采用这些分组作为 Schema 设计参考。
+- `maifusha/xiaoliuren` 提供 `qike`、阳历日期、时辰、掐指计数、三宫和六宫时辰分组等概念；解释性断语字段不进入规则层。
+- `wlhyl/dalurenpython` 未确认 license，只作字段词汇交叉观察；不复制代码、数据或 UI 文本。

@@ -1,0 +1,432 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LiurenCase",
+  "description": "大六壬 / 小六壬案例录入契约。它用于学习、检索、复盘和后续算法测试，不提供自动起课或确定性断语。",
+  "type": "object",
+  "required": [
+    "id",
+    "system",
+    "subsystem",
+    "topic",
+    "question",
+    "input_source",
+    "chart",
+    "judgment",
+    "boundary_notes"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "稳定案例 id，例如 liuren-case-2026-06-21-001。"
+    },
+    "system": {
+      "const": "liuren",
+      "description": "固定为 liuren，避免和六爻、紫微、奇门案例混写。"
+    },
+    "subsystem": {
+      "type": "string",
+      "enum": ["da_liuren", "xiao_liuren"],
+      "description": "大六壬与小六壬必须分开记录、搜索和评分。"
+    },
+    "topic": {
+      "type": "string",
+      "enum": [
+        "wealth",
+        "relationship",
+        "career",
+        "exam",
+        "health",
+        "lost_object",
+        "travel",
+        "lawsuit",
+        "home",
+        "event",
+        "other"
+      ]
+    },
+    "question": {
+      "type": "string",
+      "description": "占问原文。回测样本也必须记录问题如何被事后重构。"
+    },
+    "input_source": {
+      "type": "object",
+      "required": ["mode", "recorded_at"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["manual", "library_output", "retrospective_reconstruction", "imported"]
+        },
+        "recorded_at": {
+          "type": "string",
+          "description": "ISO 8601 记录时间。"
+        },
+        "timezone": {
+          "type": "string",
+          "description": "时区，例如 Asia/Shanghai。"
+        },
+        "calendar_source": {
+          "type": "string",
+          "description": "历法、干支或节气换算来源。"
+        },
+        "library_ref": {
+          "type": "string",
+          "description": "如果来自开源库输出，记录 source id 或 project id。"
+        },
+        "operator_notes": {
+          "type": "string",
+          "description": "人工修正、取数方式或无法复核的输入说明。"
+        }
+      },
+      "additionalProperties": true
+    },
+    "chart": {
+      "oneOf": [
+        { "$ref": "#/$defs/da_liuren_chart" },
+        { "$ref": "#/$defs/xiao_liuren_chart" }
+      ]
+    },
+    "judgment": {
+      "type": "object",
+      "required": ["summary"],
+      "properties": {
+        "summary": {
+          "type": "string",
+          "description": "复盘结论摘要。不能写成现实决策建议。"
+        },
+        "evidence": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "逐条列出来自课式、题型、来源规则或案例反馈的证据。"
+        },
+        "rule_source_refs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "引用的规则、古籍、教程或项目来源。C 类来源不能单独升级为规则。"
+        },
+        "confidence": {
+          "type": "string",
+          "enum": ["draft", "low", "medium", "high", "not_scored"]
+        },
+        "risks": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "outcome": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["unknown", "pending", "resolved", "retrospective_calibration"]
+        },
+        "actual_result": { "type": "string" },
+        "outcome_date": { "type": "string" },
+        "matched": { "type": "string" },
+        "missed": { "type": "string" },
+        "review_notes": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "score": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["not_scored", "retrospective_calibration_not_accuracy", "precommitted_accuracy"]
+        },
+        "total": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "value", "weight"],
+            "properties": {
+              "name": { "type": "string" },
+              "value": { "type": "number" },
+              "weight": { "type": "number" },
+              "notes": { "type": "string" }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "source_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "license_notes": {
+      "type": "string",
+      "description": "如果案例来自开源库输出或公开教程，记录许可、引用和不可复制边界。"
+    },
+    "boundary_notes": {
+      "type": "string",
+      "description": "说明流派、题型、资料不足、回测/事前样本状态和现实使用限制。"
+    }
+  },
+  "$defs": {
+    "branch_key": {
+      "type": "string",
+      "enum": ["zi", "chou", "yin", "mao", "chen", "si", "wu", "wei", "shen", "you", "xu", "hai"]
+    },
+    "branch_name": {
+      "type": "string",
+      "enum": ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"]
+    },
+    "heavenly_general": {
+      "type": "string",
+      "enum": ["贵人", "螣蛇", "朱雀", "六合", "勾陈", "青龙", "天空", "白虎", "太常", "玄武", "太阴", "天后"]
+    },
+    "xiao_liuren_palace": {
+      "type": "string",
+      "enum": ["大安", "留连", "速喜", "赤口", "小吉", "空亡"]
+    },
+    "lesson": {
+      "type": "object",
+      "required": ["position", "name"],
+      "properties": {
+        "position": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "name": {
+          "type": "string",
+          "enum": ["一课", "二课", "三课", "四课"]
+        },
+        "upper": { "type": "string" },
+        "lower": { "type": "string" },
+        "source_note": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "transmission": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": ["初传", "中传", "末传"]
+        },
+        "branch": { "$ref": "#/$defs/branch_name" },
+        "heavenly_general": { "$ref": "#/$defs/heavenly_general" },
+        "marker": { "type": "string" },
+        "source_note": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "da_liuren_chart": {
+      "type": "object",
+      "required": [
+        "subsystem",
+        "calendar_basis",
+        "month_general",
+        "divination_hour",
+        "day_ganzhi",
+        "plates",
+        "four_lessons",
+        "three_transmissions"
+      ],
+      "properties": {
+        "subsystem": { "const": "da_liuren" },
+        "calendar_basis": {
+          "type": "object",
+          "properties": {
+            "solar_datetime": { "type": "string" },
+            "lunar_month": { "type": "string" },
+            "solar_term": { "type": "string" },
+            "year_ganzhi": { "type": "string" },
+            "month_ganzhi": { "type": "string" },
+            "day_ganzhi": { "type": "string" },
+            "hour_ganzhi": { "type": "string" },
+            "void_branches": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/branch_name" }
+            }
+          },
+          "additionalProperties": true
+        },
+        "month_general": {
+          "type": "string",
+          "description": "月将。需要记录取法和节气来源。"
+        },
+        "divination_hour": {
+          "type": "string",
+          "description": "占时，可记录为地支或完整时辰说明。"
+        },
+        "day_ganzhi": { "type": "string" },
+        "hour_ganzhi": { "type": "string" },
+        "plates": {
+          "type": "object",
+          "properties": {
+            "heaven_plate": {
+              "type": "object",
+              "description": "推荐使用 zi/chou/yin/.../hai 作为十二宫 key。",
+              "additionalProperties": { "type": "string" }
+            },
+            "earth_plate": {
+              "type": "object",
+              "description": "推荐使用 zi/chou/yin/.../hai 作为十二宫 key。",
+              "additionalProperties": { "type": "string" }
+            },
+            "earth_to_heaven": {
+              "type": "object",
+              "description": "地盘到天盘映射。",
+              "additionalProperties": { "type": "string" }
+            }
+          },
+          "additionalProperties": true
+        },
+        "four_lessons": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": { "$ref": "#/$defs/lesson" }
+        },
+        "three_transmissions": {
+          "type": "object",
+          "required": ["initial", "middle", "final"],
+          "properties": {
+            "initial": { "$ref": "#/$defs/transmission" },
+            "middle": { "$ref": "#/$defs/transmission" },
+            "final": { "$ref": "#/$defs/transmission" }
+          },
+          "additionalProperties": true
+        },
+        "heavenly_generals": {
+          "type": "object",
+          "description": "十二天将落位。推荐使用 zi/chou/yin/.../hai 作为 key。",
+          "additionalProperties": { "$ref": "#/$defs/heavenly_general" }
+        },
+        "lesson_types": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "课体或课格标签。必须保留来源，不能写成唯一标准。"
+        },
+        "markers": {
+          "type": "object",
+          "properties": {
+            "fa_yong": { "type": "string" },
+            "day_horse": { "type": "string" },
+            "dun_gan": { "type": "string" },
+            "chu_jian": { "type": "string" },
+            "fu_jian": { "type": "string" },
+            "jian_chu": { "type": "string" },
+            "shen_sha": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "yin_yang_gui_ren": { "type": "string" }
+          },
+          "additionalProperties": true
+        },
+        "chart_json": {
+          "type": "object",
+          "description": "可选：保留原始库输出，必须去除私密字段和本机路径。",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "xiao_liuren_chart": {
+      "type": "object",
+      "required": ["subsystem", "qike_start", "selected_palace", "sangong"],
+      "properties": {
+        "subsystem": { "const": "xiao_liuren" },
+        "qike_start": {
+          "type": "string",
+          "description": "起课宫位、取数入口或人工指定起点。"
+        },
+        "solar_date": { "type": "string" },
+        "lunar_date": { "type": "string" },
+        "hour_branch": { "$ref": "#/$defs/branch_name" },
+        "finger_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sangong": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["stage", "palace"],
+            "properties": {
+              "stage": {
+                "type": "string",
+                "enum": ["month", "day", "hour", "manual"]
+              },
+              "palace": { "$ref": "#/$defs/xiao_liuren_palace" },
+              "count": { "type": "integer" },
+              "source_note": { "type": "string" }
+            },
+            "additionalProperties": true
+          }
+        },
+        "selected_palace": { "$ref": "#/$defs/xiao_liuren_palace" },
+        "palace_order": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/xiao_liuren_palace" },
+          "description": "记录本案例使用的六宫顺序，默认大安、留连、速喜、赤口、小吉、空亡。"
+        },
+        "favorable_hours": {
+          "type": "object",
+          "description": "可选：只记录分组结果，不直接采信吉凶断语。",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/branch_name" }
+          }
+        },
+        "chart_json": {
+          "type": "object",
+          "description": "可选：保留原始库输出，必须去除私密字段和本机路径。",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "x_source_refs": [
+    "wikipedia-da-liuren-zh",
+    "wikipedia-rokuyo-zh",
+    "github-kentang2017-kinliuren",
+    "github-look-fate-liuren-ts-lib",
+    "github-maifusha-xiaoliuren",
+    "github-wlhyl-dalurenpython"
+  ],
+  "x_reference_projects": [
+    {
+      "id": "github-kentang2017-kinliuren",
+      "schema_hint": "大六壬输入字段和四课三传输出颗粒度参考；MIT。"
+    },
+    {
+      "id": "github-look-fate-liuren-ts-lib",
+      "schema_hint": "Date / 四柱输入、dateInfo、tianDiPan、siKe、sanChuan、shenSha、yinYangGuiRen 等输出分组参考；Apache-2.0。"
+    },
+    {
+      "id": "github-maifusha-xiaoliuren",
+      "schema_hint": "小六壬 qike、solar date、hour branch、sangong、selected palace 与六宫时辰分组参考；MIT。"
+    },
+    {
+      "id": "github-wlhyl-dalurenpython",
+      "schema_hint": "仅作大六壬字段词汇交叉观察；未确认 license，不复制代码或数据。"
+    }
+  ],
+  "x_structure_refs": [
+    "field-liuren-subsystem",
+    "field-liuren-topic",
+    "field-liuren-inputs",
+    "field-liuren-chart-json",
+    "field-liuren-source-rule",
+    "field-liuren-outcome",
+    "field-liuren-score",
+    "field-liuren-boundary"
+  ],
+  "additionalProperties": true
+}
