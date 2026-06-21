@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.7.2 - 2026-06-21
+
+- Added `data/liuren_case_samples.json` with separate Da Liu Ren and Xiao Liu Ren schema fixtures.
+- Added `liuren_case_samples` to generated data, backend search, local search, CLI query, and the "六壬资料" workbench view.
+- Marked Liuren samples as non-accuracy fixtures with zero scoring so they cannot inflate prediction metrics.
+- Expanded validation, smoke tests, function tests, predeploy checks, and public docs for the Liuren sample layer.
+
 ## v0.7.1 - 2026-06-21
 
 - Added `data/liuren_case_schema.json` with shared Liuren fields plus separate Da Liu Ren and Xiao Liu Ren chart branches.

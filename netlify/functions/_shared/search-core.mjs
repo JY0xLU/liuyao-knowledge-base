@@ -128,6 +128,14 @@ export function searchPools(data) {
           },
         ]
       : []),
+    ...(data.liuren_case_samples || []).map((item) => ({
+      kind: "liuren_case_samples",
+      kind_label: "六壬案例样本",
+      id: item.id,
+      title: item.title || item.question,
+      summary: `${item.subsystem} ${item.topic} ${item.judgment?.summary || ""} ${item.boundary_notes || ""}`,
+      item,
+    })),
     ...(data.sources || []).map((item) => ({
       kind: "sources",
       kind_label: "来源",

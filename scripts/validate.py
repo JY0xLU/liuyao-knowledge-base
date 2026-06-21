@@ -311,6 +311,86 @@ def check_liuren_case_schema(schema, source_ids: set[str], liuren_structures) ->
     return errors
 
 
+def check_liuren_case_samples(samples, source_ids: set[str], schema) -> list[str]:
+    errors: list[str] = []
+    errors += require_unique(samples, "id", "liuren_case_samples")
+    if len(samples) < 2:
+        errors.append("liuren_case_samples must include at least one da_liuren and one xiao_liuren sample")
+
+    required = set(schema.get("required", []))
+    forbidden_liuyao_terms = {"hexagram", "lines", "six_kin", "world_response", "shi_line", "ying_line"}
+    subsystems = {item.get("subsystem") for item in samples}
+    if not {"da_liuren", "xiao_liuren"}.issubset(subsystems):
+        errors.append("liuren_case_samples must cover da_liuren and xiao_liuren")
+
+    for item in samples:
+        sample_id = item.get("id", "unknown")
+        missing = [key for key in required if key not in item]
+        if missing:
+            errors.append(f"liuren_case_sample {sample_id} missing required fields: {', '.join(sorted(missing))}")
+        if item.get("system") != "liuren":
+            errors.append(f"liuren_case_sample {sample_id} system must be liuren")
+        subsystem = item.get("subsystem")
+        if subsystem not in {"da_liuren", "xiao_liuren"}:
+            errors.append(f"liuren_case_sample {sample_id} subsystem must be da_liuren or xiao_liuren")
+
+        chart = item.get("chart", {})
+        if chart.get("subsystem") != subsystem:
+            errors.append(f"liuren_case_sample {sample_id} chart.subsystem must match subsystem")
+        if not item.get("source_refs"):
+            errors.append(f"liuren_case_sample {sample_id} missing source_refs")
+        if not item.get("boundary_notes"):
+            errors.append(f"liuren_case_sample {sample_id} missing boundary_notes")
+        if item.get("sample_type") != "schema_fixture":
+            errors.append(f"liuren_case_sample {sample_id} sample_type must be schema_fixture")
+
+        text = json.dumps(item, ensure_ascii=False)
+        for token in forbidden_liuyao_terms:
+            if token in text:
+                errors.append(f"liuren_case_sample {sample_id} contains Liuyao-only token {token}")
+        if any(token in text for token in ["C:\\Users\\", "Desktop\\新建文件夹", "NETLIFY_AUTH_TOKEN", "x-access-token"]):
+            errors.append(f"liuren_case_sample {sample_id} contains local path or private token marker")
+
+        score = item.get("score", {})
+        total = score.get("total")
+        if not isinstance(total, (int, float)) or total < 0 or total > 100:
+            errors.append(f"liuren_case_sample {sample_id} score.total must be 0-100")
+        if item.get("outcome", {}).get("status") == "retrospective_calibration":
+            if score.get("mode") != "retrospective_calibration_not_accuracy" or total != 0:
+                errors.append(f"liuren_case_sample {sample_id} retrospective fixture must not count toward accuracy")
+        if not score.get("dimensions"):
+            errors.append(f"liuren_case_sample {sample_id} missing score.dimensions")
+
+        for ref in item.get("source_refs", []):
+            if ref not in source_ids:
+                errors.append(f"liuren_case_sample {sample_id} references missing source {ref}")
+        for ref in item.get("judgment", {}).get("rule_source_refs", []):
+            if ref not in source_ids:
+                errors.append(f"liuren_case_sample {sample_id} judgment references missing source {ref}")
+
+        if subsystem == "da_liuren":
+            for key in ["calendar_basis", "month_general", "divination_hour", "day_ganzhi", "plates"]:
+                if not chart.get(key):
+                    errors.append(f"liuren_case_sample {sample_id} da_liuren chart missing {key}")
+            if len(chart.get("four_lessons", [])) != 4:
+                errors.append(f"liuren_case_sample {sample_id} da_liuren chart must have four lessons")
+            transmissions = chart.get("three_transmissions", {})
+            if not {"initial", "middle", "final"}.issubset(transmissions):
+                errors.append(f"liuren_case_sample {sample_id} da_liuren chart missing three transmissions")
+            generals = chart.get("heavenly_generals", {})
+            if len(generals) != 12:
+                errors.append(f"liuren_case_sample {sample_id} da_liuren chart must map 12 heavenly generals")
+        if subsystem == "xiao_liuren":
+            if not chart.get("qike_start") or not chart.get("selected_palace"):
+                errors.append(f"liuren_case_sample {sample_id} xiao_liuren chart missing qike_start/selected_palace")
+            if not chart.get("sangong"):
+                errors.append(f"liuren_case_sample {sample_id} xiao_liuren chart missing sangong")
+            palace_order = chart.get("palace_order", [])
+            if chart.get("selected_palace") not in palace_order:
+                errors.append(f"liuren_case_sample {sample_id} selected_palace must exist in palace_order")
+    return errors
+
+
 def check_note_refs(notes, source_ids: set[str], rule_ids: set[str]) -> list[str]:
     errors: list[str] = []
     seen: set[str] = set()
@@ -471,6 +551,7 @@ def main() -> int:
     external_projects = load_json("external_projects.json")
     case_schema = load_json("case_schema.json")
     liuren_case_schema = load_json("liuren_case_schema.json")
+    liuren_case_samples = load_json("liuren_case_samples.json")
 
     errors: list[str] = []
     errors += require_unique(sources, "id", "sources")
@@ -492,6 +573,7 @@ def main() -> int:
     errors += check_refs(classics, source_ids, "classic")
     errors += check_rule_ids(case_schema, rule_ids)
     errors += check_liuren_case_schema(liuren_case_schema, source_ids, liuren_structures)
+    errors += check_liuren_case_samples(liuren_case_samples, source_ids, liuren_case_schema)
     errors += check_note_refs(classic_notes, source_ids, rule_ids)
     errors += check_case_index_refs(case_index, source_ids, rule_ids)
     errors += check_accuracy_cases(accuracy_cases, source_ids, rule_ids)
@@ -541,7 +623,7 @@ def main() -> int:
         f"{len(classic_notes)} classic notes, {len(case_index)} case slots, "
         f"{len(accuracy_cases)} accuracy cases, "
         f"{len(external_projects)} external projects, "
-        f"liuren case schema"
+        f"liuren case schema, {len(liuren_case_samples)} liuren case samples"
     )
     return 0
 

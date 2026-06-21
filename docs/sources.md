@@ -2,7 +2,7 @@
 
 本索引记录第一版知识库用到的公开资料线索。它不是完整书目，后续应继续扩展到逐章读书笔记和案例库。
 
-当前深入资料仍以六爻为主。紫微斗数已进入第一版资料层，见 [紫微斗数第一版资料层](16-ziwei-foundation.md)、`data/ziwei_terms.json` 和 `data/ziwei_structures.json`；奇门遁甲已进入第一版资料层，见 [奇门遁甲第一版资料层](17-qimen-foundation.md)、`data/qimen_terms.json` 和 `data/qimen_structures.json`；大六壬/小六壬也已进入第一版资料层，见 [大六壬 / 小六壬第一版资料层](18-liuren-foundation.md)、`data/liuren_terms.json`、`data/liuren_structures.json` 和 `data/liuren_case_schema.json`。后续按体系独立扩展来源、术语、盘式和案例，不与六爻规则混写。
+当前深入资料仍以六爻为主。紫微斗数已进入第一版资料层，见 [紫微斗数第一版资料层](16-ziwei-foundation.md)、`data/ziwei_terms.json` 和 `data/ziwei_structures.json`；奇门遁甲已进入第一版资料层，见 [奇门遁甲第一版资料层](17-qimen-foundation.md)、`data/qimen_terms.json` 和 `data/qimen_structures.json`；大六壬/小六壬也已进入第一版资料层，见 [大六壬 / 小六壬第一版资料层](18-liuren-foundation.md)、`data/liuren_terms.json`、`data/liuren_structures.json`、`data/liuren_case_schema.json` 和 `data/liuren_case_samples.json`。后续按体系独立扩展来源、术语、盘式和案例，不与六爻规则混写。
 
 ## A 类：经典与公共文本
 
@@ -62,7 +62,7 @@
 - 对《黄金策》建立分类断法索引。第一版专题映射见 [古籍阅读索引](06-classics-reading-index.md)。
 - 对紫微斗数继续校对《紫微斗數全書》原文，并建立命例 Schema、排盘字段测试和流派差异记录。
 - 对奇门遁甲继续校对公开古籍入口，并抽样审计 qfdk/qimen 与 arc119226/qimen_dunjia 的起局字段。
-- 对大六壬/小六壬继续建立起课字段测试、手工案例样本和古籍来源索引。
+- 对大六壬/小六壬继续建立起课字段测试、可复核算法回归样本和古籍来源索引。
 - 搜集至少 100 个有反馈的现代案例，按专题归档。
 - 建立「规则来源」字段：每条规则都能指向古籍、现代解释或案例统计。第一版规则卡见 [规则卡索引](07-rule-cards.md) 和 `data/rules.json`。
 
@@ -115,3 +115,8 @@
 - `look-fate/liuren-ts-lib` 提供 Date 或四柱输入，输出 `dateInfo`、`tianDiPan`、`siKe`、`sanChuan`、`dunGan`、`chuJian`、`fuJian`、`jianChu`、`shenSha`、`yinYangGuiRen` 等分组；本库采用这些分组作为 Schema 设计参考。
 - `maifusha/xiaoliuren` 提供 `qike`、阳历日期、时辰、掐指计数、三宫和六宫时辰分组等概念；解释性断语字段不进入规则层。
 - `wlhyl/dalurenpython` 未确认 license，只作字段词汇交叉观察；不复制代码、数据或 UI 文本。
+
+2026-06-21 六壬案例样本边界：
+- `data/liuren_case_samples.json` 当前两条样本均为人工 `schema_fixture`，只验证字段、搜索、UI 和校验链路。
+- 样本引用来源 id 只说明字段概念来源，不复制开源项目源码、输出数据、教程文本或断语。
+- 样本没有真实事件结果，`score.mode` 固定为 `retrospective_calibration_not_accuracy`，不得作为命中率证据。

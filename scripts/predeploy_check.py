@@ -138,6 +138,7 @@ def main() -> int:
     check("function_search_core_has_liuren_terms", "liuren_terms" in function_search_core, failures)
     check("function_search_core_has_liuren_structures", "liuren_structures" in function_search_core, failures)
     check("function_search_core_has_liuren_case_schema", "liuren_case_schema" in function_search_core, failures)
+    check("function_search_core_has_liuren_case_samples", "liuren_case_samples" in function_search_core, failures)
     check("docs_count", len(data.get("docs", [])) >= 13, failures)
     check(
         "research_log_in_site_data",
@@ -239,6 +240,24 @@ def main() -> int:
         and len(data.get("liuren_case_schema", {}).get("properties", {}).get("chart", {}).get("oneOf", [])) == 2,
         failures,
     )
+    check(
+        "liuren_case_samples_available",
+        len(data.get("liuren_case_samples", [])) >= 2
+        and {"da_liuren", "xiao_liuren"}.issubset(
+            {item.get("subsystem") for item in data.get("liuren_case_samples", [])}
+        ),
+        failures,
+    )
+    check(
+        "liuren_case_samples_not_accuracy",
+        all(
+            item.get("sample_type") == "schema_fixture"
+            and item.get("score", {}).get("mode") == "retrospective_calibration_not_accuracy"
+            and item.get("score", {}).get("total") == 0
+            for item in data.get("liuren_case_samples", [])
+        ),
+        failures,
+    )
     check("classic_notes_count", len(data.get("classic_notes", [])) >= 36, failures)
     check(
         "classic_notes_have_linked_rules",
@@ -293,7 +312,7 @@ def main() -> int:
         "npm run check" in readme and "npx netlify deploy --prod" in readme,
         failures,
     )
-    check("changelog_has_current_version", "## v0.7.1 - 2026-06-21" in changelog, failures)
+    check("changelog_has_current_version", "## v0.7.2 - 2026-06-21" in changelog, failures)
 
     if failures:
         print("\nPredeploy check failed:")

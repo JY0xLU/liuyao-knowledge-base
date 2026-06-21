@@ -1,0 +1,294 @@
+[
+  {
+    "id": "liuren-sample-da-structure-001",
+    "system": "liuren",
+    "subsystem": "da_liuren",
+    "sample_type": "schema_fixture",
+    "title": "大六壬案例字段结构样本",
+    "topic": "event",
+    "question": "结构样本：记录一条大六壬课式应包含哪些字段，不作为真实占断或预测。",
+    "input_source": {
+      "mode": "manual",
+      "recorded_at": "2026-06-21T00:00:00+08:00",
+      "timezone": "Asia/Shanghai",
+      "calendar_source": "manual-fixture-no-calendar-validation",
+      "library_ref": "github-look-fate-liuren-ts-lib",
+      "operator_notes": "本样本只用于验证数据结构、检索和 UI 展示；月将、干支、课传值均为人工示例，不代表算法输出。"
+    },
+    "chart": {
+      "subsystem": "da_liuren",
+      "calendar_basis": {
+        "solar_datetime": "2026-06-21T09:00:00+08:00",
+        "solar_term": "示例节气字段",
+        "year_ganzhi": "丙午",
+        "month_ganzhi": "甲午",
+        "day_ganzhi": "丙辰",
+        "hour_ganzhi": "癸巳",
+        "void_branches": ["子", "丑"],
+        "fixture_notice": "未用历法库复核。"
+      },
+      "month_general": "未（示例值）",
+      "divination_hour": "巳时（示例值）",
+      "day_ganzhi": "丙辰（示例值）",
+      "hour_ganzhi": "癸巳（示例值）",
+      "plates": {
+        "earth_plate": {
+          "zi": "子",
+          "chou": "丑",
+          "yin": "寅",
+          "mao": "卯",
+          "chen": "辰",
+          "si": "巳",
+          "wu": "午",
+          "wei": "未",
+          "shen": "申",
+          "you": "酉",
+          "xu": "戌",
+          "hai": "亥"
+        },
+        "heaven_plate": {
+          "zi": "未",
+          "chou": "申",
+          "yin": "酉",
+          "mao": "戌",
+          "chen": "亥",
+          "si": "子",
+          "wu": "丑",
+          "wei": "寅",
+          "shen": "卯",
+          "you": "辰",
+          "xu": "巳",
+          "hai": "午"
+        },
+        "earth_to_heaven": {
+          "zi": "未",
+          "chou": "申",
+          "yin": "酉",
+          "mao": "戌",
+          "chen": "亥",
+          "si": "子",
+          "wu": "丑",
+          "wei": "寅",
+          "shen": "卯",
+          "you": "辰",
+          "xu": "巳",
+          "hai": "午"
+        }
+      },
+      "four_lessons": [
+        {
+          "position": 1,
+          "name": "一课",
+          "upper": "未",
+          "lower": "丙",
+          "source_note": "结构占位，待算法或古籍例课校验。"
+        },
+        {
+          "position": 2,
+          "name": "二课",
+          "upper": "亥",
+          "lower": "未",
+          "source_note": "结构占位，待算法或古籍例课校验。"
+        },
+        {
+          "position": 3,
+          "name": "三课",
+          "upper": "子",
+          "lower": "辰",
+          "source_note": "结构占位，待算法或古籍例课校验。"
+        },
+        {
+          "position": 4,
+          "name": "四课",
+          "upper": "巳",
+          "lower": "子",
+          "source_note": "结构占位，待算法或古籍例课校验。"
+        }
+      ],
+      "three_transmissions": {
+        "initial": {
+          "name": "初传",
+          "branch": "未",
+          "heavenly_general": "贵人",
+          "marker": "sample-initial",
+          "source_note": "示例传位，不作断语。"
+        },
+        "middle": {
+          "name": "中传",
+          "branch": "亥",
+          "heavenly_general": "六合",
+          "marker": "sample-middle",
+          "source_note": "示例传位，不作断语。"
+        },
+        "final": {
+          "name": "末传",
+          "branch": "卯",
+          "heavenly_general": "青龙",
+          "marker": "sample-final",
+          "source_note": "示例传位，不作断语。"
+        }
+      },
+      "heavenly_generals": {
+        "zi": "贵人",
+        "chou": "螣蛇",
+        "yin": "朱雀",
+        "mao": "六合",
+        "chen": "勾陈",
+        "si": "青龙",
+        "wu": "天空",
+        "wei": "白虎",
+        "shen": "太常",
+        "you": "玄武",
+        "xu": "太阴",
+        "hai": "天后"
+      },
+      "lesson_types": ["schema_fixture_not_validated"],
+      "markers": {
+        "fa_yong": "未（示例）",
+        "day_horse": "寅（示例）",
+        "dun_gan": "示例字段",
+        "shen_sha": ["示例神煞字段，不入规则"],
+        "yin_yang_gui_ren": "示例字段"
+      },
+      "chart_json": {
+        "fixture_notice": "No private path, token, real person, or real event is included."
+      }
+    },
+    "judgment": {
+      "summary": "结构化样本，只验证大六壬案例字段能被存储、搜索和展示；不代表实际课式、断语或准确率。",
+      "evidence": [
+        "包含大六壬分支必填字段：calendar_basis、month_general、divination_hour、day_ganzhi、plates、four_lessons、three_transmissions。",
+        "包含十二天将落位、课体标签和 markers，便于后续算法输出回归。",
+        "样本明确标记为 schema_fixture，不能进入真实命中率统计。"
+      ],
+      "rule_source_refs": [
+        "wikipedia-da-liuren-zh",
+        "github-kentang2017-kinliuren",
+        "github-look-fate-liuren-ts-lib"
+      ],
+      "confidence": "not_scored",
+      "risks": [
+        "示例值未用历法库、开源库或古籍例课复核。",
+        "不能作为课体、应期或吉凶判断依据。"
+      ]
+    },
+    "outcome": {
+      "status": "retrospective_calibration",
+      "actual_result": "无真实事件结果；仅用于结构校准。",
+      "review_notes": "不计入准确率。"
+    },
+    "score": {
+      "mode": "retrospective_calibration_not_accuracy",
+      "total": 0,
+      "dimensions": [
+        {
+          "name": "schema_coverage",
+          "value": 0,
+          "weight": 0,
+          "notes": "结构覆盖检查，不是命中率评分。"
+        }
+      ]
+    },
+    "source_refs": [
+      "wikipedia-da-liuren-zh",
+      "github-kentang2017-kinliuren",
+      "github-look-fate-liuren-ts-lib"
+    ],
+    "license_notes": "人工编写的结构样本；只引用公开来源 id 和字段概念，不复制开源项目源码、输出数据或教程断语。",
+    "boundary_notes": "用于本地知识库、搜索 API、前端展示和后续算法回归的 schema fixture；不用于现实决策。"
+  },
+  {
+    "id": "liuren-sample-xiao-structure-001",
+    "system": "liuren",
+    "subsystem": "xiao_liuren",
+    "sample_type": "schema_fixture",
+    "title": "小六壬案例字段结构样本",
+    "topic": "other",
+    "question": "结构样本：记录一条小六壬起课样本应包含哪些字段，不作为真实占断或预测。",
+    "input_source": {
+      "mode": "manual",
+      "recorded_at": "2026-06-21T00:00:00+08:00",
+      "timezone": "Asia/Shanghai",
+      "calendar_source": "manual-fixture-no-calendar-validation",
+      "library_ref": "github-maifusha-xiaoliuren",
+      "operator_notes": "本样本只用于验证小六壬字段、检索和 UI 展示；日期、计数和宫位值均为人工示例。"
+    },
+    "chart": {
+      "subsystem": "xiao_liuren",
+      "qike_start": "月起大安，顺行计数（结构样本，不校验流派）",
+      "solar_date": "2026-06-21",
+      "lunar_date": "示例：五月初七",
+      "hour_branch": "午",
+      "finger_count": 18,
+      "sangong": [
+        {
+          "stage": "month",
+          "palace": "大安",
+          "count": 5,
+          "source_note": "示例月位，不代表算法输出。"
+        },
+        {
+          "stage": "day",
+          "palace": "速喜",
+          "count": 7,
+          "source_note": "示例日位，不代表算法输出。"
+        },
+        {
+          "stage": "hour",
+          "palace": "小吉",
+          "count": 6,
+          "source_note": "示例时位，不代表算法输出。"
+        }
+      ],
+      "selected_palace": "小吉",
+      "palace_order": ["大安", "留连", "速喜", "赤口", "小吉", "空亡"],
+      "favorable_hours": {
+        "sample_group_a": ["子", "午"],
+        "sample_group_b": ["丑", "未"]
+      },
+      "chart_json": {
+        "fixture_notice": "No private path, token, real person, or real event is included."
+      }
+    },
+    "judgment": {
+      "summary": "结构化样本，只验证小六壬案例字段能被存储、搜索和展示；不代表真实六宫结果、速断口诀或准确率。",
+      "evidence": [
+        "包含小六壬分支必填字段：qike_start、selected_palace、sangong。",
+        "记录默认六宫顺序，避免与大六壬课式字段混写。",
+        "样本明确标记为 schema_fixture，不能进入真实命中率统计。"
+      ],
+      "rule_source_refs": [
+        "wikipedia-rokuyo-zh",
+        "github-maifusha-xiaoliuren"
+      ],
+      "confidence": "not_scored",
+      "risks": [
+        "示例值未用小六壬库或具体流派规则复核。",
+        "不能作为吉凶、应期或现实行动建议。"
+      ]
+    },
+    "outcome": {
+      "status": "retrospective_calibration",
+      "actual_result": "无真实事件结果；仅用于结构校准。",
+      "review_notes": "不计入准确率。"
+    },
+    "score": {
+      "mode": "retrospective_calibration_not_accuracy",
+      "total": 0,
+      "dimensions": [
+        {
+          "name": "schema_coverage",
+          "value": 0,
+          "weight": 0,
+          "notes": "结构覆盖检查，不是命中率评分。"
+        }
+      ]
+    },
+    "source_refs": [
+      "wikipedia-rokuyo-zh",
+      "github-maifusha-xiaoliuren"
+    ],
+    "license_notes": "人工编写的结构样本；只引用公开来源 id 和字段概念，不复制开源项目源码、输出数据或教程断语。",
+    "boundary_notes": "用于本地知识库、搜索 API、前端展示和后续算法回归的 schema fixture；不用于现实决策。"
+  }
+]

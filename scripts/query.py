@@ -137,6 +137,28 @@ def query_liuren_case_schema(keyword: str, as_json: bool) -> int:
     return 0 if matches else 1
 
 
+def query_liuren_case_samples(keyword: str, subsystem: str | None, as_json: bool) -> int:
+    samples = load("liuren_case_samples.json")
+    matches = []
+    for item in samples:
+        if subsystem and item.get("subsystem") != subsystem:
+            continue
+        if contains(item, keyword):
+            matches.append(item)
+    if as_json:
+        print_json(matches)
+        return 0 if matches else 1
+    for item in matches:
+        print(f"- {item['id']} [{item.get('subsystem', '-')}/{item.get('sample_type', '-')}] {item.get('title', '')}")
+        print(f"  question: {item.get('question', '')}")
+        print(f"  summary: {item.get('judgment', {}).get('summary', '')}")
+        print(f"  score: {item.get('score', {}).get('mode', '-')} total {item.get('score', {}).get('total', '-')}")
+        refs = ", ".join(item.get("source_refs", []))
+        if refs:
+            print(f"  sources: {refs}")
+    return 0 if matches else 1
+
+
 def query_rules(keyword: str, layer: str | None, as_json: bool) -> int:
     rules = load("rules.json")
     matches = []
@@ -261,6 +283,11 @@ def main() -> int:
     liuren_case_schema.add_argument("keyword")
     liuren_case_schema.add_argument("--json", action="store_true")
 
+    liuren_case_samples = sub.add_parser("liuren_case_samples")
+    liuren_case_samples.add_argument("keyword")
+    liuren_case_samples.add_argument("--subsystem", choices=["da_liuren", "xiao_liuren"])
+    liuren_case_samples.add_argument("--json", action="store_true")
+
     rules = sub.add_parser("rules")
     rules.add_argument("keyword")
     rules.add_argument("--layer")
@@ -296,6 +323,8 @@ def main() -> int:
         return query_liuren_terms(args.keyword, args.json)
     if args.kind == "liuren_case_schema":
         return query_liuren_case_schema(args.keyword, args.json)
+    if args.kind == "liuren_case_samples":
+        return query_liuren_case_samples(args.keyword, args.subsystem, args.json)
     if args.kind == "rules":
         return query_rules(args.keyword, args.layer, args.json)
     if args.kind == "sources":

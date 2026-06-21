@@ -18,7 +18,8 @@
 - `data/liuren_terms.json`：六壬术语层，覆盖六壬、大六壬、小六壬、月将、占时、天地盘、四课、三传、发用、十二天将、课体和小六壬六宫。
 - `data/liuren_structures.json`：六壬结构层，覆盖两个子体系、大六壬课式字段、四课、三传、十二天将、小六壬六宫和案例字段。
 - `data/liuren_case_schema.json`：六壬案例 Schema，使用共享字段加大六壬/小六壬两个分支，保留输入来源、课式 JSON、结果、评分、许可和边界说明。
-- `data/systems.json`：六壬状态更新为 `active-v0.7-seed`。
+- `data/liuren_case_samples.json`：六壬案例结构样本，分别覆盖大六壬和小六壬；样本只用于字段、搜索、UI 和后续算法回归，不计入准确率。
+- `data/systems.json`：六壬状态更新为 `active-v0.7.2-seed`。
 - `data/sources.json`：新增大六壬、小六壬百科入口、开源项目和 B站搜索线索。
 - `data/external_projects.json`：新增 `kentang2017/kinliuren`、`look-fate/liuren-ts-lib`、`maifusha/xiaoliuren` 三个六壬参考项目。
 
@@ -61,7 +62,16 @@
 
 后端新增 `GET /api/liuren-case-schema`，前端六壬资料页也会展示 Schema 摘要。这样后续可以先做手工案例录入和固定样本，再接起课算法。
 
-## 6. 来源边界
+## 6. 案例样本
+
+`data/liuren_case_samples.json` 目前有两条结构样本：
+
+- `liuren-sample-da-structure-001`：大六壬样本，覆盖 `calendar_basis`、月将、占时、天地盘、四课、三传、十二天将、课体标签和 markers。
+- `liuren-sample-xiao-structure-001`：小六壬样本，覆盖 `qike_start`、阳历/阴历字段、时辰、掐指计数、三宫递进、最终六宫和六宫顺序。
+
+这两条都是 `schema_fixture`，目的是保证本地知识库、后端搜索、前端六壬页面和校验脚本可以识别两种子体系。它们没有真实事件结果，也没有经过历法库或开源库复核，`score.mode` 固定为 `retrospective_calibration_not_accuracy`，`score.total` 固定为 `0`。
+
+## 7. 来源边界
 
 本轮调研使用：
 
@@ -73,9 +83,9 @@
 - `wlhyl/dalurenpython`：未确认 license，只作为字段词汇交叉观察，不复制代码或数据。
 - B站搜索结果：只作为课程生态观察，不升级为规则。
 
-## 7. 下一步
+## 8. 下一步
 
-1. 把 `kinliuren` 和 `liuren-ts-lib` 的输入输出转成固定测试样本。
+1. 把 `kinliuren` 和 `liuren-ts-lib` 的输入输出转成可复核的算法回归样本。
 2. 为小六壬建立六宫取数来源样本，但不把速断口诀直接写成规则。
 3. 基于 `liuren_case_schema.json` 做手工案例导入/导出。
 4. 寻找可校对的公开古籍文本入口，再把经典资料逐条挂到术语和规则层。

@@ -240,6 +240,12 @@ function localSearchResults(query) {
           },
         ]
       : []),
+    ...(state.data.liuren_case_samples || []).map((item) => ({
+      type: "六壬案例样本",
+      title: item.title || item.question,
+      body: `${item.subsystem} ${item.topic} ${item.judgment?.summary || ""} ${item.boundary_notes || ""}`,
+      item,
+    })),
     ...(state.data.sources || []).map((item) => ({ type: "来源", title: item.title, body: item.notes, item })),
     ...(state.data.systems || []).map((item) => ({
       type: "体系",
@@ -335,6 +341,7 @@ function renderStats() {
     ["奇门术语", (data.qimen_terms || []).length],
     ["六壬术语", (data.liuren_terms || []).length],
     ["六壬 Schema", data.liuren_case_schema ? 1 : 0],
+    ["六壬样本", (data.liuren_case_samples || []).length],
     ["规则", (data.rules || []).length],
     ["来源", (data.sources || []).length],
     ["古籍", (data.classics || []).length],
@@ -635,6 +642,7 @@ function renderLiuren() {
   const schema = state.data.liuren_case_schema || {};
   const schemaRequired = schema.required || [];
   const schemaProps = schema.properties || {};
+  const samples = (state.data.liuren_case_samples || []).filter((item) => matchText(item, query));
 
   els.content.innerHTML = `
     <div class="hero-grid">
@@ -649,6 +657,7 @@ function renderLiuren() {
           <span class="tag">天将 ${structures.heavenly_generals?.length || 0}</span>
           <span class="tag">六宫 ${structures.xiao_liuren_palaces?.length || 0}</span>
           <span class="tag">Schema ${schema.title ? "1" : "0"}</span>
+          <span class="tag">样本 ${state.data.liuren_case_samples?.length || 0}</span>
         </div>
       </article>
       <article class="card">
@@ -723,6 +732,31 @@ function renderLiuren() {
           <h3>/api/liuren-case-schema</h3>
           <p>部署后可返回六壬案例录入契约；本地数据包中同步为 liuren_case_schema。</p>
         </article>
+      </div>
+    </div>
+    <div class="section-band">
+      <h3>案例样本</h3>
+      <div class="result-grid">
+        ${samples
+          .map(
+            (sample) => `
+              <article class="card">
+                <div class="meta-row">
+                  <span class="tag">${escapeHtml(sample.subsystem)}</span>
+                  <span class="tag">${escapeHtml(sample.sample_type || "sample")}</span>
+                  <span class="tag">score ${escapeHtml(String(sample.score?.total ?? 0))}</span>
+                </div>
+                <h3>${escapeHtml(sample.title || sample.id)}</h3>
+                <p><strong>问题：</strong>${escapeHtml(sample.question)}</p>
+                <p>${escapeHtml(sample.judgment?.summary || "")}</p>
+                <p><strong>边界：</strong>${escapeHtml(sample.boundary_notes || "")}</p>
+                <div class="tag-row">
+                  ${(sample.source_refs || []).map((ref) => `<span class="tag">${escapeHtml(ref)}</span>`).join("")}
+                </div>
+              </article>
+            `,
+          )
+          .join("")}
       </div>
     </div>
   `;

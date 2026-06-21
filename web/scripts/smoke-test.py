@@ -76,6 +76,17 @@ def main() -> int:
         and len(data.get("liuren_structures", {}).get("xiao_liuren_palaces", [])) == 6,
         "liuren_case_schema_required": "subsystem" in data.get("liuren_case_schema", {}).get("required", [])
         and data.get("liuren_case_schema", {}).get("title") == "LiurenCase",
+        "has_liuren_case_samples": len(data.get("liuren_case_samples", [])) >= 2,
+        "liuren_case_samples_cover_subsystems": {"da_liuren", "xiao_liuren"}.issubset(
+            {item.get("subsystem") for item in data.get("liuren_case_samples", [])}
+        ),
+        "liuren_case_samples_are_fixtures": all(
+            item.get("sample_type") == "schema_fixture"
+            and item.get("score", {}).get("mode") == "retrospective_calibration_not_accuracy"
+            and item.get("score", {}).get("total") == 0
+            for item in data.get("liuren_case_samples", [])
+        ),
+        "app_has_liuren_case_samples": "liuren_case_samples" in app and "案例样本" in app,
         "has_rules": len(data["rules"]) >= 20,
         "has_classic_notes": len(data.get("classic_notes", [])) >= 36,
         "has_case_index": len(data.get("case_index", [])) >= 24,
