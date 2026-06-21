@@ -33,7 +33,7 @@
 | 教材阅读 | 渲染 `docs/*.md`，支持标题目录和引用跳转 |
 | 术语检索 | 读取 `data/terms.json`，按 term、alias、category 搜索 |
 | 紫微资料 | 读取 `data/ziwei_terms.json` 和 `data/ziwei_structures.json`，展示紫微术语、十二宫、十四主星、四化和命盘字段 |
-| 奇门资料 | 读取 `data/qimen_terms.json` 和 `data/qimen_structures.json`，展示奇门术语、九宫、八门、九星、八神和值符值使字段 |
+| 奇门资料 | 读取 `data/qimen_terms.json`、`data/qimen_structures.json` 和 `data/qimen_case_schema.json`，展示奇门术语、九宫、八门、九星、八神、值符值使字段和案例 Schema |
 | 六壬资料 | 读取 `data/liuren_terms.json`、`data/liuren_structures.json`、`data/liuren_case_schema.json` 和 `data/liuren_case_samples.json`，展示大六壬/小六壬术语、四课三传、十二天将、小六壬六宫、案例字段、案例 Schema 和结构样本 |
 | 来源库 | 读取 `data/sources.json`，按 A/B/C 类、类型、关键词筛选 |
 | 规则卡 | 读取 `data/rules.json`，按 layer、source_refs、confidence 筛选 |
@@ -71,17 +71,19 @@
 
 当前版本已经在零数据库基础上补了 Netlify Functions：
 
-- `GET /api/search?q=...`：读取构建期数据模块，返回文档、规则、术语、紫微术语、紫微结构、奇门术语、奇门结构、六壬术语、六壬结构、六壬案例 Schema、来源、古籍、读书笔记和案例槽位的统一检索结果。
+- `GET /api/search?q=...`：读取构建期数据模块，返回文档、规则、术语、紫微术语、紫微结构、奇门术语、奇门结构、奇门案例 Schema、六壬术语、六壬结构、六壬案例 Schema、来源、古籍、读书笔记和案例槽位的统一检索结果。
 - `GET /api/search?q=四化&kind=ziwei_terms`：检索紫微术语。
 - `GET /api/search?q=命宫&kind=ziwei_structures`：检索紫微盘式结构。
 - `GET /api/search?q=八门&kind=qimen_terms`：检索奇门术语。
 - `GET /api/search?q=坎一宫&kind=qimen_structures`：检索奇门盘式结构。
+- `GET /api/search?q=palaces&kind=qimen_case_schema`：检索奇门案例 Schema。
 - `GET /api/search?q=三传&kind=liuren_terms`：检索六壬术语。
 - `GET /api/search?q=初传&kind=liuren_structures`：检索六壬课式结构。
 - `GET /api/search?q=four_lessons&kind=liuren_case_schema`：检索六壬案例 Schema。
 - `GET /api/search?q=结构样本&kind=liuren_case_samples`：检索六壬案例结构样本。
 - `GET /api/search?q=najia&kind=external_projects`：检索类似项目与源码参考。
 - `GET /api/case-schema`：返回案例录入 Schema，方便后续在线案例保存接口复用。
+- `GET /api/qimen-case-schema`：返回奇门遁甲案例录入 Schema。
 - `GET /api/liuren-case-schema`：返回大六壬 / 小六壬案例录入 Schema。
 - 前端搜索会优先尝试 `/api/search`；本地 `file://` 或普通静态服务不可用时，自动回退到内置数据包检索。
 

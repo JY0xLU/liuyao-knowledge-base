@@ -18,6 +18,7 @@ python .\scripts\query.py notes 旬空
 python .\scripts\query.py cases 失物
 python .\scripts\query.py ziwei_terms 命宫 --json
 python .\scripts\query.py qimen_terms 八门 --json
+python .\scripts\query.py qimen_case_schema palaces --json
 python .\scripts\query.py liuren_terms 三传 --json
 python .\scripts\query.py liuren_case_samples 结构样本 --json
 ```
@@ -51,6 +52,7 @@ python .\scripts\query.py liuren_case_samples 结构样本 --json
 - [紫微结构 JSON](data/ziwei_structures.json)
 - [奇门术语 JSON](data/qimen_terms.json)
 - [奇门结构 JSON](data/qimen_structures.json)
+- [奇门案例 Schema](data/qimen_case_schema.json)
 - [六壬术语 JSON](data/liuren_terms.json)
 - [六壬结构 JSON](data/liuren_structures.json)
 - [六壬案例 Schema](data/liuren_case_schema.json)
@@ -71,7 +73,7 @@ python .\scripts\query.py liuren_case_samples 结构样本 --json
 - 六爻体系的学习边界和知识地图
 - 奇门遁甲、大小六壬、紫微斗数、六爻的体系索引与扩展路线
 - 紫微斗数第一版资料层：36 个术语、十二宫、十四主星、四化和命盘字段结构
-- 奇门遁甲第一版资料层：25 个术语、九宫、八门、九星、八神和值符值使字段结构
+- 奇门遁甲第一版资料层：25 个术语、九宫、八门、九星、八神、值符值使字段结构和独立案例 Schema
 - 大六壬/小六壬第一版资料层：六壬术语、四课三传、十二天将、小六壬六宫、案例字段结构、独立案例 Schema 和结构化案例样本
 - 起卦、动爻、变卦、本卦、互参逻辑
 - 纳甲、六亲、六神、世应、伏神等装卦层
@@ -145,6 +147,8 @@ python -m http.server 8765
 - `netlify.toml`：发布目录为 `web`，部署时运行 `npm run build:netlify` 生成 `web/assets` 与函数共享数据包。
 - `netlify/functions/search.mts`：部署后提供 `GET /api/search?q=...` 后端检索接口。
 - `netlify/functions/case-schema.mts`：部署后提供 `GET /api/case-schema` 案例 Schema 接口。
+- `netlify/functions/qimen-case-schema.mts`：部署后提供 `GET /api/qimen-case-schema` 奇门案例 Schema 接口。
+- `netlify/functions/liuren-case-schema.mts`：部署后提供 `GET /api/liuren-case-schema` 六壬案例 Schema 接口。
 - `package.json`：提供 `build`、`check`、`serve` 脚本，方便本地和 CI 复用。
 - `.gitignore`：排除 `.netlify/`、`node_modules/`、Python 缓存等本地状态。
 
@@ -171,6 +175,7 @@ npx netlify deploy --prod
 - `data/ziwei_structures.json` 作为紫微盘式结构 API
 - `data/qimen_terms.json` 作为奇门术语检索 API
 - `data/qimen_structures.json` 作为奇门盘式结构 API
+- `data/qimen_case_schema.json` 作为奇门案例录入和校验契约
 - `data/liuren_terms.json` 作为六壬术语检索 API
 - `data/liuren_structures.json` 作为六壬课式结构 API
 - `data/liuren_case_schema.json` 作为六壬案例录入和校验契约
@@ -220,6 +225,7 @@ python .\scripts\query.py notes 回头克 --group 十八问答
 python .\scripts\query.py cases 失物
 python .\scripts\query.py ziwei_terms 命宫 --json
 python .\scripts\query.py qimen_terms 八门 --json
+python .\scripts\query.py qimen_case_schema palaces --json
 python .\scripts\query.py liuren_terms 三传 --json
 python .\scripts\query.py liuren_case_samples 结构样本 --subsystem da_liuren --json
 ```

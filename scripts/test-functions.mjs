@@ -3,6 +3,7 @@ import { searchKnowledgeBase } from "../netlify/functions/_shared/search-core.mj
 import searchHandler from "../netlify/functions/search.mts";
 import caseSchemaHandler from "../netlify/functions/case-schema.mts";
 import liurenCaseSchemaHandler from "../netlify/functions/liuren-case-schema.mts";
+import qimenCaseSchemaHandler from "../netlify/functions/qimen-case-schema.mts";
 
 const failures = [];
 
@@ -27,6 +28,7 @@ const liurenThreeTransmissions = searchKnowledgeBase(data, { query: "三传", ki
 const liurenStructures = searchKnowledgeBase(data, { query: "初传", kind: "liuren_structures", limit: 10 });
 const xiaoLiurenStructures = searchKnowledgeBase(data, { query: "大安", kind: "liuren_structures", limit: 10 });
 const liurenCaseSchema = searchKnowledgeBase(data, { query: "four_lessons", kind: "liuren_case_schema", limit: 10 });
+const qimenCaseSchema = searchKnowledgeBase(data, { query: "palaces", kind: "qimen_case_schema", limit: 10 });
 const liurenCaseSamples = searchKnowledgeBase(data, { query: "结构样本", kind: "liuren_case_samples", limit: 10 });
 const xiaoLiurenCaseSamples = searchKnowledgeBase(data, { query: "小六壬", kind: "liuren_case_samples", limit: 10 });
 const accuracy = searchKnowledgeBase(data, { query: "评分", kind: "accuracy_cases", limit: 10 });
@@ -47,6 +49,12 @@ check(
     && data.qimen_structures.gates.length === 8
     && data.qimen_structures.stars.length === 9
     && data.qimen_structures.deities.length === 8,
+);
+check(
+  "function_data_has_qimen_case_schema",
+  data.qimen_case_schema.title === "QimenCase"
+    && data.qimen_case_schema.properties.system.const === "qimen"
+    && data.qimen_case_schema.properties.chart.oneOf.length === 2,
 );
 check("function_data_has_liuren_terms", data.liuren_terms.length >= 36);
 check(
@@ -93,6 +101,7 @@ check("search_ziwei_structures_ming", ziweiStructures.results.some((item) => ite
 check("search_qimen_terms_qimen", qimenTerms.results.some((item) => item.kind === "qimen_terms" && item.id === "qimen-dunjia"));
 check("search_qimen_terms_gates", qimenGates.results.some((item) => item.id === "eight-gates"));
 check("search_qimen_structures_kan", qimenStructures.results.some((item) => item.id === "palace-kan-1"));
+check("search_qimen_case_schema_palaces", qimenCaseSchema.results.some((item) => item.id === "qimen_case_schema"));
 check("search_liuren_terms_da", liurenTerms.results.some((item) => item.kind === "liuren_terms" && item.id === "da-liuren"));
 check("search_liuren_terms_three_transmissions", liurenThreeTransmissions.results.some((item) => item.id === "three-transmissions"));
 check("search_liuren_structures_initial", liurenStructures.results.some((item) => item.id === "transmission-initial"));
@@ -117,6 +126,14 @@ const qimenResponse = await searchHandler(new Request("https://example.test/api/
 const qimenPayload = await qimenResponse.json();
 check("handler_search_qimen_terms_ok", qimenResponse.status === 200 && qimenPayload.results.some((item) => item.id === "eight-gates"));
 
+const qimenSchemaSearchResponse = await searchHandler(new Request("https://example.test/api/search?q=palaces&kind=qimen_case_schema"));
+const qimenSchemaSearchPayload = await qimenSchemaSearchResponse.json();
+check(
+  "handler_search_qimen_case_schema_ok",
+  qimenSchemaSearchResponse.status === 200
+    && qimenSchemaSearchPayload.results.some((item) => item.id === "qimen_case_schema"),
+);
+
 const liurenResponse = await searchHandler(new Request("https://example.test/api/search?q=%E5%9B%9B%E8%AF%BE&kind=liuren_terms"));
 const liurenPayload = await liurenResponse.json();
 check("handler_search_liuren_terms_ok", liurenResponse.status === 200 && liurenPayload.results.some((item) => item.id === "four-lessons"));
@@ -140,6 +157,13 @@ const liurenSchemaPayload = await liurenSchemaResponse.json();
 check(
   "handler_liuren_case_schema_get_ok",
   liurenSchemaResponse.status === 200 && liurenSchemaPayload.schema.title === "LiurenCase",
+);
+
+const qimenSchemaResponse = await qimenCaseSchemaHandler(new Request("https://example.test/api/qimen-case-schema"));
+const qimenSchemaPayload = await qimenSchemaResponse.json();
+check(
+  "handler_qimen_case_schema_get_ok",
+  qimenSchemaResponse.status === 200 && qimenSchemaPayload.schema.title === "QimenCase",
 );
 
 const methodResponse = await searchHandler(new Request("https://example.test/api/search", { method: "POST" }));

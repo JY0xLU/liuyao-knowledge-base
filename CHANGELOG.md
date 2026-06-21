@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.8.0 - 2026-06-21
+
+- Added `data/qimen_case_schema.json` with separate Shi Jia and Ri Jia Qimen chart branches.
+- Added `/api/qimen-case-schema` and a searchable `qimen_case_schema` backend kind while keeping Liuyao and Liuren schema endpoints separate.
+- Surfaced Qimen case schema metadata in the "濂囬棬璧勬枡" workbench view and CLI query path.
+- Expanded validation, smoke tests, function tests, and predeploy checks for the Qimen case contract.
+
 ## v0.7.2 - 2026-06-21
 
 - Added `data/liuren_case_samples.json` with separate Da Liu Ren and Xiao Liu Ren schema fixtures.

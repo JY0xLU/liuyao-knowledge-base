@@ -104,6 +104,18 @@ export function searchPools(data) {
           item: { group, ...item },
         })),
       ),
+    ...(data.qimen_case_schema
+      ? [
+          {
+            kind: "qimen_case_schema",
+            kind_label: "奇门案例 Schema",
+            id: "qimen_case_schema",
+            title: data.qimen_case_schema.title || "QimenCase",
+            summary: data.qimen_case_schema.description || "奇门遁甲案例录入契约",
+            item: data.qimen_case_schema,
+          },
+        ]
+      : []),
     ...Object.entries(data.liuren_structures || {})
       .filter(([, value]) => Array.isArray(value))
       .flatMap(([group, items]) =>

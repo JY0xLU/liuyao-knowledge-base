@@ -64,6 +64,10 @@ def main() -> int:
         and len(data.get("qimen_structures", {}).get("gates", [])) == 8
         and len(data.get("qimen_structures", {}).get("stars", [])) == 9
         and len(data.get("qimen_structures", {}).get("deities", [])) == 8,
+        "qimen_case_schema_required": "time_system" in data.get("qimen_case_schema", {}).get("required", [])
+        and data.get("qimen_case_schema", {}).get("title") == "QimenCase"
+        and len(data.get("qimen_case_schema", {}).get("properties", {}).get("chart", {}).get("oneOf", [])) == 2,
+        "app_has_qimen_case_schema": "qimen_case_schema" in app and "/api/qimen-case-schema" in app,
         "has_liuren_terms": len(data.get("liuren_terms", [])) >= 36,
         "liuren_contains_core_terms": all(
             any(item.get("term") == term for item in data.get("liuren_terms", []))

@@ -1,0 +1,417 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "QimenCase",
+  "description": "奇门遁甲案例录入契约。它用于学习、检索、手工复盘和后续排盘算法测试；当前不提供自动起局，也不提供确定性断语。",
+  "type": "object",
+  "required": [
+    "id",
+    "system",
+    "method",
+    "time_system",
+    "topic",
+    "question",
+    "input_source",
+    "chart",
+    "judgment",
+    "boundary_notes"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "稳定案例 id，例如 qimen-case-2026-06-21-001。"
+    },
+    "system": {
+      "const": "qimen",
+      "description": "固定为 qimen，避免和六爻、紫微、六壬案例混写。"
+    },
+    "method": {
+      "$ref": "#/$defs/qimen_method"
+    },
+    "time_system": {
+      "$ref": "#/$defs/time_system"
+    },
+    "topic": {
+      "$ref": "#/$defs/topic"
+    },
+    "question": {
+      "type": "string",
+      "description": "占问或复盘问题原文。回测样本必须说明问题是否由事后重构。"
+    },
+    "input_source": {
+      "type": "object",
+      "required": ["mode", "recorded_at"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["manual", "library_output", "retrospective_reconstruction", "imported"]
+        },
+        "recorded_at": {
+          "type": "string",
+          "description": "ISO 8601 记录时间。"
+        },
+        "timezone": {
+          "type": "string",
+          "description": "时区，例如 Asia/Shanghai。"
+        },
+        "calendar_source": {
+          "type": "string",
+          "description": "历法、节气、干支或局数换算来源。"
+        },
+        "library_ref": {
+          "type": "string",
+          "description": "如来自开源库输出，记录 source id 或 project id。"
+        },
+        "operator_notes": {
+          "type": "string",
+          "description": "人工修正、取数方式、盘式差异或无法复核的输入说明。"
+        }
+      },
+      "additionalProperties": true
+    },
+    "chart": {
+      "oneOf": [
+        { "$ref": "#/$defs/hour_qimen_chart" },
+        { "$ref": "#/$defs/day_qimen_chart" }
+      ]
+    },
+    "judgment": {
+      "type": "object",
+      "required": ["summary"],
+      "properties": {
+        "summary": {
+          "type": "string",
+          "description": "复盘结论摘要。不能写成现实决策建议。"
+        },
+        "evidence": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "逐条列出来自盘式、题型、来源规则或案例反馈的证据。"
+        },
+        "rule_source_refs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "引用的规则、古籍、教程或项目来源；C 类来源不能单独升级为规则。"
+        },
+        "confidence": {
+          "type": "string",
+          "enum": ["draft", "low", "medium", "high", "not_scored"]
+        },
+        "risks": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "outcome": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["unknown", "pending", "resolved", "retrospective_calibration"]
+        },
+        "actual_result": { "type": "string" },
+        "outcome_date": { "type": "string" },
+        "matched": { "type": "string" },
+        "missed": { "type": "string" },
+        "review_notes": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "score": {
+      "type": "object",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["not_scored", "retrospective_calibration_not_accuracy", "precommitted_accuracy"]
+        },
+        "total": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "value", "weight"],
+            "properties": {
+              "name": { "type": "string" },
+              "value": { "type": "number" },
+              "weight": { "type": "number" },
+              "notes": { "type": "string" }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "source_refs": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "license_notes": {
+      "type": "string",
+      "description": "如果案例来自开源库输出或公开教程，记录许可、引用和不可复制边界。"
+    },
+    "boundary_notes": {
+      "type": "string",
+      "description": "说明盘式体系、流派、题型、资料不足、回测/事前样本状态和现实使用限制。"
+    }
+  },
+  "$defs": {
+    "qimen_method": {
+      "type": "string",
+      "enum": ["zhuanpan", "feipan", "other"],
+      "description": "转盘、飞盘或其他明确来源的盘式方法。"
+    },
+    "time_system": {
+      "type": "string",
+      "enum": ["shi_jia", "ri_jia"],
+      "description": "时家或日家奇门必须分支记录，避免算法和案例混用。"
+    },
+    "topic": {
+      "type": "string",
+      "enum": [
+        "wealth",
+        "relationship",
+        "career",
+        "exam",
+        "health",
+        "lost_object",
+        "travel",
+        "lawsuit",
+        "home",
+        "event",
+        "other"
+      ]
+    },
+    "palace_id": {
+      "type": "string",
+      "enum": [
+        "palace-kan-1",
+        "palace-kun-2",
+        "palace-zhen-3",
+        "palace-xun-4",
+        "palace-center-5",
+        "palace-qian-6",
+        "palace-dui-7",
+        "palace-gen-8",
+        "palace-li-9"
+      ]
+    },
+    "palace_name": {
+      "type": "string",
+      "enum": ["坎一宫", "坤二宫", "震三宫", "巽四宫", "中五宫", "乾六宫", "兑七宫", "艮八宫", "离九宫"]
+    },
+    "gate_name": {
+      "type": "string",
+      "enum": ["休门", "生门", "伤门", "杜门", "景门", "死门", "惊门", "开门"]
+    },
+    "star_name": {
+      "type": "string",
+      "enum": ["天蓬", "天任", "天冲", "天辅", "天英", "天芮", "天柱", "天心", "天禽"]
+    },
+    "deity_name": {
+      "type": "string",
+      "enum": ["值符", "腾蛇", "太阴", "六合", "白虎", "玄武", "九地", "九天"]
+    },
+    "stem": {
+      "type": "string",
+      "enum": ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"]
+    },
+    "branch": {
+      "type": "string",
+      "enum": ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"]
+    },
+    "ganzhi": {
+      "type": "string",
+      "description": "干支字符串，例如 甲子。"
+    },
+    "calendar_basis": {
+      "type": "object",
+      "properties": {
+        "solar_datetime": { "type": "string" },
+        "lunar_date": { "type": "string" },
+        "solar_term": { "type": "string" },
+        "year_ganzhi": { "$ref": "#/$defs/ganzhi" },
+        "month_ganzhi": { "$ref": "#/$defs/ganzhi" },
+        "day_ganzhi": { "$ref": "#/$defs/ganzhi" },
+        "hour_ganzhi": { "$ref": "#/$defs/ganzhi" },
+        "yuan": {
+          "type": "string",
+          "enum": ["shang_yuan", "zhong_yuan", "xia_yuan", "unknown"]
+        },
+        "calculation_notes": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "zhi_marker": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "palace_id": { "$ref": "#/$defs/palace_id" },
+        "palace_name": { "$ref": "#/$defs/palace_name" },
+        "gate": { "$ref": "#/$defs/gate_name" },
+        "star": { "$ref": "#/$defs/star_name" },
+        "deity": { "$ref": "#/$defs/deity_name" },
+        "stem": { "$ref": "#/$defs/stem" },
+        "source_note": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "palace_cell": {
+      "type": "object",
+      "required": ["palace_id"],
+      "properties": {
+        "palace_id": { "$ref": "#/$defs/palace_id" },
+        "palace_name": { "$ref": "#/$defs/palace_name" },
+        "number": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9
+        },
+        "gate": { "$ref": "#/$defs/gate_name" },
+        "star": { "$ref": "#/$defs/star_name" },
+        "deity": { "$ref": "#/$defs/deity_name" },
+        "heaven_stem": { "$ref": "#/$defs/stem" },
+        "earth_stem": { "$ref": "#/$defs/stem" },
+        "hidden_stem": { "$ref": "#/$defs/stem" },
+        "void_branch": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/branch" }
+        },
+        "horse": { "type": "string" },
+        "markers": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "notes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "topic_mapping": {
+      "type": "object",
+      "properties": {
+        "use_god": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "subject_palace": { "$ref": "#/$defs/palace_id" },
+        "target_palace": { "$ref": "#/$defs/palace_id" },
+        "key_gate": { "$ref": "#/$defs/gate_name" },
+        "key_star": { "$ref": "#/$defs/star_name" },
+        "evidence_notes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "shared_chart_fields": {
+      "type": "object",
+      "required": ["method", "time_system", "calendar_basis", "dun_type", "ju_number", "zhi_fu", "zhi_shi", "palaces"],
+      "properties": {
+        "method": { "$ref": "#/$defs/qimen_method" },
+        "time_system": { "$ref": "#/$defs/time_system" },
+        "calendar_basis": { "$ref": "#/$defs/calendar_basis" },
+        "dun_type": {
+          "type": "string",
+          "enum": ["yang", "yin", "unknown"]
+        },
+        "ju_number": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9
+        },
+        "xun_shou": {
+          "type": "string",
+          "description": "旬首或符头字段，必须保留来源说明。"
+        },
+        "fu_shou": {
+          "type": "string",
+          "description": "符首字段，来源不确定时不要推断。"
+        },
+        "zhi_fu": { "$ref": "#/$defs/zhi_marker" },
+        "zhi_shi": { "$ref": "#/$defs/zhi_marker" },
+        "palaces": {
+          "type": "array",
+          "minItems": 9,
+          "maxItems": 9,
+          "items": { "$ref": "#/$defs/palace_cell" }
+        },
+        "topic_mapping": { "$ref": "#/$defs/topic_mapping" },
+        "chart_json": {
+          "type": "object",
+          "description": "可选：保留原始库输出，必须去除私密字段和本机路径。",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "hour_qimen_chart": {
+      "allOf": [
+        { "$ref": "#/$defs/shared_chart_fields" },
+        {
+          "type": "object",
+          "required": ["time_system", "hour_ganzhi"],
+          "properties": {
+            "time_system": { "const": "shi_jia" },
+            "hour_ganzhi": { "$ref": "#/$defs/ganzhi" }
+          }
+        }
+      ]
+    },
+    "day_qimen_chart": {
+      "allOf": [
+        { "$ref": "#/$defs/shared_chart_fields" },
+        {
+          "type": "object",
+          "required": ["time_system", "day_ganzhi"],
+          "properties": {
+            "time_system": { "const": "ri_jia" },
+            "day_ganzhi": { "$ref": "#/$defs/ganzhi" }
+          }
+        }
+      ]
+    }
+  },
+  "x_source_refs": [
+    "wikipedia-qimen-dunjia-zh",
+    "wikipedia-qimen-dunjia-en",
+    "github-qfdk-qimen",
+    "github-arc119226-qimen-dunjia",
+    "github-banderzhm-zhouyilab",
+    "bilibili-qimen-search-20260621"
+  ],
+  "x_reference_projects": [
+    {
+      "id": "github-qfdk-qimen",
+      "schema_hint": "转盘奇门在线排盘项目；字段形态参考九宫、八门、九星、八神、节气、阴阳遁、局数和值符值使输出；MIT。"
+    },
+    {
+      "id": "github-arc119226-qimen-dunjia",
+      "schema_hint": "起盘模块；字段形态参考地盘、天盘、八门、九星、八神、旬首、符首、值符和值使输出；MIT。"
+    },
+    {
+      "id": "github-banderzhm-zhouyilab",
+      "schema_hint": "多术数计算引擎；仅作工程分层与多体系边界参考；MIT。"
+    }
+  ],
+  "x_structure_refs": [
+    "field-cast-time",
+    "field-dun-type",
+    "field-ju-number",
+    "field-zhi-fu",
+    "field-zhi-shi",
+    "field-palace-cells",
+    "field-school",
+    "field-yong-shen"
+  ],
+  "additionalProperties": true
+}

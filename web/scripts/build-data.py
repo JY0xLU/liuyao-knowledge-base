@@ -96,6 +96,7 @@ def main() -> int:
         "ziwei_structures": load_json("ziwei_structures.json"),
         "qimen_terms": load_json("qimen_terms.json"),
         "qimen_structures": load_json("qimen_structures.json"),
+        "qimen_case_schema": load_json("qimen_case_schema.json"),
         "liuren_terms": load_json("liuren_terms.json"),
         "liuren_structures": load_json("liuren_structures.json"),
         "sources": load_json("sources.json"),
@@ -127,7 +128,8 @@ def main() -> int:
         f"{len(payload['rules'])} rules, {len(payload['classic_notes'])} notes, "
         f"{len(payload['case_index'])} case slots, "
         f"{len(payload['accuracy_cases'])} accuracy cases, "
-        f"{len(payload['external_projects'])} external projects "
+        f"{len(payload['external_projects'])} external projects, "
+        f"qimen case schema "
         f"and liuren case schema, {len(payload['liuren_case_samples'])} liuren case samples "
         f"-> {OUT}, {OUT_JS}, and {FUNCTION_DATA}"
     )

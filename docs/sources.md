@@ -2,7 +2,7 @@
 
 本索引记录第一版知识库用到的公开资料线索。它不是完整书目，后续应继续扩展到逐章读书笔记和案例库。
 
-当前深入资料仍以六爻为主。紫微斗数已进入第一版资料层，见 [紫微斗数第一版资料层](16-ziwei-foundation.md)、`data/ziwei_terms.json` 和 `data/ziwei_structures.json`；奇门遁甲已进入第一版资料层，见 [奇门遁甲第一版资料层](17-qimen-foundation.md)、`data/qimen_terms.json` 和 `data/qimen_structures.json`；大六壬/小六壬也已进入第一版资料层，见 [大六壬 / 小六壬第一版资料层](18-liuren-foundation.md)、`data/liuren_terms.json`、`data/liuren_structures.json`、`data/liuren_case_schema.json` 和 `data/liuren_case_samples.json`。后续按体系独立扩展来源、术语、盘式和案例，不与六爻规则混写。
+当前深入资料仍以六爻为主。紫微斗数已进入第一版资料层，见 [紫微斗数第一版资料层](16-ziwei-foundation.md)、`data/ziwei_terms.json` 和 `data/ziwei_structures.json`；奇门遁甲已进入第一版资料层和案例 Schema 层，见 [奇门遁甲第一版资料层](17-qimen-foundation.md)、`data/qimen_terms.json`、`data/qimen_structures.json` 和 `data/qimen_case_schema.json`；大六壬/小六壬也已进入第一版资料层，见 [大六壬 / 小六壬第一版资料层](18-liuren-foundation.md)、`data/liuren_terms.json`、`data/liuren_structures.json`、`data/liuren_case_schema.json` 和 `data/liuren_case_samples.json`。后续按体系独立扩展来源、术语、盘式和案例，不与六爻规则混写。
 
 ## A 类：经典与公共文本
 
@@ -96,7 +96,7 @@
 - 任何 C 类材料都需要经过古籍、现代教程或案例反馈交叉校验，才能影响规则卡。
 
 - 紫微斗数已建立独立来源索引、术语和盘式结构层；下一轮进入命例 Schema、排盘算法抽样和原文校对。
-- 奇门遁甲已建立独立来源索引、术语和盘式结构层；下一轮进入案例 Schema、源码抽样和起局测试。
+- 奇门遁甲已建立独立来源索引、术语、盘式结构层和案例 Schema；下一轮进入结构样本、源码输出对照和起局测试。
 - 大六壬/小六壬已建立独立来源索引、术语、课式结构层和案例 Schema；下一轮进入源码抽样样本和月将/占时/四课三传测试。
 
 2026-06-21 奇门遁甲第一版资料层核验：
@@ -104,6 +104,11 @@
 - Jina Reader 读取 Wikipedia 镜像时返回匿名 401，因此本轮不把其作为可摘录正文来源。
 - GitHub 元数据确认 `qfdk/qimen` 为 MIT JavaScript 转盘奇门在线排盘项目，`arc119226/qimen_dunjia` 为 MIT JavaScript 起盘模块，`banderzhm/ZhouYiLab` 为 MIT 多体系计算引擎。
 - B站搜索可返回奇门遁甲入门和长课目录线索；因终端标题编码限制，本轮只作为 C 类学习生态观察。
+
+2026-06-21 奇门案例 Schema 源码抽样：
+- `qfdk/qimen` 提供九宫、八门、九星、八神、节气、阴阳遁、局数和值符值使等字段概念；本库只采用字段概念。
+- `arc119226/qimen_dunjia` 提供地盘、天盘、八门、九星、八神、旬首、符首、值符和值使等输出分组；本库采用这些分组作为 Schema 设计参考。
+- `banderzhm/ZhouYiLab` 只作为多体系工程分层参考，不复制代码、数据或断语。
 
 2026-06-21 大六壬/小六壬第一版资料层核验：
 - Node fetch 可直接访问中文维基百科“大六壬 / 六壬”和“六曜 / 小六壬”页面；前者包含四课、三传等结构线索，后者包含大安、留连、速喜、赤口、小吉、空亡等名称入口。

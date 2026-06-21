@@ -311,6 +311,92 @@ def check_liuren_case_schema(schema, source_ids: set[str], liuren_structures) ->
     return errors
 
 
+def check_qimen_case_schema(schema, source_ids: set[str], qimen_structures) -> list[str]:
+    errors: list[str] = []
+    if schema.get("title") != "QimenCase":
+        errors.append("qimen_case_schema title must be QimenCase")
+    required = set(schema.get("required", []))
+    expected = {
+        "id",
+        "system",
+        "method",
+        "time_system",
+        "topic",
+        "question",
+        "input_source",
+        "chart",
+        "judgment",
+        "boundary_notes",
+    }
+    missing = expected - required
+    if missing:
+        errors.append(f"qimen_case_schema missing required fields: {', '.join(sorted(missing))}")
+
+    props = schema.get("properties", {})
+    if props.get("system", {}).get("const") != "qimen":
+        errors.append("qimen_case_schema system must be qimen")
+
+    defs = schema.get("$defs", {})
+    for key in [
+        "qimen_method",
+        "time_system",
+        "palace_id",
+        "palace_name",
+        "gate_name",
+        "star_name",
+        "deity_name",
+        "calendar_basis",
+        "zhi_marker",
+        "palace_cell",
+        "topic_mapping",
+        "shared_chart_fields",
+        "hour_qimen_chart",
+        "day_qimen_chart",
+    ]:
+        if key not in defs:
+            errors.append(f"qimen_case_schema missing $defs.{key}")
+
+    if set(defs.get("qimen_method", {}).get("enum", [])) != {"zhuanpan", "feipan", "other"}:
+        errors.append("qimen_case_schema method must separate zhuanpan, feipan, and other")
+    if set(defs.get("time_system", {}).get("enum", [])) != {"shi_jia", "ri_jia"}:
+        errors.append("qimen_case_schema time_system must separate shi_jia and ri_jia")
+
+    chart = props.get("chart", {})
+    if len(chart.get("oneOf", [])) != 2:
+        errors.append("qimen_case_schema chart must use oneOf for Shi/Ri Qimen")
+
+    shared_required = set(defs.get("shared_chart_fields", {}).get("required", []))
+    for key in ["method", "time_system", "calendar_basis", "dun_type", "ju_number", "zhi_fu", "zhi_shi", "palaces"]:
+        if key not in shared_required:
+            errors.append(f"qimen_case_schema shared_chart_fields missing required {key}")
+
+    palaces = defs.get("shared_chart_fields", {}).get("properties", {}).get("palaces", {})
+    if palaces.get("minItems") != 9 or palaces.get("maxItems") != 9:
+        errors.append("qimen_case_schema palaces must require exactly 9 cells")
+
+    hour_props = defs.get("hour_qimen_chart", {}).get("allOf", [{}, {}])[-1].get("properties", {})
+    day_props = defs.get("day_qimen_chart", {}).get("allOf", [{}, {}])[-1].get("properties", {})
+    if hour_props.get("time_system", {}).get("const") != "shi_jia":
+        errors.append("qimen_case_schema hour_qimen_chart must const shi_jia")
+    if day_props.get("time_system", {}).get("const") != "ri_jia":
+        errors.append("qimen_case_schema day_qimen_chart must const ri_jia")
+
+    source_refs = schema.get("x_source_refs", [])
+    for ref in source_refs:
+        if ref not in source_ids:
+            errors.append(f"qimen_case_schema references missing source {ref}")
+
+    structure_ids = {
+        item.get("id")
+        for item in qimen_structures.get("chart_fields", [])
+        if item.get("id")
+    }
+    for ref in schema.get("x_structure_refs", []):
+        if ref not in structure_ids:
+            errors.append(f"qimen_case_schema references missing qimen chart field {ref}")
+    return errors
+
+
 def check_liuren_case_samples(samples, source_ids: set[str], schema) -> list[str]:
     errors: list[str] = []
     errors += require_unique(samples, "id", "liuren_case_samples")
@@ -541,6 +627,7 @@ def main() -> int:
     ziwei_structures = load_json("ziwei_structures.json")
     qimen_terms = load_json("qimen_terms.json")
     qimen_structures = load_json("qimen_structures.json")
+    qimen_case_schema = load_json("qimen_case_schema.json")
     liuren_terms = load_json("liuren_terms.json")
     liuren_structures = load_json("liuren_structures.json")
     rules = load_json("rules.json")
@@ -567,6 +654,7 @@ def main() -> int:
     errors += check_ziwei_structures(ziwei_structures, source_ids)
     errors += check_qimen_terms(qimen_terms, source_ids)
     errors += check_qimen_structures(qimen_structures, source_ids)
+    errors += check_qimen_case_schema(qimen_case_schema, source_ids, qimen_structures)
     errors += check_liuren_terms(liuren_terms, source_ids)
     errors += check_liuren_structures(liuren_structures, source_ids)
     errors += check_refs(rules, source_ids, "rule")
@@ -623,7 +711,7 @@ def main() -> int:
         f"{len(classic_notes)} classic notes, {len(case_index)} case slots, "
         f"{len(accuracy_cases)} accuracy cases, "
         f"{len(external_projects)} external projects, "
-        f"liuren case schema, {len(liuren_case_samples)} liuren case samples"
+        f"qimen case schema, liuren case schema, {len(liuren_case_samples)} liuren case samples"
     )
     return 0
 

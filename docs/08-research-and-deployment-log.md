@@ -179,6 +179,13 @@ Netlify 上线结果：
 - 接入前端“奇门资料”视图、后端 `qimen_terms` / `qimen_structures` 搜索池、CLI 查询和部署前检查。
 - 调研边界：Jina Reader 读取 Wikipedia 镜像返回匿名 401；本轮使用可直接访问的百科 URL 与 GitHub 元数据，B站搜索只作为 C 类学习生态线索。
 
+## 2026-06-21 奇门案例 Schema
+
+- 新增 `data/qimen_case_schema.json`：共享字段包含 `id`、`system`、`method`、`time_system`、`topic`、`question`、`input_source`、`chart`、`judgment`、`outcome`、`score`、`license_notes` 和 `boundary_notes`。
+- `chart.oneOf` 分为 `hour_qimen_chart` 与 `day_qimen_chart`，分别固定 `shi_jia` 和 `ri_jia`；共享盘式字段包含 `calendar_basis`、`dun_type`、`ju_number`、`xun_shou`、`fu_shou`、`zhi_fu`、`zhi_shi`、`palaces`、`topic_mapping` 和 `chart_json`。
+- 新增 `/api/qimen-case-schema`，并把 `qimen_case_schema` 接入后端搜索池、本地搜索、CLI 查询、奇门资料页、静态数据包和部署前检查。
+- Agent Reach doctor 显示 Web/Jina、B站、V2EX、RSS 可用；GitHub 全局检测未找到 `gh`，但仓库内本地 `gh` 可用。GitHub 元数据确认 `qfdk/qimen`、`arc119226/qimen_dunjia`、`banderzhm/ZhouYiLab` 均为 MIT 且 2026-06-19/20 有更新记录，本轮只采用字段形态参考。
+
 ## 2026-06-21 大六壬 / 小六壬第一版资料层
 
 - 新增 `data/liuren_terms.json`：覆盖六壬、大六壬、小六壬、月将、占时、天地盘、四课、三传、发用、十二天将、课体和小六壬六宫。

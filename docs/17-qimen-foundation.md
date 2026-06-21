@@ -8,6 +8,7 @@
 |---|---|---|
 | `data/qimen_terms.json` | 奇门遁甲术语、别名、分类、定义、来源和边界说明 | 全库搜索、奇门资料页、后续案例字段 |
 | `data/qimen_structures.json` | 九宫、八门、九星、八神和盘式字段结构 | 起局 Schema 设计、前端结构展示 |
+| `data/qimen_case_schema.json` | 奇门案例录入契约，分开记录盘式体系、时间体系、九宫单元和值符值使 | 全库搜索、奇门资料页、`/api/qimen-case-schema` |
 | `data/systems.json` | 奇门体系状态和下一步 | 多体系路线图和体系总览 |
 | `data/sources.json` | 奇门百科、开源项目和视频搜索线索 | 来源库、规则采信边界 |
 
@@ -41,51 +42,28 @@
 
 本轮 Jina Reader 读取 Wikipedia 镜像时返回匿名 401；因此百科来源只记录可直接访问的原始页面 URL，后续逐段校对前不能升为 A 类材料。
 
-## 4. 结构草案
+## 4. 案例 Schema
 
-奇门案例后续至少需要这些字段：
+奇门案例已经进入 `data/qimen_case_schema.json`。当前契约只支持手工录入和开源库输出留痕，不执行自动起局。共享必填字段包括：
 
-```json
-{
-  "system": "qimen",
-  "chart_type": "hour-qimen",
-  "plate_style": "rotating-plate",
-  "cast_time": "2026-06-21T10:00:00+08:00",
-  "dun_type": "yang",
-  "ju_number": 1,
-  "zhi_fu": {
-    "name": "值符",
-    "palace_id": "palace-kan-1"
-  },
-  "zhi_shi": {
-    "gate": "开门",
-    "palace_id": "palace-li-9"
-  },
-  "palaces": [
-    {
-      "palace_id": "palace-kan-1",
-      "gate": "休门",
-      "star": "天蓬",
-      "deity": "值符",
-      "heaven_stem": "",
-      "earth_stem": "",
-      "notes": []
-    }
-  ],
-  "question": {
-    "topic": "event",
-    "target": "",
-    "yong_shen": []
-  },
-  "source_refs": []
-}
-```
+- `id`
+- `system`
+- `method`
+- `time_system`
+- `topic`
+- `question`
+- `input_source`
+- `chart`
+- `judgment`
+- `boundary_notes`
 
-这只是草案。真正进入 `data/qimen_case_schema.json` 前，要先确认盘式体系、节气/局数算法、值符值使字段和最小案例录入需求。
+`chart.oneOf` 分成 `hour_qimen_chart` 和 `day_qimen_chart`，分别固定 `time_system = shi_jia` 和 `time_system = ri_jia`。共享盘式字段包含 `calendar_basis`、`dun_type`、`ju_number`、`xun_shou`、`fu_shou`、`zhi_fu`、`zhi_shi`、`palaces`、`topic_mapping` 和可选 `chart_json`。
+
+九宫单元使用现有结构 ID：`palace-kan-1`、`palace-kun-2`、`palace-zhen-3`、`palace-xun-4`、`palace-center-5`、`palace-qian-6`、`palace-dui-7`、`palace-gen-8`、`palace-li-9`。八门、九星、八神只记录名称和落宫，不在本层生成吉凶断语。
 
 ## 5. 下一步
 
-1. 抽样审计 `qfdk/qimen` 和 `arc119226/qimen_dunjia` 的源码字段，确认输入、输出、节气和局数边界。
-2. 建立 `data/qimen_case_schema.json`，先支持手工录入，不急着自动起局。
-3. 建立阴阳遁、局数、值符和值使的最小测试样本。
-4. 继续寻找可逐段校对的公开古籍文本入口，再决定哪些来源可以升为 A 类。
+1. 建立阴阳遁、局数、值符和值使的最小测试样本。
+2. 继续抽样审计 `qfdk/qimen` 和 `arc119226/qimen_dunjia` 的具体输出，对照 `chart_json` 保留字段。
+3. 继续寻找可逐段校对的公开古籍文本入口，再决定哪些来源可以升为 A 类。
+4. 等最小样本稳定后，再评估是否接入自动起局算法。

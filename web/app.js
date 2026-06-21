@@ -220,6 +220,16 @@ function localSearchResults(query) {
           item: { group, ...item },
         })),
       ),
+    ...(state.data.qimen_case_schema
+      ? [
+          {
+            type: "奇门案例 Schema",
+            title: state.data.qimen_case_schema.title || "QimenCase",
+            body: state.data.qimen_case_schema.description || "奇门遁甲案例录入契约",
+            item: state.data.qimen_case_schema,
+          },
+        ]
+      : []),
     ...Object.entries(state.data.liuren_structures || {})
       .filter(([, value]) => Array.isArray(value))
       .flatMap(([group, items]) =>
@@ -339,6 +349,7 @@ function renderStats() {
     ["术语", (data.terms || []).length],
     ["紫微术语", (data.ziwei_terms || []).length],
     ["奇门术语", (data.qimen_terms || []).length],
+    ["奇门 Schema", data.qimen_case_schema ? 1 : 0],
     ["六壬术语", (data.liuren_terms || []).length],
     ["六壬 Schema", data.liuren_case_schema ? 1 : 0],
     ["六壬样本", (data.liuren_case_samples || []).length],
@@ -570,6 +581,8 @@ function renderQimen() {
   const stars = (structures.stars || []).filter((item) => matchText(item, query));
   const deities = (structures.deities || []).filter((item) => matchText(item, query));
   const fields = (structures.chart_fields || []).filter((item) => matchText(item, query));
+  const schema = state.data.qimen_case_schema || {};
+  const schemaRequired = schema.required || [];
 
   els.content.innerHTML = `
     <div class="hero-grid">
@@ -588,7 +601,8 @@ function renderQimen() {
         <h3>边界</h3>
         <p>${escapeHtml(structures.boundary || "转盘、飞盘、时家、日家等体系并列记录，不合并成单一断法。")}</p>
         <div class="tag-row">
-          <span class="tag">active-v0.6-seed</span>
+          <span class="tag">active-v0.8.0-schema</span>
+          <span class="tag">${escapeHtml(schema.title || "QimenCase")}</span>
           <span class="tag">结构先行</span>
         </div>
       </article>
@@ -623,6 +637,36 @@ function renderQimen() {
         ${renderStructureColumn("九星", stars)}
         ${renderStructureColumn("八神", deities)}
         ${renderStructureColumn("字段", fields)}
+      </div>
+    </div>
+    <div class="section-band">
+      <h3>案例 Schema</h3>
+      <div class="result-grid">
+        <article class="card">
+          <div class="meta-row">
+            <span class="tag">${escapeHtml(schema.title || "QimenCase")}</span>
+            <span class="tag">required ${schemaRequired.length}</span>
+          </div>
+          <h3>共享必填字段</h3>
+          <p>${escapeHtml(schemaRequired.join("、"))}</p>
+        </article>
+        <article class="card">
+          <div class="meta-row">
+            <span class="tag">chart.oneOf</span>
+            <span class="tag">shi_jia</span>
+            <span class="tag">ri_jia</span>
+          </div>
+          <h3>盘式分支</h3>
+          <p>奇门案例先分开记录转盘/飞盘与时家/日家，保留节气、阴阳遁、局数、值符和值使来源。</p>
+        </article>
+        <article class="card">
+          <div class="meta-row">
+            <span class="tag">API</span>
+            <span class="tag">JSON Schema</span>
+          </div>
+          <h3>/api/qimen-case-schema</h3>
+          <p>部署后可返回奇门案例录入契约；本地数据包中同步为 qimen_case_schema。</p>
+        </article>
       </div>
     </div>
   `;
